@@ -1,0 +1,87 @@
+@import '../../config.less';
+#contacts {
+	min-height:600px;
+	font-size: 16px;
+	color: @textColor;
+	padding: 30px;
+	>a {
+		color: black;
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	.contacts-box{
+		-width: 100%;
+		display: flex;
+		display: -ms-flexbox;
+		flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		justify-content: space-between;
+		-ms-flex-pack: justify;
+		>div{
+			-display: flex;
+	    	-display: -ms-flexbox;
+		}
+		.contacts-menu{
+			width:150px;
+			margin-right:10px;
+			ul.menu-list{
+				width:150px;
+				li.item{
+					width:150px;
+					a{
+						display:inline-block;
+						font-weight: normal;
+						cursor: pointer;
+						color: #555;
+						text-decoration: none;
+						padding: 8px 0px 8px 25px;
+						display: block;
+						transition: all 0.25s;
+						position: relative;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						background-color: #f4f5f9;
+						color:#555;
+						i{
+
+						}
+					}
+					&.current .item-menu,&:hover .item-menu{
+						background-color: #55BEBF;
+						color:#fff;
+					}
+				}
+			}
+		}
+		.contacts-team{
+			width:168px;
+			#treeMenu{
+				width:168px;
+				li{
+					>span{
+						display:none;
+					}
+					a{
+						width: 168px;
+						min-width: 168px;
+						display: block;
+						text-align: center;
+					}
+				}
+			}
+		}
+		.contacts-info{
+			width:752px;
+			.contacts-form{
+				width:752px;
+				margin-bottom:10px;
+			}
+			.contacts-inner{
+				width:752px;
+			}
+		}
+	}
+}
