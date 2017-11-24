@@ -4,48 +4,53 @@
 		<form class="add-form form-horizontal" role="form">
 			<div class="add-form-base">
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="formGroupInputDefault"><span>*</span>姓名:</label>
-					<div class="col-sm-10">
-						<input class="form-control username" type="text" placeholder="姓名">
+					<button type="button" class="btn btn-info btn-large btn-add-dept">从其它部门添加</button>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="formGroupInputDefault">姓名:</label>
+					<div class="col-sm-8">
+						<input class="form-control username" type="text" placeholder="姓名" require>
 					</div>
 				</div>
-				<!-- <div class="form-group">
-					<label class="col-sm-2 control-label" for="formGroupInputDefault"><span>*</span>部门:</label>
-					<div class="col-sm-10">
-						<input class="form-control" type="text" placeholder="部门">
-					</div>
-				</div> -->
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="formGroupInputDefault">手机:</label>
-					<div class="input-group">
-		              <span class="input-group-addon">+86</span>
-		              <input type="text" class="form-control usermobile" placeholder="手机号码">
+					<div class="col-sm-8">
+		              <input class="form-control usermobile" type="text" placeholder="手机号码" require>
 		            </div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="formGroupInputDefault">编号:</label>
-					<div class="col-sm-10">
-						<input class="form-control employee_num" type="text" placeholder="员工编号">
+					<div class="col-sm-8">
+						<input class="form-control employee_num" type="text" placeholder="员工编号" require>
 					</div>
 				</div>
 			</div>
 			<div class="add-form-extra">
-				<!-- <button type="button" class="btn btn-primary btn-sm btn-dept-addinfo">新增部门</button> -->
-				<button type="button" class="btn btn-embossed btn-success btn-add-dept">新增部门</button>
-				<ul class="clear">
-					<li>
-						<div class="input-group">
-							<label>部门:</label>
-							<input type="text" class="form-control department" placeholder="部门">
+				<ul class="extra-list clear">
+					<li class="extra-item">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="formGroupInputDefault">部门:</label>
+							<div class="col-sm-8">
+								<input class="form-control username" type="text" placeholder="部门" require>
+							</div>
 						</div>
-						<div class="input-group">
-							<label>职务:</label>
-							<input type="text" class="form-control business" placeholder="职务">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="formGroupInputDefault">职务:</label>
+							<div class="col-sm-8">
+								<input class="form-control username" type="text" placeholder="职务" require>
+							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
-			<button type="button" class="btn btn-embossed btn-info btn-add-user">确&nbsp;&nbsp;定</button>
+			<div class="add-form-btn">
+				<a href="javascript:;" class="button button-large btn-add-more">继续增加部门及职务 </a>
+			</div>
 		</form>
+		<div class="add-btns">
+			<button type="button" class="btn btn-info btn-add-user">保存</button>
+			<button type="button" class="btn btn-info btn-add-user">保存并继续添加成员</button>
+			<a href="javascript:;" class="button btn-add-cancel">取消</a>
+		</div>
 	</div>
 </div>
