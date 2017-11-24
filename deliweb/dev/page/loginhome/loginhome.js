@@ -20,13 +20,14 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 
 	        function listenStomp(cid, url, status){
 	        	//qrcode
-				stomp.subscribe('/user/'+ cid +'/info', function(message){
+				stomp.subscribe('/user/'+ cid +'/info', function(message){  
 					var json = JSON.parse(message.body);
 					console.log("json", json);
 					$loginDoing.hide();
 					$loginSuccess.find('img.success-img').attr('src', json.avatar_url);
-					$loginSuccess.find('img.success-img').attr('title', json.name);
+					$loginSuccess.attr('title', json.avatar_url);
 		            $loginSuccess.show();
+
 				});
 
 				//login

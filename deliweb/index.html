@@ -18,38 +18,26 @@
 	<script src='/framework/all.js'></script>
 </head>
 <body class="loading">
-	<div id="header" class="wrap-top">
+	<div id="header" class="wrap-top wrap-top-shadow">
 		<div class="user-head">
-			<div id="head" class="container clear">
+			<div id="head" class="clearfix">
 				<div class="logo-box clearfix">
-					<a href="#!home" class="logo logo1"></a>
-					<a href="#!home" class="logo logo2">为了难以触摸的效率</a>
+					<a href="#!home" class="logo"></a>
 				</div>
 				<div class="nav-top">
-					<ul class="clear">
-						<li class="nav-item"><a href="#!home" class="navlink homeBtn">首页</a></li>
-						<li class="nav-item nav-item-loan"><a href="#!contacts" class="navlink orgBtn">组织通讯录</a></li>
-						<li class="nav-item nav-item-loan"><a href="#!apphome" class="navlink appBtn">应用</a></li>
-						<li class="nav-item nav-item-loan"><a href="#!device" class="navlink devBtn">设备</a></li>
-						<li class="dropdown nav-item nav-item-team">
-						  <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">得力团队 <b class="caret"></b></a>
-						  <ul class="dropdown-menu sun-nav-list sun-nav-list-about">
-						    <li class="sub-nav-item"><a href="javascript:;">得力团队1</a></li>
-						    <li class="sub-nav-item"><a href="javascript:;">得力团队2</a></li>
-						    <li class="sub-nav-item"><a href="javascript:;">得力团队3</a></li>
-						    <li class="divider"></li>
-						    <li class="sub-nav-item dropdown-header">得力团队4</li>
-						  </ul>
-						</li>
-						<!-- <li class="nav-item nav-item-team">
-							<a href="#!organization" class="navlink orgBtn">得力团队</a>
-							<div class="sun-nav-list sun-nav-list-about">
-								<a class="sub-nav-item" href="#!organization?org=1">得力团队1</a>
-								<a class="sub-nav-item" href="#!organization?org=2">得力团队2</a>
-								<a class="sub-nav-item" href="#!organization?org=3">得力团队3</a>
-								<a class="sub-nav-item" href="#!organization?org=4">得力团队4</a>
+					<ul class="clearfix">
+						<li class="nav-item"><a href="#!home" class="navlink navlink-current homeBtn">首页</a></li>
+						<li class="nav-item"><a href="#!contacts" class="navlink orgBtn">组织通讯录</a></li>
+						<li class="nav-item"><a href="#!apphome" class="navlink appBtn">应用</a></li>
+						<li class="nav-item"><a href="#!device" class="navlink devBtn">设备</a></li>
+						<li class="nav-item nav-item-team">
+							<a href="javascript:;" class="navlink nav-item-current">得力团队</a>
+							<div class="sun-nav-list sun-nav-list-team">
+								<a class="sub-nav-item current" href="javascript:;">得力团队1</a>
+								<a class="sub-nav-item" href="javascript:;">得力团队2</a>
+								<a class="sub-nav-item" href="javascript:;">得力团队3</a>
 							</div>
-						</li> -->
+						</li>
 						<li class="nav-item">
 							<div class="nologin" style="display: block;">
 								<a href="javascript:;" class="green">登录</a>
@@ -78,7 +66,7 @@
 		</div>
 	</div>
 	<div id="pages"></div>
-	<div id="footer">
+	<div id="footer" class="hide">
 		<div class="container footer">
 			<div class="footer-link clearfix">
 				<dl>

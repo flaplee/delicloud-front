@@ -16,6 +16,13 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         }
     });
 
+    $(document).on("mouseover", "li.nav-item-team", function() {
+        $(".sun-nav-list-team").show();
+    })
+    $(document).on("mouseout", "li.nav-item-team", function() {
+        $(".sun-nav-list-team").hide();
+    })
+
     $userlogin.on('click',function(){
     	kernel.openPopup('loginPopup');
     });

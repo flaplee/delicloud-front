@@ -218,7 +218,7 @@ b {
 }
 
 .green {
-    color: #1ABC9C !important
+    color: #00D8D6 !important
 }
 
 .red {
@@ -304,11 +304,11 @@ code,kbd,pre,samp {
 
 @font-face {
   font-family: 'iconfont';  /* project id 483384 */
-  src: url('//at.alicdn.com/t/font_483384_y3o1ryhaefdpldi.eot');
-  src: url('//at.alicdn.com/t/font_483384_y3o1ryhaefdpldi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_483384_y3o1ryhaefdpldi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_483384_y3o1ryhaefdpldi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_483384_y3o1ryhaefdpldi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.eot');
+  src: url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -381,7 +381,16 @@ button{
 
 #header{
 	&.wrap-top {
-	    height: 80px
+	    height: 80px;
+	    update:20171122;
+		position: fixed;
+		width: 100%;
+		background: #373d41;
+		z-index: 110;
+		&.wrap-top-shadow{
+			-webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+    		box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+		}
 	}
 	.user-head {
 	    height: 80px;
@@ -404,6 +413,13 @@ button{
 	    position: relative;
 	    height: 100%;
 	    z-index: 1;
+	    update:20171122;
+		position: relative;
+		z-index: 100;
+		clear: both;
+		height: 80px;
+		background: #fff;
+		font-size: 12px;
 	    .logo-box {
 	        display: inline-block;
 	        position: absolute;
@@ -412,23 +428,13 @@ button{
 	        .logo {
 	            display: inline-block;
 	            float: left;
-	            height: 50px
-	        }
-
-	        .logo1 {
-				width: 80px;
-				height: 80px;
-				line-height: 80px;
-	            background: url("images/logo1.png") no-repeat
-	        }
-
-	        .logo2 {
-				width: 180px;
-				height: 80px;
-				line-height: 80px;
-				font-size: 16px;
-				color: #1ABC9C;
-				text-align: center;
+	            height: 50px;
+	            width: 120px;
+			    height: 40px;
+			    line-height: 80px;
+			    background: url("images/logo.png") no-repeat;
+			    background-size: 100% 100%;
+			    margin: 20px 0 20px 30px;
 	        }
 	    }
 
@@ -459,19 +465,27 @@ button{
 	            line-height: 40px;
 	            text-align: center;
 	            font-size: 16px;
+	            color: #666666;
 	            text-decoration: none;
 	            position: relative;
 	            border-radius: 5px
 	        }
 
-	        .nav-item a.navlink:hover {
-	            -background-color: #55BEBF;
-	            color: #55BEBF
+	        .nav-item a.navlink.nav-item-current{
+	        	width:120px;
+	        	color: #00d8d6;
+				border: 1px solid #00d8d6;
+				border-radius: 4px;
 	        }
 
-	        .nav-item a.navlink-hover {
+	        .nav-item a.navlink:hover {
 	            -background-color: #55BEBF;
-	            color: #55BEBF
+	            color: #00d8d6
+	        }
+
+	        .nav-item a.navlink-current {
+	            -background-color: #55BEBF;
+	            color: #00d8d6
 	        }
 
 	        .nav-item .awardapr {
@@ -485,37 +499,38 @@ button{
 	        }
 
 	        .nav-item .sun-nav-list {
-	            width: 85px;
+	            width: 150px;
 	            position: absolute;
 	            z-index: 1;
-	            background-color: #5F5F5F;
-	            border-radius: 10px;
-	            top: 29px;
-	            padding-top: 11px;
-	            padding-bottom: 10px;
+	            background-color: #fff;
+	            top: 40px;
 	            display: none;
-	            left: 0
+	            left: -15px;
+	            border: 1px solid #d9d9d9;
+	            border-top: 0;
 	        }
 
 	        .nav-item .sun-nav-list a.sub-nav-item {
 	            display: block;
-	            width: 85px;
+	            width: 150px;
 	            height: 40px;
 	            line-height: 40px;
-	            font-size: 12px;
+	            font-size: 14px;
 	            text-align: center;
-	            color: #fff
+	            color: #333333;
 	        }
 
-	        .nav-item .sun-nav-list a.sub-nav-item:hover {
-	            background-color: #55bebf;
-	            color: #fff
+	        .nav-item .sun-nav-list a.sub-nav-item.current,.nav-item .sun-nav-list a.sub-nav-item:hover {
+	            color: #00d8d6
 	        }
 
 	        .nologin {
 	            font-size: 16px;
 	            margin-left: 5px;
-	            width: 100px
+	            width: 100px;
+	            a{
+	            	color: #00d8d6;
+	            }
 	        }
 
 	        .userBtn.hasLogin:hover {
@@ -726,7 +741,7 @@ button{
 }
 
 #panels {
-	z-index: 11;
+	z-index: 110;
 	> .contents {
 		top: 0;
 		bottom: 0;
@@ -1068,13 +1083,13 @@ textarea{
 		height: 32px;
 		line-height: 32px;
 		border: 1px solid @inputBorder;
-		border-radius: 30px;
+		border-radius: 4px;
 		padding: 0 10px 0 46px;
 		margin: 0;
 		font-size: 14px;
 		color: @inputText;
 		outline: none;
-		background-color: #f4f5f9;
+		background-color: #fff;
 	}
 
 	.search-ico {
@@ -1084,11 +1099,11 @@ textarea{
 		height: 30px;
 		top: 1px;
 		left: 0;
-		background-image: url("search-ico.png");
-		background-repeat: no-repeat;
-		background-position: center;
+		-background-image: url("search-ico.png");
+		-background-repeat: no-repeat;
+		-background-position: center;
 		margin-left: 20px;
-		background-color: #f4f5f9;
+		background-color: #eaeaea;
 	}
 }
 
@@ -1150,22 +1165,26 @@ textarea{
 .paging a {
 	text-decoration: none;
 	color: #808080;
+	background-color: #fff;
+	border: 1px solid #ececec;
 	margin: 0 5px;
+	padding: 0 8px;
 	display: inline-block;
 	vertical-align: middle;
 	height: 22px;
 	line-height: 22px;
+	border-radius:4px;
 }
 
 .paging a:hover {
 	border-color: #999;
 	color: #666;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .paging a.active {
 	color: #fff;
-	background-color: #55BEBF;
+	background-color: #00d8d6;
 	padding: 0 8px;
 	border-radius: 4px;
 }

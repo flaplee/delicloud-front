@@ -21,7 +21,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 	            success: function(res) {
 	                //console.log("res",res);
 	                for (var i = 0; i < res.data.result.length; i++) {
-	                	var itemTpl = '<div class="app-item" data-app_id="' + res.data.result[i].id + '">\
+	                	var itemTpl = '<div class="app-item" data-app_id="' + res.data.result[i].id + '" title="' + res.data.result[i].name + '">\
 							<div class="item-icon-wrap">\
 								<img class="item-icon" src="' + res.data.result[i].icon + '">\
 							</div>\
@@ -37,10 +37,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                         $tmpIn.append($(itemTpl));
                     }
                     $tmpIn.append('<a class="app-item app-item-add" href="javascript:;">\
-						<div class="item-icon-wrap">\
-							<img class="item-icon" src="/dev/page/apphome/images/add-app.png">\
-						</div>\
-						<div class="item-title green">添加新应用</div>\
+						<div class="item-icon-wrap"></div>\
+						<div class="item-title">安装新应用</div>\
 					</a>');
                     setAddApp($tmpIn.find('.app-item'), $tmpIn.find('.app-item').attr('data-app_id'));
                     for (var i = 0; i < 2; i++) {
