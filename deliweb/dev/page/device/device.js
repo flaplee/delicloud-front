@@ -4,7 +4,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
         onload: function(force) {
         	var userid = util.getCookie('userid'),
         		token = util.getCookie('token'),
-        		orgid = '355671868335718400';
+        		//orgid = '355671868335718400';
+        		orgid = util.getCookie('orgid');
         	var $devBox = $('#device .dev-box'),
         		$tmp = $devBox.find('.dev-main .dev-installed .dev-wrap table.table tbody.tbody');
         	;
@@ -41,9 +42,9 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                     setOperates($tmp.find('.dev-item'), $tmp.find('.dev-item').attr('data-dev_id'));
 	            }
 	        });
-	        function setOperates(dom, devid){
+	        function setOperates(o, devid){
 	        	// setbindApp
-	        	dom.find('.btn-dev-bind-item').on('click',function(){
+	        	o.find('.btn-dev-bind-item').on('click',function(){
 	        		util.ajaxSubmit({
 		        		type: 'get',
 			            url: '/v1.0/bind/devicev',
@@ -58,7 +59,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 			        });
 	        	});
 	        	// setEditDevice
-	        	dom.find('.btn-dev-rename-item').on('click',function(){
+	        	o.find('.btn-dev-rename-item').on('click',function(){
 	        		kernel.openPopup('editdevice', {
 						type:'editdevice',
                     	data:{
@@ -81,7 +82,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 	        	});
 
 	        	// setDelDevice
-	        	dom.find('.btn-dev-delete-item').on('click',function(){
+	        	o.find('.btn-dev-delete-item').on('click',function(){
 	        		kernel.confirm('删除设备后该设备将从所有已绑定应用中解绑，你确定要删除吗',function(sure){
 	        			if(sure){
 	        				util.ajaxSubmit({

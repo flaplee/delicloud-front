@@ -2,6 +2,7 @@
 
 #dialogs,
 #hint,
+#hintIcon,
 #loading,
 #pages > div,
 #photoview,
@@ -213,6 +214,79 @@
 		background-color: @errorBackgroundColor;
 		border-color: @errorBorderColor;
 		color: @errorTextColor;
+	}
+}
+
+#hintIcon {
+	text-align: center;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index:140;
+	display: none;
+	> .mask {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		.halfTrans;
+	}
+	> div {
+		overflow: visible;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		> div{
+			position: absolute;
+		    width: 600px;
+		    height: 360px;
+		    margin-left: -300px;
+		    margin-top: -180px;
+		    padding: 10px 20px;
+		    font-size: 18px;
+		    display: inline-block;
+		    white-space: pre;
+		    line-height: 1.5;
+		    min-width: 600px;
+		    background-color: #fff;
+		    border: 1px solid #eaeaea;
+		    color: #fc6e69;
+		    z-index: 150;
+			div.icon{
+				padding-top: 60px;
+				color: #55bfbe;
+				font-size: 90px;
+			}
+			p{
+				font-size:18px;
+				color:#666666;
+				&.title{
+					font-size:24px;
+					color:#333333;
+					margin-bottom:10px;
+				}
+				&.desc{
+					color:#666666;
+					margin-bottom: 50px;
+				}
+				
+			}
+		}
+	}
+
+	&.success div.icon {
+		color: #55bfbe;
+	}
+
+	&.warning div.icon {
+		color: @warningTextColor;
+	}
+
+	&.error div.icon {
+		color: #fc6e69;
 	}
 }
 

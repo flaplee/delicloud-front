@@ -4,8 +4,15 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         $userlogin = $usermenu.find('.nologin a');
 
     kernel.appendCss(require.toUrl("common/ztree/css/metroStyle/metroStyle.css"));
-    /*kernel.appendCss(require.toUrl("common/flat/css/vendor/bootstrap/css/bootstrap.min.css"));
-    kernel.appendCss(require.toUrl("common/flat/css/flat-ui.min.css"));*/
+
+    $usermenu.find('a.navlink').on('click',function(e){
+        e.stopPropagation();
+        var c = $(this);
+        if(!c.hasClass('navlink-current')){
+            c.parent('li.nav-item').siblings('li').find('>a.navlink').removeClass('navlink-current');
+            c.addClass('navlink-current');
+        }
+    });
 
     $('#head>.user>a').on('click', function() {
         if (usermenu.css('display') !== 'block') {
@@ -61,5 +68,5 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             }
         }
     });
-    kernel.init('home');
+    kernel.init('loginhome');
 });

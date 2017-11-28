@@ -5,58 +5,141 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 		$addInner = $dom.find('.add-user'),
 		$addInfo  = $addInner.find('.add-form .add-form-base'),
 		$addExtra = $addInner.find('.add-form .add-form-extra'),
-		$addUser = $addInner.find('.btn-add-user'),
-		$addDept = $addInner.find('.btn-add-dept');
-		var userid = util.getCookie('userid'),
-			token = util.getCookie('token'),
-			orgid = '355671868335718400';
-		$addUser.on('click',function(){
-			// 添加人员到团队 /v1.0/org/user
-			util.ajaxSubmit({
-                url: '/v1.0/org/user',
-                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildHash(token),
-                data: {
-				    "user_id":350305795163815936,      // 选填，被添加的用户id，当用户id和用户手机号同时存在时，优先使用用户id
-				    "mobile_region":"86",              // 选填，被添加的用户手机号区号，没有填被添加用户id的时候必须填这个
-				    "mobile":"123456789",              // 选填，被添加的用户手机号，没有填被添加用户id的时候必须填这个
-				    "department_ids":[350236083323142144, 123],       // 必填，被添加到的部门id数组
-				    "titles":["组长",""],       // 必填，被添加到的部门职务数组,长度必须和id数组一致，不够的用空字符串补上
-				    "nickname":"stone",                 // 选填，用户在团队中的名称
-				    "employee_num":"123"                // 选填， 用户的工号
-                },
-                success: function(res) {
-                    console.log("res",res);
-                }
-            });
-		});
-		$addDept.on('click', function() {
-	        kernel.openPopup('adddept', {
-	            model: {
-	                attr: 'adddept'
-	            }
-	        });
-	    });
-	    // 修改人员在团队组织中的信息 /v1.0/org/user/{user_id}
+		$addBtn = $addInner.find('.add-form-btn'),
+		$addFromDept = $addInfo.find('.btn-to-dept'),
+		$addBtns = $addInner.find('.add-btns'),
+		$addDeptMore = $addBtn.find('.btn-add-more'),
+		$addUser = $addBtns.find('.btn-add-user'),
+		$addUserGo = $addBtns.find('.btn-add-user-go'),
+		$addUserCancel = $addBtns.find('.btn-add-cancel');
+
 	return {
 		onload: function(param) {
+			var userid = util.getCookie('userid'),
+			token = util.getCookie('token'),
+			orgid = util.getCookie('orgid');
+/*			console.log("userid",userid);
 			console.log('opening ' + thisPanel);
-			console.log('param',param);
+			console.log('param',param);*/
 			var type = param.type,data = param.data;
+			console.log("data.uid",data);
 			if(type == 'edit'){
 				$addInner.find('h4').text('编辑成员');
 				$addInfo.find('.username').val(data.name);
 				$addInfo.find('.usermobile').val(data.mobile);
 				$addInfo.find('.employee_num').val(data.employee_num);
-				$addExtra.find('.department').val(data.department);
-				$addExtra.find('.business').val(data.title);
+				$addExtra.find('.extra-item-index .department').val(data.department);
+				$addExtra.find('.extra-item-index .business').val(data.title);
+				$addFromDept.hide();
 			}else{
 				$addInner.find('h4').text('添加成员');
 				$addInfo.find('.username').val('');
 				$addInfo.find('.usermobile').val('');
 				$addInfo.find('.employee_num').val('');
-				$addExtra.find('.department').val('');
-				$addExtra.find('.business').val('');
+				$addExtra.find('.extra-item-index .department').val('');
+				$addExtra.find('.extra-item-index .business').val('');
+				$addFromDept.show();
 			}
+
+			// 从其他部门添加
+			$addFromDept.on('click', function() {
+				//update 2017-11-28
+				// 添加部门
+ 		        /*kernel.openPopup('adddept', {
+		            type: 'adddept'
+		        });*/
+
+		        // 从部门中选择
+		        /*kernel.openPopup('adduser', {
+		            type: 'adduser'
+		        });*/
+
+		        // 选择人员
+		        kernel.openPopup('seluser', {
+		        	type: 'seluser'
+		        });
+		    });
+
+			// 继续增加部门及职务
+			$addDeptMore.on('click',function(e){
+				e.stopPropagation();
+				var $temp = $('<li class="extra-item">\
+					<a href="javascript:;" class="extra-item-del">删除</a>\
+					<div class="form-group">\
+						<label class="col-sm-2 control-label" for="formGroupInputDefault">部门:</label>\
+						<div class="col-sm-8">\
+							<input class="form-control username" type="text" placeholder="" require>\
+						</div>\
+					</div>\
+					<div class="form-group">\
+						<label class="col-sm-2 control-label" for="formGroupInputDefault">职务:</label>\
+						<div class="col-sm-8">\
+							<input class="form-control username" type="text" placeholder="" require>\
+						</div>\
+					</div>\
+				</li>');
+				$addExtra.find('ul.extra-list').append($temp);
+				setDelDept($temp);
+			});
+
+			var setDelDept = function(dom){
+				dom.find('.extra-item-del').on('click',function(e){
+					e.stopPropagation();
+					var c = $(this),index = c.parent('li.extra-item').index();
+					c.parent('li.extra-item').remove();
+				});
+			}
+
+			setDelDept($addExtra.find('ul.extra-list li.extra-item'));
+			
+			// save & cancel
+			$addUser.on('click',function(){
+				// 添加人员到团队 /v1.0/org/user
+				util.ajaxSubmit({
+	                url: '/v1.0/org/user',
+	                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+	                data: {
+					    "user_id":data.user_id,
+					    "mobile_region":data.mobile_region,
+					    "mobile":$addInfo.find('.usermobile').val(),
+					    "department_ids":[data.department_id],
+					    "nickname":$addInfo.find('.username').val(),
+					    "employee_num":$addInfo.find('.employee_num').val()
+	                },
+	                success: function(res) {
+	                    console.log("res",res);
+	                }
+	            });
+			});
+
+			// save & no cancel
+			$addUserGo.on('click',function(){
+				// 添加人员到团队 /v1.0/org/user
+				util.ajaxSubmit({
+	                url: '/v1.0/org/user',
+	                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+	                data: {
+					    "user_id":data.user_id,
+					    "mobile_region":data.mobile_region,
+					    "mobile":$addInfo.find('.usermobile').val(),
+					    "department_ids":[data.department_id],
+					    "nickname":$addInfo.find('.username').val(),
+					    "employee_num":$addInfo.find('.employee_num').val()
+	                },
+	                success: function(res) {
+	                	$addUserCancel.trigger('click');
+	                    console.log("res",res);
+	                }
+	            });
+			});
+
+			//cancel
+			$addUserCancel.on('click',function(){
+				kernel.closePanel('adduser');
+			});
+			
+			
+		    // 修改人员在团队组织中的信息 /v1.0/org/user/{user_id}
 		},
 		onunload: function() {
 			//console.log('closing ' + thisPanel);

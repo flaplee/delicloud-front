@@ -1,7 +1,7 @@
 @import "../../config.less";
 #panels.adduser {
 	> .contents {
-		width: 600px;
+		width: 482px;
 	    height: 100%;
 	    border: 1px solid #dedede;
 	    border-top-left-radius: 8px;
@@ -10,7 +10,6 @@
 	    background: #fff;
 	    --webkit-animation-duration: .3s;
 	    -animation-duration: .3s;
-	    padding: 0px 35px;
 	}
 }
 
@@ -25,6 +24,7 @@
 			line-height: 1.1;
 			color: inherit;
 			font-size: 24px;
+			font-weight: normal;
 		}
 		.add-inner{
 			width: 100%;
@@ -32,27 +32,62 @@
 			overflow-y:hidden;
 			.add-form{
 				.add-form-base{
-					.btn-add-dept{
-						margin: 0 auto;
-						display: block;
+					border-bottom:1px solid #eaeaea;
+					.form-group{
+						div.col-sm-8{
+							&.from-dept{
+								position:relative;
+							}
+							input{
+								width:100%;
+							}
+							.btn-to-dept{
+								position: absolute;
+								top: 8px;
+								right: 10px;
+								width: 25px;
+								height: 25px;
+								background:url('./images/to-dept.png')no-repeat center;
+							}
+						}
+						
 					}
+					
+
 				}
 				.add-form-extra{
 					ul.extra-list{
+						height: 400px;
+						overflow-y: auto;
 						li.extra-item{
+							position:relative;
 							width:100%;
 							float: left;
 							padding:15px 0;
-							border:1px solid #eaeaea;
+							border-bottom:1px solid #eaeaea;
+							.extra-item-del{
+								display:inline-block;
+								width:24px;
+								height:24px;
+								position:absolute;
+								top:-2px;
+								right:0;
+								background:url('./images/del-dept.png') no-repeat center;
+								text-indent: -9999px;
+							}
 							.form-group{
 								&:last-child{
 									margin-bottom:0;
 								}
 							}
+							&:n-child(3n){
+								border-bottom:none;
+							}
 						}
 					}
 				}
 				.add-form-btn{
+					border-top:1px solid #eaeaea;
 					.btn-add-more{
 						margin: 20px auto;
 						display: block;
@@ -63,11 +98,17 @@
 				width: 100%;
 				position: absolute;
 				bottom: 0;
-				padding: 20px;
+				padding: 25px 30px;
 				border: 1px solid #eaeaea;
 				background-color: #fff;
-				.btn{
-					margin-right:10px;
+				text-align: center;
+				button{
+					&.btn-add-user{
+						width:100px;
+					}
+					&.btn-add-user-go{
+						margin: 0 20px;
+					}
 				}
 			}
 		}
@@ -100,10 +141,12 @@
 	    margin-bottom: 0;
 	}
 	.form-horizontal .control-label {
+		font-weight:normal;
 	    padding-top: 3px;
 	    padding-bottom: 3px;
 	}
 	.form-horizontal .control-label {
+		font-weight:normal;
 	    padding-top: 7px;
 	    margin-bottom: 0;
 	    text-align: right;

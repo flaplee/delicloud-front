@@ -7,7 +7,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
         $btnClose = $dom.find('.btn-close');
     var userid = util.getCookie('userid'),
         token = util.getCookie('token'),
-        orgid = '355671868335718400';
+        //orgid = '355671868335718400';
+        orgid = util.getCookie('orgid');
     return {
         onload: function(param) {
             var data = param.data;

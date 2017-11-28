@@ -61,12 +61,14 @@ define(['common/kernel/kernel'], function(kernel) {
             };
             if (param.data instanceof FormData) {
                 //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+                if(param.dauth){
+                    xhr.setRequestHeader('Dauth', param.dauth);
+                }
                 xhr.send(param.data);
             } else {
                 xhr.setRequestHeader('content-type', 'application/json');
-                if(param.data.dauth){
-                    xhr.setRequestHeader('Dauth', param.data.dauth);
-                    delete param.data.dauth;
+                if(param.dauth){
+                    xhr.setRequestHeader('Dauth', param.dauth);
                 }
                 xhr.send(JSON.stringify(param.data));
             }
@@ -101,83 +103,6 @@ define(['common/kernel/kernel'], function(kernel) {
             s = t.getSeconds();
             if (s < 10) s = '0' + s;
             return y + '-' + m + '-' + d + ' ' + h + ':' + i + ':' + s;
-        },
-        formatObj: function(r, need) {
-            /**
-             * 传入对象
-             * r.obj 需要显示的字段
-             * r.loan 字段值
-             *
-             * 由于后端返回时间戳类型为字符串故使用正则判断是否为时间，字段名中含date或time并且是十位数字会认为是时间戳
-             *
-             * 返回格式化后数组，使用for循环即可
-             */
-            var arr = [],
-                obj = {},
-                key
-            for (key in r.obj) {
-                if (r.obj.hasOwnProperty(key)) {
-                    if (/time|expire$/.test(key) && /^\d{10}$/.test(r.loan[key])) {
-                        arr.push({
-                            title: r.obj[key].title,
-                            content: util.formatTime(r.loan[key])
-                        })
-                    } else if (/date$/.test(key) && /^\d{10}$/.test(r.loan[key])) {
-                        arr.push({
-                            title: r.obj[key].title,
-                            content: util.formatDate(r.loan[key])
-                        })
-                    } else {
-                        if (r.obj[key].type === 'select') {
-                            if (!/car_brand|car_model|car_series/.test(key)) {
-                                r.loan[key] = r.obj[key].stype[r.loan[key]];
-                                r.loan[key] = r.loan[key] ? r.loan[key] : '暂无数据';
-                            }
-                        } else if (r.obj[key].type === 'checkbox') {
-                            r.loan[key] = typeof r.loan[key] == 'String' ? r.loan[key].split(',') : [];
-
-                            if (r.loan[key].length > 0) {
-                                var i = 0;
-                                while (i < r.loan[key].length) {
-                                    if (!r.obj[key].stype.hasOwnProperty(r.loan[key][i])) {
-                                        r.loan[key].splice(i, 1);
-                                    } else {
-                                        r.loan[key][i] = r.obj[key].stype[r.loan[key][i]];
-                                        i++;
-                                    }
-                                }
-                                r.loan[key] = r.loan[key].join(', ');
-                            } else {
-                                r.loan[key] = '暂无数据'
-                            }
-                        } else {
-                            if (/[\(（]元/.test(r.obj[key].title)) {
-                                if (r.loan[key]) {
-                                    r.loan[key] = util.moneyFormat(r.loan[key], true);
-                                } else {
-                                    r.loan[key] = '暂无数据'
-                                }
-                            } else {
-                                if (!r.loan[key] || r.loan[key] == '') {
-                                    r.loan[key] = '暂无数据'
-                                }
-                            }
-                        }
-                        arr.push({
-                            title: r.obj[key].title,
-                            content: r.loan[key] ? r.loan[key] : '暂无数据'
-                        })
-                    }
-                }
-            }
-            if (need === 'object') {
-                var j
-                for (j = 0; j < arr.length; j++) {
-                    obj[arr[j].title] = arr[j].content
-                }
-                return obj
-            }
-            return arr
         },
         setImgCat: function(r, attr) {
             /**

@@ -4,12 +4,10 @@
 		<form class="add-form form-horizontal" role="form">
 			<div class="add-form-base">
 				<div class="form-group">
-					<button type="button" class="btn btn-info btn-large btn-add-dept">从其它部门添加</button>
-				</div>
-				<div class="form-group">
 					<label class="col-sm-2 control-label" for="formGroupInputDefault">姓名:</label>
-					<div class="col-sm-8">
+					<div class="col-sm-8 from-dept">
 						<input class="form-control username" type="text" placeholder="姓名" require>
+						<a class="btn-to-dept" href="javascript:;"></a>
 					</div>
 				</div>
 				<div class="form-group">
@@ -27,30 +25,31 @@
 			</div>
 			<div class="add-form-extra">
 				<ul class="extra-list clear">
-					<li class="extra-item">
+					<li class="extra-item extra-item-index">
+						<a href="javascript:;" class="extra-item-del">删除</a>
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="formGroupInputDefault">部门:</label>
 							<div class="col-sm-8">
-								<input class="form-control username" type="text" placeholder="部门" require>
+								<input class="form-control department" type="text" placeholder="" require>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="formGroupInputDefault">职务:</label>
 							<div class="col-sm-8">
-								<input class="form-control username" type="text" placeholder="职务" require>
+								<input class="form-control business" type="text" placeholder="" require>
 							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
 			<div class="add-form-btn">
-				<a href="javascript:;" class="button button-large btn-add-more">继续增加部门及职务 </a>
+				<a href="javascript:;" class="button button-white button-large btn-add-more">继续增加部门及职务</a>
 			</div>
 		</form>
 		<div class="add-btns">
-			<button type="button" class="btn btn-info btn-add-user">保存</button>
-			<button type="button" class="btn btn-info btn-add-user">保存并继续添加成员</button>
-			<a href="javascript:;" class="button btn-add-cancel">取消</a>
+			<button type="button" class="btn btn-info btn-add-user fl">保存</button>
+			<button type="button" class="btn btn-info btn-add-user-go fl">保存并继续添加成员</button>
+			<button type="button" class="button button-small button-white btn-add-cancel fl">取消</button>
 		</div>
 	</div>
 </div>

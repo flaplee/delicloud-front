@@ -738,6 +738,7 @@ define(['common/slider/slider', 'site/pages/pages', 'site/popups/popups', 'site/
 	! function() {
 		var hintmo,
 			hintCtn = document.getElementById('hintCtn'),
+			hintmoIcon,
 			loadingRT = 0,
 			dlgCtn = document.getElementById('dialogs'),
 			dlgStack = [],
@@ -781,6 +782,29 @@ define(['common/slider/slider', 'site/pages/pages', 'site/popups/popups', 'site/
 			}
 			hintmo = setTimeout(function() {
 				hintmo = 0;
+				o.fadeOut(function() {
+					o.css('display', '');
+				});
+			}, t);
+		};
+		kernel.hintIcon = function(className, text, t){
+			var o = $('#hintIcon');
+			o.prop('className', className ? className : '');
+			o.find('p.title').text(text.title);
+			o.find('p.desc').text(text.desc);
+			(className && className == 'success')? o.find('div.icon').html('<i class="iconfont">&#xe649;</i>') : o.find('div.icon').html('<i class="iconfont">&#xe66b;</i>');
+			if (hintmoIcon) {
+				clearTimeout(hintmoIcon);
+			} else {
+				o.css('display', 'block');
+				o[0].offsetWidth;
+				o.fadeIn();
+			}
+			if (!t) {
+				t = 3000;
+			}
+			hintmoIcon = setTimeout(function() {
+				hintmoIcon = 0;
 				o.fadeOut(function() {
 					o.css('display', '');
 				});

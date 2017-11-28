@@ -1,9 +1,7 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree', 'page/contacts/department', 'page/contacts/import'], function(module, kernel, util, ztree, departments, imports) {
+define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'], function(module, kernel, util, ztree) {
     return {
         onload: function(force) {
-            console.log("departments", departments);
-            console.log("imports", imports);
             var userid = util.getCookie('userid'),
                 token = util.getCookie('token'),
                 //orgid = '355671868335718400';
@@ -42,7 +40,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                     }
                 });
             });
-
             //从本部门移除
             $removeUser.on('click', function() {
                 // 将人员从团队组织中删除 /v1.0/org/user/delete
@@ -59,7 +56,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                     }
                 });
             });
-
             //彻底删除
             $deleteUser.on('click', function() {
                 // 将人员从团队组织中删除 /v1.0/org/user/delete
@@ -76,7 +72,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                     }
                 });
             });
-
             // 添加成员
             $addUser.on('click', function() {
                 kernel.openPanel('adduser', {
@@ -123,8 +118,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                     }
                 });
             }
-
-            //全选
+            
             function selectUserAll(o) {
                 o.on('click', function(e) {
                     e.stopPropagation();
@@ -141,7 +135,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                 });
             }
 
-            //选择成员
             function selectUser(o) {
                 o.on('click', function(e) {
                     e.stopPropagation();
@@ -158,7 +151,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                 });
             }
 
-            //编辑成员
             function setUserEdit(o) {
                 o.on('click', function() {
                     kernel.openPanel('adduser', {
@@ -168,7 +160,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                 });
             }
 
-            //删除成员
             function setUserDelete(o) {
                 o.on('click', function() {
                     kernel.openPopup('deluser',{
@@ -182,7 +173,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                     });
                 });
             }
-
 
             // 搜索我的通讯录 /v1.0/address_book/search?q={keyword}&org_id={org_id}
 
@@ -207,20 +197,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
 	        });*/
 
             //部门
-            var $addDept = $('.btn-dept-add');
-            var $reNameDept = $('.btn-dept-add');
-
-            /* 部门管理 */
-            //添加部门
-            $addDept.on('click',function(){
-                kernel.openPopup('editdept', {
-                    type: 'editdept',
-                    data: {
-                        id: '123456'
-                    }
-                });
-            });
-
             // 添加部门 /v1.0/org/department
             $contactsDept.find('.btn-dept-add-item').on('click', function() {
                 util.ajaxSubmit({
@@ -260,12 +236,12 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                     }
                 });
             });
-
             //设置部门主管 修改部门信息 /v1.0/org/department/{department_id}
             $contactsDept.find('.btn-dept-setadmin-item').on('click', function() {
                 kernel.openPanel('editdept', {
                     type: 'editdept',
                     data: {
+
                     }
                 });
                 /*util.ajaxSubmit({

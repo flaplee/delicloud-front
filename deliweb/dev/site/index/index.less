@@ -289,8 +289,16 @@ code,kbd,pre,samp {
 }
 
 .container {
-    width: 1080px;
+    width: 1200px;
     margin: 0 auto
+}
+
+.talign-left{
+	text-align:left;
+}
+
+.talign-right{
+	text-align:right;
 }
 
 .main {
@@ -301,14 +309,13 @@ code,kbd,pre,samp {
     width: 360px
 }
 
-
 @font-face {
   font-family: 'iconfont';  /* project id 483384 */
-  src: url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.eot');
-  src: url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_483384_ojd7fh5dlmzpvi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.eot');
+  src: url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -331,6 +338,9 @@ code,kbd,pre,samp {
     -webkit-font-smoothing: subpixel-antialiased;
     &:hover{
     	cursor: pointer;
+    }
+    &.btn-middle{
+    	width:120px;
     }
     &.btn-large{
     	width:240px;
@@ -412,18 +422,18 @@ code,kbd,pre,samp {
 
 .btn-info {
     color: #fff;
-    background-color: #3498db
+    background-color: #55bfbe
 }
 
 .btn-info:hover,.btn-info.hover,.btn-info:focus,.btn-info:active,.btn-info.active,.open>.dropdown-toggle.btn-info {
     color: #fff;
-    background-color: #5dade2;
-    border-color: #5dade2
+    background-color: #55bfbe;
+    border-color: #55bfbe
 }
 
 .btn-info:active,.btn-info.active,.open>.dropdown-toggle.btn-info {
-    background: #2c81ba;
-    border-color: #2c81ba
+    background: #55bfbe;
+    border-color: #55bfbe
 }
 
 .btn-info.disabled,.btn-info[disabled],fieldset[disabled] .btn-info,.btn-info.disabled:hover,.btn-info[disabled]:hover,fieldset[disabled] .btn-info:hover,.btn-info.disabled.hover,.btn-info[disabled].hover,fieldset[disabled] .btn-info.hover,.btn-info.disabled:focus,.btn-info[disabled]:focus,fieldset[disabled] .btn-info:focus,.btn-info.disabled:active,.btn-info[disabled]:active,fieldset[disabled] .btn-info:active,.btn-info.disabled.active,.btn-info[disabled].active,fieldset[disabled] .btn-info.active {
@@ -618,6 +628,11 @@ button{
 	        	color: #00d8d6;
 				border: 1px solid #00d8d6;
 				border-radius: 4px;
+				.navlink-icon{
+					color: #00d8d6;
+					font-size:12px;
+					margin-left: 15px;
+				}
 	        }
 
 	        .nav-item a.navlink:hover {
@@ -738,7 +753,7 @@ button{
     width: 155px;
     float: left;
     -height: 100px;
-    margin-right: 150px;
+    margin-right: 100px;
     margin-bottom:0;
 }
 
@@ -845,6 +860,7 @@ button{
 
 #dialogs > div > div,
 #hint > span,
+#hintIcon > div,
 #loading > div > div,
 #panels > .contents > div,
 #popups > div > div,
@@ -854,7 +870,8 @@ button{
 
 #dialogs > div > .no,
 #dialogs > div > .yes,
-#hint > span {
+#hint > span,
+#hintIcon > div {
 	border-radius: 4px;
 }
 
@@ -882,6 +899,32 @@ button{
 	}
 }
 
+#popups{
+	.btns{
+		margin: 40px auto 0;
+		text-align: center;
+		div{
+			width: 50%;
+			float: left;
+			&.talign-left{
+				text-align:left;
+				button{
+					margin-left:60px;
+				}
+			}
+			&.talign-right{
+				text-align:right;
+				button{
+					margin-right:60px;
+				}
+			}
+			button{
+				width:100px;
+			}
+		}
+	}
+}
+
 #panels {
 	z-index: 110;
 	> .contents {
@@ -902,42 +945,6 @@ button{
 				padding-left: 20px;
 				color: white;
 			}
-		}
-	}
-}
-
-.table_wrap {
-	width: 100%;
-	text-align: center;
-	border-collapse: collapse;
-	border-cellspacing: 0;
-	border: none;
-
-	tr {
-		height: 40px;
-		margin: 0;
-	}
-
-	> thead {
-		background-color: @tableHeadBackground;
-		font-weight: normal;
-
-		> tr {
-			> th {
-				font-weight: normal;
-			}
-		}
-	}
-
-	> tbody {
-		background-color: @tableHeadBackground;
-
-		.odd {
-			background-color: @tableTdBackgroundOdd;
-		}
-
-		.even {
-			background-color: @tableTdBackgroundEven;
 		}
 	}
 }
@@ -1101,12 +1108,26 @@ button{
 	width: 120px;
 	background-color: #fff;
 	border:1px solid #6abbfd;
+	&.button-small{
+		width:100px;
+	}
+	&.button-middle{
+		width:120px;
+	}
 	&.button-large{
 		width:240px;
+	}
+	&.button-white{
+		color:#666666;
+		border:1px solid #eaeaea;
 	}
 	&.button-green{
 		color:#6abbfd;
 		border:1px solid #6abbfd;
+	}
+	&.button-primary{
+		color:#1abc9c;
+		border:1px solid #1abc9c;
 	}
 	&.button-orange{
 		color:#ffbb12;
@@ -1295,6 +1316,53 @@ textarea{
 		white-space: nowrap;
 	}
 }
+
+.table_wrap {
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	border-cellspacing: 0;
+	border: none;
+
+	tr {
+		height: 40px;
+		margin: 0;
+	}
+
+	
+
+	> thead {
+		background-color: @tableHeadBackground;
+		font-weight: normal;
+
+		> tr {
+			> th {
+				font-weight: normal;
+				border-left: none;
+				border-right: none;
+				border-top: none;
+			}
+		}
+	}
+
+	> tbody {
+		background-color: @tableHeadBackground;
+
+		td{
+			border-left: none;
+			border-right: none;
+			border-top: none;
+		}
+		.odd {
+			background-color: @tableTdBackgroundOdd;
+		}
+
+		.even {
+			background-color: @tableTdBackgroundEven;
+		}
+	}
+}
+
 //paging
 .paging {
 	margin-top: 20px;

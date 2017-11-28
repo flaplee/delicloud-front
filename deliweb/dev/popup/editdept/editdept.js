@@ -4,10 +4,11 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
         $dom = $('#' + thisPopup),
         $editInfo = $dom.find('.form-group input.deptname'),
         $btnConfirm = $dom.find('.btn-confirm'),
-        $btnCancel = $dom.find('.btn-cancel');
+        $btnClose = $dom.find('.btn-close');
     var userid = util.getCookie('userid'),
         token = util.getCookie('token'),
-        orgid = '355671868335718400';
+        //orgid = '355671868335718400';
+        orgid = util.getCookie('orgid');
     return {
         onload: function(param) {
             var data = param.data;
@@ -28,7 +29,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                     }
                 });
             });
-            $btnCancel.on('click',function(){
+            $btnClose.on('click',function(){
                 kernel.closePopup('editdept');
             });
         }

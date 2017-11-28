@@ -20,15 +20,28 @@
 		</li>
 	</ul>
 	<div class="contacts-list fl">
-		<form class="search-form clearfix">
+		<form class="search-form clear">
 			<div class="search-box fl">
 				<i class="icon iconfont search-ico">&#xe600;</i>
-				<input class="search" placeholder="搜索" name="key_search" />
+				<input class="search" placeholder="姓名/手机号" name="key_search" />
 			</div>
 			<a class="button btn-user-search fl" href="javascript:;">搜索</a>
 		</form>
 		<div class="contacts-team">
-			<div id="treeMenu" class="ztree"></div>
+			<div id="treeMenu" class="ztree hide"></div>
+			<div class="dept-select-list">
+				<ul class="dept-select-inner">
+					<li class="select-item clear" data-orgid="">
+						<a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe608;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>技术部</span></a>
+					</li>
+					<li class="select-item select-item-success clear" data-orgid="">
+						<a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe608;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>市场部</span></a>
+					</li>
+					<li class="select-item select-item-error clear" data-orgid="">
+						<a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe641;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>设计部</span></a>
+					</li>
+				</ul>
+			</div>
 			<div class="contacts-dept hide">
 				<button type="button" class="btn btn-primary btn-sm btn-dept-add-item">添加部门</button>
 				<button type="button" class="btn btn-default btn-sm btn-dept-delete-item">删除部门</button>
@@ -43,7 +56,7 @@
 		<div class="contacts-form clear">
 			<h2 class="form-title fl">研发组</h2>
 			<div class="form-btns fl">
-				<a href="javascript:;" class="button btn-user-add">移动到其他部门</a>
+				<a href="javascript:;" class="button btn-user-dept">移动到其他部门</a>
 				<a href="javascript:;" class="button button-orange btn-user-remove">从本部门移除</a>
 				<a href="javascript:;" class="button button-red btn-user-delete">彻底删除</a>
 				<button type="button" class="btn btn-primary btn-sm btn-user-add fr">添加成员</button>
@@ -77,7 +90,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="paging">
+			<div class="paging hide">
 				<a href="javascript:;" class="first disabled">首页</a>
 				<a href="javascript:;" class="previous disabled">上一页</a>
 				<a href="javascript:;" class="item active">1</a><a href="javascript:;" class="item">2</a><a href="javascript:;" class="item">3</a><a href="javascript:;" class="item">4</a><a href="javascript:;" class="item">5</a><a href="javascript:;" class="item">6</a><a href="javascript:;" class="item">7</a><a href="javascript:;" class="item">8</a><a href="javascript:;" class="item">9</a><a href="javascript:;" class="item">10</a><a href="javascript:;" class="next">下一页</a>
@@ -91,5 +104,67 @@
 				</select> 条
 			</div>
 		</div>
+	</div>
+	<div class="department-info">
+		<div class="department-form clear">
+			<h2 class="form-title fl">得力智能团队</h2>
+			<div class="form-btns fl">
+				<button type="button" class="btn btn-primary btn-sm btn-dept-add fr">添加部门</button>
+			</div>
+		</div>
+		<div class="department-inner">
+			<div class="department-list">
+				<ul class="department-list-inner">
+					<li class="select-item current clear" data-orgid="">
+						<a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe608;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>技术部<span class="item-count">(<em>10人</em>)</span></span>/<span class="item-admin">张三(<em>主管</em>)</span></a>
+						<div class="item-setup">
+							<a class="setup-admin" href="javascript:;"><i class="iconfont">&#xe634;</i></a>
+							<a class="setup-rename" href="javascript:;"><i class="iconfont">&#xe618;</i></a>
+							<a class="setup-add" href="javascript:;"><i class="iconfont">&#xe73e;</i></a>
+							<a class="setup-del" href="javascript:;"><i class="iconfont">&#xe6df;</i></a>
+						</div>
+					</li>
+					<li class="select-item clear" data-orgid="">
+						<a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe608;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>技术部<span class="item-count">(<em>10人</em>)</span></span>/<span class="item-admin">张三(<em>主管</em>)</span></a>
+						<div class="item-setup">
+							<a class="setup-admin" href="javascript:;"><i class="iconfont">&#xe634;</i></a>
+							<a class="setup-rename" href="javascript:;"><i class="iconfont">&#xe618;</i></a>
+							<a class="setup-add" href="javascript:;"><i class="iconfont">&#xe73e;</i></a>
+							<a class="setup-del" href="javascript:;"><i class="iconfont">&#xe6df;</i></a>
+						</div>
+					</li>
+					<li class="select-item clear" data-orgid="">
+						<a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe608;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>技术部<span class="item-count">(<em>10人</em>)</span></span>/<span class="item-admin">张三(<em>主管</em>)</span></a>
+						<div class="item-setup">
+							<a class="setup-admin" href="javascript:;"><i class="iconfont">&#xe634;</i></a>
+							<a class="setup-rename" href="javascript:;"><i class="iconfont">&#xe618;</i></a>
+							<a class="setup-add" href="javascript:;"><i class="iconfont">&#xe73e;</i></a>
+							<a class="setup-del" href="javascript:;"><i class="iconfont">&#xe6df;</i></a>
+						</div>
+					</li>
+					<li class="select-item clear" data-orgid="">
+						<a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe608;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>技术部<span class="item-count">(<em>10人</em>)</span></span>/<span class="item-admin">张三(<em>主管</em>)</span></a>
+						<div class="item-setup">
+							<a class="setup-admin" href="javascript:;"><i class="iconfont">&#xe634;</i></a>
+							<a class="setup-rename" href="javascript:;"><i class="iconfont">&#xe618;</i></a>
+							<a class="setup-add" href="javascript:;"><i class="iconfont">&#xe73e;</i></a>
+							<a class="setup-del" href="javascript:;"><i class="iconfont">&#xe6df;</i></a>
+						</div>
+					</li>
+					<li class="select-item clear" data-orgid="">
+						<a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe608;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>技术部<span class="item-count">(<em>10人</em>)</span></span>/<span class="item-admin">张三(<em>主管</em>)</span></a>
+						<div class="item-setup">
+							<a class="setup-admin" href="javascript:;"><i class="iconfont">&#xe634;</i></a>
+							<a class="setup-rename" href="javascript:;"><i class="iconfont">&#xe618;</i></a>
+							<a class="setup-add" href="javascript:;"><i class="iconfont">&#xe73e;</i></a>
+							<a class="setup-del" href="javascript:;"><i class="iconfont">&#xe6df;</i></a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="import-info">
+		<a class="btn-batch" href="javascript:;">批量导入</a>
 	</div>
 </div>

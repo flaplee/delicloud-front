@@ -6,6 +6,21 @@ define({
         html: "loginPopup.html",
         css: "loginPopup.less"
     },
+    adduser: {
+        js: 'adduser',
+        html: 'adduser.html',
+        css: 'adduser.less'
+    },
+    deluser: {
+        js: 'deluser',
+        html: 'deluser.html',
+        css: 'deluser.less'
+    },
+    seluser: {
+        js: 'seluser',
+        html: 'seluser.html',
+        css: 'seluser.less'
+    },
     adddept: {
         js: 'adddept',
         html: 'adddept.html',

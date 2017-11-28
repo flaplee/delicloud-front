@@ -5,6 +5,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
         form = dom.find('form'),
         uid = dom.find('.username'),
         pwd = dom.find('.password');
+    var userData = {};
     form.on('submit', function() {
         // 登录 /v1.0/login
         util.ajaxSubmit({
@@ -16,6 +17,13 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                 pwd: hex_md5(pwd.val())
             },
             success: function(json) {
+                userData = json.data.result;
+                if(userData.type == '_user_'){
+                    util.setUserData(userData);
+                    util.setCookie('token',userData.token);
+                    util.setCookie('userid',userData.user_id);
+                    util.setCookie('expire',userData.expire);
+                }
                 util.setCookie('username', uid.val(), 9999);
                 util.setCookie('password', pwd.val(), 9999);
                 kernel.closePopup(thisPopup);
