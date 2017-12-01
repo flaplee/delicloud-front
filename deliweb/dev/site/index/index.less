@@ -23,7 +23,8 @@ body {
 	margin: 0;
 	height: 100%;
 	overflow: auto;
-	background-color: #ededed;
+	-background-color: #ededed;
+	background-color: #eeeff2;
     color: #333;
 }
 
@@ -311,11 +312,11 @@ code,kbd,pre,samp {
 
 @font-face {
   font-family: 'iconfont';  /* project id 483384 */
-  src: url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.eot');
-  src: url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_483384_lz842bfz6758kt9.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.eot');
+  src: url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -738,7 +739,8 @@ button{
 }
 
 #footer{
-	background-color:#cfd2d7
+	background-color:#cfd2d7;
+	display:none;
 }
 .footer {
     padding-top: 25px;
@@ -757,59 +759,41 @@ button{
     margin-bottom:0;
 }
 
-.footer-link dl.openwexin {
-    width: 230px;
-    margin-left: -10px
-}
-
-.footer-link dl.openwexin .openwexin-img {
-    display: inline-block;
-    width: 81px;
-    height: 81px;
-    float: left;
-    margin-top: 10px;
-    background: url("images/weixin.png") no-repeat
-}
-
-.footer-link dl.openwexin .openwexin-name {
-    display: inline-block;
-    width: 75px;
-    padding-left: 25px;
-    padding-top: 20px
-}
-
 .footer-link dl.attus {
     position: relative;
     width: 170px;
     margin-right: 0;
 }
 
-.footer-link dl.attus .icon-wexin-img {
+.footer-link dl.attus .icon-weixin-img {
     display: none;
     position: absolute;
-    top: -80px;
-    left: 0;
+	top: -80px;
+	left: -25px;
     background-image: url("images/weixin.png");
-    width: 81px;
-    height: 81px
+    width: 80px;
+    height: 80px;
 }
 
-.footer-link dl.attus .icon-weibo,.footer-link dl.attus .icon-wexin {
-    font-size: 50px;
-    color: #9B9B9B;
+.footer-link dl.attus .icon-qq{
+	margin-right:50px;
+}
+.footer-link dl.attus .icon-weixin{
+	position:relative;
+}
+
+.footer-link dl.attus .icon-qq, .footer-link dl.attus .icon-weixin {
+    font-size: 30px;
+    color: #333333;
     cursor: pointer;
     text-decoration: none
 }
 
-.footer-link dl.attus .icon-weibo:hover,.footer-link dl.attus .icon-wexin:hover {
-    color: #FF6E00
+.footer-link dl.attus .icon-qq:hover,.footer-link dl.attus .icon-weixin:hover {
+    color: #55bfbe
 }
 
-.footer-link dl.attus .icon-weibo {
-    margin-left: 40px
-}
-
-.footer-link dl.attus .icon-wexin:hover .icon-wexin-img {
+.footer-link dl.attus .icon-weixin:hover .icon-weixin-img {
     display: block
 }
 
@@ -851,7 +835,7 @@ button{
 
 .footer-copyright {
 	font-size:14px;
-	color:#808184;
+	color: #666666;
     height: 50px;
     padding-top: 20px;
     text-align: center

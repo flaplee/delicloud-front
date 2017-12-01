@@ -2,8 +2,7 @@
 define(['module', 'common/kernel/kernel', 'site/util/util', 'common/text/text!page/contacts/department.html!strip'], function(module, kernel, util, html) {
     var userid = util.getCookie('userid'),
         token = util.getCookie('token'),
-        orgid = util.getCookie('orgid'),
-        parentid = util.getCookie('parentid');
+        orgid = util.getCookie('orgid');
     var dom = $(html),
         $contacts = $('#contacts .contacts-box'),
         $deptTitle = dom.find('.department-form .form-title'),
@@ -116,8 +115,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/text/text!pa
             kernel.openPopup('editdept', {
                 type: 'rename',
                 data: {
-                    id: orgid,
-                    pid: parentid,
+                    id: '123456',
+                    pid: '123456789',
                     text:'请输入新的部门名称',
                     name: data.name
                 }
@@ -129,8 +128,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/text/text!pa
             kernel.openPopup('editdept', {
                 type: 'add',
                 data: {
-                    id: orgid,
-                    pid: parentid,
+                    id: '123456',
+                    pid: '123456789',
                     text:'请输入新的部门名称',
                     name: data.name
                 }

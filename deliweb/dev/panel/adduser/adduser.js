@@ -43,20 +43,9 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 
 			// 从其他部门添加
 			$addFromDept.on('click', function() {
-				//update 2017-11-28
-				// 添加部门
- 		        /*kernel.openPopup('adddept', {
-		            type: 'adddept'
-		        });*/
-
 		        // 从部门中选择
-		        /*kernel.openPopup('adduser', {
+		        kernel.openPopup('adduser', {
 		            type: 'adduser'
-		        });*/
-
-		        // 选择人员
-		        kernel.openPopup('seluser', {
-		        	type: 'seluser'
 		        });
 		    });
 

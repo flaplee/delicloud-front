@@ -30,7 +30,7 @@
 	}
 	.contacts-menu{
 		update:20171122;
-		width: 30%;
+		width: 602px;
 		display: block;
 		position: fixed;
 		top: 80px;
@@ -43,14 +43,14 @@
 		ul.menu-list{
 			width:150px;
 			update:20171122;
-			width:23%;
+			width:140px;
 			height:100%;
 			float:left;
 			background-color: #e3e6e5;
 			li.item{
 				width:150px;
 				update:20171122;
-				width:100%;
+				width:140px;
 				a{
 					display:inline-block;
 					font-weight: normal;
@@ -77,7 +77,7 @@
 			}
 		}
 		.contacts-list{
-			width:77%;
+			width:461px;
 			.search-form{
 				padding: 20px;
 				.search-box{
@@ -147,44 +147,14 @@
 									color:#333333;
 									font-size:18px;
 								}
-								&:hover{
-									background-color:#75cac9;
-									.item-class{
-										color: #fff;
-									}
-									.text{
-										color: #fff;
-									}
-								}
 							}
-							&.select-item-success{
+							&:hover,&.current{
+								background-color:#75cac9;
 								.item-class{
-									color:#999;
+									color: #fff;
 								}
-								.item-info{
-									.text{
-										color:#333;
-									}
-								}
-								&:hover{
-									.text{
-										color: #fff;
-									}
-								}
-							}
-							&.select-item-error{
-								.item-class{
-									color:#ccc;
-								}
-								.item-info{
-									.text{
-										color:#ccc;
-									}
-								}
-								&:hover{
-									.text{
-										color: #fff;
-									}
+								.text{
+									color: #fff;
 								}
 							}
 							&:last-child{
@@ -209,7 +179,7 @@
 		width: 70%;
 		position: relative;
 		top: 80px;
-		left: 30%;
+		left: 602px;
 		bottom: 0px;
 		right: 0px;
 		overflow: hidden;
@@ -219,7 +189,7 @@
 	    	-display: -ms-flexbox;
 		}
 
-		.contacts-info,.department-info{
+		.contacts-info,.department-info,.import-info{
 			width:752px;
 			update:20171122;
 			width: 100%;
@@ -378,6 +348,18 @@
 						}
 					}
 				}
+			}
+		}
+
+		.import-info{
+			min-height:500px;
+			.btn-import-batch{
+				display:block;
+				width: 100px;
+				height: 30px;
+				margin: 30px auto;
+				display: inherit;
+				text-align: center;
 			}
 		}
 	}

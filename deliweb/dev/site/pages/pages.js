@@ -27,6 +27,11 @@ define({
 		html: 'contacts.html',
 		css: 'contacts.less'
 	},
+	imports:{
+		js: 'imports',
+		html: 'imports.html',
+		css: 'imports.less'
+	},
 	department:{
 		js: 'department',
 		html: 'department.html',

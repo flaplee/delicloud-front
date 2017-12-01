@@ -1,32 +1,27 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree', 'page/contacts/department', 'page/contacts/import'], function(module, kernel, util, ztree, departments, imports) {
+define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree', 'page/imports/member', 'page/imports/steps'], function(module, kernel, util, ztree, member, steps) {
     var loc, type, keyword;
     var userid = util.getCookie('userid'),
         token = util.getCookie('token'),
-        orgid = util.getCookie('orgid'),
-        parentid = util.getCookie('parentid');
-    console.log('~~~contacts '+ userid   + token +   orgid + parentid+'');
-/*    kernel.appendCss(require.toUrl("common/ztree/css/metroStyle/metroStyle.css"));*/
-    var $contacts = $('#contacts'),
-        $contactsMenu = $contacts.find('.contacts-menu'),
-        $contactsList = $contactsMenu.find('.contacts-list'),
-        $contactsForm = $contactsList.find('.search-form'),
-        $contactsTeam = $contactsList.find('.contacts-team'),
-        $contactsSearch = $contactsForm.find('.search-box input.search'),
-        $searchBtn = $contactsForm.find('.search-box a.btn-user-search'),
-        $contactsBox = $contacts.find('.contacts-box'),
-        $contactsInfo = $contactsBox.find('.contacts-info'),
-        $moveUser = $contactsInfo.find('.btn-user-dept'),
-        $removeUser = $contactsInfo.find('.btn-user-remove'),
-        $deleteUser = $contactsInfo.find('.btn-user-delete'),
-        $addUser = $contactsInfo.find('.btn-user-add'),
-        $contactsTable = $contactsInfo.find('.contacts-inner .table'),
-        $tmp = $contactsTable.find('.tbody'),
-        $dTmp = $contactsTeam.find('.dept-select-list ul.dept-select-inner');
+        orgid = util.getCookie('orgid');
+    kernel.appendCss(require.toUrl("common/ztree/css/metroStyle/metroStyle.css"));
+    var $imports = $('#imports'),
+        $importsMenu = $imports.find('.imports-menu'),
+        $importsForm = $importsMenu.find('.search-form'),
+        $importsSearch = $importsForm.find('.search-box input.search'),
+        $searchBtn = $importsForm.find('.search-box a.btn-user-search'),
+        $importsBox = $imports.find('.imports-box'),
+        $importsInfo = $importsBox.find('.imports-info'),
+        $moveUser = $importsInfo.find('.btn-user-dept'),
+        $removeUser = $importsInfo.find('.btn-user-remove'),
+        $deleteUser = $importsInfo.find('.btn-user-delete'),
+        $addUser = $importsInfo.find('.btn-user-add'),
+        $importsTable = $importsInfo.find('.imports-inner .table'),
+        $tmp = $importsTable.find('.tbody');
     var dataCache;
 
     // 左侧菜单导航
-    $contactsMenu.find('.menu-list .item a.item-menu').on('click',function(e){
+    $importsMenu.find('.menu-list .item a.item-menu').on('click',function(e){
         e.stopPropagation();
         var c = $(this).parent('li');
         if(!c.hasClass('current')){
@@ -36,11 +31,11 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
     });
 
     //关键字搜索
-    $contactsForm.on("submit", "form", function(e) {
+    $importsForm.on("submit", "form", function(e) {
         e.preventDefault()
         var loc = kernel.parseHash(location.hash);
         var params = {};
-        params.key_search = $contactsSearch.val();
+        params.key_search = $importsSearch.val();
         checkUrlParams(params, loc);
         kernel.replaceLocation(loc);
     });
@@ -72,7 +67,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
     //移动到其他部门
     $moveUser.on('click', function() {
         var uids = [];
-        $contactsTable.find('tbody.tbody tr td a.item.selected').each(function(i, dom){
+        $importsTable.find('tbody.tbody tr td a.item.selected').each(function(i, dom){
             uids.push($(dom).attr('data-uid'));
         });
         if(uids.length > 0){
@@ -92,7 +87,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
     //从本部门移除
     $removeUser.on('click', function() {
         var uids = [];
-        $contactsTable.find('tbody.tbody tr td a.item.selected').each(function(i, dom){
+        $importsTable.find('tbody.tbody tr td a.item.selected').each(function(i, dom){
             uids.push($(dom).attr('data-uid'));
         });
         if(uids.length > 0){
@@ -117,7 +112,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
     //彻底删除
     $deleteUser.on('click', function() {
         var uids = [];
-        $contactsTable.find('tbody.tbody tr td a.item.selected').each(function(i, dom){
+        $importsTable.find('tbody.tbody tr td a.item.selected').each(function(i, dom){
             uids.push($(dom).attr('data-uid'));
         });
         if(uids.length > 0){
@@ -156,11 +151,11 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
         });
     });
 
-    // 查看团队成员   //查看团队下所有成员信息 /v1.0/org/{org_id}/users?q={keyword} 
-    initContacts($tmp, orgid);
+    // 查看我的通讯录 /v1.0/address_book/my  //查看团队下所有成员信息 /v1.0/org/{org_id}/users?q={keyword} 
+    initimports($tmp, orgid);
 
-    // 初始化团队成员
-    function initContacts(o, orgid){
+    // 初始化通讯录
+    function initimports(o, orgid){
         o.find('>').remove();
         util.ajaxSubmit({
             type: 'get',
@@ -188,50 +183,11 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                     </tr>';
                     $tmp.append($(itemTpl));
                 }
-                selectUserAll($contactsTable.find('.thead .select-all'));
+                selectUserAll($importsTable.find('.thead .select-all'));
                 selectUser($tmp.find('a.item'));
                 setUserEdit($tmp.find('.btn-user-edit'));
                 setUserDelete($tmp.find('.btn-user-delete'));
             }
-        });
-    }
-
-    initDepartment($dTmp, parentid);
-
-    //初始化团队组织 及 团队子部门信息
-    function initDepartment(o, data){
-        var status = data.status, type = data.type,parentid = data.parentid, orgid = data.orgid;
-        // status = 'onload/loaded',  type = 'parent/son', parentid = 355671868335718401, orgid = 363677081407586304;
-        if(type && type == 'parent'){
-            o.find('>').remove();
-            util.ajaxSubmit({
-                type: 'get',
-                url: '/v1.0/org/department/' + (data.type == 'parent') ? data.parentid : data.orgid + '/departments',
-                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
-                data: {},
-                success: function(res) {
-                    //console.log("res",res);
-                    var json = res.data.result;
-                    for (var i = 0; i < res.data.result.length; i++) {
-                        var itemTpl = '<li class="select-item clear" data-orgid="'+ json[i].org_id +'">\
-                            <a class="item-info" href="javascript:;"><i class="iconfont item-class">&#xe641;</i><span class="text"><i class="iconfont item-class">&#xe661;</i>'+ json[i].name +'</span></a>\
-                            <ul class="select-son-list"></ul>\
-                        </li>';
-                        $dTmp.append($(itemTpl));
-                        $dTmp.attr('data-status','loaded');
-                        bindSonDept($(itemTpl));
-                    }
-                }
-            });
-        }
-       
-    }
-
-    //初始化团队子部门信息
-    function bindSonDept(o){
-        o.find('a.item-info').on('click',function(e){
-            e.stopPropagation();
-            initDepartment();
         });
     }
 
@@ -297,13 +253,15 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
 
     // 搜索我的通讯录 /v1.0/address_book/search?q={keyword}&org_id={org_id}
 
+
+    
     // test api 查看团队一级部门信息 /v1.0/org/355671868335718401/departments  
 
     //部门
     var $addDept = $('.btn-dept-add');
     var $reNameDept = $('.btn-dept-add');
-    /* 部门管理 */
 
+    /* 部门管理 */
     //添加部门
     $addDept.on('click',function(){
         kernel.openPopup('editdept', {
@@ -347,7 +305,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
                 onAsyncSuccess: onAsyncSuccess,
                 beforeClick: function(treeId, treeNode) {
                     console.log("treeNode", treeNode);
-                    initContacts($tmp, treeNode.org_id);
+                    initimports($tmp, treeNode.org_id);
                     /* var zTree = $.fn.zTree.getZTreeObj("treeMenu");
                     if (treeNode.isParent) {
                         zTree.expandNode(treeNode);
@@ -427,24 +385,24 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'common/ztree/ztree'
     setTreeMenu('355671868335718401');
     return {
         onload: function(force) {
-            var $contactsBox =  $('#contacts .contacts-box'),boxClass;
+            var $importsBox =  $('#imports .imports-box'),boxClass;
             loc = kernel.parseHash(location.hash),
             type = loc.args.type,
             keyword = loc.args.key_search;
             boxClass = type ? '.'+ type +'-info' : '.user-info';
-            $contactsBox.find(boxClass).show().siblings().hide();
+            $importsBox.find(boxClass).show().siblings().hide();
             switch(type){
                 case 'user':
-                    $contactsForm.show();
+                    $importsForm.show();
                     break;
                 case 'import':
-                    $contactsForm.hide();
+                    $importsForm.hide();
                     break;
                 case 'department':
-                    $contactsForm.hide();
+                    $importsForm.hide();
                     break;  
                 default:
-                    $contactsForm.show();
+                    $importsForm.show();
                     break;
             }
         }

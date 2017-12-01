@@ -26,6 +26,11 @@ define({
         html: 'adddept.html',
         css: 'adddept.less'
     },
+    deldept: {
+        js: 'deldept',
+        html: 'deldept.html',
+        css: 'deldept.less'
+    },
     renamedept: {
         js: 'renamedept',
         html: 'renamedept.html',
