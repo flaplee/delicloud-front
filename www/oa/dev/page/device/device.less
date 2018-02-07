@@ -1,0 +1,124 @@
+@import '../../config.less';
+.device{
+	#pages {
+	    position: relative;
+	    background-color: #eeeff2;
+	    top: 80px;
+	}
+}
+
+#device {
+	min-height:600px;
+	font-size: 16px;
+	color: @textColor;
+	padding: 0 30px;
+	>a {
+		color: black;
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	.dev-box{
+		.dev-header{
+			font-size: 22px;
+			color:#333;
+			height: 22px;
+			line-height: 22px;
+			font-weight: normal;
+			margin: 30px 0 20px;
+			padding-left: 10px;
+			border-left: 5px solid #55bfbe;
+		}
+		.dev-main{
+			background-color: #fff;
+			border-radius:10px;
+			.dev-installed{
+				.dev-wrap{
+					min-height:600px;
+					table.table{
+						thead.thead{
+							background: #fff;
+							tr{
+								height: 78px;
+								th{
+									font-size:16px;
+									color:#333333;
+									height: 40px;
+									line-height: 40px;
+									border-top: none;
+									border-bottom: none;
+									border-left: none;
+									border-right: none;
+									text-align:center;
+								}
+							}
+						}
+						tbody.tbody{
+							tr.dev-item{
+								height: 78px;
+								td{
+									padding: 10px 30px;
+									font-size:14px;
+									color:#999999;
+									border-left: none;
+									border-right: none;
+									text-align:center;
+									&.item-desc{
+										.item-img{
+											padding: 5px 0;
+											margin-right:10px;
+											img{
+												width:30px;
+												height:30px;
+												display:inline-block;
+											}
+										}
+										.item-text{
+											p{
+												color:#333333;
+												text-align:left;
+											}
+										}
+									}
+									&.item-title,&.item-status,&.item-app{
+										font-size:14px;
+										color:#55bfbe;
+									}
+									&.item-status{
+										span.status-online{
+											color:#55bfbe;
+										}
+										span.status-offline{
+											color:#999999;
+										}
+									}
+									&.item-app{
+										span{
+											display:block;
+										}
+									}
+									&.item-delact{
+										a{
+											float: right;
+											width: 100px;
+											margin-left: 30px;
+											&:last-child{
+												margin-left: 0;
+											}
+										}
+									}
+								}
+							}
+							
+						}
+					}
+				}
+
+			}
+		}
+		.dev-wrap{
+			margin-top:10px;
+		}
+	}
+}

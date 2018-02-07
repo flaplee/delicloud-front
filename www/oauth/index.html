@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="fragment" content="!" />
+	<title>得力智慧办公室WEB版</title>
+	<link rel="stylesheet" type="text/css" href="/oauth/css/style.css">
+</head>
+<body>
+	<div id="header" class="wrap-top wrap-top-shadow">
+		<div class="user-head">
+			<div id="head" class="clear">
+				<div class="logo-box clear">
+					<a href="#!loginhome" class="logo"></a>
+				</div>
+				<div class="nav-top">
+					<ul class="nav-top-list clear">
+						<li class="nav-item"><a href="/oa/index.html#!home" class="navlink navlink-current homeBtn">首页</a></li>
+						<li class="nav-item"><a href="/oa/index.html#!contacts" class="navlink orgBtn">组织通讯录</a></li>
+						<li class="nav-item"><a href="/oa/index.html#!apphome" class="navlink appBtn">应用</a></li>
+						<li class="nav-item"><a href="/oa/index.html#!device" class="navlink devBtn">设备</a></li>
+						<li class="nav-item nav-item-team">
+							<a href="javascript:;" class="navlink nav-item-current"><span class="navlink-name">得力团队</span><span class="navlink-icon"><i class="iconfont">&#xe608;</i></span></a>
+							<div class="sun-nav-list sun-nav-list-team">
+								<!-- <a class="sub-nav-item current" href="javascript:;">得力团队1</a>
+								<a class="sub-nav-item" href="javascript:;">得力团队2</a>
+								<a class="sub-nav-item" href="javascript:;">得力团队3</a> -->
+							</div>
+						</li>
+						<li class="nav-item nav-item-login">
+							<div class="nologin">
+								<a href="/oauth/" class="green">登录</a>
+							</div>
+							<div class="login user-panel">
+								<a href="javascript:;" class="user-info fl" style="display: block;">
+									<img class="user-info-avatar" width="50" height="50" src="/oauth/images/user.png">
+									<i class="iconfont"></i>
+								</a>
+								<div class="user-asset fl" style="display: none;">
+									<a class="user-asset-link logout" href="javascript:;">退出登录</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="login">
+		<div class="login-box">
+			<div id="loginQr" class="login-inner clear">
+				<div class="login-title">
+					<p class="login-name">得力助手</p>
+					<p class="login-slogan">为了难以触摸的效率</p>
+				</div>
+				<div class="login-doing" title="请用手机智慧办公室扫码登录">
+					<div id="qrcode" class="loginQr"></div>
+					<p class="login-sub-title">请用手机智慧办公室扫码登录</p>
+				</div>
+				<div class="login-success">
+					<img class="success-img" src="/oauth/images/user.png">
+					<p class="success-title">扫码成功</p>
+					<p class="success-sub-title">请在手机智慧办公室上确认登录</p>
+					<a class="success-btn" href="javascript:;">返回</a>
+				</div>
+				<div class="login-fail">
+					<div class="fail-img"></div>
+					<p class="fail-sub-title">抱歉！暂不支持非管理人员扫码登录，你可以在得力助手App上创建团队，成为管理员后再尝试。</p>
+					<a class="fail-btn" href="javascript:;">返回</a>
+				</div>
+			</div>
+		</div>
+		<div class="org-box">
+			<div class="org-wrap container">
+				<div class="org-title">你是以下企业组织的管理员，请选择要管理的组织</div>
+				<div class="org-inner clear">
+					<ul class="org-list clear org-list-seldom">
+						<!-- <li class="list-item">
+							<a class="list-item-inner noline" href="javascript:;" data-oid="388622052149428224" data-pid="388622052149428224">得力助手web版本</a>
+						</li>
+						<li class="list-item">
+							<a class="list-item-inner noline" href="javascript:;" data-oid="375676325056217088" data-pid="375676325060411392">个人测试组织</a>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="footer container">
+			<div class="footer-link clear">
+				<dl>
+					<dt>使用帮助</dt>
+					<dd><a href="javascript:;">去购买智能设备</a></dd>
+					<dd><a href="javascript:;">App使用帮助</a></dd>
+					<dd><a href="javascript:;">网页使用帮助</a></dd>
+				</dl>
+				<dl>
+					<dt>应用开发商</dt>
+					<dd><a href="javascript:;">应用接入指南</a></dd>
+				</dl>
+				<dl>
+					<dt>关于我们</dt>
+					<dd><a href="javascript:;">加入我们</a></dd>
+					<dd><a href="javascript:;">联系我们</a></dd>
+				</dl>
+				<dl class="attus">
+					<dt>联系我们</dt>
+					<dd class="kefu-phone">400-185-0555</dd>
+					<a class="share-icon icon-qq" href="javascript:;"><i class="iconfont">&#xe644;</i></a>
+					<a class="share-icon icon-weixin" href="javascript:;"><i class="iconfont">&#xe609;</i><img class="icon-weixin-img" src="/oauth/images/qrcode.png"></a>
+				</dl>
+			</div>
+			<div class="footer-copyright">浙ICP备06004512号 Copyright ©2014 得力集团有限公司 版权所有</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="/oauth/js/qrcode.js"></script>
+	<script type="text/javascript" src="/oauth/js/jquery.js"></script>
+	<script type="text/javascript" src="/oauth/js/sockjs.js"></script>
+	<script type="text/javascript" src="/oauth/js/stomp.js"></script>
+	<script type="text/javascript" src="/oauth/js/util.js"></script>
+	<script type="text/javascript" src="/oauth/js/oauth.js"></script>
+</body>
+</html>
