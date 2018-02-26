@@ -12,7 +12,6 @@ $(function() {
         $navTeam = $('#header .nav-top .nav-top-list .nav-item-team'),
         $orgNavList = $navTeam.find('.son-nav-list-team');
     var userInfo = {}, stomp = null, orgNumNull = 0;
-
     // init
     initQrcode($loginBox.find('.loginQr'));
 
@@ -38,8 +37,9 @@ $(function() {
                                 //self.appendChild(kernel.makeQr(url, 300));
                                 new QRCode(document.getElementById('qrcode'), {
                                     text: url,
-                                    width: 300,
-                                    height: 300
+                                    width: 234,
+                                    height: 234,
+                                    correctLevel: QRCode.CorrectLevel.L
                                 });
                                 connect(cid);
                             } else {
@@ -90,8 +90,9 @@ $(function() {
                             o.html('');
                             new QRCode(document.getElementById('qrcode'), {
                                 text: url,
-                                width: 300,
-                                height: 300
+                                width: 234,
+                                height: 234,
+                                correctLevel: QRCode.CorrectLevel.L
                             });
                             connect(cid, 'disconnect');
                         } else {
@@ -110,7 +111,7 @@ $(function() {
 
     // webscoket 
     function connect(cid, status) {
-        var sock = new SockJS('/web/web-gateway-websocket');
+        var sock = new SockJS('http://t.delicloud.com/web/web-gateway-websocket');
         stomp = Stomp.over(sock);
         stomp.connect({}, function(frame) {
             var url = "/user/" + cid + "/barcode/login";
@@ -125,8 +126,8 @@ $(function() {
             console.log("json~~~~~~~~~~~", json);
             $loginDoing.hide();
             $loginFail.hide();
-            $loginSuccess.find('img.success-img').attr('src', json.avatar_url);
-            $loginSuccess.find('img.success-img').attr('title', json.name);
+            $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'});
+            $loginSuccess.find('div.success-img').attr('title', json.name);
             $loginSuccess.show();
         });
 
@@ -162,7 +163,7 @@ $(function() {
                 }, function() {
                     $loginDoing.hide();
                     $loginSuccess.hide();
-                    $loginSuccess.find('img.success-img').attr('src', json.avatar_url);
+                    $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'});
                     $loginSuccess.find('img.success-img').attr('title', json.name);
                     $loginFail.show();
                 });
