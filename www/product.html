@@ -6,30 +6,30 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="fragment" content="!" />
 	<title>得力e+ 产品</title>
-	<link rel="stylesheet" type="text/css" href="http://t.static.delicloud.com/www/home/css/style.css">
+	<link rel="shortcut icon" href="http://t.static.delicloud.com/www/images/favicons/favicon.ico">
+	<!-- <link rel="stylesheet" type="text/css" href="http://t.static.delicloud.com/www/home/css/style.css"> -->
+	<link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
-	<div id="header" class="wrap-top wrap-top-shadow">
-		<div class="user-head container">
-			<div id="head" class="clear">
-				<div class="logo-box clear">
-					<a href="/" class="logo"></a>
-				</div>
-				<div class="nav-top">
-					<ul class="nav-top-list clear">
-						<li class="nav-item"><a href="/product.html" class="navlink navlink-current proBtn">产品</a></li>
-						<li class="nav-item"><a href="javascript:;" class="navlink devBtn">智能硬件</a></li>
-						<li class="nav-item"><a href="/about.html" class="navlink abtBtn">关于得力</a></li>
-						<li class="nav-item"><a href="/download.html" class="navlink appBtn">应用下载</a></li>
-						<li class="nav-item nav-item-admin">
-							<a href="/oa" class="admin-login">管理后台</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="home">
+	<header class="main-nav background-shadow">
+	  <div class="wrapper">
+	    <nav role="navigation">
+			<h1 class="logo-box">
+				<a href="/" class="logo" title="得力e+"></a>
+			</h1>
+			<a href="javascript:;" class="nav-toggle">立刻下载</span>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li><a class="active" href="/product.html">产品</a></li>
+				<li style="display: none;"><a href="javascript:;">智能硬件</a></li>
+				<li><a href="/about.html">关于得力</a></li>
+				<li><a href="/download.html">应用下载</a></li>
+				<li class="nav-item-admin"><a href="/oa" class="admin-login">管理后台</a></li>
+			</ul>
+	    </nav>
+	  </div>
+	</header>
+	<section class="home-product">
 		<div class="product-box">
 			<div class="product-list clear">
 				<div class="product-item">
@@ -82,7 +82,7 @@
 								<div class="title-text title-text-4 fr"></div>
 							</div>
 							<div class="info-desc">
-								预置多种模版、自定义模版，满足各类工作场景<br />随时审批，自动归类保存，方便月度总结
+								预置多种模版、自定义模版，满足各类工作场景！<br />随时审批，自动归类保存，方便月度总结！
 							</div>
 						</div>
 						<div class="product-img product-img-4 fl"></div>
@@ -90,37 +90,43 @@
 				</div>
 			</div>
 			<div class="product-btn container">
-				<a href="/product.html" class="btn-experience noline">立即体验</a>
+				<a href="/download.html" class="btn-experience noline">立即体验</a>
 			</div>
 		</div>
-	</div>
-	<div id="footer">
-		<div class="footer container">
-			<div class="footer-link clear">
-				<dl>
-					<dt>使用帮助</dt>
-					<dd><a href="javascript:;">去购买智能设备</a></dd>
-					<dd><a href="javascript:;">App使用帮助</a></dd>
-					<dd><a href="javascript:;">网页使用帮助</a></dd>
-				</dl>
-				<dl>
-					<dt>应用开发商</dt>
-					<dd><a href="javascript:;">应用接入指南</a></dd>
-				</dl>
-				<dl>
-					<dt>关于我们</dt>
-					<dd><a href="javascript:;">加入我们</a></dd>
-					<dd><a href="javascript:;">联系我们</a></dd>
-				</dl>
-				<dl class="attus">
-					<dt>联系我们</dt>
-					<dd class="kefu-phone">400-185-0555</dd>
-					<a class="share-icon icon-qq" href="javascript:;"><i class="iconfont">&#xe644;</i></a>
-					<a class="share-icon icon-weixin" href="javascript:;"><i class="iconfont">&#xe609;</i><img class="icon-weixin-img" src="/images/qrcode.png"></a>
-				</dl>
-			</div>
-			<div class="footer-copyright">浙ICP备06004512号 Copyright ©2014 得力集团有限公司 版权所有</div>
+	</section>
+	<footer class="main-footer">
+		<div class="wrapper extra">
+			<ul class="small">
+			  <li>
+			    <h1 class="heading-caption section-footer mobile-collapsible">使用帮助</h1>
+			    <ul class="section-footer" role="navigation">
+			      <li><a href="javascript:;">去购买智能设备</a></li>
+			      <li><a href="javascript:;">App使用帮助</a></li>
+			      <li><a href="javascript:;">网页使用帮助</a></li>
+			    </ul>
+			  </li>
+			  <li>
+			    <h1 class="heading-caption section-support mobile-collapsible">应用开发商</h1>
+			    <ul class="section-support" role="navigation">
+			      <li><a href="javascript:;">应用接入指南</a></li>
+			    </ul>
+			  </li>
+			  <li>
+			    <h1 class="heading-caption section-company mobile-collapsible">关于我们</h1>
+			    <ul class="section-company" role="navigation">
+			      <li><a href="javascript:;">加入我们</a></li>
+			      <li><a href="javascript:;">联系我们</a></li>
+			    </ul>
+			  </li>
+			  <li>
+			    <h1 class="heading-caption section-community mobile-collapsible">联系我们</h1>
+			    <ul class="section-community" role="navigation">
+					<li>400-185-0555<!-- <a href="javascript:;">QQ</a> <a href="javascript:;">Wechat</a> --> </li>
+			    </ul>
+			  </li>
+			</ul>
+			<div class="section-footer-news"><span>浙ICP备06004512号 Copyright &copy;2014 得力集团有限公司 版权所有</span></div>
 		</div>
-	</div>
+	</footer>
 </body>
 </html>

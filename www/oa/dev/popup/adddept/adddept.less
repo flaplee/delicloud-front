@@ -51,7 +51,11 @@
 			-margin-right:60px;
 			.dept-select-list{
 				.dept-select-inner{
-					padding: 20px 0 20px 10px;
+					width: 228px;
+					height: 320px;
+					margin: 20px 10px 20px 10px;
+					overflow-y: scroll;
+					overflow-x: hidden;
 					.select-item{
 						.item-info{
 							width: 100%;
@@ -63,6 +67,7 @@
 							font-size: 18px;
 							.item-class{
 								color: #999;
+								width: 20px;
 								margin: 0 10px;
 								float: left;
 							}
@@ -70,7 +75,7 @@
 								color: #333333;
 								font-size: 18px;
 								float: left;
-								width:150px;
+								width: 170px;
 								display:inline-block;
 								overflow: hidden;
 								text-overflow: ellipsis;
@@ -79,13 +84,13 @@
 							&.current{
 								background-color:none;
 								.item-class{
-									color: #75cac9;
+									color: #7c9ce4;
 								}
 								.text{
-									color: #75cac9;
+									color: #7c9ce4;
 								}
 								&:hover{
-									background-color:#75cac9;
+									background-color:#7c9ce4;
 									.item-class{
 										color: #fff;
 									}
@@ -95,7 +100,7 @@
 								}
 							}
 							&:hover{
-								background-color:#75cac9;
+								background-color:#7c9ce4;
 								.item-class{
 									color: #fff;
 								}
@@ -104,30 +109,10 @@
 								}
 							}
 						}
-						>ul.select-son-list{
-							>.item-info{
-								width:90%;
-								float:left;
-								display:inline-block;
-								color: #999;
-								font-size:18px;
-								margin-bottom: 10px;
-								.item-class{
-									color:#999;
-									margin:0 10px;
-								}
-								.text{
-									color:#333333;
-									font-size:18px;
-								}
-								&:hover{
-									background-color:#75cac9;
-									.item-class{
-										color: #fff;
-									}
-									.text{
-										color: #fff;
-									}
+						&>ul.select-son-list{
+							&>.select-item{
+								.item-info{
+									margin-left: 10px;
 								}
 							}
 						}
@@ -162,6 +147,7 @@
 							}
 						}
 					}
+
 				}
 			}
 		}

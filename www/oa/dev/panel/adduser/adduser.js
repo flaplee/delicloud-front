@@ -2,8 +2,8 @@
 define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/contacts'], function(module, kernel, util, contacts) {
 	var thisPanel = module.id.replace(/^[^/]+\/|\/[^/]+/g, ''),
 		$dom = $('#' + thisPanel),
-		$addUser = $dom.find('.add-user'),
-		$addInner = $addUser.find('.add-inner'),
+		$addWrap = $dom.find('.add-user'),
+		$addInner = $addWrap.find('.add-inner'),
 		$addInfo  = $addInner.find('.add-form .add-form-base'),
 		$addExtra = $addInner.find('.add-form .add-form-extra'),
 		$addExtraList = $addExtra.find('.extra-list'),
@@ -24,7 +24,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 			console.log("data.uid", data);
 			if(type && type == 'edit'){
 				var departmentText = (data.departmentid == data.orgid) ? '' : data.department;
-				$addInner.find('h4').text('编辑成员');
+				$addWrap.find('h4').text('编辑成员');
 				$addInfo.find('.username').val($.trim(data.nickname));
 				$addInfo.find('.usermobile').attr('disabled','disabled').val($.trim(data.mobile));
 				$addInfo.find('.employee_num').val($.trim(data.employee_num));
@@ -32,9 +32,10 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 				$addExtra.find('.extra-item-index .departmentId').val($.trim(data.departmentid));
 				$addExtra.find('.extra-item-index .business').val($.trim(data.title));
 				$addFromUser.hide();
+				$addUserGo.hide();
 			}else{
 				var departmentId = (data.isParentid.length > 0) ? data.isParentid : '';
-				$addInner.find('h4').text('添加成员');
+				$addWrap.find('h4').text('添加成员');
 				$addInfo.find('.username').val('');
 				$addInfo.find('.usermobile').attr('disabled', false).val('');
 				$addInfo.find('.employee_num').val('');
@@ -42,6 +43,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 				$addExtra.find('.extra-item-index .departmentId').val(departmentId);
 				$addExtra.find('.extra-item-index .business').val('');
 				$addFromUser.show();
+				$addUserGo.show();
 			}
 
 			// 默认部门 和 职务

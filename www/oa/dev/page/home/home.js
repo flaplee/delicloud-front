@@ -1,40 +1,35 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'page/orghome/orghome'], function(module, kernel, util, orghome) {
-    var userid, token, orgid, orgname, parentid, idata;
-    userid = util.getCookie('userid'),
-    token = util.getCookie('token'),
-    orgid = util.getCookie('orgid'),
-    orgname = util.getCookie('orgname'),
-    parentid = util.getCookie('parentid'),
-    idata = util.getCookie('idata');
+define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+    var userid, token, orgid, orgname, parentid, device_ids, app_ids, employee_count;
     var $homeBox = $('#home .home-box'),
         $homeRecord = $homeBox.find('.home-record'),
+        $homeName = $homeRecord.find('.record-top p.text'),
         $homeDev = $homeRecord.find('.record-main .device span em'),
         $homeApp = $homeRecord.find('.record-main .app span em'),
         $homeCount = $homeRecord.find('.record-main .count span em'),
         $homeIndex = $homeBox.find('.home-index'),
         $bn = $homeIndex.find('.banner'),
         $bnav = $homeIndex.find(' .bannerNav');
-    var $navTeam = $('#header .nav-top .nav-top-list .nav-item-team'), $orgNavList = $navTeam.find('.son-nav-list-team');
-    orghome.switchOrgs($orgNavList, {
-        userid: userid,
-        token: token,
-        orgid: orgid,
-        orgname: orgname
-    });
     return {
         onload: function(force) {
-            if(userid === undefined || token === undefined || orgid === undefined || idata === undefined){
+            userid = util.getCookie('userid'),
+            token = util.getCookie('token'),
+            orgid = util.getCookie('orgid'),
+            orgname = util.getCookie('orgname'),
+            parentid = util.getCookie('parentid'),
+            device_ids = util.getCookie('device_ids'),
+            app_ids = util.getCookie('app_ids'),
+            employee_count = util.getCookie('employee_count');
+            if(userid === undefined || token === undefined || orgid === undefined){
                 util.setUserData(undefined);
                 kernel.replaceLocation({'args': {},'id': 'loginhome'});
             }else{
-                if(idata){
-                    var data = JSON.parse(idata);
-                    $homeDev.text(data.device_ids);
-                    $homeApp.text(data.app_ids);
-                    $homeCount.text(data.employee_count);
+                if(orgname && device_ids && app_ids && employee_count){
+                    $homeName.text(orgname);
+                    $homeDev.text(device_ids);
+                    $homeApp.text(app_ids);
+                    $homeCount.text(employee_count);
                 }
-                util.getUserData();
             }
         }
     };

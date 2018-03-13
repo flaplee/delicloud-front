@@ -1,22 +1,15 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'page/orghome/orghome'], function(module, kernel, util, orghome) {
+define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
 	var userid, token, orgid, orgname, parentid, loc, locid;
-	userid = util.getCookie('userid'),
-	token = util.getCookie('token'),
-	orgid = util.getCookie('orgid'),
-	orgname = util.getCookie('orgname'),
-	parentid = util.getCookie('parentid');
 	var $appBox = $('#apphome .app-box'),
 		$tmpIn = $appBox.find('.app-main .app-installed .app-list.app-installed-list');
-	var $navTeam = $('#header .nav-top .nav-top-list .nav-item-team'), $orgNavList = $navTeam.find('.son-nav-list-team');
-	orghome.switchOrgs($orgNavList, {
-        userid: userid,
-        token: token,
-        orgid: orgid,
-        orgname: orgname
-    });
     return {
         onload: function(force) {
+			userid = util.getCookie('userid'),
+			token = util.getCookie('token'),
+			orgid = util.getCookie('orgid'),
+			orgname = util.getCookie('orgname'),
+			parentid = util.getCookie('parentid');
         	loc = kernel.parseHash(location.hash), locid = loc.id;
         	if(userid === undefined || token === undefined || orgid === undefined){
                 util.setUserData(undefined);
@@ -37,29 +30,37 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/orghome/orghom
     	// 已安装应用
     	util.ajaxSubmit({
     		type: 'get',
-            url: '/v1.0/app/bind/'+ orgid,
+            url: '/v1.0/admin/app/my', // '/v1.0/app/bind/'+ orgid
             dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
-            data: {},
+            data: {
+				'org_id':orgid
+            },
             success: function(res) {
                 //console.log("res",res);
                 var data = res.data.result;
-                for (var i = 0; i < data.length; i++) {
-                	var $itemTpl = $('<div class="app-item" data-app_id="' + data[i].id + '" title="' + data[i].app.name + '">\
-						<div class="item-icon-wrap">\
-							<img class="item-icon" src="' + data[i].app.icon + '">\
-						</div>\
-						<div class="item-title">' + data[i].app.name + '</div>\
-						<div class="item-info"></div>\
-					</div>');
-                    o.append($itemTpl);
-                    setTargetApp($itemTpl, data[i].app.web_url);
-                    function setTargetApp(o, url){
-			        	o.on('click',function(e){
-			        		e.stopPropagation();
-			        		window.location.href = ''+ url +'?user_id='+ userid +'&org_id='+ orgid +'&token='+ token +'&uuid=';
-			        	});
-			        }
+                if(data.length > 0){
+	                for (var i = 0;i < data.length; i++) {
+	                	var dataInner = data[i].binds; 
+	                	for(var j = 0;j < dataInner.length; j++){
+	                		var $itemTpl = $('<div class="app-item" data-app_id="' + dataInner[j].id + '" title="' + dataInner[j].app.name + '">\
+								<div class="item-icon-wrap">\
+									<img class="item-icon" src="' + dataInner[j].app.icon + '">\
+								</div>\
+								<div class="item-title">' + dataInner[j].app.name + '</div>\
+								<div class="item-info"></div>\
+							</div>');
+		                    o.append($itemTpl);
+		                    setTargetApp($itemTpl, dataInner[j].app.web_url);
+		                    function setTargetApp(o, url){
+					        	o.on('click',function(e){
+					        		e.stopPropagation();
+					        		window.location.href = ''+ url +'?user_id='+ userid +'&org_id='+ orgid +'&token='+ token +'&uuid=';
+					        	});
+					        }
+	                	}
+	                }
                 }
+
                 o.append('<a class="app-item app-item-add" href="/oa/#!app" title="安装新应用">\
 					<div class="item-icon-wrap"></div>\
 					<div class="item-title">安装新应用</div>\

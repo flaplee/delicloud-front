@@ -1,22 +1,18 @@
 'use strict';
 define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
-    var $userlist = $('#header .user-head .nav-top .nav-top-list'),
-        $userteam = $userlist.find('.nav-item-team'),
-        $userpanel = $userlist.find('.nav-item-login'),
-        $userlogout = $userpanel.find('.nologin'),
-        $userlogin = $userpanel.find('.login');
-    var $loginBox =  $('#loginhome .login-box'),
+    var $login = $('#loginhome'),
+        $loginBox = $login.find('.login-box'),
         $loginQr = $loginBox.find('#loginQr'),
         $loginDoing = $loginQr.find('.login-doing'),
         $loginSuccess = $loginQr.find('.login-success'),
         $successBtn = $loginSuccess.find('.success-btn'),
         $loginFail = $loginQr.find('.login-fail'),
-        $failBtn = $loginFail.find('.fail-btn');
-    var $orgBox = $('#orghome .org-box'),
+        $failBtn = $loginFail.find('.fail-btn'),
+        $orgBox = $login.find('.org-box'),
         $orgList = $orgBox.find('.org-wrap .org-inner .org-list'),
-        orgNumNull = 0;
-    var stomp = null;
-    var userInfo = {}, tempInfo = {};
+        $navTeam = $('#header .nav-top .nav-top-list .nav-item-team'),
+        $orgNavList = $navTeam.find('.son-nav-list-team');;
+    var stomp = null, userInfo = {}, tempInfo = {'data':{}, 'organization':{}};
 
     // init qrcode
     var initQrcode = function(o, status){
@@ -33,7 +29,13 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                             cid = res.cid,
                             url = res.data;
                         if (url) {
-                            o.html('').append(kernel.makeQr(url, 300));
+                            o.html('');
+                            new QRCode(document.getElementById('qrcode'), {
+                                text: url,
+                                width: 234,
+                                height: 234,
+                                correctLevel: QRCode.CorrectLevel.L
+                            });
                             connect(cid, 'disconnect');
                         } else {
                             o.html('');
@@ -71,7 +73,12 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                                 url = res.data;
                             if (url) {
                                 loginQr.html('');
-                                self.appendChild(kernel.makeQr(url, 300));
+                                new QRCode(document.getElementById('qrcode'), {
+                                    text: url,
+                                    width: 234,
+                                    height: 234,
+                                    correctLevel: QRCode.CorrectLevel.L
+                                });
                                 connect(cid);
                             } else {
                                 loginQr.html('');
@@ -115,13 +122,12 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
         //qrcode
         stomp.subscribe('/user/'+ cid +'/info', function(message){
             var json = JSON.parse(message.body);
-            tempInfo = json;
-            util.setUserData(tempInfo);
-            util.setCookie('tempInfo', JSON.stringify(tempInfo));
+            tempInfo.data = json;
+            //util.setUserData(tempInfo.data);
+            //util.setCookie('tempInfo.data', JSON.stringify(tempInfo.data));
             $loginDoing.hide();
             $loginFail.hide();
-            $loginSuccess.find('img.success-img').attr('src', json.avatar_url);
-            $loginSuccess.find('img.success-img').attr('title', json.name);
+            $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
             $loginSuccess.show();
         });
 
@@ -140,17 +146,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                 if(status && status == 'disconnect'){
                     disconnect();
                 }
-                orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token}, function(){
-                    $userlogin.show();
-                    $userlogout.hide();
-                    kernel.replaceLocation({'args':{},'id':'orghome'});
-                }, function(){
-                    $loginDoing.hide();
-                    $loginSuccess.hide();
-                    $loginSuccess.find('img.success-img').attr('src', json.avatar_url);
-                    $loginSuccess.find('img.success-img').attr('title', json.name);
-                    $loginFail.show();
-                });
+                orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token});
             }else{
                 setTimeout(initQrcode($loginBox.find('.loginQr')), 1000);
             }
@@ -161,10 +157,9 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
         if (stomp != null) {
             stomp.disconnect();
         }
-        //console.log("Disconnected");
     }
 
-    function orgsCalls(o, data, callbackGt, callbackLt){
+    function orgsCalls(o, data){
         util.ajaxSubmit({
             type: 'get',
             url: '/v1.0/admin/auth/my',
@@ -175,58 +170,74 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
             success: function(json) {
                 if (json.code == 0) {
                     o.find('>').remove('');
-                    var info = json.data.result,
-                        length = info.length;
-                    if(length == 1){
-                        // 全局数据
-                        util.setCookie('orgid', info[0].org_id),
-                        util.setCookie('parentid', info[0].top_department_id),
-                        util.setCookie('orgname', info[0].org_name);
-                        // 获取组织adminid
-                        /*util.ajaxSubmit({
-                            type: 'get',
-                            url: '/v1.0/org/'+ info[0].org_id +'',
-                            dauth: data.userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(data.token),
-                            success: function(json) {
-                                if (json.code == 0) {
-                                    util.setCookie('adminid', json.data.result['admin_id']);
-                                }
+                    var orgInfo = json.data.result;
+                    tempInfo.organization = orgInfo;
+                    if(orgInfo && orgInfo.length && orgInfo.length > 0){
+                        $loginBox.hide();
+                        $orgBox.show();
+                        var targetLength = orgInfo.length, targetCurrent = 0;
+                        $.each(orgInfo, function(i, item) {
+                            if(item.is_admin != undefined){
+                                targetCurrent = i;
+                                var $tempOrg = $('<li class="list-item"><a class="list-item-inner noline" href="javascript:;" title="' + item.org_name + '" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a></li>');
+                                o.append($tempOrg);
+                                return function(){
+                                    // 选择组织
+                                    var data = {
+                                        name: item.org_name,
+                                        orgid: item.org_id,
+                                        parentid: item.top_department_id,
+                                        app_ids: (item.app_ids ? item.app_ids.length : 0),
+                                        device_ids: (item.device_ids ? item.device_ids.length : 0),
+                                        employee_count: item.employee_count
+                                    };
+                                    $tempOrg.find('a.list-item-inner').on('click', function(e) {
+                                        e.stopPropagation();
+                                        // 全局数据
+                                        util.setCookie('orgid', data.orgid),
+                                        util.setCookie('parentid', data.parentid),
+                                        util.setCookie('orgname', data.name),
+                                        util.setCookie('device_ids', data.device_ids),
+                                        util.setCookie('app_ids', data.app_ids),
+                                        util.setCookie('employee_count', data.employee_count),
+                                        // update 20180306
+                                        tempInfo.orgindex = $(this).parent('li.list-item').index();
+                                        util.setCookie('orgindex', tempInfo.orgindex);
+                                        util.setUserData(tempInfo);
+                                        kernel.replaceLocation({'args': {},'id': 'home'});
+                                    });
+                                }();
+                            }else{
+                                targetLength--;
                             }
-                        });*/
-                        // 首页数据
-                        var newIdata = {
-                            employee_count: info[0].employee_count,
-                            app_ids: info[0].app_permission,
-                            device_ids: info[0].device_permission,
-                            department_ids: info[0].department_ids
-                        };
-                        util.setCookie('idata', JSON.stringify(newIdata));
-                        kernel.replaceLocation({'args': {},'id': 'home'});
-                    }
-                    $.each(info, function(i, item) {
-                        if(item.is_admin != undefined){
-                            var $temp = $('<a class="sub-nav-item"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
-                            o.append($temp);
-                            setOrgNav($temp, o.parent('.nav-item-team'), {
-                                name: item.org_name,
-                                orgid : item.org_id
-                            });
-                            // 切换组织
-                            function setOrgNav(o, d, data) {
-                                d.find('a.nav-item-current .navlink-name').text(data.name);
-                                o.on('click', function() {
-                                    var c = $(this);
-                                    //util.setCookie('orgid', c.attr('data-oid'));
-                                    util.setCookie('parentid', c.attr('data-pid'));
-                                });
+                        });
+                        // 组织列表
+                        if(targetLength > 1){
+                            o.addClass('org-list-plenty');
+                        }else{
+                            if(targetLength == 1){
+                                util.setCookie('orgid', orgInfo[targetCurrent].org_id),
+                                util.setCookie('parentid', orgInfo[targetCurrent].top_department_id),
+                                util.setCookie('orgname', orgInfo[targetCurrent].org_name),
+                                util.setCookie('device_ids', (orgInfo[targetCurrent].device_ids ? orgInfo[targetCurrent].device_ids.length : 0)),
+                                util.setCookie('app_ids', (orgInfo[targetCurrent].app_ids? orgInfo[targetCurrent].app_ids.length : 0)),
+                                util.setCookie('employee_count', orgInfo[targetCurrent].employee_count),
+                                // update 20180306
+                                tempInfo.orgindex = targetCurrent;
+                                util.setUserData(tempInfo);
+                                kernel.replaceLocation({'args': {},'id': 'home'});
+                            }else{
+                                o.addClass('org-list-seldom');
                             }
-                            orgNumNull++;
                         }
-                    });
-                    if(orgNumNull > 0){
-                        callbackGt();
                     }else{
-                        callbackLt();
+                        $loginBox.show();
+                        $orgBox.hide();
+                        //login status
+                        $loginDoing.hide();
+                        $loginSuccess.hide();
+                        $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                        $loginFail.show();
                     }
                 } else {
                     kernel.hint(json.msg);
@@ -236,6 +247,16 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
     }
     return {
         onload: function(force) {
+            var h_userid, h_token, h_orgid, h_orgname, h_parentid;
+            h_userid = util.getCookie('userid'),
+            h_token = util.getCookie('token'),
+            h_orgid = util.getCookie('orgid'),
+            h_orgname = util.getCookie('orgname'),
+            h_parentid = util.getCookie('parentid');
+            if(h_userid != 'undefined' && h_token != 'undefined' && h_orgid != 'undefined' && h_orgname != 'undefined' && h_parentid != 'undefined'){
+                $loginBox.show();
+                $orgBox.hide();
+            }
         }
     };
 });

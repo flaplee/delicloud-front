@@ -72,9 +72,9 @@ body.imports{
 					line-height:100px;
 				}
 				&.current .item-menu,&:hover .item-menu{
-					font-weight:bold;
+					font-weight: bold;
 					background-color: #fff;
-					color:#55BEBF;
+					color: #3b63f9;
 				}
 			}
 		}
@@ -91,9 +91,9 @@ body.imports{
 		width: auto;
 		position: relative;
 		top: 80px;
-		left: 140px;
+		-left: 140px;
 		-margin-top: 80px;
-		-margin-left: 140px;
+		margin-left: 140px;
 		overflow: hidden;
 		background: #f6f6f6;
 		>div{
@@ -105,7 +105,7 @@ body.imports{
 			width:752px;
 			update:20171122;
 			width: 100%;
-			min-height:600px;
+			min-height: 808px;
 			background-color:#fff;
 			border-radius:5px;
 			border:1px solid #eaeaea;
@@ -114,7 +114,7 @@ body.imports{
 				padding: 20px 30px;
 				a{
 					&.active,&:hover{
-						color:#55bfbe;
+						color:#5d85e0;
 					}
 				}
 			}
@@ -135,7 +135,7 @@ body.imports{
 						a{
 							float: left;
 							border-right: 0px;
-							color: #55bfbe;
+							color: #5d85e0;
 							width: 50%;
 							height:40px;
 							line-height: 40px;
@@ -147,7 +147,7 @@ body.imports{
 							display: inline-block;
 							&:hover,&.active{
 								color: #fff;
-								background-color: #55bfbe;
+								background-color: #5d85e0;
 							}
 							&:first-child{
 								border-radius: 4px 0 0 4px;
@@ -164,6 +164,12 @@ body.imports{
 					.imports-table{
 						min-height: 600px;
 						margin-top:30px;
+						.imports-table-enable,.imports-table-unable{
+							display:none;
+							&.active{
+								display:block;
+							}
+						}
 						table.table{
 							thead.thead{
 								background: #fff;
@@ -206,6 +212,7 @@ body.imports{
 					}
 				}
 				.imports-inner-error,.imports-inner-success{
+					padding: 300px 0;
 					display:none;
 					text-align:center;
 					.icon{
@@ -218,7 +225,17 @@ body.imports{
 					}
 					&.imports-inner-success{
 						.icon{
-							color:#55bfbe;
+							color:#5d85e0;
+						}
+					}
+					p.title{
+						font-size: 18px;
+						letter-spacing: 2px;
+						&.user-error-title{
+							display: block;
+						}
+						&.authority-error-title{
+							display: none;
 						}
 					}
 				}
@@ -231,6 +248,7 @@ body.imports{
 		.imports-steps{
 			display:block;
 			padding:180px 0;
+			min-height: 808px;
 			.steps-inner{
 				padding-left:400px;
 				.steps-item{

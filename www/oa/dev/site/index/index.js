@@ -26,7 +26,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     });
 
     $(document).on('click',function(){
-        $(".son-nav-list-team").hide();
+        $(".son-nav-wrap").hide();
         //$('.user-asset').hide();
         $('.user-info').removeClass('visited');
     });
@@ -34,10 +34,10 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     $userteam.find('a.nav-item-current').on('click',function(e){
         var e = e || window.e;
         e.stopPropagation();
-        $(".son-nav-list-team").show();
+        $(".son-nav-wrap").show();
     });
 
-    $userteam.find('.son-nav-list-team a.sub-nav-item').on('click',function(e){
+    $userteam.find('.son-nav-wrap a.sub-nav-item').on('click',function(e){
         var e= e || window.e;
         e.stopPropagation();
         var c = $(this), pid = c.attr('data-pid');
@@ -45,7 +45,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             c.siblings().removeClass('current');
             c.addClass('current');
         }
-        $(".son-nav-list-team").hide();
+        $(".son-nav-wrap").hide();
         util.setCookie('parentid', pid);
     });
 
@@ -62,7 +62,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     $userlogin.find('a.logout').on('click', function(e){
         var e = e || window.e;
         e.stopPropagation();
-        var uid = util.getUserData().id, token = util.getUserData().token;
+        var uid = util.getUserData().id,
+            token = util.getUserData().token;
         // 用户退出 /web/v1.0/cd/logout/web
         /*util.ajaxSubmit({
             type: 'get',
@@ -88,13 +89,17 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         util.delCookie('userid', undefined),
         util.delCookie('token', undefined),
         util.delCookie('orgid', undefined),
-        util.delCookie('idata', undefined);
+        util.delCookie('orgindex', undefined),
+        util.delCookie('parentid', undefined),
+        util.delCookie('orgname', undefined),
+        util.delCookie('device_ids', undefined),
+        util.delCookie('app_ids', undefined),
+        util.delCookie('employee_count', undefined),
         util.setUserData(undefined, true);
-        //kernel.replaceLocation({'args': {},'id': 'loginhome'});
-        window.location.reload();
+        kernel.replaceLocation({'args': {},'id': 'loginhome'});
     });
 
-    statechange({});
+    //statechange({});
 
     var historyNav;
     
@@ -121,14 +126,18 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         }
     });*/
 
-    util.updateUserData(util.getCookie('userid'), util.getCookie('token'),function (data) {
-        kernel.init('home');
-    });
+    if(util.getCookie('userid') && util.getCookie('token')){
+        util.updateUserData(util.getCookie('userid'), util.getCookie('token'),function (data) {
+            kernel.init('home');
+        });
+    }
 
-    //kernel.init('home');
+    // init home 
+    kernel.init('home');
 
     kernel.listeners.add(util.userEvents, 'statechange', statechange);
     kernel.listeners.add(util.userEvents, 'datachange', datachange);
+    kernel.listeners.add(util.userEvents, 'pagechange', pagechange);
 
     kernel.listeners.add(kernel.pageEvents, 'routend', function() {
         var h;
@@ -142,8 +151,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             }
         }
     });
-    function showCg(data) {
-    }
+    function showCg(data) {}
 
     function statechange(evt) {
         //showCg(evt.data);
@@ -156,18 +164,62 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             $userlogout.show();
             $userlogin.removeClass('hasLogin');
             $userlogin.hide();
-            //kernel.reloadPage();
         }
-        if(evt.org){
+
+        if(evt.data){
             $userteam.show();
         }else{
             $userteam.hide();
         }
     }
-
+    
     function datachange(evt) {
-        $userlogin.find('.user-wrap img.user-info-avatar').prop('src', evt.data.avatar_url);
-        $userlogin.find('.user-panel >.user-info >.userinfo-name-box b').text(evt.data.name);
-        $userlogin.find('.user-panel >.user-info img').prop('src', evt.data.avatar_url);
+        $userlogin.find('.user-wrap img.user-info-avatar').prop('src', evt.data.data.avatar_url);
+        $userlogin.find('.user-panel >.user-info >.userinfo-name-box b').text(evt.data.data.name);
+        $userlogin.find('.user-panel >.user-info img').prop('src', evt.data.data.avatar_url);
+        orgdatachange(evt);
+    }
+
+    function orgdatachange(evt){
+        var index = util.getCookie('orgindex');
+        if(index && evt.data.organization){
+            $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
+            $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();
+            $.each(evt.data.organization, function(i, item) {
+                var $targetHtml = $('<a class="sub-nav-item '+ ((evt.data.organization[index].org_id == item.org_id) ? 'current' : '') +'"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
+                $('.nav-item-team .son-nav-wrap .son-nav-list-team').append($targetHtml);
+                return function(){
+                    // 切换组织
+                    $targetHtml.on('click', function(e) {
+                        var e = e || window.e;
+                        e.stopPropagation();
+                        var c = $(this), oname = c.text();
+                        if(!c.hasClass('current')){
+                            $targetHtml.parents('.nav-item-team').find('a.nav-item-current .navlink-name').text(oname);
+                            c.siblings().removeClass('current');
+                            c.addClass('current');
+                            // update 20180308 更新相应数据
+                            evt.data.orgindex = c.index();
+                            util.setCookie('orgindex', evt.data.orgindex);
+                            // update 20180313 更新相应数据
+                            util.setUserData(evt);
+                            pagechange(evt);
+                        }
+                        $('.nav-item-team .son-nav-wrap').hide();
+                    });
+                }();
+            });
+        }
+    }
+
+    function pagechange(evt){
+        util.setCookie('userid', evt.data.data.id),
+        util.setCookie('orgid', evt.data.organization[evt.data.orgindex].org_id),
+        util.setCookie('parentid', evt.data.organization[evt.data.orgindex].top_department_id),
+        util.setCookie('orgname', evt.data.organization[evt.data.orgindex].org_name),
+        util.setCookie('device_ids', (evt.data.organization[evt.data.orgindex].device_ids ? evt.data.organization[evt.data.orgindex].device_ids.length : 0)),
+        util.setCookie('app_ids', (evt.data.organization[evt.data.orgindex].app_ids ? evt.data.organization[evt.data.orgindex].app_ids.length : 0)),
+        util.setCookie('employee_count', evt.data.organization[evt.data.orgindex].employee_count),
+        kernel.reloadPage(kernel.parseHash(location.hash).id);
     }
 });

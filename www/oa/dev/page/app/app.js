@@ -1,26 +1,19 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'page/orghome/orghome'], function(module, kernel, util, orghome) {
+define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
 	var userid, token, orgid, orgname, parentid, loc, locid;
-	userid = util.getCookie('userid'),
-	token = util.getCookie('token'),
-	orgid = util.getCookie('orgid'),
-	orgname = util.getCookie('orgname'),
-	parentid = util.getCookie('parentid');
-	var $navTeam = $('#header .nav-top .nav-top-list .nav-item-team'), $orgNavList = $navTeam.find('.son-nav-list-team');
 	var $appBox = $('#app .app-box'),
     	$tmpApp = $appBox.find('.app-main .app-inner .app-main-list'),
     	$tmpBack = $appBox.find('.btn-app-back');
-    orghome.switchOrgs($orgNavList, {
-        userid: userid,
-        token: token,
-        orgid: orgid,
-        orgname: orgname
-    });
     $tmpBack.on('click',function(){
     	window.history.back();
     });
     return {
         onload: function(force) {
+            userid = util.getCookie('userid'),
+            token = util.getCookie('token'),
+            orgid = util.getCookie('orgid'),
+            orgname = util.getCookie('orgname'),
+            parentid = util.getCookie('parentid');
         	loc = util.clone(kernel.location), locid = loc.id;
         	if(userid === undefined || token === undefined || orgid === undefined){
                 util.setUserData(undefined);
@@ -101,6 +94,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/orghome/orghom
 					console.log("res", res);
 					if(res.code == 0){
 						kernel.hint('应用安装成功~', 'success');
+                        util.setCookie('app_ids', (parseInt(util.getCookie('app_ids')) + 1));
 						getAppList(os);
 						//kernel.replaceLocation({'args': {},'id': 'apphome'});
 					}

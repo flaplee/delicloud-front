@@ -423,15 +423,26 @@ define(['common/kernel/kernel'], function(kernel) {
         //传入undefined表示账号已退出登录
         util.setUserData = function(data, initiative) {
             if (data !== userData) {
-                if (data && userData && data.id == userData.id) {
+                if (data && userData && data.data.id == userData.data.id) {
                     if (!util.isEqual(userData, data)) {
-                        userData = data;
-                        if (util.userEvents.ondatachange instanceof Function) {
-                            util.userEvents.ondatachange({
-                                type: 'datachange',
-                                initiative: initiative,
-                                data: util.clone(data)
-                            });
+                        if(data.orgindex == userData.orgindex){
+                            userData = data;
+                            if (util.userEvents.ondatachange instanceof Function) {
+                                util.userEvents.ondatachange({
+                                    type: 'datachange',
+                                    initiative: initiative,
+                                    data: util.clone(data)
+                                });
+                            }
+                        }else{
+                            userData = data;
+                            if (util.userEvents.onpagechange instanceof Function) {
+                                util.userEvents.onpagechange({
+                                    type: 'pagechange',
+                                    initiative: initiative,
+                                    data: util.clone(data)
+                                });
+                            }
                         }
                     }
                 } else {
@@ -463,25 +474,56 @@ define(['common/kernel/kernel'], function(kernel) {
         };
         //从服务器获取最新的账号数据 api 需要跟setToken 保持同步
         util.updateUserData = function(uid, token, callback) {
-            util.ajaxSubmit({
-                type: 'get',
-                url: '/v1.0/user/me',
-                dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
-                silent: true,
-                complete: function(xhr, msg) {
-                    var json, i;
-                    try {
-                        json = $.parseJSON(xhr.responseText);
-                        if (json.data) {
-                            // change 2017-12-01
-                            util.setUserData(json.data.result);
+            if(uid != 'undefined'){
+                util.ajaxSubmit({
+                    type: 'get',
+                    url: '/v1.0/user/me',
+                    dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                    silent: true,
+                    complete: function(xhr, msg) {
+                        var json, i;
+                        try {
+                            json = $.parseJSON(xhr.responseText);
+                            if (json.data) {
+                                //util.setUserData(json.data); 由于接口 /v1.0/user/me 返回组织数据格式与接口 /v1.0/admin/auth/my 返回数据格式不一致，因此组装此2个接口
+                                //屏蔽掉个人组织 
+                                var targetData = [], dataInfo = {
+                                    'data': json.data.result,
+                                    'organization': targetData
+                                };
+                                util.ajaxSubmit({
+                                    type: 'get',
+                                    url: '/v1.0/admin/auth/my',
+                                    dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                                    data: {
+                                        type: 'group'
+                                    },
+                                    success: function(json) {
+                                        if (json.code == 0) {
+                                            $.each(json.data.result,function(i, item){
+                                                if(item.is_admin != undefined){
+                                                    targetData.push(item);
+                                                }
+                                            });
+                                            dataInfo.organization = targetData;
+                                            dataInfo.orgindex = 0;
+                                            // change 2017-12-01
+                                            util.setUserData(dataInfo);
+                                        }else{
+                                            kernel.hint(json.msg);
+                                        }
+                                    }
+                                });
+                            }
+                        } catch (e) {
+                            kernel.hint('网络错误，请稍后重试~');
                         }
-                    } catch (e) {}
-                    if (typeof callback === 'function') {
-                        callback(util.clone(userData));
+                        if (typeof callback === 'function') {
+                            callback(util.clone(userData));
+                        }
                     }
-                }
-            });
+                });
+            }
         };
         util.token = util.getCookie('token');
         //用于监视账号登录状态或者属性变化

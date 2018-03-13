@@ -1,13 +1,7 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/department', 'page/orghome/orghome'], function(module, kernel, util, departments, orghome) {
+define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/department'], function(module, kernel, util, departments) {
     var userid, token, orgid, orgname, parentid, adminid, loc, locid, type, keyword, boxClass;
-    userid = util.getCookie('userid'),
-    token = util.getCookie('token'),
-    orgid = util.getCookie('orgid'),
-    orgname = util.getCookie('orgname'),
-    parentid = util.getCookie('parentid'),
-    adminid = util.getCookie('adminid');
-    var dataCache, title, tempId = orgid, tempType = 'parent', tempOrgid  = orgid, tempParentid, queryParentid;
+    var dataCache, title, tempId, tempType, tempOrgid, tempParentid, queryParentid;
     var $contacts = $('#contacts'),
         $contactsMenu = $contacts.find('.contacts-menu'),
         $contactsList = $contactsMenu.find('.contacts-list'),
@@ -17,6 +11,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
         $searchBtn = $contactsForm.find('.search-box a.btn-user-search'),
         $contactsBox = $contacts.find('.contacts-box'),
         $contactsInfo = $contactsBox.find('.contacts-info'),
+        $contactsWrapData = $contactsInfo.find('.contacts-wrap-data'),
+        $contactsWrapEmpty = $contactsInfo.find('.contacts-wrap-empty'),
         $contactsTitle = $contactsInfo.find('.contacts-form h2.form-title'),
         $moveUser = $contactsInfo.find('.btn-user-dept'),
         $removeUser = $contactsInfo.find('.btn-user-remove'),
@@ -26,16 +22,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
         $tmp = $contactsTable.find('.tbody'),
         $listTmp = $contactsTeam.find('.dept-select-list'),
         $wrapTmp = $listTmp.find('div.dept-select-wrap'),
-        $dTmp = $listTmp.find('ul.dept-select-inner');
-    var $navTeam = $('#header .nav-top .nav-top-list .nav-item-team'), $orgNavList = $navTeam.find('.son-nav-list-team');
-    
-    orghome.switchOrgs($orgNavList, {
-        userid: userid,
-        token: token,
-        orgid: orgid,
-        orgname: orgname
-    });
-    
+        $dTmp = $listTmp.find('ul.dept-select-inner');    
     //初始化组织
     var initTopDeparentment = function(o, data){
         tempParentid = data.orgid;
@@ -57,12 +44,15 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                     $listTmp.find('.select-item').removeClass('current');
                     c.addClass('current');
                     tempId = data.orgid, tempType = data.type, tempOrgid = data.orgid;
-                    initContacts($tmp, {
-                        id: tempId,
-                        orgid: tempOrgid,
-                        title: data.title,
-                        type: tempType
-                    });
+                    //update 20180307
+                    if(tempId){
+                        initContacts($tmp, {
+                            id: tempId,
+                            orgid: tempOrgid,
+                            title: data.title,
+                            type: tempType
+                        });
+                    }
                 }
             });
         }
@@ -72,7 +62,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
     var initContacts = function(o, data, isQuery, os) {
         var initUrl = (isQuery && isQuery == true) ? '/v1.0/org'+ ((data.type && data.type == 'parent') ? '': '/department') +'/' + data.orgid + '/users' : '/v1.0/org'+ ((data.type && data.type == 'parent') ? '': '/department') +'/' + data.orgid + '/users';
         var initData = (isQuery && isQuery == true) ? {query:data.query} : {} ;
-        o.find('>').remove();
         util.ajaxSubmit({
             type: 'get',
             url: initUrl,
@@ -87,68 +76,78 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                         os.find('a.select-item, li.select-item').removeClass('current');
                         os.find('.dept-select-wrap a.item-info').addClass('current');
                     }
-                    for (var i = 0; i < res.data.result.length; i++) {
-                        var departmentText = (json[i].org_id == json[i].department_id) ? '' : json[i].department;
-                        var $itemTpl = $('<tr>\
-                            <td><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
-                            <td>' + json[i].nickname + '</td>\
-                            <td>' + json[i].employee_num + '</td>\
-                            <td>' + departmentText + '</td>\
-                            <td>' + json[i].title + '</td>\
-                            <td>' + json[i].mobile + '</td>\
-                            <td>\
-                                <button data-index="' + i + '" type="button" class="btn btn-primary btn-sm btn-user-edit">编辑</button>\
-                            </td>\
-                        </tr>');
-                        o.append($itemTpl);
-                        selectUser($itemTpl.find('a.item'));
-                        //单个用户编辑
-                        editUser($itemTpl,{
-                            nickname : json[i].nickname,
-                            id : tempId,
-                            type : tempType,
-                            userid : json[i].user_id,
-                            department : json[i].department,
-                            departmentid : json[i].department_id,
-                            orgid : json[i].org_id,
-                            orgname : json[i].organization,
-                            mobile : json[i].mobile,
-                            mobile_region: json[i].mobile_region,
-                            employee_num : json[i].employee_num,
-                            title: json[i].title
-                        });
+                    if(res.data && res.data.result.length > 0){
+                        o.find('>').remove();
+                        for (var i = 0; i < res.data.result.length; i++) {
+                            var deptsText = ((json[i].department_path.split(';')).length > 1) ? json[i].department_path.replace(new RegExp(""+ orgname +"/","gm"),"").replace(new RegExp("/","gm"),"-").replace(new RegExp(";","gm"),"/") : json[i].department;
+                            var departmentText = (json[i].org_id == json[i].department_id) ? '' : deptsText;
+                            var $itemTpl = $('<tr>\
+                                <td><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
+                                <td>' + json[i].nickname + '</td>\
+                                <td>' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
+                                <td class="dept-text">' + departmentText + '</td>\
+                                <td>' + json[i].title + '</td>\
+                                <td>' + json[i].mobile + '</td>\
+                                <td>\
+                                    <button data-index="' + i + '" type="button" class="btn btn-info btn-sm btn-user-edit">编辑</button>\
+                                </td>\
+                            </tr>');
+                            o.append($itemTpl);
+                            selectUser($itemTpl.find('a.item'));
+                            //单个用户编辑
+                            editUser($itemTpl,{
+                                nickname : json[i].nickname,
+                                id : tempId,
+                                type : tempType,
+                                userid : json[i].user_id,
+                                department : json[i].department,
+                                departmentid : json[i].department_id,
+                                orgid : json[i].org_id,
+                                orgname : json[i].organization,
+                                mobile : json[i].mobile,
+                                mobile_region: json[i].mobile_region,
+                                employee_num : json[i].employee_num,
+                                title: json[i].title
+                            });
 
-                        //编辑成员
-                        function editUser(o, data){
-                            o.find('td button.btn-user-edit').on('click', function() {
-                                kernel.openPanel('adduser', {
-                                    type: 'edit',
-                                    data: data
+                            //编辑成员
+                            function editUser(o, data){
+                                o.find('td button.btn-user-edit').on('click', function() {
+                                    kernel.openPanel('adduser', {
+                                        type: 'edit',
+                                        data: data
+                                    });
                                 });
-                            });
-                        }
+                            }
 
-                        //选择成员
-                        function selectUser(o) {
-                            o.on('click', function(e) {
-                                e.stopPropagation();
-                                var c = $(this);
-                                if (!c.hasClass('selected')) {
-                                    c.addClass('selected').find('i').html('&#xe63d;');
-                                    c.addClass('selected');
-                                    c.find('i').html('&#xe63d;');
-                                } else {
-                                    c.removeClass('selected').find('i').html('&#xe76a;');
-                                    c.removeClass('selected');
-                                    c.find('i').html('&#xe76a;');
-                                }
-                            });
+                            //选择成员
+                            function selectUser(o) {
+                                o.on('click', function(e) {
+                                    e.stopPropagation();
+                                    var c = $(this);
+                                    if (!c.hasClass('selected')) {
+                                        c.addClass('selected').find('i').html('&#xe63d;');
+                                        c.addClass('selected');
+                                        c.find('i').html('&#xe63d;');
+                                    } else {
+                                        c.removeClass('selected').find('i').html('&#xe76a;');
+                                        c.removeClass('selected');
+                                        c.find('i').html('&#xe76a;');
+                                    }
+                                });
+                            }
                         }
+                        selectUserAll($contactsTable.find('.thead .select-all'));
                     }
-                    selectUserAll($contactsTable.find('.thead .select-all'));
                 } else {
-                    var itemTpl = '<tr><td colspan="8" class="empty"></td></tr>';
-                    o.append($(itemTpl));
+                    if(isQuery && isQuery == true && os){
+                        $contactsWrapData.hide();
+                        $contactsWrapEmpty.show();
+                    }else{
+                        o.find('>').remove();
+                        var itemTpl = '<tr><td colspan="8" class="empty"></td></tr>';
+                        o.append($(itemTpl));
+                    }
                 }
                 setDeptTitle($contactsTitle, data.title);
             }
@@ -186,12 +185,18 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
 
                     //加载团队子部门信息
                     function bindSon(o, data, os) {
-                        o.find('a.item-info').on('click', function(e) {
+                        o.find('a.item-info > i.item-class').on('click', function(e) {
                             e.stopPropagation();
                             tempParentid = '';
-                            var c = $(this), cLi = c.parent('.select-item');
+                            var c = $(this);
                             // 设置收缩展开
-                            setExpand(c, cLi);
+                            setExpandTwo(c, o, parentid, data.orgid, w);
+                        });
+
+                        o.find('a.item-info').on('click', function(e) {
+                            e.stopPropagation();
+                            var c = $(this), cLi = c.parent('.select-item');
+                            // 加载数据&选中部门
                             if (!cLi.hasClass('current')) {
                                 $listTmp.find('.select-item').removeClass('current');
                                 cLi.addClass('current');
@@ -206,18 +211,33 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                                     title: data.title
                                 });
                             }
-                            if (!(cLi.attr('data-status') == 'loaded')) {
-                                initDepartment(o.find('ul.select-son-list'), {
-                                    status: 'onload',
-                                    type: 'son',
-                                    parentid: parentid,
-                                    orgid: data.orgid
-                                }, (w && w == true) ? true : undefined, $('#adddept .dept-box .dept-selected-list').find('ul.dept-selected-inner'));
-                                cLi.attr('data-status', 'loaded');
-                            }
+                            // 选中部门
                             bindSel(os, data, cLi);
                         });
                     }
+                    
+                    // 设置收缩展开
+                    function setExpandTwo(o, os, w, a, n){
+                        var oList = o.parent('a.item-info').siblings('ul.select-son-list'),oLi = o.parent('a.item-info').parent('.select-item');
+                        if(oLi.attr('data-expand') == 'false'){
+                            o.html('&#xe608;');
+                            oLi.attr('data-expand', true);
+                            oList.show();
+                        }else{
+                            o.html('&#xe641;');
+                            oLi.attr('data-expand', false);
+                            oList.hide();
+                        }
+                        if (!(oLi.attr('data-status') == 'loaded')) {
+                            initDepartment(os.find('ul.select-son-list'), {
+                                status: 'onload',
+                                type: 'son',
+                                parentid: w,
+                                orgid: a
+                            }, (n && n == true) ? true : undefined, $('#adddept .dept-box .dept-selected-list').find('ul.dept-selected-inner'));
+                            oLi.attr('data-status', 'loaded');
+                        }
+                    };
 
                     // 选中部门
                     function bindSel(o, data, os){
@@ -308,7 +328,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                             function bindDeptSetup(o, data){
                                 // 设置当前组织
                                 o.on('click',function(e){
-                                    console.log("设置当前组织设置当前组织设置当前组织");
                                     var event = e || window.event;
                                     event.stopPropagation();
                                     var target = event.target || event.srcElement;
@@ -344,7 +363,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
 
                                 //设置部门主管
                                 o.on('click', '.item-setup .setup-admin', function (e) {
-                                    console.log("设置部门主管设置部门主管设置部门主管");
                                     //e.stopPropagation();
                                     var c = $(this).parent('.item-setup').parent('.item-info');
                                     setCurrent($deptList, c, function(){
@@ -369,7 +387,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
 
                                 //部门重命名 
                                 o.on('click', '.item-setup .setup-rename', function (e) {
-                                    console.log("部门重命名部门重命名部门重命名");
                                     //e.stopPropagation();
                                     var c = $(this).parent('.item-setup').parent('.item-info');
                                     setCurrent($deptList, c, function(){
@@ -397,7 +414,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
 
                                 // 添加部门
                                 o.on('click', '.item-setup .setup-add', function (e) {
-                                    console.log("添加部门添加部门添加部门");
                                     //e.stopPropagation();
                                     var c = $(this).parent('.item-setup').parent('.item-info');
                                     setCurrent($deptList, c, function(){
@@ -418,14 +434,15 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                                                     parentid: parentid, //'355671868335718401'
                                                     index: 0
                                                 });
-                                            }
+                                            },
+                                            idNeedId: true,
+                                            isNeedLoad: true
                                         });
                                     });
                                 });
 
                                 //删除部门信息 /v1.0/org/department/delete
                                 o.on('click', '.item-setup .setup-del', function (e) {
-                                    console.log("删除部门信息删除部门信息删除部门信息删除部门信息");
                                     e.stopPropagation();
                                     var c = $(this),$info = c.parent('.item-setup').parent('.item-info');
                                     var userLength, deptLength, id = c.parent('.item-setup').attr('data-id'),name = c.parent('.item-setup').siblings('a.item-info').find('.item-name').text();
@@ -433,78 +450,23 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                                         kernel.openPopup('deldept',{
                                             type:'group', //both group none user
                                             data:{
-                                                orgid: data.orgid,
+                                                id: data.orgid,
+                                                pid: parentid,
                                                 name: data.name,
                                                 title:  '是否删除该部门？'
                                             },
                                             func: function(){
-                                                util.ajaxSubmit({
-                                                    type:'post',
-                                                    url: '/v1.0/org/department/delete',
-                                                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
-                                                    data: {
-                                                        "department_id": data.orgid
-                                                    },
-                                                    success: function(resp) {
-                                                        console.log("resp",resp);
-                                                        if(resp.code == 0){
-                                                            kernel.hint('部门删除成功~', 3000);
-                                                            kernel.closePopup('deldept');
-                                                            /*initDepartment($dTmp, {
-                                                                status: 'onload',
-                                                                type: 'parent',
-                                                                parentid: parentid,
-                                                                orgid: orgid
-                                                            }, true);*/
-                                                            initTopDept($deptList,{
-                                                                status: 'onload',
-                                                                relation: 'parent',
-                                                                orgid: orgid,
-                                                                orgname: orgname,
-                                                                parentid: parentid, //'355671868335718401'
-                                                                index: 0
-                                                            });
-                                                        }else{
-                                                            kernel.hint(res.msg, 3000);
-                                                            kernel.closePopup('deldept');
-                                                        }
-                                                    }
+                                                initTopDept($deptList,{
+                                                    status: 'onload',
+                                                    relation: 'parent',
+                                                    orgid: orgid,
+                                                    orgname: orgname,
+                                                    parentid: parentid,
+                                                    index: 0
                                                 });
-                                            }
-                                        });
-                                        /*util.ajaxSubmit({
-                                            type:'post',
-                                            url: '/v1.0/org/department/delete',
-                                            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
-                                            data: {
-                                                "department_id":data.orgid
                                             },
-                                            success: function(resp) {
-                                                console.log("resp",resp);
-                                                if(resp.code == 0){
-                                                    kernel.openPopup('deldept',{
-                                                        type:'group', //both group none user
-                                                        data:{
-                                                            orgid: data.orgid,
-                                                            name: data.name,
-                                                            title:  '是否删除该部门？'
-                                                        },
-                                                        func: function(){
-                                                            initTopDept($deptList,{
-                                                                status: 'onload',
-                                                                relation: 'parent',
-                                                                orgid: orgid,
-                                                                orgname: orgname,
-                                                                parentid: parentid, //'355671868335718401'
-                                                                index: 0
-                                                            });
-                                                        }
-                                                    });
-                                                }else{
-
-                                                }
-                                            }
-                                        });*/
+                                            isNeedLoad: true
+                                        });
                                     });
                                 });
                             }
@@ -568,6 +530,14 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
         }, true, $listTmp);
     });
 
+    //组织中未搜索到内容返回处理
+    $contactsWrapEmpty.find('p a.empty-back').on('click', function(e){
+        e.stopPropagation();
+        $contactsWrapData.show();
+        $contactsWrapEmpty.hide();
+        $contactsForm.find('.search-box input.search').val('');
+    });
+
     /*$contactsForm.on("submit", "form", function(e) {
         e.preventDefault()
         var loc = kernel.parseHash(location.hash);
@@ -576,20 +546,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
         checkUrlParams(params, loc);
         kernel.replaceLocation(loc);
     });*/
-
-    var setExpand = function(o, os){
-        if(os.attr('data-status') == 'loaded'){
-            if(o.attr('data-expand') == 'false'){
-                o.attr('data-expand', true);
-                o.find('> i.iconfont').html('&#xe608;');
-                o.siblings('ul.select-son-list').toggle();
-            }else{
-                o.attr('data-expand', false);
-                o.find('> i.iconfont').html('&#xe641;');
-                o.siblings('ul.select-son-list').toggle();
-            }
-        }
-    };
 
     var setMove =  function(uids, oldDid, newDid){
         // 将人员移动到其他部门 /v1.0/org/user/move
@@ -695,7 +651,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
             kernel.openPopup('deluser', {
                 type: 'user',
                 data: {
-                    org_id: parentid, //从顶级部门移除
+                    org_id: orgid, //从顶级部门移除 parentid //update 20180304 orgid、parentid置换
                     user_ids: uids,
                     title: text,
                     sub: '从' + (oname ? oname : '得力团队') + ' 通讯录中彻底删除？'
@@ -724,7 +680,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
         });
     });
 
-    initContacts($tmp, {
+    // init
+    /*initContacts($tmp, {
         id: orgid,
         orgid: orgid,
         title: orgname,
@@ -736,7 +693,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
         type: 'parent',
         parentid: parentid,
         orgid: orgid
-    }, true);
+    }, true);*/
 
     // 搜索我的通讯录 /v1.0/address_book/search?q={keyword}&org_id={org_id}
 
@@ -745,33 +702,45 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
 
     //添加部门
     $addDept.off('click').on('click', function(e) {
+        //update 20180304 orgid、parentid置换
         e.stopPropagation();
         kernel.openPopup('editdept', {
             type: 'add',
             data: {
-                id : orgid,
-                pid : parentid,
-                text:'请输入新的部门名称'
+                id: parentid,
+                pid: orgid,
+                text:'请输入部门名称'
             },
             func: function(){
                 initTopDept($('.department-info .department-inner .department-list .department-list-inner'),{
                     status: 'onload',
                     relation: 'parent',
-                    orgid: orgid,
+                    orgid: parentid,
                     orgname: orgname,
-                    parentid: parentid, //'355671868335718401'
+                    parentid: orgid,
                     index: 0
                 });
-            }
+            },
+            idNeedId: false,
+            isNeedLoad: true
         });
     });
 
     return {
         onload: function(force) {
+            userid = util.getCookie('userid'),
+            token = util.getCookie('token'),
+            orgid = util.getCookie('orgid'),
+            orgname = util.getCookie('orgname'),
+            parentid = util.getCookie('parentid'),
+            adminid = util.getCookie('adminid');
+            tempId = orgid,
+            tempType = 'parent',
+            tempOrgid  = orgid,
             loc = kernel.parseHash(location.hash),
             locid = loc.id,
             type = loc.args.type,
-            keyword = loc.args.key_search;
+            //keyword = loc.args.key_search;
             boxClass = type ? '.' + type + '-info' : '.user-info';
             if(userid === undefined || token === undefined || orgid === undefined){
                 util.setUserData(undefined);
@@ -785,11 +754,28 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                 console.log('~~~contacts userid:' + userid + '~~~token:' + token + '~~~orgid:' + orgid + '~~~parentid:' + parentid + '');
                 /*var $contactsMenu = $('#contacts .contacts-menu'),
                     $contactsBox = $('#contacts .contacts-box');*/
+
+                //init
                 initTopDeparentment($wrapTmp,{
                     orgid: orgid,
                     name: orgname,
                     type: 'parent'
                 });
+
+                initContacts($tmp, {
+                    id: orgid,
+                    orgid: orgid,
+                    title: orgname,
+                    type: tempType
+                });
+
+                initDepartment($dTmp, {
+                    status: 'onload',
+                    type: 'parent',
+                    parentid: parentid,
+                    orgid: orgid
+                }, true);
+                
                 $contactsMenu.find('ul.menu-list li.item').removeClass('current');
                 $contactsMenu.find('ul.menu-list li.item').filter('.item-'+ ((type) ? type : 'user') +'').addClass('current');
                 $contactsBox.find(boxClass).show().siblings().hide();
@@ -803,7 +789,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                     case 'department':
                         departments();
                         $contactsForm.hide();
-                        
                         break;
                     default:
                         $contactsForm.show();

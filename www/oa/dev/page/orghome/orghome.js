@@ -1,10 +1,6 @@
 'use strict';
 define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
     var userid, token, orgid, parentid, loc, locid, orgNavNull = 0;
-    userid = util.getCookie('userid'),
-    token = util.getCookie('token'),
-    orgid = util.getCookie('orgid'),
-    parentid = util.getCookie('parentid');
     var $userlist = $('#header .user-head .nav-top .nav-top-list'),
         $userteam = $userlist.find('.nav-item-team'),
         $userpanel = $userlist.find('.nav-item-login'),
@@ -16,6 +12,10 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
         $orgNavList = $navTeam.find('.son-nav-list-team');
     return {
         onload: function(force) {
+            userid = util.getCookie('userid'),
+            token = util.getCookie('token'),
+            orgid = util.getCookie('orgid'),
+            parentid = util.getCookie('parentid');
             loc = util.clone(kernel.location), locid = loc.id;
             if(userid === undefined || token === undefined){
                 util.setUserData(undefined);
@@ -53,8 +53,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                             if(item.is_admin != undefined){
                                 var newIdata = {
                                     employee_count: item.employee_count,
-                                    app_ids: item.app_permission,
-                                    device_ids: item.device_permission,
+                                    app_ids: item.app_usable,
+                                    device_ids: item.device_usable,
                                     department_ids: item.department_ids
                                 };
                                 var $itemHtml = $('<a class="sub-nav-item '+((orgid == item.org_id)?'current':'')+'"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
@@ -144,8 +144,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                         if(item.is_admin){
                             var idata = {
                                 employee_count: item.employee_count,
-                                app_ids: item.app_permission,
-                                device_ids: item.device_permission,
+                                app_ids: item.app_usable,
+                                device_ids: item.device_usable,
                                 department_ids: item.department_ids
                             };
                             var $tempOrg = $('<li class="list-item"><a class="list-item-inner" href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a></li>');

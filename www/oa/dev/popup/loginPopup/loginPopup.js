@@ -28,10 +28,10 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                 util.setCookie('password', pwd.val(), 9999);
                 kernel.closePopup(thisPopup);
                 kernel.hint('登录成功', 'success');
-                kernel.replaceLocation({
+                /*kernel.replaceLocation({
                     'args': {},
                     'id': 'orghome'
-                });
+                });*/
             }
         });
         return false;

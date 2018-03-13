@@ -17,8 +17,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
             keyword = loc.args.key_search;
             var userid = util.getCookie('userid'), token = util.getCookie('token');
             console.log("params", params);
-            var type = params.type,data = params.data;
-
+            var type = params.type, data = params.data;
             //关键字搜索
             $searchBtn.off('click').on("click", function(e) {
                 e.preventDefault()
@@ -38,9 +37,10 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 
             $btnSetAdmin.off('click').on('click',function(e){
                 e.stopPropagation();
-                var ids = [];
+                var ids = [], names = [];
                 $userTable.find('tr.main-item td input[name="director"]:checked').each(function(i, dom){
                     ids.push($(dom).attr('data-id'));
+                    names.push($(dom).parents('.main-item').find('.main-item-name').text());
                 });
                 //设置部门主管 /v1.0/org/department/{department_id}/director
                 util.ajaxSubmit({
@@ -55,6 +55,15 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                             kernel.hint('设置部门主管成功~', 3000);
                             kernel.closePopup('seluser');
                             //initDept();
+                            var adminName = '';
+                            $.each(names, function(i, n){
+                                adminName += names[i];
+                            });
+                            if(data.adnull && data.adnull == true){
+                                data.$target.html('<span class="item-admin-name">'+ adminName +'</span>(<em>主管</em>)')
+                            }else{
+                                data.$target.removeClass('null').addClass('item-admin').html('<span class="item-admin-name">'+ adminName +'</span>(<em>主管</em>)</span>');
+                            }
                         }else{
                             kernel.hint(res.msg, 3000);
                         }
@@ -153,9 +162,9 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                 if (json) {
                     for (var i = 0; i < res.data.result.length; i++) {
                         var departmentText = (json[i].org_id == json[i].department_id) ? '' : json[i].department;
-                        var $itemTpl = $('<tr class="main-item" data-id="123456">\
+                        var $itemTpl = $('<tr class="main-item" data-id="' + json[i].user_id + '">\
                             <td><input class="main-item-radio" name="director" type="checkbox"  data-id="' + json[i].user_id + '"/></td>\
-                            <td>' + json[i].nickname + '</td>\
+                            <td class="main-item-name">' + json[i].nickname + '</td>\
                             <td>' + json[i].employee_num + '</td>\
                             <td>' + departmentText + '</td>\
                             <td>' + json[i].title + '</td>\

@@ -37,7 +37,7 @@ define(['common/slider/slider', 'site/pages/pages', 'site/popups/popups', 'site/
 				return hash;
 			},
 			makeQr: function(str, s) {
-	            var qrcode = new QRCode(0, QRErrorCorrectLevel.H);
+	            var qrcode = new QRCode(0, QRErrorCorrectLevel.L);
 	            qrcode.addData(str);
 	            qrcode.make();
 	            var lt, br;

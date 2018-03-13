@@ -159,6 +159,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
             }
 
             initContacts($tmp, {
+                type: 'parent',
                 orgid: data.orgid,
                 title: data.orgname
             });

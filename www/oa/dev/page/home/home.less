@@ -15,7 +15,7 @@ body.home{
     -ms-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -webkit-transition: all 0.2s ease;
-    margin-top:90px;
+    margin-top:80px;
 	>a {
 		color: black;
 		text-decoration: none;
@@ -54,11 +54,12 @@ body.home{
                     margin: 0 auto;
                     width:100px;
                     height:100px;
-                    background:url('./images/logo.png')no-repeat center;
+                    background:url('./images/archi.png')no-repeat center;
                 }
     			.text{
-    				color:#333;
-    				font-size:24px;
+                    padding: 0 30px;
+                    color:#333;
+                    font-size:24px;
     			}
     		}
     		.record-main{
@@ -71,7 +72,7 @@ body.home{
 	    			span{
                         float: right;
                         font-size: 20px;
-	    				color:#55bfbe;
+	    				color: #3b63f9;
 	    			}
     			}
     		}
@@ -87,6 +88,7 @@ body.home{
     			height:360px;
                 margin-top:50px;
                 margin-bottom:30px;
+                background: url('./images/banner.png') no-repeat center;
     		}
     		.index-entry{
     			h3.entry-title{
@@ -134,6 +136,16 @@ body.home{
     					&:last-child{
     						margin-right:0;
     					}
+                        &.item-adduser{
+                            .item-wrap{
+                                background: url('./images/app-1.png') no-repeat center;
+                            }
+                        }
+                        &.item-importuser{
+                            .item-wrap{
+                                background: url('./images/app-2.png') no-repeat center;
+                            }
+                        }
     				}
     			}
     		}

@@ -1,22 +1,15 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'page/orghome/orghome'], function(module, kernel, util, orghome) {
+define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
 	var userid, token, orgid, orgname, parentid, loc, locid;
-	userid = util.getCookie('userid'),
-	token = util.getCookie('token'),
-	orgid = util.getCookie('orgid'),
-	orgname = util.getCookie('orgname'),
-	parentid = util.getCookie('parentid');
 	var $devBox = $('#device .dev-box'),
 		$tmp = $devBox.find('.dev-main .dev-installed .dev-wrap table.table tbody.tbody');
-	var $navTeam = $('#header .nav-top .nav-top-list .nav-item-team'), $orgNavList = $navTeam.find('.son-nav-list-team');
-	orghome.switchOrgs($orgNavList, {
-        userid: userid,
-        token: token,
-        orgid: orgid,
-        orgname: orgname
-    });
     return {
         onload: function(force) {
+			userid = util.getCookie('userid'),
+			token = util.getCookie('token'),
+			orgid = util.getCookie('orgid'),
+			orgname = util.getCookie('orgname'),
+			parentid = util.getCookie('parentid');
         	loc = util.clone(kernel.location), locid = loc.id;
         	if(userid === undefined || token === undefined || orgid === undefined){
                 util.setUserData(undefined);
@@ -45,6 +38,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/orghome/orghom
 	        success: function(res) {
 	            var json = res.data.result;
 	            if(json.length > 0){
+	            	util.setCookie('device_ids', (parseInt(util.getCookie('device_ids')) + json.length));
 	            	for (var i = 0; i < json.length; i++) {
 		            	var device = json[i].device, app = json[i].app;
 		            	var appTpl = '<span data-appid="'+ app.id +'">'+ app.name +'</span>';

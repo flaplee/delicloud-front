@@ -57,6 +57,7 @@ body.contacts{
 					display:inline-block;
 					font-weight: normal;
 					cursor: pointer;
+					font-size: 16px;
 					color: #333333;
 					text-decoration: none;
 					display: block;
@@ -74,7 +75,7 @@ body.contacts{
 				&.current .item-menu,&:hover .item-menu{
 					font-weight:bold;
 					background-color: #fff;
-					color:#55BEBF;
+					color: #5d85e0;
 				}
 			}
 		}
@@ -140,7 +141,7 @@ body.contacts{
 							font-size: 18px;
 							overflow: hidden;
 							text-overflow: ellipsis;
-							white-space: normal;
+							white-space: nowrap;
 							.item-class{
 								color: #999;
 								margin: 0 10px;
@@ -150,7 +151,7 @@ body.contacts{
 								font-size: 18px;
 							}
 							&.current{
-								background-color:#75cac9;
+								background-color:#7d9de6;
 								.item-class{
 									color: #fff;
 								}
@@ -158,7 +159,7 @@ body.contacts{
 									color: #fff;
 								}
 								&:hover{
-									background-color:#75cac9;
+									background-color:#7d9de6;
 									.item-class{
 										color: #fff;
 									}
@@ -193,7 +194,7 @@ body.contacts{
 								font-size:18px;
 								overflow: hidden;
 								text-overflow: ellipsis;
-								white-space: normal;
+								white-space: nowrap;
 								.item-class{
 									color:#999;
 									margin:0 10px;
@@ -214,7 +215,7 @@ body.contacts{
 							}
 							&.current{
 								>.item-info{
-									background-color:#75cac9;
+									background-color:#7d9de6;
 									.item-class{
 										color: #fff;
 									}
@@ -245,7 +246,7 @@ body.contacts{
 		-ms-flex-pack: justify;
 
 		update:20171122;
-		width: 70%;
+		width: 69%;
 		position: relative;
 		top: 80px;
 		left: 602px;
@@ -262,19 +263,42 @@ body.contacts{
 			width:752px;
 			update:20171122;
 			width: 100%;
+			min-height: 808px;
 			background-color:#fff;
 			border-radius:5px;
 			border:1px solid #eaeaea;
 			margin: 30px 30px 0 30px;
+			.contacts-wrap{
+				&.contacts-wrap-data{
+					display: block;
+				}
+				&.contacts-wrap-empty{
+					display: none;
+					p{
+						text-align: center;
+						color: #333;
+						font-size: 18px;
+						height: 24px;
+						line-height: 24px;
+						margin: 392px 0;
+						a{
+							color: #5d85e0;
+							&:hover{
+								text-decoration: underline;
+							}
+						}
+					}
+				}
+			}
 			.contacts-form,.department-form{
 				width: 752px;
 				update: 20171122;
 				width: 100%;
 				padding: 25px 20px 10px 20px;
 				height: 62px;
-				border-bottom: 1px solid #eaeaea;
+				-border-bottom: 1px solid #eaeaea;
 				h2{
-					font-size: 22px;
+					font-size: 24px;
 					color: #333333;
 					margin: 0;
 					height: 32px;
@@ -303,6 +327,7 @@ body.contacts{
 								font-weight:bold;
 								height: 40px;
 								line-height: 40px;
+								border-top: none;
 								border-bottom: none;
 								border-left: none;
 								border-right: none;
@@ -330,8 +355,15 @@ body.contacts{
 								color: #b5b5b5;
 								margin: 0 10px;
 							}
+							&.dept-text{
+								width: 275px;
+								overflow: hidden;
+								text-overflow: ellipsis;
+								white-space: nowrap;
+								display: block;
+							}
 							&.empty {
-								    border: 0;
+								border: 0;
 							    background-image: url(images/null.png);
 							    background-repeat: no-repeat;
 							    background-position: 50% 50%;
@@ -372,7 +404,7 @@ body.contacts{
 							line-height:40px;
 							overflow: hidden;
 							text-overflow: ellipsis;
-							white-space: normal;
+							white-space: nowrap;
 							>.item-text{
 								width:100%;
 								float:left;
@@ -440,7 +472,7 @@ body.contacts{
 								}
 							}
 							&.current{
-								background-color:#75cac9;
+								background-color:#7d9de6;
 								color: #fff;
 								>.item-text{
 									>.item-class{
