@@ -219,9 +219,14 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                             $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
                             $loginFail.show();
                         }else{
-                            $loginBox.hide();
-                            $orgBox.show();
                             if(targetLength == 1){
+                                $loginBox.show();
+                                $orgBox.hide();
+                                //login status
+                                $loginDoing.show();
+                                $loginSuccess.hide();
+                                $loginFail.hide();
+                                initQrcode($loginBox.find('.loginQr'))
                                 util.setCookie('orgid', orgInfo[targetCurrent].org_id),
                                 util.setCookie('parentid', orgInfo[targetCurrent].top_department_id),
                                 util.setCookie('orgname', orgInfo[targetCurrent].org_name),
@@ -232,10 +237,19 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                                 tempInfo.orgindex = targetCurrent;
                                 util.setUserData(tempInfo);
                                 kernel.replaceLocation({'args': {},'id': 'home'});
-                            }else if(targetLength<=4){
-                                o.addClass('org-list-seldom');
                             }else{
-                                o.addClass('org-list-plenty');
+                                $loginBox.hide();
+                                $orgBox.show();
+                                //login status
+                                $loginDoing.show();
+                                $loginSuccess.hide();
+                                $loginFail.hide();
+                                initQrcode($loginBox.find('.loginQr'))
+                                 if(targetLength<=4){
+                                    o.addClass('org-list-seldom');
+                                }else{
+                                    o.addClass('org-list-plenty');
+                                }
                             }
                         }
                     }else{
