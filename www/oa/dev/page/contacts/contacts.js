@@ -79,13 +79,21 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                     if(res.data && res.data.result.length > 0){
                         o.find('>').remove();
                         for (var i = 0; i < res.data.result.length; i++) {
-                            var deptsText = ((json[i].department_path.split(';')).length > 1) ? json[i].department_path.replace(new RegExp(""+ orgname +"/","gm"),"").replace(new RegExp("/","gm"),"-").replace(new RegExp(";","gm"),"/") : json[i].department;
+                            //((json[i].department_path.split(';')).length > 1) ? json[i].department_path.replace(new RegExp(""+ orgname +"/","gm"),"").replace(new RegExp("/","gm"),"-").replace(new RegExp(";","gm"),"/") : json[i].department;
+                            var deptPaths = json[i].department_paths,deptsText = '';
+                            if(deptPaths && deptPaths.length > 1){
+                                for(var j = 0;j < deptPaths.length; j++){
+                                    deptsText += (deptPaths[j]).replace(new RegExp("/","gm"),"-") + ((j == deptPaths.length - 1) ?'':'/');//<span style="color:#494949;margin:0 1px;"></span>
+                                }
+                            }else{
+                                deptsText = json[i].department;
+                            }
                             var departmentText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? '' : deptsText;
                             var $itemTpl = $('<tr>\
                                 <td><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
                                 <td>' + json[i].nickname + '</td>\
                                 <td>' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
-                                <td class="dept-text">' + departmentText + '</td>\
+                                <td class="dept-text"><p title="' + departmentText + '">' + departmentText + '</p></td>\
                                 <td>' + json[i].title + '</td>\
                                 <td>' + json[i].mobile + '</td>\
                                 <td>\

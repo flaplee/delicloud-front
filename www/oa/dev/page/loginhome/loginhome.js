@@ -110,7 +110,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
     
     // webscoket 
     function connect(cid, status){
-        var sock = new SockJS('http://t.delicloud.com/web/web-gateway-websocket'); // http://192.168.0.202:9002
+        var sock = new SockJS('http://t.delicloud.com/web/web-gateway-websocket');
         stomp = Stomp.over(sock);
         stomp.connect({}, function (frame) {
             var url = "/user/"+ cid +"/barcode/login";
