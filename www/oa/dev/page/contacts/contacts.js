@@ -80,7 +80,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                         o.find('>').remove();
                         for (var i = 0; i < res.data.result.length; i++) {
                             var deptsText = ((json[i].department_path.split(';')).length > 1) ? json[i].department_path.replace(new RegExp(""+ orgname +"/","gm"),"").replace(new RegExp("/","gm"),"-").replace(new RegExp(";","gm"),"/") : json[i].department;
-                            var departmentText = (json[i].org_id == json[i].department_id) ? '' : deptsText;
+                            var departmentText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? '' : deptsText;
                             var $itemTpl = $('<tr>\
                                 <td><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
                                 <td>' + json[i].nickname + '</td>\
@@ -101,13 +101,16 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                                 type : tempType,
                                 userid : json[i].user_id,
                                 department : json[i].department,
+                                departments : json[i].departments,
                                 departmentid : json[i].department_id,
+                                departmentids : json[i].department_ids,
                                 orgid : json[i].org_id,
                                 orgname : json[i].organization,
                                 mobile : json[i].mobile,
                                 mobile_region: json[i].mobile_region,
                                 employee_num : json[i].employee_num,
-                                title: json[i].title
+                                title: json[i].title,
+                                titles: json[i].titles
                             });
 
                             //编辑成员

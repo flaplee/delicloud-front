@@ -171,15 +171,13 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                 if (json.code == 0) {
                     o.find('>').remove('');
                     var orgInfo = json.data.result;
-                    tempInfo.organization = orgInfo;
                     if(orgInfo && orgInfo.length && orgInfo.length > 0){
-                        $loginBox.hide();
-                        $orgBox.show();
-                        var targetLength = orgInfo.length, targetCurrent = 0;
+                        var targetData = [], targetLength = orgInfo.length, targetCurrent = 0;
                         $.each(orgInfo, function(i, item) {
-                            if(item.is_admin != undefined){
+                            if((item.is_admin && item.is_admin == true) || item.department_ids || item.app_ids || item.device_ids){
                                 targetCurrent = i;
                                 var $tempOrg = $('<li class="list-item"><a class="list-item-inner noline" href="javascript:;" title="' + item.org_name + '" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a></li>');
+                                targetData.push(item);
                                 o.append($tempOrg);
                                 return function(){
                                     // 选择组织
@@ -211,10 +209,18 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                                 targetLength--;
                             }
                         });
-                        // 组织列表
-                        if(targetLength > 1){
-                            o.addClass('org-list-plenty');
+                        tempInfo.organization = targetData;
+                        if(targetLength <= 0){
+                            $loginBox.show();
+                            $orgBox.hide();
+                            //login status
+                            $loginDoing.hide();
+                            $loginSuccess.hide();
+                            $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                            $loginFail.show();
                         }else{
+                            $loginBox.hide();
+                            $orgBox.show();
                             if(targetLength == 1){
                                 util.setCookie('orgid', orgInfo[targetCurrent].org_id),
                                 util.setCookie('parentid', orgInfo[targetCurrent].top_department_id),
@@ -226,8 +232,10 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                                 tempInfo.orgindex = targetCurrent;
                                 util.setUserData(tempInfo);
                                 kernel.replaceLocation({'args': {},'id': 'home'});
-                            }else{
+                            }else if(targetLength<=4){
                                 o.addClass('org-list-seldom');
+                            }else{
+                                o.addClass('org-list-plenty');
                             }
                         }
                     }else{

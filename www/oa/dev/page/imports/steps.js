@@ -85,6 +85,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util',  'page/imports/membe
                         scnt = json.data['result'].success_list;
                         fcnt = json.data['result'].fail_list;
                         isImport = true;
+                        $scntBtn.find('span.nav-enable-num').text(scnt.length);
+                        $fcntBtn.find('span.nav-unable-num').text(fcnt.length);
                         if(scnt.length > 0){
                             util.setCookie('employee_count', (parseInt(util.getCookie('employee_count')) + scnt.length));
                             kernel.hint('成员导入成功~');
@@ -125,6 +127,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util',  'page/imports/membe
                         scnt = json.data['result'].success_list;
                         fcnt = json.data['result'].fail_list;
                         isImport = true;
+                        $scntBtn.find('span.nav-enable-num').text(scnt.length);
+                        $fcntBtn.find('span.nav-unable-num').text(fcnt.length);
                         if(scnt.length > 0){
                             util.setCookie('employee_count', (parseInt(util.getCookie('employee_count')) + scnt.length));
                             kernel.hint('成员导入成功~');

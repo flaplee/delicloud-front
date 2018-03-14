@@ -501,7 +501,7 @@ define(['common/kernel/kernel'], function(kernel) {
                                     success: function(json) {
                                         if (json.code == 0) {
                                             $.each(json.data.result,function(i, item){
-                                                if(item.is_admin != undefined){
+                                                if((item.is_admin && item.is_admin == true) || item.department_ids || item.app_ids || item.device_ids){
                                                     targetData.push(item);
                                                 }
                                             });

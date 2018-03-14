@@ -44,7 +44,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 	                	for(var j = 0;j < dataInner.length; j++){
 	                		var $itemTpl = $('<div class="app-item" data-app_id="' + dataInner[j].id + '" title="' + dataInner[j].app.name + '">\
 								<div class="item-icon-wrap">\
-									<img class="item-icon" src="' + dataInner[j].app.icon + '">\
+									<img class="item-icon" src="' + (dataInner[j].app.icon ? dataInner[j].app.icon : '') + '">\
 								</div>\
 								<div class="item-title">' + dataInner[j].app.name + '</div>\
 								<div class="item-info"></div>\

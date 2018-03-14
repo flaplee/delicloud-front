@@ -27,7 +27,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
             $btnConfirm.off('click').on('click',function(e){
                 e.stopPropagation();
                 if(type == 'seldept'){
-                    setAdddept($deptselectedList.find('ul.dept-selected-inner'), $('#adduser .add-user .add-inner .add-form-extra ul.extra-list').find('.extra-item').eq(params.data.index));
+                    setAdddept($deptselectedList.find('ul.dept-selected-inner'), $('#adduser .add-user .add-inner .add-form-extra ul.extra-list').find('.extra-item').eq(params.data.index), params.data.index);
                 }else if(type == 'movedept'){
                     if(func && typeof func === 'function'){
                         func(id, $deptselectedList.find('ul.dept-selected-inner li.selected-item').attr('data-orgid'));
@@ -43,12 +43,13 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 
             // 后面做确定type 后统一处理
             // type == 'seldept' 直接处理dom
-            function setAdddept(o, os){
+            function setAdddept(o, os, domIndex){
                 var operateId = o.find('li.selected-item').attr('data-orgid'),
                     operateName= o.find('li.selected-item .item-info span').text();
-                os.find('.extra-item').attr('data-orgid', operateId);
-                os.find('input.department').val($.trim(operateName));
-                os.find('input.departmentId').val($.trim(operateId));
+                //os.find('.extra-item').attr('data-orgid', operateId);
+                os.find('input.department'+ domIndex +'').val($.trim(operateName));
+                os.find('input.departmentId'+ domIndex +'').val($.trim(operateId));
+                os.find('input.business'+ domIndex +'').val('');
             }
         }
     };

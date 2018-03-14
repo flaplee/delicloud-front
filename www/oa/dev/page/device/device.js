@@ -38,7 +38,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 	        success: function(res) {
 	            var json = res.data.result;
 	            if(json.length > 0){
-	            	util.setCookie('device_ids', (parseInt(util.getCookie('device_ids')) + json.length));
 	            	for (var i = 0; i < json.length; i++) {
 		            	var device = json[i].device, app = json[i].app;
 		            	var appTpl = '<span data-appid="'+ app.id +'">'+ app.name +'</span>';

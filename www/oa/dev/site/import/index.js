@@ -62,7 +62,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         $(".user-asset").hide();
         $('.user-info').removeClass('visited');
         util.setUserData(undefined);
-        
     });
 
     var historyNav;

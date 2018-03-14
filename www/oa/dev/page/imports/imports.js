@@ -1,6 +1,6 @@
 'use strict';
 define(['module', 'common/kernel/kernel', 'site/util/util','page/imports/steps'], function(module, kernel, util, steps) {
-    var userid, token, orgid, orgname, parentid, loc, type, status, imports;
+    var userid, token, orgid, orgname, parentid, loc, locid, type, status, imports;
     var $imports = $('#imports'),
         $importsMenu = $imports.find('.imports-menu'),
         $importsSteps = $imports.find('.imports-steps'),
@@ -23,9 +23,15 @@ define(['module', 'common/kernel/kernel', 'site/util/util','page/imports/steps']
             orgname = util.getCookie('orgname'),
             parentid = util.getCookie('parentid');
             loc = kernel.parseHash(location.hash),
+            locid = loc.id,
             type = loc.args.type,
             status = loc.args.status,
             imports = loc.args.imports;
+            if(locid == 'imports'){
+                var $usermenu = $('#header .user-head .nav-top .nav-item');
+                $usermenu.find('a.navlink').removeClass('navlink-current');
+                $usermenu.find('a.navlink.orgBtn').addClass('navlink-current');
+            };
             switch(type){
                 case 'info':
                     $importsInfo.hide();

@@ -28,9 +28,31 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 				$addInfo.find('.username').val($.trim(data.nickname));
 				$addInfo.find('.usermobile').attr('disabled','disabled').val($.trim(data.mobile));
 				$addInfo.find('.employee_num').val($.trim(data.employee_num));
-				$addExtra.find('.extra-item-index .department').val($.trim(departmentText));
-				$addExtra.find('.extra-item-index .departmentId').val($.trim(data.departmentid));
-				$addExtra.find('.extra-item-index .business').val($.trim(data.title));
+				if(data.departmentids && data.departmentids.length > 0){
+					$addExtra.find('ul.extra-list >').remove();
+					for(var i = 0;i < data.departmentids.length; i++){
+						var indexClass = ((i == 0) ? 'extra-item-index' : '');
+						var $targetHtml = $('<li class="extra-item '+ indexClass +'">\
+							<a href="javascript:;" class="extra-item-del">删除</a>\
+							<div class="form-group">\
+								<label class="col-sm-2 control-label" for="formGroupInputDefault">部门:</label>\
+								<div class="col-sm-8">\
+									<input disabled class="form-control department'+ i +'" name="department'+ i +'" type="text" placeholder="'+ data.departments[i] +'" value="'+ data.departments[i] +'" require>\
+									<input disabled class="form-control departmentId'+ i +'" name="departmentId'+ i +'" value="'+ data.departmentids[i] +'" type="hidden">\
+									<a class="btn-to-dept" href="javascript:;"></a>\
+								</div>\
+							</div>\
+							<div class="form-group">\
+								<label class="col-sm-2 control-label" for="formGroupInputDefault">职务:</label>\
+								<div class="col-sm-8">\
+									<input class="form-control business business'+ i +'" name="business'+ i +'" type="text" placeholder="'+ data.titles[i] +'" value="'+ data.titles[i] +'" require>\
+								</div>\
+							</div>\
+						</li>');
+						$addExtra.find('ul.extra-list').append($targetHtml);
+						setToDept($targetHtml);
+					}
+				}
 				$addFromUser.hide();
 				$addUserGo.hide();
 			}else{
@@ -39,15 +61,36 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 				$addInfo.find('.username').val('');
 				$addInfo.find('.usermobile').attr('disabled', false).val('');
 				$addInfo.find('.employee_num').val('');
-				$addExtra.find('.extra-item-index .department').val('');
-				$addExtra.find('.extra-item-index .departmentId').val(departmentId);
-				$addExtra.find('.extra-item-index .business').val('');
-				$addFromUser.show();
+				$addExtra.find('ul.extra-list >').remove();
+				var $tempHtml = $('<li class="extra-item extra-item-index">\
+					<a href="javascript:;" style="display:none;" class="extra-item-del">删除</a>\
+					<div class="form-group">\
+						<label class="col-sm-2 control-label" for="formGroupInputDefault">部门:</label>\
+						<div class="col-sm-8">\
+							<input disabled class="form-control department0" name="department0" type="text" placeholder="" value="" require>\
+							<input disabled class="form-control departmentId0" name="departmentId0" value="" type="hidden">\
+							<a class="btn-to-dept" href="javascript:;"></a>\
+						</div>\
+					</div>\
+					<div class="form-group">\
+						<label class="col-sm-2 control-label" for="formGroupInputDefault">职务:</label>\
+						<div class="col-sm-8">\
+							<input class="form-control business business0" name="business0" type="text" placeholder="" value="" require>\
+						</div>\
+					</div>\
+				</li>');
+				$addExtra.find('ul.extra-list').append($tempHtml);
+				$addExtra.find('.extra-item-index .department0').val('');
+				$addExtra.find('.extra-item-index .departmentId0').val(departmentId);
+				$addExtra.find('.extra-item-index .business0').val('');
+				$addFromUser.hide();
 				$addUserGo.show();
 			}
 
+
+
 			// 默认部门 和 职务
-			$addExtraList.find('li.extra-item-index.extra-item a.btn-to-dept').off('click').on('click',function(e){
+			/*$addExtraList.find('li.extra-item a.btn-to-dept').off('click').on('click',function(e){
 				e.stopPropagation();
 				var c = $(this), index = c.parents('li.extra-item').index();
 				// 选择部门
@@ -59,7 +102,28 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 	                    "parentid": parentid
 	                }
 	            });
+			});*/
+
+			defaultDeptTitle($addExtraList.find('li.extra-item a.btn-to-dept'),{
+				'orgid' : data.orgid,
+				'parentid' : parentid
 			});
+
+			function defaultDeptTitle(o, data){
+				o.off('click').on('click',function(e){
+					e.stopPropagation();
+					var c = $(this), index = c.parents('li.extra-item').index();
+					// 选择部门
+		            kernel.openPopup('adddept', {
+		                type: 'seldept',
+		                data: {
+		                	index: index,
+		                    "org_id": data.orgid,
+		                    "parentid": data.parentid
+		                }
+		            });
+				});
+			}
 
 			// 从其他部门添加
 			$addFromUser.off('click').on('click', function() {
@@ -77,83 +141,99 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 			// 继续增加部门及职务
 			$addDeptMore.off('click').on('click',function(e){
 				e.stopPropagation();
-				var $temp = $('<li class="extra-item">\
+				var targetLen = parseInt($addExtra.find('ul.extra-list .extra-item').length);
+				var indexClass = ((targetLen == 0) ? 'extra-item-index' : '');
+				var $temp = $('<li class="extra-item '+ indexClass +'">\
 					<a href="javascript:;" class="extra-item-del">删除</a>\
 					<div class="form-group">\
 						<label class="col-sm-2 control-label" for="formGroupInputDefault">部门:</label>\
 						<div class="col-sm-8">\
-							<input class="form-control department" name="department" type="text" placeholder="" require>\
-							<input class="form-control departmentId" name="departmentId" type="hidden">\
+							<input disabled class="form-control department'+ targetLen +'" name="department'+ targetLen +'" type="text" placeholder="" require>\
+							<input disabled class="form-control departmentId'+ targetLen +'" name="departmentId'+ targetLen +'" type="hidden">\
 							<a class="btn-to-dept" href="javascript:;"></a>\
 						</div>\
 					</div>\
 					<div class="form-group">\
 						<label class="col-sm-2 control-label" for="formGroupInputDefault">职务:</label>\
 						<div class="col-sm-8">\
-							<input class="form-control business" name="business" type="text" placeholder="" require>\
+							<input class="form-control business business'+ targetLen +'" name="business'+ targetLen +'" type="text" placeholder="" require>\
 						</div>\
 					</div>\
 				</li>');
 				$addExtra.find('ul.extra-list').append($temp);
 
 				setToDept($temp);
-
-				function setToDept(o){
-					o.find('a.btn-to-dept').on('click',function(e){
-						e.stopPropagation();
-						var c = $(this), index = c.parents('li.extra-item').index();
-						// 选择部门
-			            kernel.openPopup('adddept', {
-			                type: 'seldept',
-			                data: {
-			                	index: index,
-			                    "org_id": data.orgid,
-			                    "parentid": parentid
-			                }
-			            });
-					});
-					o.find('a.extra-item-del').on('click',function(e){
-						e.stopPropagation();
-						var c = $(this), index = c.parents('li.extra-item').index();
-						c.parent('li.extra-item').remove();
-					});
-				}
 			});
 
+			// 删除部门及职务
+			function setToDept(o){
+				o.find('a.btn-to-dept').on('click',function(e){
+					e.stopPropagation();
+					var c = $(this), index = c.parents('li.extra-item').index();
+					// 选择部门
+		            kernel.openPopup('adddept', {
+		                type: 'seldept',
+		                data: {
+		                	index: index,
+		                    "org_id": data.orgid,
+		                    "parentid": parentid
+		                }
+		            });
+				});
+				o.find('a.extra-item-del').on('click',function(e){
+					e.stopPropagation();
+					var c = $(this), index = c.parents('li.extra-item').index();
+					c.parent('li.extra-item').remove();
+				});
+			}
+
 			//setToDept($addExtra.find('ul.extra-list li.extra-item'));
+
+			function isMobile(phoneNum) {
+	            var reg = /^1[3,4,5,7,8]{1}[0-9]{9}$/;
+	            return reg.test(phoneNum)
+	        }
 			
 			// save & cancel
 			$addUser.off('click').on('click',function(){
 				var titles = [], dids = [], temp = {
 					"mobile_region":data.mobile_region,
-				    "mobile":$addInfo.find('.usermobile').val(),
-				    "nickname":$addInfo.find('.username').val(),
-				    "employee_num":$addInfo.find('.employee_num').val()
+					"mobile":$addInfo.find('.usermobile').val(),
+					"nickname":$addInfo.find('.username').val(),
+					"employee_num":$addInfo.find('.employee_num').val()
 				};
 				$addExtra.find('ul.extra-list li.extra-item').each(function(i, o){
-					dids.push($(o).find('.form-group input.departmentId').val());
-					titles.push($(o).find('.form-group input.business').val());
+					dids.push($(o).find('.form-group input.departmentId'+ i +'').val());
+					titles.push($(o).find('.form-group input.business'+ i +'').val());
 				});
 				temp.titles = titles,
 				temp.department_ids = (dids && dids.length > 0) ? dids : data.parentids,
 				(type && type == 'edit') ? temp.user_id = ((data.userid && data.userid.length > 0) ? data.userid : $addInner.attr('data-userid')) : '';
-				// 添加人员到团队 /v1.0/org/user
-				util.ajaxSubmit({
-	                url: '/v1.0/org/user' + ((type && type == 'edit')? '/'+ ((data.userid && data.userid.length > 0) ? data.userid : $addInner.attr('data-userid')) +'':''),
-	                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
-	                data: temp,
-	                success: function(res) {
-	                    if(res && res.code == 0){
-	                    	$addUserCancel.trigger('click');
-	                    	kernel.hint(res.msg || ((type && type == 'edit') ? '编辑成员信息成功~' : '添加成员成功~'), 3000);
-	                    	contacts.initContacts($('#contacts .contacts-box .contacts-inner tbody.tbody'), {
-		                        orgid: data.orgid, //data.id
-		                        type: data.type,
-		                        title: data.orgname
-		                    });
-	                    }
-	                }
-	            });
+				if(temp.nickname != ''){
+					if(isMobile(temp.mobile)){
+						// 添加人员到团队 /v1.0/org/user
+						util.ajaxSubmit({
+			                url: '/v1.0/org/user' + ((type && type == 'edit')? '/'+ ((data.userid && data.userid.length > 0) ? data.userid : $addInner.attr('data-userid')) +'':''),
+			                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+			                data: temp,
+			                success: function(res) {
+								if(res && res.code == 0){
+									$addUserCancel.trigger('click');
+									kernel.hint(res.msg || ((type && type == 'edit') ? '编辑成员信息成功~' : '添加成员成功~'), 3000);
+									contacts.initContacts($('#contacts .contacts-box .contacts-inner tbody.tbody'), {
+										orgid: data.orgid, //data.id
+										type: data.type,
+										title: data.orgname
+									});
+								}
+			                }
+			            });
+					}else{
+						kernel.hint('请输入正确的手机号码~', 'error');
+					}
+				}else{
+					kernel.hint('请输入成员姓名~', 'error');
+				}
 			});
 
 			// save & no cancel
@@ -171,23 +251,31 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 				temp.titles = titles,
 				temp.department_ids = (dids && dids.length > 0) ? dids : data.parentids,
 				(type && type == 'edit') ? temp.user_id = ((data.userid && data.userid.length > 0) ? data.userid : $addInner.attr('data-userid')) : '';
-				// 添加人员到团队 /v1.0/org/user
-				util.ajaxSubmit({
-	                url: '/v1.0/org/user' + ((type && type == 'edit')? '/'+ ((data.userid && data.userid.length > 0) ? data.userid : $addInner.attr('data-userid')) +'':''),
-	                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
-	                data: temp,
-	                success: function(res) {
-	                    if(res && res.code == 0){
-	                    	$addUserCancel.trigger('click');
-	                    	kernel.hint(res.msg || ((type && type == 'edit') ? '编辑成员信息成功~' : '添加成员成功~'), 3000);
-	                    	contacts.initContacts($('#contacts .contacts-box .contacts-inner tbody.tbody'), {
-		                        orgid: data.orgid, //data.id
-		                        type: data.type,
-		                        title: data.orgname
-		                    });
-	                    }
-	                }
-	            });
+				if(temp.nickname != ''){
+					if(isMobile(temp.mobile)){
+						// 添加人员到团队 /v1.0/org/user
+						util.ajaxSubmit({
+			                url: '/v1.0/org/user' + ((type && type == 'edit')? '/'+ ((data.userid && data.userid.length > 0) ? data.userid : $addInner.attr('data-userid')) +'':''),
+			                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+			                data: temp,
+			                success: function(res) {
+			                    if(res && res.code == 0){
+			                    	$addUserCancel.trigger('click');
+			                    	kernel.hint(res.msg || ((type && type == 'edit') ? '编辑成员信息成功~' : '添加成员成功~'), 3000);
+			                    	contacts.initContacts($('#contacts .contacts-box .contacts-inner tbody.tbody'), {
+				                        orgid: data.orgid, //data.id
+				                        type: data.type,
+				                        title: data.orgname
+				                    });
+			                    }
+			                }
+			            });
+			        }else{
+						kernel.hint('请输入正确的手机号码~', 'error');
+					}
+				}else{
+					kernel.hint('请输入成员姓名~', 'error');
+				}
 			});
 
 			//cancel

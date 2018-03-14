@@ -174,15 +174,17 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     }
     
     function datachange(evt) {
-        $userlogin.find('.user-wrap img.user-info-avatar').prop('src', evt.data.data.avatar_url);
-        $userlogin.find('.user-panel >.user-info >.userinfo-name-box b').text(evt.data.data.name);
-        $userlogin.find('.user-panel >.user-info img').prop('src', evt.data.data.avatar_url);
+        if(evt.data && evt.data.data){
+            $userlogin.find('.user-wrap img.user-info-avatar').prop('src', evt.data.data.avatar_url);
+            $userlogin.find('.user-panel >.user-info >.userinfo-name-box b').text(evt.data.data.name);
+            $userlogin.find('.user-panel >.user-info img').prop('src', evt.data.data.avatar_url);
+        }
         orgdatachange(evt);
     }
 
     function orgdatachange(evt){
-        var index = util.getCookie('orgindex');
-        if(index && evt.data.organization){
+        var index = parseInt(util.getCookie('orgindex')? util.getCookie('orgindex') : 0);
+        if(index >= 0 && evt.data.organization && evt.data.organization.length > 0){
             $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
             $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();
             $.each(evt.data.organization, function(i, item) {
