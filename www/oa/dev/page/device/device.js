@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	var userid, token, orgid, orgname, parentid, loc, locid;
 	var $devBox = $('#device .dev-box'),
 		$tmp = $devBox.find('.dev-main .dev-installed .dev-wrap table.table tbody.tbody');
@@ -44,7 +44,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 		        		var $deviceTpl = $('<tr class="dev-item" data-dev_id="'+ json[i].device_id +'">\
 							<td class="item-desc">\
 								<div class="item-img fl">\
-									<img src="'+ device.product.icon +'" width="30px" height="30px" />\
+									<img src="'+ device.product.icon +'" />\
 								</div>\
 								<div class="item-text fl">\
 									<p>'+ device.product.name +'</p>\
@@ -57,8 +57,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 							'+ appTpl +'\
 							</td>\
 							<td class="item-delact">\
-								<a href="javascript:;" class="button button-red btn-dev-delete-item">删除设备</a>\
 								<a href="javascript:;" class="button button-orange btn-dev-rename-item">修改设备名称</a>\
+								<a href="javascript:;" class="button button-red btn-dev-delete-item">删除设备</a>\
 								<a href="javascript:;" class="button btn-dev-bind-item hide">绑定其他应用</a>\
 							</td>\
 						</tr>');

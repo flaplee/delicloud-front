@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     var $login = $('#loginhome'),
         $loginBox = $login.find('.login-box'),
         $loginQr = $loginBox.find('#loginQr'),
@@ -17,39 +17,37 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
     // init qrcode
     var initQrcode = function(o, status){
         o.addClass('login-loading');
-        setTimeout(function(){
-            util.ajaxSubmit({
-                url: '/v1.0/barcode_login/public',
-                silent: true,
-                type:'get',
-                success: function(json) {
-                    o.removeClass('login-loading');
-                    if(json.code == 0){
-                        var res = json.data['result'],
-                            cid = res.cid,
-                            url = res.data;
-                        if (url) {
-                            o.html('');
-                            new QRCode(document.getElementById('qrcode'), {
-                                text: url,
-                                width: 234,
-                                height: 234,
-                                correctLevel: QRCode.CorrectLevel.L
-                            });
-                            connect(cid, 'disconnect');
-                        } else {
-                            o.html('');
-                        }
-                    }else{
-                        kernel.hint(json.msg);
+        util.ajaxSubmit({
+            url: '/v1.0/barcode_login/public',
+            silent: true,
+            type:'get',
+            success: function(json) {
+                o.removeClass('login-loading');
+                if(json.code == 0){
+                    var res = json.data['result'],
+                        cid = res.cid,
+                        url = res.data;
+                    if (url) {
+                        o.html('');
+                        new QRCode(document.getElementById('qrcode'), {
+                            text: url,
+                            width: 234,
+                            height: 234,
+                            correctLevel: QRCode.CorrectLevel.L
+                        });
+                        connect(cid, 'disconnect');
+                    } else {
+                        o.html('');
                     }
-                },
-                error: function(json){
-                    o.removeClass('login-loading');
-                    kernel.hint('网络或服务器错误~', 'error');
+                }else{
+                    kernel.hint(json.msg);
                 }
-            });
-        }, 0);
+            },
+            error: function(json){
+                o.removeClass('login-loading');
+                kernel.hint('网络或服务器错误~', 'error');
+            }
+        });
     };
 
     initQrcode($loginBox.find('.loginQr'));
@@ -148,7 +146,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                 }
                 orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token});
             }else{
-                setTimeout(initQrcode($loginBox.find('.loginQr')), 1000);
+                initQrcode($loginBox.find('.loginQr'));
             }
         });
     }

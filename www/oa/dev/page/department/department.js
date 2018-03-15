@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     return {
         onload: function(force) {
             var $dept = $('#department .department-box'),

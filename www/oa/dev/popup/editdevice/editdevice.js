@@ -22,12 +22,17 @@ define(['module', 'common/kernel/kernel', 'site/util/util','page/device/device']
                         name: $editInfo.val()
                     },
                     success: function(res) {
-                        kernel.hint('保存成功', 'success');
                         kernel.closePopup('editdevice');
-                        device.getDeviceSub(userid, token, orgid, $('#device .dev-box').find('.dev-main .dev-installed .dev-wrap table.table tbody.tbody'));
+                        if(res.code == 0){
+                            kernel.hint('保存成功~', 'success');
+                            device.getDeviceSub(userid, token, orgid, $('#device .dev-box').find('.dev-main .dev-installed .dev-wrap table.table tbody.tbody'));
+                        }else{
+                            kernel.hint(res.msg, 'error');
+                        }
                     },
                     error(res){
                         kernel.closePopup('editdevice');
+                        kernel.hint(res.msg, 'error');
                     }
                 });
             });

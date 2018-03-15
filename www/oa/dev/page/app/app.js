@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	var userid, token, orgid, orgname, parentid, loc, locid;
 	var $appBox = $('#app .app-box'),
     	$tmpApp = $appBox.find('.app-main .app-inner .app-main-list'),
@@ -56,16 +56,18 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                             break;
                     }
                 	var $itemHtml = $('<li class="item">\
-						<div class="item-img" title="'+ data[i].name +'">\
-							<img  src="'+ data[i].icon +'" width="80" height="80" />\
-						</div>\
-						<div class="item-info">\
-							<div class="item-title clear">\
-								<div class="item-text">'+ data[i].name +'</div>\
-								<div class="item-category">'+ innerHtml +'</div>\
-							</div>\
-							<div class="item-content">'+ data[i].slogan +'</div>\
-						</div>\
+                        <div class="item-wrap clear">\
+    						<div class="item-img" title="'+ data[i].name +'">\
+                                <img  src="'+ data[i].icon +'" width="80" height="80" />\
+    						</div>\
+    						<div class="item-info">\
+                                <div class="item-title clear">\
+                                    <div class="item-text">'+ data[i].name +'</div>\
+                                    <div class="item-category">'+ innerHtml +'</div>\
+                                </div>\
+                                <div class="item-content">'+ data[i].slogan +'</div>\
+    						</div>\
+                        </div>\
 						<div class="item-btn">\
 							'+ installHtml +'\
 						</div>\

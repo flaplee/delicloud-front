@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	var userid = util.getCookie('userid'),
 		token = util.getCookie('token'),
 		orgid = util.getCookie('orgid');

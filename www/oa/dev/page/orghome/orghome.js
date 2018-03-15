@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     var userid, token, orgid, parentid, loc, locid, orgNavNull = 0;
     var $userlist = $('#header .user-head .nav-top .nav-top-list'),
         $userteam = $userlist.find('.nav-item-team'),

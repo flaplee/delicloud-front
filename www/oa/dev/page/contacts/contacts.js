@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/department'], function(module, kernel, util, departments) {
+define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], function(kernel, util, departments) {
     var userid, token, orgid, orgname, parentid, adminid, loc, locid, type, keyword, boxClass;
     var dataCache, title, tempId, tempType, tempOrgid, tempParentid, queryParentid;
     var $contacts = $('#contacts'),
@@ -73,6 +73,8 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                 dataCache = json;
                 if (json) {
                     if(isQuery && isQuery == true && os){
+                        $contactsWrapData.show();
+                        $contactsWrapEmpty.hide();
                         os.find('a.select-item, li.select-item').removeClass('current');
                         os.find('.dept-select-wrap a.item-info').addClass('current');
                     }
@@ -90,13 +92,13 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
                             }
                             var departmentText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? '' : deptsText;
                             var $itemTpl = $('<tr>\
-                                <td><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
+                                <td style="display:none;"><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
                                 <td>' + json[i].nickname + '</td>\
                                 <td>' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
                                 <td class="dept-text"><p title="' + departmentText + '">' + departmentText + '</p></td>\
                                 <td>' + json[i].title + '</td>\
                                 <td>' + json[i].mobile + '</td>\
-                                <td>\
+                                <td style="display:none;">\
                                     <button data-index="' + i + '" type="button" class="btn btn-info btn-sm btn-user-edit">编辑</button>\
                                 </td>\
                             </tr>');
@@ -539,6 +541,14 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/depar
             type: 'parent',
             query: $contactsForm.find('.search-box input.search').val()
         }, true, $listTmp);
+    });
+
+    // 回车键搜索
+    $contactsForm.find('.search-box input.search').bind('keyup', function(e) {
+        var c = $(this);
+        if (e.keyCode == "13" && c.val().length > 0) {
+            $contactsForm.find('.btn-user-search').trigger('click');
+        }
     });
 
     //组织中未搜索到内容返回处理

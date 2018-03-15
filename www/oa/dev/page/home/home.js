@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     var userid, token, orgid, orgname, parentid, device_ids, app_ids, employee_count;
     var $homeBox = $('#home .home-box'),
         $homeRecord = $homeBox.find('.home-record'),

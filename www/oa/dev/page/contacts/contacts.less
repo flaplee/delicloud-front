@@ -72,19 +72,25 @@ body.contacts{
 					height:100px;
 					line-height:100px;
 				}
-				&.current .item-menu,&:hover .item-menu{
-					font-weight:bold;
+				&.current .item-menu{
 					background-color: #fff;
 					color: #5d85e0;
+					font-weight:bold;
+				}
+				&:hover .item-menu{
+					color: #5d85e0;
+					font-weight:bold;
 				}
 			}
 		}
 		.contacts-list{
 			width:461px;
 			.search-form{
-				padding: 20px;
+				padding: 30px 20px 0 20px;
 				.search-box{
 					width:75%;
+					height: 40px;
+					line-height: 40px;
 					margin-right:5%;
 					color: #999999;
 					.search-ico{
@@ -93,22 +99,28 @@ body.contacts{
 						position: absolute;
 						width: 24px;
 						height: 24px;
-						top: 4px;
+						top: 2px;
 						left: 0;
 						background-color: #fff;
 					}
 					.search{
 						width: 100%;
+						height: 40px;
+						line-height: 40px;
 					}
 				}
 				.btn-user-search{
 					width:20%;
+					height: 40px;
+					line-height: 40px;
+					font-size: 16px;
 				}
 			}
 			.contacts-team{
 				update:20171122;
 				width:100%;
 				float:left;
+				margin-top: 30px;
 				#treeMenu{
 					width:168px;
 					li{
@@ -265,7 +277,10 @@ body.contacts{
 			width: 100%;
 			min-height: 808px;
 			background-color:#fff;
-			border-radius:5px;
+			border-radius: 10px;
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+			-o-border-radius: 10px;
 			border:1px solid #eaeaea;
 			margin: 30px 30px 0 30px;
 			.contacts-wrap{
@@ -294,10 +309,9 @@ body.contacts{
 				width: 752px;
 				update: 20171122;
 				width: 100%;
-				padding: 25px 20px 10px 20px;
-				height: 62px;
-				-border-bottom: 1px solid #eaeaea;
+				padding: 20px;
 				h2{
+					font-weight: bold;
 					font-size: 24px;
 					color: #333333;
 					margin: 0;
@@ -322,7 +336,7 @@ body.contacts{
 						background: #fff;
 						tr{
 							th{
-								font-size:14px;
+								font-size:16px;
 								color:#333333;
 								font-weight:bold;
 								height: 40px;
@@ -332,6 +346,8 @@ body.contacts{
 								border-left: none;
 								border-right: none;
 								text-align:center;
+								padding: 0;
+								border-bottom: 1px solid #eaeaea;
 								.select-all{
 									font-weight: normal;
 									font-size: 24px;
@@ -349,6 +365,7 @@ body.contacts{
 							border-right: none;
 							height: 40px;
 							line-height: 40px;
+							padding: 0;
 							a.item{
 								font-weight: normal;
 								font-size: 24px;
@@ -370,7 +387,10 @@ body.contacts{
 							    background-image: url(images/null.png);
 							    background-repeat: no-repeat;
 							    background-position: 50% 50%;
-							    height: 100px;
+							    height: 500px;
+							    &:hover{
+							    	background-color:#fff;
+							    }
 							}
 						}
 					}
@@ -390,7 +410,7 @@ body.contacts{
 				background-color:#fff;
 				.department-list-inner{
 					background-color:#ffffff;
-					padding: 20px 0 20px 20px;
+					padding: 5px 0 20px 20px;
 					.select-item{
 						-position:relative;
 						width: 100%;
@@ -452,7 +472,7 @@ body.contacts{
 									width: 30px;
 									height: 30px;
 									line-height: 30px;
-									display: block;
+									display: none;
 									color: #fff;
 									font-size: 24px;
 									text-align: center;

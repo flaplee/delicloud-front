@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util', 'common/text/text!page/imports/member.html!strip'], function(module, kernel, util, html) {
+define(['common/kernel/kernel', 'site/util/util', 'common/text/text!page/imports/member.html!strip'], function(kernel, util, html) {
     var loc = kernel.parseHash(location.hash);
     var userid = util.getCookie('userid'),
         token = util.getCookie('token'),

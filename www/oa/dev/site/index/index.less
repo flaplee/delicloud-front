@@ -15,7 +15,7 @@ html {
 	line-height: 1;
 	height: 100%;
 	overflow: auto;
-    background: #ededed;
+    background: #f6f6f6;
     color: #333;
 }
 
@@ -23,7 +23,7 @@ body {
 	margin: 0;
 	height: 100%;
 	overflow: auto;
-	background-color: #eeeff2;
+	background-color: #f6f6f6;
 	color: #333;
 }
 
@@ -91,7 +91,7 @@ input[type=datetime-local] {
 
 
 html {
-    background-color: #ededed;
+    background-color: #f6f6f6;
     color: #333;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -543,8 +543,10 @@ button{
 		background: #373d41;
 		z-index: 110;
 		&.wrap-top-shadow{
-			-webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
-    		box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+			box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);
+			-moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);
+			-webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);
+			-o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);
 		}
 	}
 	.user-head {
@@ -581,22 +583,23 @@ button{
 	        bottom: 0;
 	        left: 0;
 	        .logo {
-	            display: inline-block;
-	            float: left;
-	            width: 164px;
-	            height: 36px;
-			    line-height: 36px;
-			    background: url("images/logo.png") no-repeat;
-			    background-size: 100% 100%;
-			    margin: 22px 0 22px 30px;
+				display: inline-block;
+				float: left;
+				width: 178px;
+				height: 50px;
+				line-height: 50px;
+				background: url("images/logo.png") no-repeat;
+				background-size: 100% 100%;
+				margin: 15px 0;
 	        }
 	    }
 
 	    .nav-top {
+	    	width: 955px;
 	        height: 40px;
 	        position: absolute;
 	        bottom: 20px;
-	        right: 1px;
+	        left: 245px;
 	        .user-center-btn {
 	            display: inline-block;
 	            margin-right: 20px
@@ -609,7 +612,6 @@ button{
 	            line-height: 40px;
 	            margin-left: 25px;
 	            float: left;
-	            position: relative
 	        }
 
 	        .nav-item-team{
@@ -619,15 +621,17 @@ button{
 				line-height: 40px;
 				margin-left: 25px;
 				float: left;
-				position: relative
+				position: absolute;
+				right: 110px;
 	        }
 
 	        .nav-item-login{
-	        	display: inline-block;
-				width: 100px;
-				margin-left: 25px;
+				display: inline-block;
+				width: 50px;
 				float: left;
-				position: relative
+				position: absolute;
+				top: -5px;
+				right: 0;
 	        }
 
 	        .nav-item a.navlink, .nav-item-team a.navlink {
@@ -644,17 +648,18 @@ button{
 	        }
 
 	        .nav-item a.navlink.nav-item-current, .nav-item-team a.navlink.nav-item-current{
-	        	width:120px;
-		        padding: 0 10px;
-	        	color: #3b63f9;
+				text-align: center;
+				width: 120px;
+				padding: 0 24px 0 6px;
+				color: #3b63f9;
 				border: 1px solid #3b63f9;
 				border-radius: 4px;
 				overflow: hidden;
-    			text-overflow: ellipsis;
-    			white-space: nowrap;
+				text-overflow: ellipsis;
+				white-space: nowrap;
     			&.larget{
-			        width:140px;
-		        	padding: 0 20px;
+					width:140px;
+					padding: 0 20px;
     			}
 				.navlink-icon{
 					font-size:12px;
@@ -735,9 +740,13 @@ button{
 				margin: 0 auto;
 	        }
 
-	        .nav-item-team .son-nav-list a.sub-nav-item.current, .nav-item-team .son-nav-list a.sub-nav-item:hover{
+	        .nav-item-team .son-nav-list a.sub-nav-item.current{
 				color: #3b63f9;
-				background-color: #eeeff2;
+				background-color: #f6f6f6;
+	        }
+
+	        .nav-item-team .son-nav-list a.sub-nav-item:hover{
+				color: #3b63f9;
 	        }
 
 	        .nav-item-login{
@@ -756,7 +765,7 @@ button{
 
 		        .userBtn{
 					display: none;
-					width: 100px;
+					width: 50px;
 					height: 50px;
 					line-height: 50px;
 					text-align: center;
@@ -777,10 +786,18 @@ button{
 		        .user-wrap {
 	            	position:relative;
 	            	display: inline-block;
-		            width: 100px;
-		            height: 50px;
+		            width: 52px;
+		            height: 52px;
+					border-radius: 50%;
+					-moz-border-radius: 50%;
+					-webkit-border-radius: 50%;
+					overflow: hidden;
 		            overflow: hidden;
-		            top: -5px;
+		            &:hover{
+		            	.user-info-avatar{
+		            		border:2px solid #5d85e0;
+		            	}
+		            }
 		            .user-info-avatar{
 		            	width:50px;
 		            	height:50px;
@@ -816,13 +833,14 @@ button{
 					border: 1px solid #eaeaea;
 					border-radius: 6px;
 					box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.2);
+					z-index: 2;
 					&:before{
 						content: '';
 						width: 14px;
 						height: 10px;
 						position: absolute;
-						top: -10px;
-						right: 24px;
+						top: -9px;
+						right: 15px;
 						background-image: url("images/triangle.png");
 						background-repeat: no-repeat;
 						background-size: 100% 100%;
@@ -1457,22 +1475,23 @@ textarea{
 			white-space: nowrap;
 		}
 	}
+	> tbody{
+		tr {
+			-cursor: pointer;
+		}
 
-	tr {
-		cursor: pointer;
-	}
+		tr:hover {
+			background: #fafafa;
+		}
 
-	tr:hover {
-		background: #fafafa;
-	}
-
-	td {
-		font-size: 12px;
-		color: @textColor;
-		padding: 10px 20px;
-		border: 1px solid @inputBorder;
-		text-align: center;
-		white-space: nowrap;
+		td {
+			font-size: 12px;
+			color: @textColor;
+			padding: 10px 20px;
+			border: 1px solid @inputBorder;
+			text-align: center;
+			white-space: nowrap;
+		}
 	}
 }
 

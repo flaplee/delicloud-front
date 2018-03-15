@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, kernel, util) {
+define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	var userid, token, orgid, orgname, parentid, loc, locid;
 	var $appBox = $('#apphome .app-box'),
 		$tmpIn = $appBox.find('.app-main .app-installed .app-list.app-installed-list');

@@ -31,14 +31,14 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/imports/member
     });
 
     //关键字搜索
-    $importsForm.on("submit", "form", function(e) {
+    /*$importsForm.on("submit", "form", function(e) {
         e.preventDefault()
         var loc = kernel.parseHash(location.hash);
         var params = {};
         params.key_search = $importsSearch.val();
         checkUrlParams(params, loc);
         kernel.replaceLocation(loc);
-    });
+    });*/
 
     //检查是否空对象
     function isNullObj(obj) {

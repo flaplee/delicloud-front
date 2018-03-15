@@ -2,7 +2,7 @@
 .app{
 	#pages {
 	    position: relative;
-	    background-color: #eeeff2;
+	    background-color: #f6f6f6;
 	    top: 80px;
 	}
 }
@@ -21,6 +21,7 @@
 	.app-box{
 		background-color:#fff;
 		.app-title{
+            position: relative;
             font-size:18px;
             color:#333333;
             width:100%;
@@ -29,14 +30,17 @@
             border-bottom:1px solid #eaeaea;
             text-align:center;
             >a{
+                position:absolute;
                 font-size: 16px;
-				width: 80px;
-				height: 40px;
-				line-height: 40px;
-				margin: 20px 0 20px 30px;
-				color: #5d85e0;
-				border-color: #5d85e0;
-				background-color:#fff;
+                width: 80px;
+                height: 40px;
+                line-height: 40px;
+                color: #5d85e0;
+                border-color: #5d85e0;
+                background-color:#fff;
+                position: absolute;
+                top: 20px;
+                left: 20px;
             }
             .app-menu{
             	.menu-item{
@@ -52,8 +56,9 @@
             }
         }
         .app-main{
-        	padding: 20px 100px;
+        	padding: 0 100px;
     		width: 100%;
+            min-height: 690px;
         	.app-inner{
         		ul.app-main-list{
         			width:1000px;
@@ -61,68 +66,73 @@
 						width:1000px;
 						height:140px;
 						border-bottom: 1px solid #eaeaea;
-						margin-bottom: 30px;
-        				.item-img{
-        					float:left;
-        					margin-right:20px;
-        					width:80px;
-        					height:80px;
-        					border-radius:50%;
-        					-moz-border-radius:50%;
-        					-webkit-border-radius:50%;
-        					-o-border-radius:50%;
-        					-background-color: #5d85e0;
-        					img{
-                                width: 58px;
-                                height: 54px;
-                                margin: 12px;
-        					}
-        				}
-        				.item-info{
-        					float:left;
-        					.item-title{
-        						margin-bottom:10px;
-        						.item-text{
-                                    float: left;
-                                    font-size: 18px;
-                                    color: #333;
-        						}
-        						.item-category{
-        							float:left;
-                                    height: 24px;
-                                    line-height: 24px;
-        							.item-category-name{
-        								font-size:12px;
-        								width:70px;
-        								height:24px;
-        								line-height:24px;
-                                        float:left;
-        								color:#fff;
-        								background-color:#cccccc;
-        								border-radius:10px;
-        								-moz-border-radius:10px;
-        								-webkit-border-radius:10px;
-        								-o-border-radius:10px;
-        								display: inline-block;
-        								text-align:center;
-        								margin-left: 30px;
-        							}
-        						}
-        					}
-        					.item-content{
-                                color: #999;
-        						width: 700px;
-        						overflow: hidden;
-	        					text-overflow: ellipsis;
-	        					display: -webkit-box;
-	        					-webkit-box-orient: vertical;
-	        					-webkit-line-clamp: 3;
-        					}
-        				}
+                        .item-wrap{
+                            float:left;
+                            margin-top: 30px;
+                            .item-img{
+                            	float:left;
+                            	margin-right:15px;
+                            	width: 84px;
+                            	height: 84px;
+                            	border-radius:50%;
+                            	-moz-border-radius:50%;
+                            	-webkit-border-radius:50%;
+                            	-o-border-radius:50%;
+                            	-background-color: #5d85e0;
+                            	img{
+                                    width: 54px;
+                                    height: 54px;
+                                    margin: 12px 15px;
+                            	}
+                            }
+                            .item-info{
+                            	float:left;
+                            	.item-title{
+                            		margin-bottom:15px;
+                            		.item-text{
+                                        float: left;
+                                        font-size: 18px;
+                                        height: 20px;
+                                        line-height: 20px;
+                                        color: #333;
+                            		}
+                            		.item-category{
+                            			float:left;
+                                        height: 20px;
+                                        line-height: 20px;
+                            			.item-category-name{
+                            				font-size:12px;
+                            				width:70px;
+                            				height: 20px;
+                                            line-height: 20px;
+                                            float:left;
+                            				color:#fff;
+                            				background-color:#cccccc;
+                            				border-radius:10px;
+                            				-moz-border-radius:10px;
+                            				-webkit-border-radius:10px;
+                            				-o-border-radius:10px;
+                            				display: inline-block;
+                            				text-align:center;
+                            				margin-left: 30px;
+                            			}
+                            		}
+                            	}
+                            	.item-content{
+                                    color: #999;
+                            		width: 700px;
+                            		overflow: hidden;
+                            		text-overflow: ellipsis;
+                            		display: -webkit-box;
+                            		-webkit-box-orient: vertical;
+                            		-webkit-line-clamp: 3;
+                            	}
+                            }
+                        }
         				.item-btn{
 							float: right;
-							margin: 30px 0 0 0;
-        					a{
+                            margin-top: 50px;
+                            a{
 								width: 100px;
 								height: 40px;
 								line-height: 30px;

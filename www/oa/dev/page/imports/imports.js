@@ -1,5 +1,5 @@
 'use strict';
-define(['module', 'common/kernel/kernel', 'site/util/util','page/imports/steps'], function(module, kernel, util, steps) {
+define(['common/kernel/kernel', 'site/util/util','page/imports/steps'], function(kernel, util, steps) {
     var userid, token, orgid, orgname, parentid, loc, locid, type, status, imports;
     var $imports = $('#imports'),
         $importsMenu = $imports.find('.imports-menu'),

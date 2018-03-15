@@ -100,7 +100,7 @@ a img {
 
 .home-box .home-banner .banner-inner .banner-text{
   width: 794px;
-  height: 48px;
+  height: 54px;
   background-image: url('http://t.static.delicloud.com/www/home/images/index/index1-text.png?v=20180313');
   background-repeat: no-repeat;
   background-position: center;
@@ -225,16 +225,16 @@ a img {
 }
 
 .home-box .home-app .app-inner .app-img{
-  width: 314px;
-  height: 652px;
+  width: 408px;
+  height: 699px;
   background-image: url('http://t.static.delicloud.com/www/home/images/index/app.png?v=20180313');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  margin-right: 90px;
-  border: 0 solid rgba(42,16,106,0.11);
-  box-shadow: 0 10px 60px 0 rgba(27,15,70,0.22);
-  border-radius: 52px;
+  margin-right: 0;
+  -border: 0 solid rgba(42,16,106,0.11);
+  -box-shadow: 0 10px 60px 0 rgba(27,15,70,0.22);
+  -border-radius: 52px;
 }
 
 .home-box .home-device{
@@ -522,9 +522,9 @@ a img {
   margin: 0 auto;
 }
 
-.about-box .about-history{position: relative;margin-top: 90px;margin-bottom: 80px!important;}
+.about-box .about-history{position: relative;-margin-top: 90px;margin-bottom: 80px!important;}
 
-.about-history .about-list{width: 990px;margin: 0 auto;}
+.about-history .about-list{width: 990px;margin: 0 auto;padding-top: 90px;}
 
 .about-list .about-item{-position: relative;margin-bottom: 60px;}
 
@@ -553,7 +553,7 @@ a img {
 .about-history .timeline {
     display: inline-block;
     width: 2px;
-    height: 1500px;
+    height: 1590px;
     background: #eaeaea;
     position: absolute;
     top: 0;
@@ -569,6 +569,10 @@ a img {
     text-align: center;
     cursor: pointer;
     position: relative
+}
+
+.about-history .timeline li.timeline-item-one {
+  margin-top: 90px;
 }
 
 .about-history .timeline .curnav{
@@ -889,8 +893,12 @@ nav a.active,nav a:active {
   z-index: 99999;
   border: 0;
   -border-bottom-width: 1px;
-  border-style: solid;
-  border-image: linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.1) 50%,rgba(255,255,255,0) 100%) 5%
+  -border-style: solid;
+  -border-image: linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.1) 50%,rgba(255,255,255,0) 100%) 5%;
+  box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);
+  -moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);
+  -webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);
+  -o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);
 }
 
 .main-nav nav {
@@ -946,7 +954,7 @@ nav a.active,nav a:active {
     display: inline-block;
     width: 80px;
     height: 50px;
-    margin-left: 100px;
+    margin-left: 80px;
     float: left;
     vertical-align: middle;
   }
