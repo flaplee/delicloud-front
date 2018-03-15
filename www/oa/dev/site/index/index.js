@@ -16,26 +16,13 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         }
     });
 
-    $('#head>.user>a').on('click', function() {
-        if (usermenu.css('display') !== 'block') {
-            usermenu.css('display', 'block');
-            setTimeout(function() {
-                $(document).on('click', hideusermenu);
-            }, 0);
-        }
-    });
-
-    $(document).on('click',function(){
-        $(".son-nav-wrap").hide();
-        //$('.user-asset').hide();
-        $('.user-info').removeClass('visited');
-    });
-
-    $userteam.find('a.nav-item-current').on('click',function(e){
-        var e = e || window.e;
-        e.stopPropagation();
-        $(".son-nav-wrap").show();
-    });
+    // 我的组织下拉
+    $(document).on("mouseover", "li.nav-item-team", function() {
+        $("li.nav-item-team .son-nav-wrap").show();
+    })
+    $(document).on("mouseout", "li.nav-item-team", function() {
+        $("li.nav-item-team .son-nav-wrap").hide();
+    })
 
     $userteam.find('.son-nav-wrap a.sub-nav-item').on('click',function(e){
         var e= e || window.e;
@@ -49,16 +36,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         util.setCookie('parentid', pid);
     });
 
-/*    $userlogin.find('.user-panel .user-info').on('click', function(e) {
-        var e = e || window.e;
-        e.stopPropagation();
-        var c = $(this);
-        if(!c.hasClass('visited')){
-            c.addClass('visited');
-        }
-        //$('.user-asset').show();
-    });*/
-
+    // 用户提出
     $userlogin.find('a.logout').on('click', function(e){
         var e = e || window.e;
         e.stopPropagation();

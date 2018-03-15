@@ -258,7 +258,12 @@ define(['common/kernel/kernel', 'site/util/util', 'common/text/text!page/contact
                                 }
                             }
                         }else{
-                            // 无子部门时需要处理样式
+                            // 当前组织无部门时
+                            if(data.relation == 'parent'){
+                                o.find('>').remove();
+                                var emptyTpl = '<li class="empty empty-dept"><div class="empty-item empty-item-dept"><div class="empty-img empty-img-dept"></div><p class="empty-text">暂无部门</p></div></li>';
+                                o.append($(emptyTpl));
+                            }
                         }
                     }
                 });

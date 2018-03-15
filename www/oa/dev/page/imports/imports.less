@@ -106,6 +106,7 @@ body.imports{
 			update:20171122;
 			width: 100%;
 			min-height: 808px;
+			height: 808px;
 			background-color:#fff;
 			border-radius:5px;
 			border:1px solid #eaeaea;
@@ -145,10 +146,12 @@ body.imports{
 							border: 1px solid #eaeaea;
 							border-right:0px;
 							display: inline-block;
-							&:hover,&.active{
+							&:hover{
 								color: #5d85e0;
-								-color: #fff;
-								-background-color: #5d85e0;
+							}
+							&.active{
+								color: #fff;
+								background-color: #5d85e0;
 							}
 							&:first-child{
 								border-radius: 4px 0 0 4px;
@@ -273,6 +276,7 @@ body.imports{
 			display:block;
 			padding:180px 0;
 			min-height: 808px;
+			height: 808px;
 			.steps-inner{
 				padding-left:400px;
 				.steps-item{
@@ -291,6 +295,18 @@ body.imports{
 						p,.operate{
 						    float: left;
 						    margin-top:55px;
+						}
+
+						.operate{
+							.btn-step-download{
+								font-size: 18px;
+								width: 100px;
+								height: 40px;
+								line-height: 40px;
+								display: block;
+								padding: 0;
+								text-align: center;
+							}
 						}
 
 						&::before{
@@ -327,6 +343,44 @@ body.imports{
 								left:-165px;
 								background:url('./images/step2.png') no-repeat center;
 							}
+						}
+					}
+				}
+				#upload-form{
+					width: 100px;
+					height: 40px;
+					line-height: 40px;
+					float: left;
+					margin-top: 45px;
+					cursor: pointer;
+					.upload-file{
+						width:100px;
+						height:40px;
+						line-height:40px;
+						text-align:center;
+						display: inline-block;
+						*zoom:1;
+						*display:block;
+						color: #fff;
+    					background-color: #5d85e0;
+						font-size: 18px;
+						font-weight: 400;
+						border: none;
+						border-radius: 4px;
+						-webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+						transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+						-webkit-font-smoothing: subpixel-antialiased;
+						position: relative;
+						text-decoration: none;
+						#upload-file{
+							position: absolute;
+							overflow: hidden;
+							right: 0;
+							top: 0;
+							opacity: 0;
+							width:100px;
+							height:40px;
+							line-height:40px;
 						}
 					}
 				}

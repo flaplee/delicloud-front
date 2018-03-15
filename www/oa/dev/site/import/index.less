@@ -302,10 +302,18 @@ code,kbd,pre,samp {
 }
 
 .empty {
-    background-image: url(images/null.png);
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    height: 100px;
+    .empty-item{
+    	.empty-img{
+			background-image: url(images/icons/icon_no_equipment=.png);width:67px;height:80px;});
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			&.empty-img-device{background-image: url(images/icons/icon_no_equipment=.png);width:67px;height:80px;}
+			&.empty-img-app{background-image: url(images/icons/icon_no_data.png);width:66px;height:79px;}
+			&.empty-img-user{background-image: url(images/icons/icon_no_staff.png);width:68px;height:80px;}
+			&.empty-img-dept{background-image: url(images/icons/icon_no_department.png);width:68px;height:80px;}
+    	}
+    	.empty-text{font-size:16px;font-weight:bold;text-align:center;}
+    }
 }
 
 @font-face {

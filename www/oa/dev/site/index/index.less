@@ -302,10 +302,39 @@ code,kbd,pre,samp {
 }
 
 .empty {
-    background-image: url(images/null.png);
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    height: 100px;
+	&.empty-device{
+		height:620px;
+	}
+
+	&.empty-user{
+		height:620px;
+	}
+
+	&.empty-dept{
+		height:620px;
+	}
+
+	&.empty-data{
+		height:620px;
+	}
+    .empty-item{
+    	&.empty-item-dept{
+    		margin-top:200px;
+    	}
+    	.empty-img{
+    		width:68px;
+			height:80px;
+			background-image: url(icons/icon_no_equipment.png);
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			margin: 0 auto 24px;
+			&.empty-img-device{background-image: url(icons/icon_no_equipment.png);width:67px;height:80px;}
+			&.empty-img-data{background-image: url(icons/icon_no_data.png);width:66px;height:79px;}
+			&.empty-img-user{background-image: url(icons/icon_no_staff.png);width:68px;height:80px;}
+			&.empty-img-dept{background-image: url(icons/icon_no_department.png);width:68px;height:80px;}
+    	}
+    	.empty-text{font-size:24px;font-weight:bold;text-align:center;color:#333;}
+    }
 }
 
 @font-face {
@@ -1464,12 +1493,15 @@ textarea{
 
 	> thead {
 		background: #fafafa;
-
 		th {
 			font-size: 14px;
 			color: @textColor;
 			padding: 10px 20px;
 			border: 1px solid @inputBorder;
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			text-align:center;
 			text-align: center;
 			font-weight: normal;
 			white-space: nowrap;
@@ -1478,10 +1510,12 @@ textarea{
 	> tbody{
 		tr {
 			-cursor: pointer;
-		}
-
-		tr:hover {
-			background: #fafafa;
+			&:hover {
+				background: #fafafa;
+			}
+			&.empty:hover{
+				background: #ffffff;
+			}
 		}
 
 		td {
@@ -1491,6 +1525,10 @@ textarea{
 			border: 1px solid @inputBorder;
 			text-align: center;
 			white-space: nowrap;
+		}
+
+		td.empty-item{
+			border:0;
 		}
 	}
 }

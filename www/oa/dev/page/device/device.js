@@ -104,7 +104,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 					    }
 		            }
 	            }else{
-	            	var emptyTpl = '<tr><td colspan="5" class="empty"></td></tr>';
+	            	var emptyTpl = '<tr class="empty empty-device"><td colspan="5" class="empty-item"><div class="empty-img empty-img-device"></div><p class="empty-text">暂无设备</p></td></tr>';
                     $dom.append($(emptyTpl));
 	            }
 	        }

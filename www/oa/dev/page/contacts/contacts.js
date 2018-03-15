@@ -158,7 +158,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         $contactsWrapEmpty.show();
                     }else{
                         o.find('>').remove();
-                        var itemTpl = '<tr><td colspan="8" class="empty"></td></tr>';
+                        var itemTpl = '<tr class="empty empty-user"><td colspan="8" class="empty-item"><div class="empty-img empty-img-user"></div><p class="empty-text">暂无人员信息</p></td></tr>';
                         o.append($(itemTpl));
                     }
                 }
