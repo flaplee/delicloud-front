@@ -82,7 +82,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         o.find('>').remove();
                         for (var i = 0; i < res.data.result.length; i++) {
                             //((json[i].department_path.split(';')).length > 1) ? json[i].department_path.replace(new RegExp(""+ orgname +"/","gm"),"").replace(new RegExp("/","gm"),"-").replace(new RegExp(";","gm"),"/") : json[i].department;
-                            var deptPaths = json[i].department_paths,deptsText = '';
+                            var deptPaths = json[i].department_paths,deptsText = '', deptTitles = json[i].titles;
                             if(deptPaths && deptPaths.length > 1){
                                 for(var j = 0;j < deptPaths.length; j++){
                                     deptsText += (deptPaths[j]).replace(new RegExp("/","gm"),"-") + ((j == deptPaths.length - 1) ?'':'/');//<span style="color:#494949;margin:0 1px;"></span>
@@ -90,13 +90,15 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                             }else{
                                 deptsText = json[i].department;
                             }
+
                             var departmentText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? '' : deptsText;
+                            var titleText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? json[i].title : ((deptTitles && deptTitles.length > 1) ? deptTitles.join('/') : json[i].title);
                             var $itemTpl = $('<tr>\
                                 <td style="display:none;"><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
                                 <td>' + json[i].nickname + '</td>\
                                 <td>' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
                                 <td class="dept-text"><p title="' + departmentText + '">' + departmentText + '</p></td>\
-                                <td>' + json[i].title + '</td>\
+                                <td><p title="' + titleText + '">' + titleText + '</p></td>\
                                 <td>' + json[i].mobile + '</td>\
                                 <td style="display:none;">\
                                     <button data-index="' + i + '" type="button" class="btn btn-info btn-sm btn-user-edit">编辑</button>\
