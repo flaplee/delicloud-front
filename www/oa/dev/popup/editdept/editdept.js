@@ -41,7 +41,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
                                 kernel.hint(res.msg, 3000);
                             }
                         },
-                        error(res){
+                        error: function(res){
                             kernel.hint(res.msg, 3000);
                             kernel.closePopup('editdept');
                         }
@@ -78,7 +78,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
                                 kernel.hint(res.msg, 3000);
                             }
                         },
-                        error(res){
+                        error: function(res){
                             kernel.hint(res.msg, 3000);
                             kernel.closePopup('editdept');
                         }

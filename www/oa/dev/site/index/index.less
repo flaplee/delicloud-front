@@ -327,13 +327,13 @@ code,kbd,pre,samp {
 			background-image: url(icons/icon_no_equipment.png);
 			background-repeat: no-repeat;
 			background-position: 50% 50%;
-			margin: 0 auto 24px;
+			margin: 0 auto 20px;
 			&.empty-img-device{background-image: url(icons/icon_no_equipment.png);width:67px;height:80px;}
 			&.empty-img-data{background-image: url(icons/icon_no_data.png);width:66px;height:79px;}
 			&.empty-img-user{background-image: url(icons/icon_no_staff.png);width:68px;height:80px;}
 			&.empty-img-dept{background-image: url(icons/icon_no_department.png);width:68px;height:80px;}
     	}
-    	.empty-text{font-size:24px;font-weight:bold;text-align:center;color:#333;}
+    	.empty-text{font-size:24px;text-align:center;color:#333;}
     }
 }
 
@@ -629,6 +629,9 @@ button{
 	        position: absolute;
 	        bottom: 20px;
 	        left: 245px;
+	        .nav-top-list{
+	        	margin-left: 40px;
+	        }
 	        .user-center-btn {
 	            display: inline-block;
 	            margin-right: 20px
@@ -639,8 +642,8 @@ button{
 	            -width: 85px;
 	            height: 40px;
 	            line-height: 40px;
-	            margin-left: 25px;
 	            float: left;
+	            margin-right: 55px;
 	        }
 
 	        .nav-item-team{
@@ -724,7 +727,7 @@ button{
 				height: 170px;
 				position: absolute;
 				z-index: 1;
-				top: 58px;
+				top: 49px;
 				left: -32px;
 				display: none;
 				background-color: #fff;
@@ -802,6 +805,13 @@ button{
 					text-decoration: none;
 					position: relative;
 					border-radius: 5px;
+					&:hover{
+						.user-wrap {
+			            	.user-info-avatar{
+			            		border:2px solid #5d85e0;
+			            	}
+		            	}
+		            }
 		        }
 
 		        .userBtn.hasLogin:hover {
@@ -821,12 +831,6 @@ button{
 					-moz-border-radius: 50%;
 					-webkit-border-radius: 50%;
 					overflow: hidden;
-		            overflow: hidden;
-		            &:hover{
-		            	.user-info-avatar{
-		            		border:2px solid #5d85e0;
-		            	}
-		            }
 		            .user-info-avatar{
 		            	width:50px;
 		            	height:50px;

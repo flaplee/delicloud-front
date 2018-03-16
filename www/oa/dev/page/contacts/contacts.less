@@ -5,7 +5,9 @@ body.contacts{
 	}
 }
 #contacts {
-	min-height:650px;
+	min-height:808px;
+	-height:auto !important;
+	-height:808px;
 	font-size: 16px;
 	color: @textColor;
 	update:20171122;
@@ -85,6 +87,8 @@ body.contacts{
 		}
 		.contacts-list{
 			width:461px;
+			-height:100%;
+			overflow-y:auto;
 			.search-form{
 				padding: 30px 20px 0 20px;
 				.search-box{
@@ -119,6 +123,8 @@ body.contacts{
 			.contacts-team{
 				update:20171122;
 				width:100%;
+				height: 100%;
+				overflow-y: auto;
 				float:left;
 				margin-top: 30px;
 				#treeMenu{
@@ -276,6 +282,7 @@ body.contacts{
 			update:20171122;
 			width: 100%;
 			min-height: 808px;
+			-height:auto !important;
 			height: 808px;
 			background-color:#fff;
 			border-radius: 10px;
@@ -329,8 +336,9 @@ body.contacts{
 			}
 			.contacts-inner,.department-inner{
 				width:752px;
-				min-height:500px;
-				update:20171122;
+				min-height: 500px;
+				-height:auto !important;
+				height: 500px;
 				width:100%;
 				table.table{
 					thead.thead{
@@ -410,6 +418,8 @@ body.contacts{
 				-o-border-radius:6px;
 				background-color:#fff;
 				.department-list-inner{
+					min-height: 736px;
+					height: 736px;
 					background-color:#ffffff;
 					padding: 5px 0 20px 20px;
 					.select-item{
@@ -520,6 +530,8 @@ body.contacts{
 
 		.import-info{
 			min-height:500px;
+			height:auto !important;
+			height: 500px;
 			.btn-import-batch{
 				display:block;
 				width: 100px;

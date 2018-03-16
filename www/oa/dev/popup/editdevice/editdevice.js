@@ -30,7 +30,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util','page/device/device']
                             kernel.hint(res.msg, 'error');
                         }
                     },
-                    error(res){
+                    error: function(res){
                         kernel.closePopup('editdevice');
                         kernel.hint(res.msg, 'error');
                     }

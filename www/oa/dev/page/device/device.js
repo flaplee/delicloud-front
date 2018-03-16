@@ -39,8 +39,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	            var json = res.data.result;
 	            if(json.length > 0){
 	            	for (var i = 0; i < json.length; i++) {
-		            	var device = json[i].device, app = json[i].app;
-		            	var appTpl = '<span data-appid="'+ app.id +'">'+ app.name +'</span>';
+		            	var device = json[i].device;
+		            	var appTpl = '<span data-appid="'+ ((json[i].app && json[i].app.id) ? json[i].app.id : '') +'">'+ ((json[i].app && json[i].app.name) ? json[i].app.name : '') +'</span>';
 		        		var $deviceTpl = $('<tr class="dev-item" data-dev_id="'+ json[i].device_id +'">\
 							<td class="item-desc">\
 								<div class="item-img fl">\
