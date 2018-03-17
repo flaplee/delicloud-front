@@ -254,11 +254,12 @@
 		-ms-flex-pack: justify;
 		position: absolute;
 		top: 0;
-		left: 602px;
+		left: 0;
 		overflow: hidden;
 		background: #f6f6f6;
-		width: 60%;
+		width: 100%;
 		height:100%;
+		padding-left: 602px;
 		>div{
 			-display: flex;
 	    	-display: -ms-flexbox;
@@ -544,20 +545,21 @@
 	}
 	@media (max-width: 1440px) and (min-width:1281px) {
 	   .contacts-menu{
-	   		background-color: red;
-	        width: 402px;
+	        width: 461px;
 	        ul.menu-list{
-	            width:20px;
+	            width:100px;
 	            li.item{
-	            	width:20px;
+	            	width:100px;
 	            }
 	        }
 	        .contacts-list{
-	            width: 361px;
+	        	width: 360px;
+	        	left: 100px;
 	        }
 	    }
 	    .contacts-box{
-	        left: 402px;
+	        left: 0;
+	        padding-left:461px;
 	    }
 	}
 	@media (max-width: 1156px) {}
