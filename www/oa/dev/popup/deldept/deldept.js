@@ -20,7 +20,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
                     type:'post',
                     url: '/v1.0/org/department/delete',
                     silent: true,
-                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                     data: {
                         "department_id": data.id
                     },

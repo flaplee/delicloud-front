@@ -83,7 +83,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                 util.ajaxSubmit({
                     type: 'get',
                     url: '/v1.0/org/department/' + id + '/departments',
-                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                     data: {},
                     success: function(res) {
                         var json = res.data.result;
@@ -172,7 +172,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                 util.ajaxSubmit({
                     type: 'get',
                     url: initUrl,
-                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                     data: initData,
                     success: function(res) {
                         //console.log("res",res);

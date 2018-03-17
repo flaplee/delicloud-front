@@ -1,26 +1,11 @@
 @import '../../config.less';
-body.imports{
-	#pages{
-		position: initial;
-	}
-}
 #imports {
-	min-height:940px;
-	-height:auto !important;
-	height:940px;
+	position: fixed;
+	width: 100%;
+    height: 100%;
 	font-size: 16px;
 	color: @textColor;
-	update:20171122;
-	-padding: 30px;
 	display: block;
-    position: absolute;
-    width: auto;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    overflow: hidden;
-    overflow-y: auto;
     -o-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -33,11 +18,10 @@ body.imports{
 		}
 	}
 	.imports-menu{
-		update:20171122;
 		width: 140px;
 		display: block;
-		position: fixed;
-		top: 80px;
+		position: absolute;
+		top: 0;
 		bottom: 0px;
 		background-color: #fff;
 		z-index: 102;
@@ -82,20 +66,15 @@ body.imports{
 		}
 	}
 	.imports-box{
+		position: absolute;
+    	top: 0;
+    	left: 140px;
 		display: flex;
 		display: -ms-flexbox;
 		flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		justify-content: space-between;
 		-ms-flex-pack: justify;
-
-		update:20171122;
-		width: auto;
-		position: relative;
-		top: 80px;
-		-left: 140px;
-		-margin-top: 80px;
-		margin-left: 140px;
 		overflow: hidden;
 		background: #f6f6f6;
 		>div{
@@ -280,9 +259,9 @@ body.imports{
 		.imports-steps{
 			display:block;
 			padding:180px 0;
-			min-height: 808px;
-			height:auto !important;
-			height: 808px;
+			-min-height: 808px;
+			-height:auto !important;
+			-height: 808px;
 			.steps-inner{
 				padding-left:400px;
 				.steps-item{
@@ -392,5 +371,22 @@ body.imports{
 				}
 			}
 		}
+	}
+
+	@media (max-width: 1400){
+		.imports-menu{
+			ul.menu-list{
+
+			}
+		}
+	   	.imports-box{
+	   		.imports-info{
+				display:none;
+			}
+
+			.imports-steps{
+				padding: 105px 0;
+			}
+	    }
 	}
 }

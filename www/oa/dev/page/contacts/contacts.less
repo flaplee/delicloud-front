@@ -1,26 +1,11 @@
 @import '../../config.less';
-body.contacts{
-	#pages{
-		position: initial;
-	}
-}
 #contacts {
-	min-height:808px;
-	-height:auto !important;
-	-height:808px;
+	position: fixed;
+	width: 100%;
+	height: 100%;
 	font-size: 16px;
 	color: @textColor;
-	update:20171122;
-	-padding: 30px;
 	display: block;
-    position: absolute;
-    width: auto;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    overflow: hidden;
-    overflow-y: auto;
     -o-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -33,20 +18,19 @@ body.contacts{
 		}
 	}
 	.contacts-menu{
-		update:20171122;
-		width: 602px;
-		display: block;
-		position: fixed;
-		top: 80px;
-		bottom: 0px;
+		position: absolute;
 		background-color: #fff;
 		z-index: 102;
 		overflow: hidden;
 		color: #fff;
 		border-right: 1px solid #eaeaea;
+		-width: 40%;
+		width: 601px;
+		height: 100%;
 		ul.menu-list{
-			width:150px;
-			update:20171122;
+			position: absolute;
+			left:0;
+			top:0;
 			width:140px;
 			height:100%;
 			float:left;
@@ -86,6 +70,9 @@ body.contacts{
 			}
 		}
 		.contacts-list{
+			position:absolute;
+			left:140px;
+			top:0;
 			width:461px;
 			-height:100%;
 			overflow-y:auto;
@@ -259,44 +246,38 @@ body.contacts{
 		}
 	}
 	.contacts-box{
-		-width: 100%;
 		display: flex;
 		display: -ms-flexbox;
 		flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		justify-content: space-between;
 		-ms-flex-pack: justify;
-
-		update:20171122;
-		width: 69%;
-		position: relative;
-		top: 80px;
+		position: absolute;
+		top: 0;
 		left: 602px;
-		bottom: 0px;
-		right: 0px;
 		overflow: hidden;
 		background: #f6f6f6;
+		width: 60%;
+		height:100%;
 		>div{
 			-display: flex;
 	    	-display: -ms-flexbox;
 		}
 
 		.contacts-info,.department-info,.import-info{
-			width:752px;
-			update:20171122;
 			width: 100%;
-			min-height: 808px;
-			-height:auto !important;
-			height: 808px;
+			height: 100%;
 			background-color:#fff;
 			border-radius: 10px;
 			-moz-border-radius: 10px;
 			-webkit-border-radius: 10px;
 			-o-border-radius: 10px;
 			border:1px solid #eaeaea;
-			margin: 30px 30px 0 30px;
+			margin: 30px;
 			.contacts-wrap{
 				&.contacts-wrap-data{
+					width:100%;
+					height:100%;
 					display: block;
 				}
 				&.contacts-wrap-empty{
@@ -341,21 +322,24 @@ body.contacts{
 			.contacts-inner{
 				width: 752px;
 				height: 806px;
-				overflow-x: hidden;
-				overflow-y: auto;
+				.table{
+					.tbody{
+						width: 752px;
+						height: 806px;
+						overflow-x: hidden;
+						overflow-y: auto;
+					}
+				}
 			}
 			.department-inner{
 				width: 752px;
 				height: 806px;
-				overflow-x: hidden;
-				overflow-y: auto;
 			}
 			.contacts-inner,.department-inner{
-				width:752px;
-				-min-height: 500px;
-				-height:auto !important;
-				-height: 500px;
 				width:100%;
+				-padding-bottom: 100px;
+				overflow-x: hidden;
+				overflow-y: auto;
 				table.table{
 					thead.thead{
 						background: #fff;
@@ -558,8 +542,9 @@ body.contacts{
 			}
 		}
 	}
-	@media (max-width: 1440px) and (min-width:1281px) {
+	@media (max-width: 1400){
 	   .contacts-menu{
+	   		background-color:red;
 	        -width: 402px;
 	        ul.menu-list{
 	            -width:20px;
@@ -575,6 +560,4 @@ body.contacts{
 	        -left: 402px;
 	    }
 	}
-	@media (max-width: 1156px) {}
-	@media (max-width: 769px) {}
 }

@@ -12,7 +12,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         	util.ajaxSubmit({
         		type: 'get',
 	            url: '/v1.0/device/my',
-	            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+	            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
 	            data: {},
 	            success: function(res) {
 	                console.log("res",res);

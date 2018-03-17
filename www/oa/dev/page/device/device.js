@@ -33,7 +33,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 		util.ajaxSubmit({
 			type: 'get',
 	        url: '/v1.0/bind/org/'+ orgid +'/device/', //获取我可管理的设备列表  /json/device.json
-	        dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+	        dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
 	        data: {},
 	        success: function(res) {
 	            var json = res.data.result;
@@ -75,7 +75,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 					    		util.ajaxSubmit({
 					        		type: 'get',
 						            url: '/v1.0/bind/device',
-						            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+						            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
 						            data: {
 						            	"org_id": data.orgid,
 										"dev_id": data.devid

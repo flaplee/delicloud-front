@@ -478,7 +478,7 @@ define(['common/kernel/kernel'], function(kernel) {
                 util.ajaxSubmit({
                     type: 'get',
                     url: '/v1.0/user/me',
-                    dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                    dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(uid, token, (new Date().valueOf())),
                     silent: true,
                     complete: function(xhr, msg) {
                         var json, i;
@@ -494,10 +494,11 @@ define(['common/kernel/kernel'], function(kernel) {
                                 util.ajaxSubmit({
                                     type: 'get',
                                     url: '/v1.0/admin/auth/my',
-                                    dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                                    dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(uid, token, (new Date().valueOf())),
                                     data: {
                                         type: 'group'
                                     },
+                                    silent: true,
                                     success: function(json) {
                                         if (json.code == 0) {
                                             $.each(json.data.result,function(i, item){
@@ -509,14 +510,12 @@ define(['common/kernel/kernel'], function(kernel) {
                                             dataInfo.orgindex = 0;
                                             // change 2017-12-01
                                             util.setUserData(dataInfo);
-                                        }else{
-                                            kernel.hint(json.msg);
                                         }
                                     }
                                 });
                             }
                         } catch (e) {
-                            kernel.hint('网络错误，请稍后重试~');
+                            //kernel.hint('网络错误，请稍后重试~');
                         }
                         if (typeof callback === 'function') {
                             callback(util.clone(userData));

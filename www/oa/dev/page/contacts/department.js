@@ -58,6 +58,7 @@ define(['common/kernel/kernel', 'site/util/util', 'common/text/text!page/contact
                 util.ajaxSubmit({
                     type:'get',
                     url: '/v1.0/org/department/'+ data.orgid +'/departments',
+                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                     data: {},
                     success: function(res) {
                         var json = res.data.result;

@@ -194,9 +194,9 @@ define(['common/slider/slider', 'site/pages/pages', 'site/popups/popups', 'site/
 	            s = Utf8Encode(s);
 	            return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
 	        },
-			buildDauth: function(token) {
+			buildDauth: function(userid, token, timestamp) {
 				//userid timestamp token
-	            var hashLoc = window.location.search.substr(1) + token;
+	            var hashLoc = window.location.search.substr(1) + userid + token + timestamp;
 	            var sha256 = kernel.SHA256(hashLoc);
 	            var hash = sha256.substr(0, 32);
 	            return hash;

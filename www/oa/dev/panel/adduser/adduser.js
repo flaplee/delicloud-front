@@ -214,7 +214,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 						// 添加人员到团队 /v1.0/org/user
 						util.ajaxSubmit({
 			                url: '/v1.0/org/user' + ((type && type == 'edit')? '/'+ ((data.userid && data.userid.length > 0) ? data.userid : $addInner.attr('data-userid')) +'':''),
-			                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+			                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
 			                data: temp,
 			                success: function(res) {
 								if(res && res.code == 0){
@@ -256,7 +256,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 						// 添加人员到团队 /v1.0/org/user
 						util.ajaxSubmit({
 			                url: '/v1.0/org/user' + ((type && type == 'edit')? '/'+ ((data.userid && data.userid.length > 0) ? data.userid : $addInner.attr('data-userid')) +'':''),
-			                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+			                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
 			                data: temp,
 			                success: function(res) {
 			                    if(res && res.code == 0){

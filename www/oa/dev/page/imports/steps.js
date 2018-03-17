@@ -71,7 +71,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 fileElementId: 'upload-file', //文件上传域的ID
                 dataType: 'json', //返回值类型 一般设置为json
                 beforeSend:function(xhr){
-                    xhr.setRequestHeader("dauth", userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token));
+                    xhr.setRequestHeader("dauth", userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())));
                 },
                 data: {
                     org_id: orgid,

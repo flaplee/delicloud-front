@@ -27,7 +27,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
                     util.ajaxSubmit({
                         type:'post',
                         url: '/v1.0/org/department/'+ $editInfo.attr('data-id') +'/name',
-                        dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                        dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                         data: {
                             "name" : $editInfo.val()
                         },
@@ -53,7 +53,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
                     util.ajaxSubmit({
                         type: 'post',
                         url: '/v1.0/org/department',
-                        dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                        dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                         data: {
                             "org_id": pid,
                             "name" : $editInfo.val(),

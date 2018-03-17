@@ -65,7 +65,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         util.ajaxSubmit({
             type: 'get',
             url: initUrl,
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
             data: initData,
             success: function(res) {
                 //console.log("res",res);
@@ -181,7 +181,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         util.ajaxSubmit({
             type: 'get',
             url: '/v1.0/org/department/' + id + '/departments',
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
             data: {},
             success: function(res) {
                 var json = res.data.result;
@@ -311,6 +311,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
             util.ajaxSubmit({
                 type:'get',
                 url: '/v1.0/org/department/'+ data.orgid +'/departments',
+                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                 data: {},
                 success: function(res) {
                     var json = res.data.result;
@@ -575,7 +576,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         util.ajaxSubmit({
             type: 'post',
             url: '/v1.0/org/user/move',
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
             data: {
                 "user_ids": uids,
                 "src_department_id": oldDid,
@@ -632,7 +633,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
             util.ajaxSubmit({
                 type: 'post',
                 url: '/v1.0/org/user/delete',
-                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                 data: {
                     "org_id": orgid, //本部门移除
                     "user_ids": uids

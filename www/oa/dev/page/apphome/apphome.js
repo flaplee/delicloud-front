@@ -31,7 +31,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     	util.ajaxSubmit({
     		type: 'get',
             url: '/v1.0/admin/app/my', // '/v1.0/app/bind/'+ orgid
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
             data: {
 				'org_id':orgid
             },
@@ -79,7 +79,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 			util.ajaxSubmit({
 	    		type: 'get',
 	            url: '/v1.0/app/bind',
-	            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+	            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
 	            data: {
 	            	"org_id":orgid,
 					"app_id":appid

@@ -18,7 +18,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
                 util.ajaxSubmit({
                     type: 'post',
                     url: '/v1.0/org/user/delete',
-                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                     data: {
                         "org_id": params.data.org_id,
                         "user_ids": params.data.user_ids

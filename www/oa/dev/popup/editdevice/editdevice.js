@@ -17,7 +17,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util','page/device/device']
                 util.ajaxSubmit({
                     type: 'post',
                     url: '/v1.0/device/'+ data.devid +'/name',
-                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
                     data: {
                         name: $editInfo.val()
                     },

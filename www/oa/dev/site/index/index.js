@@ -16,6 +16,14 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         }
     });
 
+    $(document).on('scroll', function() {
+        if($(this).scrollTop() > $('#header').height()) {
+            $('#header .user-head').addClass('user-head-fixed')
+        } else {
+            $('#header .user-head').removeClass('user-head-fixed')
+        }
+    })
+
     // 我的组织下拉
     $(document).on("mouseover", "li.nav-item-team", function() {
         $("li.nav-item-team .son-nav-wrap").show();
@@ -46,7 +54,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         /*util.ajaxSubmit({
             type: 'get',
             url: '/v1.0/cd/logout/web',
-            dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(token),
+            dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(uid, token, (new Date().valueOf())),
             data: {
                 type: 'group'
             },
@@ -104,14 +112,16 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         }
     });*/
 
-    if(util.getCookie('userid') && util.getCookie('token')){
-        util.updateUserData(util.getCookie('userid'), util.getCookie('token'),function (data) {
-            kernel.init('home');
-        });
-    }
+    //在获取用户数据后启动路由
+    //if(util.getCookie('userid') && util.getCookie('token') && (kernel.parseHash(location.hash).id == 'home')){}
+    util.updateUserData(util.getCookie('userid'), util.getCookie('token'),function (data) {
+        // init home 
+        kernel.init('home');
+    });
+    
 
     // init home 
-    kernel.init('home');
+    //kernel.init('home');
 
     kernel.listeners.add(util.userEvents, 'statechange', statechange);
     kernel.listeners.add(util.userEvents, 'datachange', datachange);
