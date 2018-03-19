@@ -1,5 +1,5 @@
 seajs.config({
-    base: './',
+    base: 'https://static.delicloud.com/h5/web/invitation/',
     alias: {
         zepto: 'js/zepto.min.js',
         dialog: 'js/dialog.min.js',
@@ -34,7 +34,7 @@ seajs.use(['zepto', 'dialog', 'fastclick', 'region'], function($, dialog, fastcl
                 $phoneCode = $contInptOne.find('.phoneCode'),
                 $areaCode = $phoneCode.find('span'),
                 $submit = $contInptOne.find('#submit'),
-                $submitDownload = $contInptOne.find('.download-app'),
+                $submitDownload = $contInptTwo.find('.download-app'),
                 $popupAc = $('#areaCode'),
                 $popupBack = $popupAc.find('.back'),
                 $popupBox = $popupAc.find('.box'),
@@ -56,41 +56,44 @@ seajs.use(['zepto', 'dialog', 'fastclick', 'region'], function($, dialog, fastcl
                 $slogon.find('p .name').text(userName);
                 $slogon.find('p.group').text(deptName);
             //数字验证码
-            getCode('http://t.delicloud.com/web/v1.0/cd/'+ deptId +'/code/public');
+            getCode('http://www.delicloud.com/web/v1.0/cd/'+ deptId +'/code/public');
             $code.on('click', function() {
-                getCode('http://t.delicloud.com/web/v1.0/cd/'+ deptId +'/code/public');
+                getCode('http://www.delicloud.com/web/v1.0/cd/'+ deptId +'/code/public');
             });
             $submit.on('click', function() {
                 if(Page.isMobile($phoneInput.val())){
-                    if ($nameInput.val().length > 0 && $codeInput.val().length > 0) {
-                        //to dolist
-                        var data = {
-                            "mobile_region": $phoneCode.find('span').data('region'),
-                            "mobile": $phoneInput.val(),
-                            "code": $codeInput.val(),
-                            "name": $nameInput.val(),
-                            "remark": $reasonInput.val()
-                        };
-                        $.ajax({
-                            type: "GET",
-                            url: "http://t.delicloud.com/web/v1.0/cd/" + deptId + "/public",
-                            data: data,
-                            dataType: "jsonp",
-                            jsonp: "callback",
-                            success: function(res) {
-                                if(res.code == 0){
-                                    $contInptOne.hide();
-                                    $contInptTwo.show();
-                                }else{
-                                    dialog.tip(res.msg);
-                                    getCode('http://t.delicloud.com/web/v1.0/cd/'+ deptId +'/code/public');
+                    if(/^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/.test($nameInput.val())){
+                        if ($codeInput.val().length > 0) {
+                            var data = {
+                                "mobile_region": $phoneCode.find('span').data('region'),
+                                "mobile": $phoneInput.val(),
+                                "code": $codeInput.val(),
+                                "name": $nameInput.val(),
+                                "remark": $reasonInput.val()
+                            };
+                            $.ajax({
+                                type: "GET",
+                                url: "http://www.delicloud.com/web/v1.0/cd/" + deptId + "/public",
+                                data: data,
+                                dataType: "jsonp",
+                                jsonp: "callback",
+                                success: function(res) {
+                                    if(res.code == 0){
+                                        $contInptOne.hide();
+                                        $contInptTwo.show();
+                                    }else{
+                                        dialog.tip(res.msg);
+                                        getCode('http://www.delicloud.com/web/v1.0/cd/'+ deptId +'/code/public');
+                                    }
                                 }
-                            }
-                        });
-                        //$contInptOne.hide();
-                        //$contInptTwo.show();
-                    } else {
-                        dialog.tip('请填写正确信息~');
+                            });
+                            //$contInptOne.hide();
+                            //$contInptTwo.show();
+                        } else {
+                            dialog.tip('请填写正确信息~');
+                        }
+                    }else{
+                        dialog.tip('姓名格式错误~');
                     }
                 }else{
                     dialog.tip('手机号格式错误~');
@@ -103,6 +106,16 @@ seajs.use(['zepto', 'dialog', 'fastclick', 'region'], function($, dialog, fastcl
             $popupBack.on('click', function() {
                 $page.css('display', 'block');
                 $popupAc.css('display', 'none');
+            });
+
+            /* android & ios to app store */
+            $submitDownload.on('click', function(){
+                var ua = navigator.userAgent.toLowerCase();
+                if (/iphone|ipad|ipod/.test(ua)) {
+                    window.location.href = 'https://www.pgyer.com/smartoffice_production_ios';
+                } else if (/android/.test(ua)) {
+                    window.location.href = 'https://www.pgyer.com/smartoffice_production_android';
+                }
             });
             
             /* 渲染国家或地区 */

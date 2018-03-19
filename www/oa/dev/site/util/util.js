@@ -36,7 +36,7 @@ define(['common/kernel/kernel'], function(kernel) {
                                 } else if (!param.silent) {
                                     kernel.hint(s.msg, 'error');
                                 }
-                                if (s.code == 9999999 && s.ex_msg === '无效的登录信息') {
+                                if (s.code == 501) {
                                     util.setUserData(undefined);
                                     kernel.replaceLocation({'args': {},'id': 'loginhome'});
                                 }

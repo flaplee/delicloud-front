@@ -26,82 +26,83 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             	};
             	getAppList($tmpApp);
             }
+
+            function getAppList(o){
+                o.find('>').remove();
+                util.ajaxSubmit({
+                    type: 'get',
+                    url: '/v1.0/app',
+                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+                    data: {
+                        org_id: orgid
+                    },
+                    success: function(res) {
+                        console.log("res", res);
+                        var data = res.data.result;
+                        for (var i = 0; i < data.length; i++) {
+                            var innerHtml = '', installHtml = '';
+                            installHtml =(data[i].installed == true) ? '<a data-appid="'+ data[i].id +'" class="btn btn-default btn-uninstall" title="已安装" href="javascript:;">已安装</a>' : '<a data-appid="'+ data[i].id +'" class="btn btn-info btn-install" title="安装" href="javascript:;">安装</a>';
+                            switch (data[i].belong_type) {
+                                case 'group':
+                                    innerHtml = '<span class="item-category-name">团队可用</span>';
+                                    break;
+                                case 'user':
+                                    innerHtml = '<span class="item-category-name">个人可用</span>';
+                                    break;
+                                case 'both':
+                                    innerHtml = '<span class="item-category-name">团队可用</span><span class="item-category-name">个人可用</span>';
+                                    break;
+                            }
+                            var $itemHtml = $('<li class="item">\
+                                <div class="item-wrap clear">\
+                                    <div class="item-img" title="'+ data[i].name +'">\
+                                        <img  src="'+ data[i].icon +'" width="80" height="80" />\
+                                    </div>\
+                                    <div class="item-info">\
+                                        <div class="item-title clear">\
+                                            <div class="item-text">'+ data[i].name +'</div>\
+                                            <div class="item-category">'+ innerHtml +'</div>\
+                                        </div>\
+                                        <div class="item-content">'+ data[i].slogan +'</div>\
+                                    </div>\
+                                </div>\
+                                <div class="item-btn">\
+                                    '+ installHtml +'\
+                                </div>\
+                            </li>');
+                            o.append($itemHtml);
+                            setInstall($itemHtml.find('.btn-install'), o, {
+                                appid: data[i].id
+                            });
+                        }
+                    }
+                });
+            }
+
+            function setInstall(o, os, data){
+                o.on('click',function(){
+                    // 安装应用
+                    util.ajaxSubmit({
+                        type: 'post',
+                        url: '/v1.0/bind/bind', ///v1.0/cd/bind
+                        dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+                        data: {
+                            org_id: orgid,
+                            app_id: data.appid
+                        },
+                        success: function(res) {
+                            console.log("res", res);
+                            if(res.code == 0){
+                                kernel.hint('应用安装成功~', 'success');
+                                util.setCookie('app_ids', (parseInt(util.getCookie('app_ids')) + 1));
+                                getAppList(os);
+                                //kernel.replaceLocation({'args': {},'id': 'apphome'});
+                            }
+                        }
+                    });
+                });
+            }
         }
     };
 
-    function getAppList(o){
-    	o.find('>').remove();
-    	util.ajaxSubmit({
-            type: 'get',
-            url: '/v1.0/app',
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
-            data: {
-            	org_id: orgid
-            },
-            success: function(res) {
-                console.log("res", res);
-                var data = res.data.result;
-                for (var i = 0; i < data.length; i++) {
-                	var innerHtml = '', installHtml = '';
-                	installHtml =(data[i].installed == true) ? '<a data-appid="'+ data[i].id +'" class="btn btn-default btn-uninstall" title="已安装" href="javascript:;">已安装</a>' : '<a data-appid="'+ data[i].id +'" class="btn btn-info btn-install" title="安装" href="javascript:;">安装</a>';
-                 	switch (data[i].belong_type) {
-                        case 'group':
-                            innerHtml = '<span class="item-category-name">团队可用</span>';
-                            break;
-                        case 'user':
-                            innerHtml = '<span class="item-category-name">个人可用</span>';
-                            break;
-                        case 'both':
-                            innerHtml = '<span class="item-category-name">团队可用</span><span class="item-category-name">个人可用</span>';
-                            break;
-                    }
-                	var $itemHtml = $('<li class="item">\
-                        <div class="item-wrap clear">\
-    						<div class="item-img" title="'+ data[i].name +'">\
-                                <img  src="'+ data[i].icon +'" width="80" height="80" />\
-    						</div>\
-    						<div class="item-info">\
-                                <div class="item-title clear">\
-                                    <div class="item-text">'+ data[i].name +'</div>\
-                                    <div class="item-category">'+ innerHtml +'</div>\
-                                </div>\
-                                <div class="item-content">'+ data[i].slogan +'</div>\
-    						</div>\
-                        </div>\
-						<div class="item-btn">\
-							'+ installHtml +'\
-						</div>\
-					</li>');
-                    o.append($itemHtml);
-                    setInstall($itemHtml.find('.btn-install'), o, {
-                    	appid: data[i].id
-                    });
-                }
-            }
-        });
-    }
-
-    function setInstall(o, os, data){
-    	o.on('click',function(){
-    		// 安装应用
-        	util.ajaxSubmit({
-        		type: 'post',
-	            url: '/v1.0/bind/bind', ///v1.0/cd/bind
-	            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
-	            data: {
-	            	org_id: orgid,
-	            	app_id: data.appid
-	            },
-				success: function(res) {
-					console.log("res", res);
-					if(res.code == 0){
-						kernel.hint('应用安装成功~', 'success');
-                        util.setCookie('app_ids', (parseInt(util.getCookie('app_ids')) + 1));
-						getAppList(os);
-						//kernel.replaceLocation({'args': {},'id': 'apphome'});
-					}
-				}
-	        });
-    	});
-    }
 });

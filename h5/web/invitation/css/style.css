@@ -57,12 +57,12 @@ input:-webkit-autofill,select:-webkit-autofill,textarea:-webkit-autofill{box-sha
 #page #content{margin: 15px 15px 0 15px;background-color: #fff;}
 #page #content .header{width: 100%;position: relative; border: none; border-radius: 3px;background-color: #fff;}
 #page #content header p {text-align: center; font-size: 13px; color: #999; margin-bottom: 9px;color: #333333;}
-#page #content header p.group {color: #55bebf; font-size: 18px; margin-right: 2px; width: 80%; margin: 0 auto;position: relative; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: normal; font-weight: normal;}
+#page #content header p.group {color: #5d85e0; font-size: 18px; margin-right: 2px; width: 80%; margin: 0 auto;position: relative; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: normal; font-weight: normal;}
 #page #content header p.group.group-border{}
-#page #content header .title{font-size: 14px;font-weight: 700;color: #fff;background-color: #55bebf;padding: 10px 0 10px 15px;border-top-left-radius: 4px;border-top-right-radius: 4px;}
-#page #content header .title .logo{width: 40px; height: 40px; background-image: url(../images/logo.png); background-repeat: no-repeat; background-size: 100% 100%; display: inline-block; float: left; margin-right: 10px;}
+#page #content header .title{font-size: 14px;font-weight: 700;color: #fff;background-color: #5d85e0;padding: 10px 0 10px 15px;border-top-left-radius: 4px;border-top-right-radius: 4px;}
+#page #content header .title .logo{width: 40px; height: 40px; background-image: url('https://static.delicloud.com/h5/web/invitation/images/logo.png'); background-repeat: no-repeat; background-size: 100% 100%; display: inline-block; float: left; margin-right: 10px;}
 #page #content header .title .text{height: 40px; line-height: 40px; display: inline-block; float: left;}
-#page #content header #avatar {width: 70px; height: 70px;line-height: 70px; color: #fff;border-radius: 50%;margin: 15px auto 12px;overflow: hidden;background-color: #fff;}
+#page #content header #avatar {width: 70px; height: 70px;line-height: 70px; color: #fff;border-radius: 50%;margin: 12px auto 10px;overflow: hidden;background-color: #fff;}
 #page #content header #avatar img {width: 100%; height: 100%;width: 70px;height: 70px;}
 #page #content section.content{position:relative;-width:100%;-webkit-box-flex:1;-ms-flex:1 1 auto;-webkit-flex:1 1 auto;flex:1 1 auto;margin: 0 9%;}
 #page #content section.content>{position:absolute;width:100%;height:100%;-right:100%;-visibility:hidden;color:#666;-webkit-animation-duration:.4s;animation-duration:.4s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-iteration-count:1;animation-iteration-count:1}
@@ -72,7 +72,7 @@ input:-webkit-autofill,select:-webkit-autofill,textarea:-webkit-autofill{box-sha
 #page #content section.content.content-line .line-box .line-across{position: absolute;top: 27px;left:0;border-bottom:1px dashed #cecece;width:100%;height: 1px;z-index: 10;}
 #page #content section.content.content-line .line-box .line-left{position: absolute;left: -12px;top: 15px;width: 25px;height: 25px;background-color: #f2f3f3;border-radius: 50%;z-index: 11;}
 #page #content section.content.content-line .line-box .line-right{position: absolute;right: -12px;top: 15px;width: 25px;height: 25px;background-color: #f2f3f3;border-radius: 50%;z-index: 11;}
-#page #content section.content.content-input .formInput{height: 40px;margin:0 auto 8px;}
+#page #content section.content.content-input .formInput{height: 38px;margin:0 auto 8px;}
 #page #content section.content.content-input .formInput:nth-child(1){margin-top:0px;}
 #page #content section.content.content-input .formInput:last-child{margin-bottom:0px;}
 #page #content section.content.content-input .formInput.formInputPhone{position: relative;}
@@ -82,35 +82,35 @@ input:-webkit-autofill,select:-webkit-autofill,textarea:-webkit-autofill{box-sha
 #page #content section.content.content-input .formInput .phoneCode{height:43px;position: absolute; right: 10%; top: 1px;background-color: #fff;}
 #page #content section.content.content-input .formInput .phoneCode span{top: 14px; border-left: 1px solid #999; padding-left: 10px; display: inline-block; margin-top: 14px;margin-right: 8px;}
 #page #content section.content.content-input .formInput .phoneCode:after{content: "";width: 8px; height: 8px; margin-top: 16px; border-right: solid 1px #999; border-bottom: solid 1px #999; color: #999; -webkit-transform: rotate(45deg); transform: rotate(45deg); -webkit-transform-origin: center 75%; transform-origin: center 75%; -webkit-transition: all 0.5s; transition: all 0.5s; font-size: 16px; line-height: 45px; float: right;}
-#page #content section.content input{width:100%;height:40px;line-height:40px;box-shadow:none;outline:none;font-size:16px;text-align:left;border:0;color:#333;}
+#page #content section.content input{width:100%;height:38px;line-height:38px;box-shadow:none;outline:none;font-size:16px;text-align:left;border:0;color:#333;}
 input::-webkit-focus-inner{border:0;padding:0;}
 #page #content section.content input::-webkit-input-placeholder{color:#ccc;}
 #page #content section.content input#captcha{width:60%;margin:0;}
 #page #content section.content .input-code{width:100%;height:45px;text-align:left;margin:0 auto;}
-#page #content section.content #code{width:76px;height:40px;float:right;-border: 1px solid #d8d8d8;}
-#page #content section.content button{height:40px;line-height:40px;font-size:18px;border:none;display:block;width:100%;border-radius:30px;color:#fff;background-color: #00d8d6;margin:30px auto}
+#page #content section.content #code{width:76px;height:38px;float:right;-border: 1px solid #d8d8d8;}
+#page #content section.content button{height:38px;line-height:38px;font-size:18px;border:none;display:block;width:100%;border-radius:30px;color:#fff;background-color: #5d85e0;margin:20px auto}
 #page #content section.content button a{color:#fff;}
 #page #content section.content p.text{text-align:center;color:#008cee;font-size:12px;margin:15px;}
 #page #content section.content.content-complete{}
-#page #content section.content.content-complete .complete-line{width: 70px; height: 56px; background-image: url(../images/right-light.png); background-repeat: no-repeat; background-size: 100% 100%; display: inline-block;text-align: center;margin-bottom: 15px;}
+#page #content section.content.content-complete .complete-line{width: 70px; height: 56px; background-image: url('https://static.delicloud.com/h5/web/invitation/images/right-light.png'); background-repeat: no-repeat; background-size: 100% 100%; display: inline-block;text-align: center;margin-bottom: 15px;}
 #page #content section.content.content-complete .complete-cont{width: 80%;margin: 0 auto;}
 #page #content section.content.content-complete .complete-cont .tips-text{font-size: 13px;color:#333;font-weight: 700;margin-bottom: 15px;}
 #page #content section.content.content-complete .complete-cont .tips-text-sub{font-size: 18px;color:#999;}
 #page #content section.content.content-complete button{margin-top:80px;}
 /* areaCode */
 #areaCode{padding-top:44px;display: none;height: 100%;overflow-y: auto;}
-#areaCode > header{height:44px;width:100%;background-color:#fff;top:0;color:white;background-color:#55bebf;z-index: 101;}
-#areaCode > header > .back{display:block;position:absolute;top:0;left:0;font-size:16px;width:40px;height:40px;line-height:40px;color:white}
+#areaCode > header{height:44px;width:100%;background-color:#fff;top:0;color:white;background-color:#5d85e0;z-index: 101;}
+#areaCode > header > .back{display:block;position:absolute;top:0;left:0;font-size:16px;width:38px;height:38px;line-height:38px;color:white}
 #areaCode > header > a.back:after{content: ""; position: absolute; left: 8px; top: 12px; width: 8px; height: 8px; border-right: solid 1px #fff; border-bottom: solid 1px #fff; -webkit-transform: rotate(45deg); transform: rotate(135deg); -webkit-transform-origin: center 75%; transform-origin: center 75%; -webkit-transition: all 0.5s; transition: all 0.5s;}
 #areaCode > header > .back > svg{height:100%;vertical-align:top;fill:white;margin:0 4px}
-#areaCode > header > .title{font-weight:bold;font-size:18px;height:40px;line-height:40px;text-align:center;color: #fff;}
+#areaCode > header > .title{font-weight:bold;font-size:18px;height:38px;line-height:38px;text-align:center;color: #fff;}
 #areaCode > header > .close{display:block;position:absolute;width:20px;height:20px;top:0;bottom:0;right:10px;margin:auto 0}
 #areaCode > header > .close > svg{width:100%;height:100%;fill:white}
 #areaCode header h1{font-weight:400;font-size:1.6rem;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);margin:0}
 #areaCode .box{font-size:1.4rem;color:#333;height: 100%;}
 #areaCode .box .cat{height:25px;line-height:25px;margin:0 15px;padding-left:10px}
 #areaCode .box .item{display:block;height:30px;line-height:30px;margin:0 18px;padding-left:7px;padding-right:7px;color: #333;}
-#areaCode .box .item.selected{color: #00d8d6;}
+#areaCode .box .item.selected{color: #5d85e0;}
 #areaCode .box .nav-right{position:fixed;z-index:5;top:18%;right:0;width:30px;min-height:250px;max-height:420px;height:64%;margin:auto;font-size:1.2rem}
 #areaCode .box .intl-code{float:right;font-style:inherit;padding-right:12px}
 #areaCode .box ul{padding:0;opacity:.5;-webkit-transition:opacity .4s;height:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;transition:opacity .4s}

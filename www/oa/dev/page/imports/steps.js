@@ -65,6 +65,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
         });
 
         function ajaxFileUpload(orgid) {
+            kernel.showLoading();
             $.ajaxFileUpload({
                 url: '/web/v1.0/import/employee', //用于文件上传的服务器端请求地址
                 secureuri: false, //是否需要安全协议，一般设置为false
@@ -79,6 +80,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 },
                 success: function (res, status)  //服务器成功响应处理函数
                 {
+                    kernel.hideLoading();
                     $('#upload-file').val('');
                     var json = $.parseJSON(jQuery(res).text());
                     if(json.code == 0){
@@ -121,6 +123,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 },
                 error: function (res, status, e)//服务器响应失败处理函数
                 {
+                    kernel.hideLoading();
                     $('#upload-file').val('');
                     var json = $.parseJSON(jQuery(res.responseText).text());
                     if(json.code == 0){

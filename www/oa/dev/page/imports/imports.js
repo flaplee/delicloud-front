@@ -32,57 +32,62 @@ define(['common/kernel/kernel', 'site/util/util','page/imports/steps'], function
                 $usermenu.find('a.navlink').removeClass('navlink-current');
                 $usermenu.find('a.navlink.orgBtn').addClass('navlink-current');
             };
-            switch(type){
-                case 'info':
-                    $importsInfo.hide();
-                    $importsSteps.show();
-                    break;
-                case 'steps':
-                    $importsInfo.show();
-                    $importsSteps.hide();
-                    switch(status){
-                        case 'data':
-                            $importsInnerData.show();
-                            $importsInnerError.hide();
-                            $importsInnerSuccess.hide();
-                            switch(imports){
-                                case 'enable':
-                                    if(!$importsInnerNav.find('.nav-enable').hasClass('active')){
-                                        $importsInnerNav.find('.nav-enable').addClass('active').siblings().removeClass('active');
-                                        $importsInnerTable.find('.imports-table-enable').addClass('active').siblings().removeClass('active');
-                                    }
-                                break;
-                                case 'unable':
-                                    if(!$importsInnerNav.find('.nav-unable').hasClass('active')){
-                                        $importsInnerNav.find('.nav-unable').addClass('active').siblings().removeClass('active');
-                                        $importsInnerTable.find('.imports-table-unable').addClass('active').siblings().removeClass('active');
-                                    }
-                                break;
-                                default:
-                                    if(!$importsInnerNav.find('.nav-enable').hasClass('active')){
-                                        $importsInnerNav.find('.nav-enable').addClass('active').siblings().removeClass('active');
-                                        $importsInnerTable.find('.imports-table-enable').addClass('active').siblings().removeClass('active');
-                                    };
-                            }
+            if(type){
+                switch(type){
+                    case 'info':
+                        $importsInfo.hide();
+                        $importsSteps.show();
                         break;
-                        case 'error':
-                            $importsInnerData.hide();
-                            $importsInnerError.show();
-                            $importsInnerSuccess.hide();
+                    case 'steps':
+                        $importsInfo.show();
+                        $importsSteps.hide();
+                        switch(status){
+                            case 'data':
+                                $importsInnerData.show();
+                                $importsInnerError.hide();
+                                $importsInnerSuccess.hide();
+                                switch(imports){
+                                    case 'enable':
+                                        if(!$importsInnerNav.find('.nav-enable').hasClass('active')){
+                                            $importsInnerNav.find('.nav-enable').addClass('active').siblings().removeClass('active');
+                                            $importsInnerTable.find('.imports-table-enable').addClass('active').siblings().removeClass('active');
+                                        }
+                                    break;
+                                    case 'unable':
+                                        if(!$importsInnerNav.find('.nav-unable').hasClass('active')){
+                                            $importsInnerNav.find('.nav-unable').addClass('active').siblings().removeClass('active');
+                                            $importsInnerTable.find('.imports-table-unable').addClass('active').siblings().removeClass('active');
+                                        }
+                                    break;
+                                    default:
+                                        if(!$importsInnerNav.find('.nav-enable').hasClass('active')){
+                                            $importsInnerNav.find('.nav-enable').addClass('active').siblings().removeClass('active');
+                                            $importsInnerTable.find('.imports-table-enable').addClass('active').siblings().removeClass('active');
+                                        };
+                                }
+                            break;
+                            case 'error':
+                                $importsInnerData.hide();
+                                $importsInnerError.show();
+                                $importsInnerSuccess.hide();
+                            break;
+                            case 'success':
+                                $importsInnerData.hide();
+                                $importsInnerError.hide();
+                                $importsInnerSuccess.show();
+                            break;
+                            default:
+                                $importsInnerData.show();
+                                $importsInnerError.hide();
+                                $importsInnerSuccess.hide();
+                        }
                         break;
-                        case 'success':
-                            $importsInnerData.hide();
-                            $importsInnerError.hide();
-                            $importsInnerSuccess.show();
-                        break;
-                        default:
-                            $importsInnerData.show();
-                            $importsInnerError.hide();
-                            $importsInnerSuccess.hide();
-                    }
-                    break;
-                default:;
-            };
+                    default:;
+                };
+            }else{
+                $importsInfo.hide();
+                $importsSteps.show();
+            }
         }
     };
 });

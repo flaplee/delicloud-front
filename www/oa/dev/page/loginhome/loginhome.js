@@ -108,7 +108,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     
     // webscoket 
     function connect(cid, status){
-        var sock = new SockJS('http://t.delicloud.com/web/web-gateway-websocket');
+        var sock = new SockJS(''+ (location.protocol == 'https:' ? 'https:' : 'http:') +'//t.delicloud.com/web/web-gateway-websocket');
         stomp = Stomp.over(sock);
         stomp.connect({}, function (frame) {
             var url = "/user/"+ cid +"/barcode/login";

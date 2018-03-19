@@ -368,7 +368,7 @@
 		}
 	}
 
-	@media (max-width: 1440px) and (min-width:1281px) {
+	@media (max-width: 1440px){
 	   .imports-menu{
 	   		width: 100px;
 			ul.menu-list{
@@ -379,13 +379,21 @@
 	   		padding-left: 100px;
 	   		.imports-info{
 				display:none;
+				.imports-inner{
+					.imports-inner-data{}
+					.imports-inner-error{
+						padding: 100px 0 300px;
+					}
+					.imports-inner-success{
+						padding: 150px 0 250px;
+					}
+				}
 			}
 
 			.imports-steps{
 				padding: 105px 0;
 			}
+
 	    }
 	}
-	@media (max-width: 1156px) {}
-	@media (max-width: 769px) {}
 }
