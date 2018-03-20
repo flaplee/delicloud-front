@@ -735,17 +735,24 @@ button{
 				background-color: #fff;
 				border: 1px solid #eaeaea;
 				border-radius: 6px;
-				&:before{
-					content: '';
-					width: 14px;
+				.son-nav-wrap-before{
+					width: 60px;
 					height: 10px;
 					position: absolute;
 					top: -10px;
-					right: 24px;
-					background-image: url("images/triangle.png");
-					background-repeat: no-repeat;
-					background-size: 100% 100%;
-					background-color: #fff;
+					right: 6px;
+					&:before{
+						content: '';
+						width: 14px;
+						height: 10px;
+						position: absolute;
+						top: 0;
+						right: 18px;
+						background-image: url("images/triangle.png");
+						background-repeat: no-repeat;
+						background-size: 100% 100%;
+						background-color: #fff;
+					}
 				}
 	        }
 
@@ -869,17 +876,24 @@ button{
 					border-radius: 6px;
 					box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.2);
 					z-index: 2;
-					&:before{
-						content: '';
-						width: 14px;
+					.user-panel-before{
+						width: 52px;
 						height: 10px;
 						position: absolute;
-						top: -9px;
-						right: 15px;
-						background-image: url("images/triangle.png");
-						background-repeat: no-repeat;
-						background-size: 100% 100%;
-						background-color: #fff;
+						top: -10px;
+						right: 0;
+						&:before{
+							content: '';
+							width: 14px;
+							height: 10px;
+							position: absolute;
+							top: 1px;
+							right: 14px;
+							background-image: url("images/triangle.png");
+							background-repeat: no-repeat;
+							background-size: 100% 100%;
+							background-color: #fff;
+						}
 					}
 				    .user-info{
 						width: 160px;

@@ -196,7 +196,7 @@ define(['common/slider/slider', 'site/pages/pages', 'site/popups/popups', 'site/
 	        },
 			buildDauth: function(userid, token, timestamp) {
 				//userid timestamp token
-	            var hashLoc = window.location.search.substr(1) + userid + token + timestamp;
+	            var hashLoc = (userid ? userid : '' ) + (token ? token : '') + timestamp;
 	            var sha256 = kernel.SHA256(hashLoc);
 	            var hash = sha256.substr(0, 32);
 	            return hash;

@@ -627,7 +627,7 @@
                     type: "get",
                     dataType: "jsonp",
                     data: {
-                        Dauth: userid + ' ' + (new Date().valueOf()) + ' ' + self.util.buildDauth(token),
+                        Dauth: userid + ' ' + (new Date().valueOf()) + ' ' + self.util.buildDauth(userid, token, (new Date().valueOf())),
                         Duagent: '_web'
                     },
                     callback: "callback",
@@ -836,11 +836,9 @@
                         s = Utf8Encode(s);
                         return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
                     },
-                    buildDauth: function (token) {
-                        var self = this;
-                        //userid timestamp token
-                        var hashLoc = window.location.search.substr(1) + token;
-                        var sha256 = self.SHA256(hashLoc);
+                    buildDauth: function(userid, token, timestamp) {
+                        var hashLoc = (userid ? userid : '' ) + (token ? token : '') + timestamp;
+                        var sha256 = kernel.SHA256(hashLoc);
                         var hash = sha256.substr(0, 32);
                         return hash;
                     }
