@@ -112,7 +112,7 @@ seajs.use(['zepto', 'dialog', 'fastclick', 'region'], function($, dialog, fastcl
             $submitDownload.on('click', function(){
                 var ua = navigator.userAgent.toLowerCase();
                 if (/iphone|ipad|ipod/.test(ua)) {
-                    window.location.href = 'https://www.pgyer.com/smartoffice_production_ios';
+                    window.location.href = 'https://itunes.apple.com/cn/app/deli/id1340208086?mt=8';
                 } else if (/android/.test(ua)) {
                     window.location.href = 'https://www.pgyer.com/smartoffice_production_android';
                 }

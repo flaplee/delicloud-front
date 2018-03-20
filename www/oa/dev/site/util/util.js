@@ -67,12 +67,14 @@ define(['common/kernel/kernel'], function(kernel) {
                 //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
                 if(param.dauth){
                     xhr.setRequestHeader('Dauth', param.dauth);
+                    xhr.setRequestHeader('Duagent', '_web');
                 }
                 xhr.send(param.data);
             } else {
                 xhr.setRequestHeader('content-type', 'application/json');
                 if(param.dauth){
                     xhr.setRequestHeader('Dauth', param.dauth);
+                    xhr.setRequestHeader('Duagent', '_web');
                 }
                 xhr.send(JSON.stringify(param.data));
             }

@@ -325,13 +325,15 @@
                 if (param.data instanceof FormData) {
                     //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
                     if (param.dauth) {
-                        xhr.setRequestHeader('Dauth', param.dauth);
+                        xhr.setRequestHeader('Dauth', param.dauth),
+                        xhr.setRequestHeader('Duagent', '_web');
                     }
                     xhr.send(param.data);
                 } else {
                     xhr.setRequestHeader('content-type', 'application/json');
                     if (param.dauth) {
-                        xhr.setRequestHeader('Dauth', param.dauth);
+                        xhr.setRequestHeader('Dauth', param.dauth),
+                        xhr.setRequestHeader('Duagent', '_web');
                     }
                     xhr.send(JSON.stringify(param.data));
                 }
@@ -543,40 +545,40 @@
                         callback: "callback",
                         //time:"1000",
                         success: function (res) {
-                                if (res.code == 0) {
-                                    var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
-                                    if (connect == 'connect') {
-                                        //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
-                                    } else {
-                                        self.logout(userid, token);
-                                    }
-
-                                    //初始化
-                                    _WrapPrivate.init();
-                                }
-                            },
-                            fail: function (res) {
-                                if (res.code == 0) {
-                                    var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
-                                    if (connect == 'connect') {
-                                        //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
-                                    } else {
-                                        self.logout(userid, token);
-                                    }
-                                    //初始化
-                                    _WrapPrivate.init();
-                                } else if (res.code == 9102112) {
-                                    setTimeout(function () {
-                                        errorHandle && errorHandle({
-                                            message: res.msg,
-                                            errorCode: -1
-                                        });
-                                    });
+                            if (res.code == 0) {
+                                var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
+                                if (connect == 'connect') {
+                                    //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
                                 } else {
-                                    alert('用户未登录或者登录信息已经过期，请重新登录');
-                                    window.location.href = "" + httpApi + "/oauth/?redirect=" + location.href;
+                                    self.logout(userid, token);
                                 }
+
+                                //初始化
+                                _WrapPrivate.init();
                             }
+                        },
+                        fail: function (res) {
+                            if (res.code == 0) {
+                                var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
+                                if (connect == 'connect') {
+                                    //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
+                                } else {
+                                    self.logout(userid, token);
+                                }
+                                //初始化
+                                _WrapPrivate.init();
+                            } else if (res.code == 9102112) {
+                                setTimeout(function () {
+                                    errorHandle && errorHandle({
+                                        message: res.msg,
+                                        errorCode: -1
+                                    });
+                                });
+                            } else {
+                                alert('用户未登录或者登录信息已经过期，请重新登录');
+                                window.location.href = "" + httpApi + "/oauth/?redirect=" + location.href;
+                            }
+                        }
                     });
                 } else {
                     // 未登录
@@ -626,6 +628,7 @@
                     dataType: "jsonp",
                     data: {
                         Dauth: userid + ' ' + (new Date().valueOf()) + ' ' + self.util.buildDauth(token),
+                        Duagent: '_web'
                     },
                     callback: "callback",
                     //time:"1000",

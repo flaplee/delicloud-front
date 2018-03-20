@@ -93,7 +93,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
 
                             var departmentText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? '' : deptsText;
                             var titleText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? json[i].title : ((deptTitles && deptTitles.length > 1) ? deptTitles.join('/') : json[i].title);
-                            var $itemTpl = $('<tr>\
+                            var $itemTpl = $('<tr class="table-item">\
                                 <td style="display:none;"><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
                                 <td>' + json[i].nickname + '</td>\
                                 <td>' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
