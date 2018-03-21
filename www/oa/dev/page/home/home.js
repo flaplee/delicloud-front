@@ -1,6 +1,6 @@
 'use strict';
 define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
-    var userid, token, orgid, orgname, parentid, device_ids, app_ids, employee_count;
+    var loc, locid, userid, token, orgid, orgname, parentid, device_ids, app_ids, employee_count;
     var $homeBox = $('#home .home-box'),
         $homeRecord = $homeBox.find('.home-record'),
         $homeName = $homeRecord.find('.record-top p.text'),
@@ -12,6 +12,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         $bnav = $homeIndex.find(' .bannerNav');
     return {
         onload: function(force) {
+            loc = kernel.parseHash(location.hash),
+            locid = loc.id,
             userid = util.getCookie('userid'),
             token = util.getCookie('token'),
             orgid = util.getCookie('orgid'),
@@ -24,6 +26,11 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 util.setUserData(undefined);
                 kernel.replaceLocation({'args': {},'id': 'loginhome'});
             }else{
+                if(locid == 'home'){
+                    var $usermenu = $('#header .user-head .nav-top .nav-item');
+                    $usermenu.find('a.navlink').removeClass('navlink-current');
+                    $usermenu.find('a.navlink.homeBtn').addClass('navlink-current');
+                };
                 if(orgname && device_ids && app_ids && employee_count){
                     $homeName.text(orgname);
                     $homeDev.text(device_ids);

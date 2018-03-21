@@ -22,7 +22,15 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         $tmp = $contactsTable.find('.tbody'),
         $listTmp = $contactsTeam.find('.dept-select-list'),
         $wrapTmp = $listTmp.find('div.dept-select-wrap'),
-        $dTmp = $listTmp.find('ul.dept-select-inner');    
+        $dTmp = $listTmp.find('ul.dept-select-inner');
+    // 屏蔽回车键自动提交
+    $(document).keydown(function(e){
+        switch(e.keyCode){
+            case 13:
+             return false;
+        }
+    });
+    
     //初始化组织
     var initTopDeparentment = function(o, data){
         tempParentid = data.orgid;
