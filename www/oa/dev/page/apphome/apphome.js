@@ -27,11 +27,12 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 
     function getAppList(o){
     	o.find('>').remove();
+    	var timestamp = (new Date().valueOf()).toString();
     	// 已安装应用
     	util.ajaxSubmit({
     		type: 'get',
             url: '/v1.0/admin/app/my', // '/v1.0/app/bind/'+ orgid
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
             data: {
 				'org_id':orgid
             },
@@ -76,10 +77,11 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	function setAddApp(o, appid){
 		o.find('.app-btn-setting').on('click',function(e){
 			e.stopPropagation();
+			var timestamp = (new Date().valueOf()).toString();
 			util.ajaxSubmit({
 	    		type: 'get',
 	            url: '/v1.0/app/bind',
-	            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+	            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
 	            data: {
 	            	"org_id":orgid,
 					"app_id":appid

@@ -158,10 +158,11 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     }
 
     function orgsCalls(o, data){
+        var timestamp = (new Date().valueOf()).toString();
         util.ajaxSubmit({
             type: 'get',
             url: '/v1.0/admin/auth/my',
-            dauth: data.userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(data.userid, data.token, (new Date().valueOf())),
+            dauth: data.userid + ' ' + timestamp + ' ' + kernel.buildDauth(data.userid, data.token, timestamp),
             data: {
                 type: 'group'
             },

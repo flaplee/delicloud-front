@@ -185,13 +185,17 @@
 						}
 					}
 					.dept-select-inner{
-						-background-color:#f8f8f8;
 						margin-left: 20px;
 						padding-bottom: 40px;
-						-padding-right: 20px;
 						height: 790px;
 						overflow-x: hidden;
 						overflow-y: auto;
+						&.dept-select-inner-user{
+							height: 790px;
+						}
+						&.dept-select-inner-department{
+							height: 860px;
+						}
 						.select-item{
 							-margin-bottom: 10px;
 							.item-info{
@@ -428,9 +432,9 @@
 				background-color:#fff;
 				.department-list-inner{
 					min-height: 736px;
-					height: 736px;
+					-height: 736px;
 					background-color:#ffffff;
-					padding: 5px 0 20px 20px;
+					padding: 5px 0 40px 20px;
 					.select-item{
 						-position:relative;
 						width: 100%;

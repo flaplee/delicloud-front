@@ -66,13 +66,14 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
 
         function ajaxFileUpload(orgid) {
             kernel.showLoading();
+            var timestamp = (new Date().valueOf()).toString();
             $.ajaxFileUpload({
                 url: '/web/v1.0/import/employee', //用于文件上传的服务器端请求地址
                 secureuri: false, //是否需要安全协议，一般设置为false
                 fileElementId: 'upload-file', //文件上传域的ID
                 dataType: 'json', //返回值类型 一般设置为json
                 beforeSend:function(xhr){
-                    xhr.setRequestHeader("dauth", userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())));
+                    xhr.setRequestHeader("dauth", userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp));
                 },
                 data: {
                     org_id: orgid,

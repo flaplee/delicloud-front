@@ -22,7 +22,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         $tmp = $contactsTable.find('.tbody'),
         $listTmp = $contactsTeam.find('.dept-select-list'),
         $wrapTmp = $listTmp.find('div.dept-select-wrap'),
-        $dTmp = $listTmp.find('ul.dept-select-inner');
+        $listTmpInner = $listTmp.find('ul.dept-select-inner');
     // 屏蔽回车键自动提交
     $(document).keydown(function(e){
         switch(e.keyCode){
@@ -70,10 +70,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
     var initContacts = function(o, data, isQuery, os) {
         var initUrl = (isQuery && isQuery == true) ? '/v1.0/org'+ ((data.type && data.type == 'parent') ? '': '/department') +'/' + data.orgid + '/users' : '/v1.0/org'+ ((data.type && data.type == 'parent') ? '': '/department') +'/' + data.orgid + '/users';
         var initData = (isQuery && isQuery == true) ? {query:data.query} : {} ;
+        var timestamp = (new Date().valueOf()).toString();
         util.ajaxSubmit({
             type: 'get',
             url: initUrl,
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
             data: initData,
             success: function(res) {
                 //console.log("res",res);
@@ -186,10 +187,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         // status = 'onload/loaded',  relation = 'parent/son', parentid = 355671868335718401, orgid = 363677081407586304;
         var id = (relation == 'parent') ? parentid : orgid;
         o.find('>').remove();
+        var timestamp = (new Date().valueOf()).toString();
         util.ajaxSubmit({
             type: 'get',
             url: '/v1.0/org/department/' + id + '/departments',
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
             data: {},
             success: function(res) {
                 var json = res.data.result;
@@ -288,7 +290,6 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
 
     //初始化组织
     var initTopDept = function(o, data){
-        console.log("initTopDept");
         var $deptTitle = $('.department-info').find('.department-form .form-title'),
         $deptBtnAdd = $('.department-info').find('.department-form .form-btns .btn-dept-add'),
         $deptInner = $('.department-info').find('.department-inner'),
@@ -316,10 +317,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
 
         //初始化团队 及 团队子部门信息
         function initDeps(o, data){
+            var timestamp = (new Date().valueOf()).toString();
             util.ajaxSubmit({
                 type:'get',
                 url: '/v1.0/org/department/'+ data.orgid +'/departments',
-                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+                dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
                 data: {},
                 success: function(res) {
                     var json = res.data.result;
@@ -580,11 +582,12 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
     });*/
 
     var setMove =  function(uids, oldDid, newDid){
+        var timestamp = (new Date().valueOf()).toString();
         // 将人员移动到其他部门 /v1.0/org/user/move
         util.ajaxSubmit({
             type: 'post',
             url: '/v1.0/org/user/move',
-            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
             data: {
                 "user_ids": uids,
                 "src_department_id": oldDid,
@@ -637,11 +640,12 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
             uids.push($(dom).attr('data-uid'));
         });
         if (uids.length > 0) {
+            var timestamp = (new Date().valueOf()).toString();
             // 将人员从团队组织中删除 /v1.0/org/user/delete
             util.ajaxSubmit({
                 type: 'post',
                 url: '/v1.0/org/user/delete',
-                dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+                dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
                 data: {
                     "org_id": orgid, //本部门移除
                     "user_ids": uids
@@ -720,7 +724,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         type: tempType
     });
 
-    initDepartment($dTmp, {
+    initDepartment($listTmpInner, {
         status: 'onload',
         type: 'parent',
         parentid: parentid,
@@ -783,10 +787,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                     $usermenu.find('a.navlink').removeClass('navlink-current');
                     $usermenu.find('a.navlink.orgBtn').addClass('navlink-current');
                 };
-                console.log('~~~contacts userid:' + userid + '~~~token:' + token + '~~~orgid:' + orgid + '~~~parentid:' + parentid + '');
-                /*var $contactsMenu = $('#contacts .contacts-menu'),
-                    $contactsBox = $('#contacts .contacts-box');*/
-
+                
                 //init
                 initTopDeparentment($wrapTmp,{
                     orgid: orgid,
@@ -801,7 +802,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                     type: tempType
                 });
 
-                initDepartment($dTmp, {
+                initDepartment($listTmpInner, {
                     status: 'onload',
                     type: 'parent',
                     parentid: parentid,
@@ -814,6 +815,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                 switch (type) {
                     case 'user':
                         $contactsForm.show();
+                        if($listTmpInner.hasClass('dept-select-inner-department')){
+                            $listTmpInner.removeClass('dept-select-inner-department').addClass('dept-select-inner-user');
+                        }else{
+                            $listTmpInner.removeClass('dept-select-inner-user').addClass('dept-select-inner-user');
+                        }
                         break;
                     case 'import':
                         $contactsForm.hide();
@@ -821,6 +827,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                     case 'department':
                         departments();
                         $contactsForm.hide();
+                        if($listTmpInner.hasClass('dept-select-inner-user')){
+                            $listTmpInner.removeClass('dept-select-inner-user').addClass('dept-select-inner-department');
+                        }else{
+                            $listTmpInner.removeClass('dept-select-inner-department').addClass('dept-select-inner-department');
+                        }
                         break;
                     default:
                         $contactsForm.show();

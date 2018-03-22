@@ -16,10 +16,11 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 util.setUserData(undefined);
                 kernel.replaceLocation({'args': {},'id': 'loginhome'});
             }
+            var timestamp = (new Date().valueOf()).toString();
         	util.ajaxSubmit({
 	            type: 'get',
 	            url: '/v1.0/app',
-	            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+	            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
 	            data: {},
 	            success: function(res) {
 	                console.log("res", res);
@@ -61,11 +62,12 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	        });
 	        function setInstall(o, data){
 	        	o.on('click',function(){
+	        		var timestamp = (new Date().valueOf()).toString();
 	        		// 安装应用
 		        	util.ajaxSubmit({
 		        		type: 'post',
 			            url: '/v1.0/bind/bind', ///v1.0/cd/bind
-			            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+			            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
 			            data: {
 			            	org_id: orgid,
 			            	app_id: data.appid

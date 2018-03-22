@@ -9,10 +9,11 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 util.setUserData(undefined);
                 kernel.replaceLocation({'args': {},'id': 'loginhome'});
             }
+            var timestamp = (new Date().valueOf()).toString();
         	util.ajaxSubmit({
         		type: 'get',
 	            url: '/v1.0/device/my',
-	            dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+	            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
 	            data: {},
 	            success: function(res) {
 	                console.log("res",res);
