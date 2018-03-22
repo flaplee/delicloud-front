@@ -9,7 +9,7 @@ define(['module'], function(module) {
 		//请确保siteVersion第四个被赋值
 		siteVersion = "1.0.8",
 		//请确保debug第五个被赋值
-		debug = false,
+		debug = true,
 		prefix = module.id.replace(/framework\/[^\/]+$/, ''),
 		cfg = {
 			waitSeconds: 0,
