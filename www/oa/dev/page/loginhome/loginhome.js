@@ -26,7 +26,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 if(json.code == 0){
                     var res = json.data['result'],
                         cid = res.cid,
-                        url = res.data;
+                        url = res.data,
+                        session = res.session;
                     if (url) {
                         o.html('');
                         new QRCode(document.getElementById('qrcode'), {
@@ -35,7 +36,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             height: 234,
                             correctLevel: QRCode.CorrectLevel.L
                         });
-                        connect(cid, 'disconnect');
+                        webSocketInit(session);
+                        //connect(cid, 'disconnect');
                     } else {
                         o.html('');
                     }
@@ -77,7 +79,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                     height: 234,
                                     correctLevel: QRCode.CorrectLevel.L
                                 });
-                                connect(cid);
+                                //connect(cid);
+                                webSocketInit(session);
                             } else {
                                 loginQr.html('');
                                 //更新user
@@ -155,6 +158,50 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         if (stomp != null) {
             stomp.disconnect();
         }
+    }
+
+    // webSocket
+    function webSocketInit(session){
+        if (!!window.WebSocket && window.WebSocket.prototype.send){
+            console.log("use WebSocket!")
+            // 打开一个 web socket
+            var ws = new WebSocket(session.ws_url);
+            ws.onopen = function(){
+                // Web Socket 已连接上，使用 send() 方法发送数据
+                ws.send('{"cmd": "register","data": "'+ session.session_id +'"}');
+            };
+            ws.onmessage = function(evt){
+                var received_msg = evt.data;
+                console.log("received_msg", received_msg);
+            };
+            ws.onclose = function() {
+                // 关闭 websocket
+                console.log("连接已关闭...")
+            };
+        }
+        else{
+           // 浏览器不支持 WebSocket
+           console.log("use polling")
+           pollInit(session.http_url);
+        }
+    }
+
+    // polling
+    function pollInit(url) {
+        setTimeout(function() {
+            util.ajaxSubmit({
+                url: url,
+                silent: true,
+                type:'get',
+                success: function(json) {
+                    console.log("json", json);
+                    pollInit();
+                },
+                error: function(json){
+                    kernel.hint('网络或服务器错误~', 'error');
+                }
+            });
+        }, 5000);
     }
 
     function orgsCalls(o, data){

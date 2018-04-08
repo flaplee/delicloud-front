@@ -461,7 +461,7 @@
                         var elementHeader = '<div class="deli-user-head">\
                             <div id="deli-head" class="deli-clear">\
                                 <div class="deli-logo-box">\
-                                    <a href="http://t.delicloud.com/" class="deli-logo"></a>\
+                                    <a href="http://t.delicloud.com/" class="deli-logo" title="得力e+"></a>\
                                 </div>\
                                 <div class="deli-nav-top">\
                                     <ul class="deli-nav-top-list deli-clear">\
@@ -528,10 +528,8 @@
                         document.body.appendChild(wrapFooter);
                         document.body.insertBefore(wrapHeader, document.body.firstElementChild);
                         document.querySelector('.deli-wrap-header .deli-nologin a.deli-nologin-btn').addEventListener('click', function () {
-                            //self.logout(userid, token);
                             self.util.setCookie('user_id', undefined);
                             self.util.setCookie('token', undefined);
-                            //window.location.href = ""+ httpApi +"/oauth/?redirect=" + location.origin + location.pathname;
                             window.location.href = "" + httpApi + "/oauth/?redirect=" + location.href;
                         }, false);
                     }
@@ -549,6 +547,8 @@
                                 var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
                                 if (connect == 'connect') {
                                     //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
+                                    self.util.setCookie('user_id', res.data.result.user_id);
+                                    self.util.setCookie('token', res.data.result.token);
                                 } else {
                                     self.logout(userid, token);
                                 }
