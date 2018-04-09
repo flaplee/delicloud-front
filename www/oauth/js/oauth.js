@@ -103,7 +103,7 @@ $(function() {
                     }
                 },
                 error: function(json) {
-                    alert('网络或服务器错误');
+                    //alert('网络或服务器错误');
                 }
             });
         }, 0);

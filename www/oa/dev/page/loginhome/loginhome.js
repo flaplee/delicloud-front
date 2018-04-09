@@ -111,7 +111,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     
     // webSocket
     function webSocketInit(session){
-        if (!(!!window.WebSocket && window.WebSocket.prototype.send)){
+        if (!!window.WebSocket && window.WebSocket.prototype.send){
             // 打开一个 web socket
             var ws = new WebSocket(session.ws_url);
             ws.onopen = function(){
