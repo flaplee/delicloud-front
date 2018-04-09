@@ -4,7 +4,7 @@ define(['common/kernel/kernel'], function(kernel) {
         ajaxSubmit: function(param) {
             var xhr = new XMLHttpRequest(),
                 type = param.type || 'post',
-                url = '/web' + param.url
+                url = (param.force ? param.url : ('/web' + param.url))
             if (type === 'get' && param.data) {
                 var strArr = []
                 for (var key in param.data) {

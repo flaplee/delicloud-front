@@ -15,7 +15,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     var stomp = null, userInfo = {}, tempInfo = {'data':{}, 'organization':{}};
 
     // init qrcode
-    var initQrcode = function(o, status){
+    var initQrcode = function(o){
         o.addClass('login-loading');
         util.ajaxSubmit({
             url: '/v1.0/barcode_login/public',
@@ -96,74 +96,22 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     });
 
     $successBtn.on('click',function(){
-        initQrcode($loginBox.find('.loginQr'), 'disconnect');
+        initQrcode($loginBox.find('.loginQr'));
         $loginFail.hide();
         $loginSuccess.hide();
         $loginDoing.show();
     });
 
     $failBtn.on('click',function(){
-        initQrcode($loginBox.find('.loginQr'), 'disconnect');
+        initQrcode($loginBox.find('.loginQr'));
         $loginFail.hide();
         $loginSuccess.hide();
         $loginDoing.show();
     });
     
-    // webscoket 
-    function connect(cid, status){
-        var sock = new SockJS(''+ (location.protocol == 'https:' ? 'https:' : 'http:') +'//t.delicloud.com/web/web-gateway-websocket');
-        stomp = Stomp.over(sock);
-        stomp.connect({}, function (frame) {
-            var url = "/user/"+ cid +"/barcode/login";
-            listenStomp(cid, url, status);
-        });
-    }
-
-    function listenStomp(cid, url, status){
-        //qrcode
-        stomp.subscribe('/user/'+ cid +'/info', function(message){
-            var json = JSON.parse(message.body);
-            tempInfo.data = json;
-            //util.setUserData(tempInfo.data);
-            //util.setCookie('tempInfo.data', JSON.stringify(tempInfo.data));
-            $loginDoing.hide();
-            $loginFail.hide();
-            $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
-            $loginSuccess.show();
-        });
-
-        //login
-        stomp.subscribe(url, function (message) {
-            var json = JSON.parse(message.body);
-            //console.log("json",json);
-            if(json && json.user_id){
-                userInfo = json;
-                if(userInfo.type == 'web'){
-                    //util.setUserData(userInfo);
-                    util.setCookie('token', userInfo.token);
-                    util.setCookie('userid', userInfo.user_id);
-                    util.setCookie('expire', userInfo.expire);
-                }
-                if(status && status == 'disconnect'){
-                    disconnect();
-                }
-                orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token});
-            }else{
-                initQrcode($loginBox.find('.loginQr'));
-            }
-        });
-    }
-
-    function disconnect() {
-        if (stomp != null) {
-            stomp.disconnect();
-        }
-    }
-
     // webSocket
     function webSocketInit(session){
-        if (!!window.WebSocket && window.WebSocket.prototype.send){
-            console.log("use WebSocket!")
+        if (!(!!window.WebSocket && window.WebSocket.prototype.send)){
             // 打开一个 web socket
             var ws = new WebSocket(session.ws_url);
             ws.onopen = function(){
@@ -171,8 +119,26 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 ws.send('{"cmd": "register","data": "'+ session.session_id +'"}');
             };
             ws.onmessage = function(evt){
-                var received_msg = evt.data;
-                console.log("received_msg", received_msg);
+                var json = JSON.parse(evt.data);
+                if(json){
+                    if(json.id){
+                        tempInfo.data = json;
+                        $loginDoing.hide();
+                        $loginFail.hide();
+                        $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                        $loginSuccess.show();
+                    }
+                    if(json.user_id){
+                        userInfo = json;
+                        if(userInfo.type == 'web'){
+                            //util.setUserData(userInfo);
+                            util.setCookie('token', userInfo.token);
+                            util.setCookie('userid', userInfo.user_id);
+                            util.setCookie('expire', userInfo.expire);
+                        }
+                        orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token}, ws);
+                    }
+                }
             };
             ws.onclose = function() {
                 // 关闭 websocket
@@ -180,9 +146,9 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             };
         }
         else{
-           // 浏览器不支持 WebSocket
-           console.log("use polling")
-           pollInit(session.http_url);
+            // 浏览器不支持 WebSocket
+            console.log("use polling")
+            pollInit(session.http_url);
         }
     }
 
@@ -193,9 +159,10 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 url: url,
                 silent: true,
                 type:'get',
+                force: true,
                 success: function(json) {
                     console.log("json", json);
-                    pollInit();
+                    //pollInit(url);
                 },
                 error: function(json){
                     kernel.hint('网络或服务器错误~', 'error');
@@ -204,7 +171,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         }, 5000);
     }
 
-    function orgsCalls(o, data){
+    // select orgs
+    function orgsCalls(o, data, ws){
         var timestamp = (new Date().valueOf()).toString();
         util.ajaxSubmit({
             type: 'get',
@@ -307,6 +275,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                         $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
                         $loginFail.show();
                     }
+                    //完成关闭websocket
+                    ws.close();
                 } else {
                     kernel.hint(json.msg);
                 }
