@@ -179,10 +179,10 @@ var util = {
         s = Utf8Encode(s);
         return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
     },
-    buildDauth:function(userid, token, timestamp) {
-        //userid token timestamp 
-        var hashLoc = userid + token + timestamp;
-        var sha256 = util.SHA256(hashLoc);
+    buildDauth: function(userid, token, timestamp) {
+        //userid timestamp token
+        var hashLoc = (userid ? userid : '' ) + (token ? token : '') + timestamp;
+        var sha256 = kernel.SHA256(hashLoc);
         var hash = sha256.substr(0, 32);
         return hash;
     },

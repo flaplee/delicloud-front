@@ -162,6 +162,10 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                             }
                         }
                         selectUserAll($contactsTable.find('.thead .select-all'));
+                    }else{
+                        kernel.hint('当前组织状态异常,请重新登录', 'error');
+                        util.setUserData(undefined);
+                        kernel.replaceLocation({'args': {},'id': 'loginhome'});
                     }
                 } else {
                     if(isQuery && isQuery == true && os){

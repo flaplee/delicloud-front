@@ -173,32 +173,36 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     function orgdatachange(evt){
         var index = parseInt(util.getCookie('orgindex')? util.getCookie('orgindex') : 0);
         if(index >= 0 && evt.data.organization && evt.data.organization.length > 0){
-            $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
-            $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();
-            $.each(evt.data.organization, function(i, item) {
-                var $targetHtml = $('<a class="sub-nav-item '+ ((evt.data.organization[index].org_id == item.org_id) ? 'current' : '') +'"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
-                $('.nav-item-team .son-nav-wrap .son-nav-list-team').append($targetHtml);
-                return function(){
-                    // 切换组织
-                    $targetHtml.on('click', function(e) {
-                        var e = e || window.e;
-                        e.stopPropagation();
-                        var c = $(this), oname = c.text();
-                        if(!c.hasClass('current')){
-                            $targetHtml.parents('.nav-item-team').find('a.nav-item-current .navlink-name').text(oname);
-                            c.siblings().removeClass('current');
-                            c.addClass('current');
-                            // update 20180308 更新相应数据
-                            evt.data.orgindex = c.index();
-                            util.setCookie('orgindex', evt.data.orgindex);
-                            // update 20180313 更新相应数据
-                            util.setUserData(evt);
-                            pagechange(evt);
-                        }
-                        $('.nav-item-team .son-nav-wrap').hide();
-                    });
-                }();
-            });
+            if(evt.data.organization[index]){
+                $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
+                $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();
+                $.each(evt.data.organization, function(i, item) {
+                    var $targetHtml = $('<a class="sub-nav-item '+ ((evt.data.organization[index].org_id == item.org_id) ? 'current' : '') +'"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
+                    $('.nav-item-team .son-nav-wrap .son-nav-list-team').append($targetHtml);
+                    return function(){
+                        // 切换组织
+                        $targetHtml.on('click', function(e) {
+                            var e = e || window.e;
+                            e.stopPropagation();
+                            var c = $(this), oname = c.text();
+                            if(!c.hasClass('current')){
+                                $targetHtml.parents('.nav-item-team').find('a.nav-item-current .navlink-name').text(oname);
+                                c.siblings().removeClass('current');
+                                c.addClass('current');
+                                // update 20180308 更新相应数据
+                                evt.data.orgindex = c.index();
+                                util.setCookie('orgindex', evt.data.orgindex);
+                                // update 20180313 更新相应数据
+                                util.setUserData(evt);
+                                pagechange(evt);
+                            }
+                            $('.nav-item-team .son-nav-wrap').hide();
+                        });
+                    }();
+                });
+            }else{
+                $userlogin.find('a.logout').trigger('click');
+            }
         }
     }
 
