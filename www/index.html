@@ -14,10 +14,9 @@
 	<link rel="apple-touch-icon-precomposed" href="http://t.static.delicloud.com/images/favicons/128x128.png?v=20180317">
 	<link rel="icon" href="http://t.static.delicloud.com/images/favicons/128x128.png?v=20180317">
 	<link rel="stylesheet" type="text/css" href="http://t.static.delicloud.com/www/home/css/style.css">
-	<!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
-	<!--[if IE 8]> <script src="http://t.static.delicloud.com/www/home/js/html5.min.js"></script> <![endif]-->
-	<!--[if IE 8]> <script src="http://t.static.delicloud.com/www/home/js/respond.src.js"></script> <![endif]-->
-	<!--[if IE 8]> <script src="http://t.static.delicloud.com/www/home/js/rem.min.js"></script> <![endif]-->
+	<!--[if IE 8]> <script src="./oauth/js/html5.min.js"></script> <![endif]-->
+	<!--[if IE 8]> <script src="./oauth/js/respond.src.js"></script> <![endif]-->
+	<!--[if IE 8]> <script src="./oauth/js/rem.min.js"></script> <![endif]-->
 </head>
 <body class="home">
 	<header class="main-nav background-shadow">
@@ -111,7 +110,7 @@
 				<div class="download-text"></div>
 				<div class="download-btn">
 					<a href="https://itunes.apple.com/cn/app/deli/id1340208086?mt=8" target="_blank" class="btn-ios" title="下载iOS"><span>iOS版</span></a>
-					<a href="https://www.pgyer.com/smartoffice_production_android" target="_blank" class="btn-android" title="下载Android"><span>Android版</span></a>
+					<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.delicloud.app.smartoffice" target="_blank" class="btn-android" title="下载Android"><span>Android版</span></a>
 				</div>
 			</div>
 		</div>
@@ -257,16 +256,16 @@
 			    </ul>
 			  </li>
 			</ul>
-			<div class="section-footer-news"><span>浙ICP备06004512号 Copyright &copy;2014 得力集团有限公司 版权所有</span></div>
+			<div class="section-footer-news"><span>鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</span></div>
 		</div>
 	</footer>
 	<script type="text/javascript">
-		var ua = navigator.userAgent.toLowerCase(), targetToggle = document.getElementById("nav-toggle"), targetDom = document.getElementsByClassName('mobile-collapsible');
+		var ua = navigator.userAgent.toLowerCase(), targetToggle = document.getElementById("nav-toggle"), targetDom = getElementsByClassName(document,'mobile-collapsible');
 		if (/iphone|ipad|ipod/.test(ua)) {
 			targetToggle.href = 'https://itunes.apple.com/cn/app/deli/id1340208086?mt=8';
 			targetToggle.setAttribute("target","_blank");
 		} else if (/android/.test(ua)) {
-			targetToggle.href = 'https://www.pgyer.com/smartoffice_production_android';
+			targetToggle.href = 'http://sj.qq.com/myapp/detail.htm?apkName=com.delicloud.app.smartoffice';
 			targetToggle.setAttribute("target","_blank");
 		}
 
@@ -325,6 +324,26 @@
 				});
 			}
 		});
+
+		/* 
+		**IE8兼容document.getElementsByClassName方法  update by yqm
+		*/
+		function getElementsByClassName(node, className) {
+		    if (node.getElementsByClassName) {
+		        // 使用现有方法
+		        return node.getElementsByClassName(className);
+		    } else {
+		        // 循环遍历所有标签，返回带有相应类名的元素
+		        var results = [],
+		            elems = node.getElementsByTagName("*");
+		        for (var i = 0, len = elems.length; i < len; i++) {
+		            if (elems[i].className.indexOf(className) != -1) {
+		                results[results.length] = elems[i];
+		            }
+		        }
+		        return results;
+		    }
+		}
 	</script>
 </body>
 </html>

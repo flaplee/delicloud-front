@@ -518,7 +518,7 @@
                                     <dd class="deli-kefu-phone">400-185-0555</dd>\
                                 </dl>\
                             </div>\
-                            <div class="deli-footer-copyright">浙ICP备06004512号 Copyright ©2014 得力集团有限公司 版权所有</div>\
+                            <div class="deli-footer-copyright">鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</div>\
                         </div>';
 
                         var wrapHeader = document.createElement('div'),
