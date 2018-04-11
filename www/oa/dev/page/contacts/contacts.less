@@ -187,14 +187,17 @@
 					.dept-select-inner{
 						margin-left: 20px;
 						padding-bottom: 40px;
-						height: 790px;
+						-height: 790px;
+						height: 720px;
 						overflow-x: hidden;
 						overflow-y: auto;
 						&.dept-select-inner-user{
-							height: 790px;
+							-height: 790px;
+							height: 720px;
 						}
 						&.dept-select-inner-department{
-							height: 860px;
+							-height: 860px;
+							height: 790px;
 						}
 						.select-item{
 							-margin-bottom: 10px;
@@ -328,7 +331,8 @@
 			}
 			.contacts-inner{
 				width: 752px;
-				height: 806px;
+				-height: 806px;
+				height: 720px;
 				.table{
 					.tbody{
 						width: 752px;
@@ -340,9 +344,10 @@
 			}
 			.department-inner{
 				width: 752px;
-				height: 806px;
+				-height: 806px;
+				height: 760px;
 			}
-			.contacts-inner,.department-inner{
+			.contacts-inner-title,.contacts-inner,.department-inner{
 				width:100%;
 				-padding-bottom: 100px;
 				overflow-x: hidden;
@@ -376,6 +381,11 @@
 						}
 					}
 					tbody.tbody{
+						tr.table-item:first-child{
+							td{
+								border-top:0;
+							}
+						}
 						tr.table-item{
 							height: 40px;
 							line-height: 40px;
@@ -385,9 +395,17 @@
 							color:#999999;
 							border-left: none;
 							border-right: none;
+							border-top: none;
 							height: 40px;
 							line-height: 40px;
 							padding: 0;
+							display: inline-block;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							&.empty-item{
+								display: table-cell;
+							}
 							a.item{
 								font-weight: normal;
 								font-size: 24px;
@@ -395,9 +413,9 @@
 								margin: 0 10px;
 							}
 							&.dept-text{
-								width: 275px;
+								-width: 275px;
 								p{
-									width: 275px;
+									-width: 275px;
 									overflow: hidden;
 									text-overflow: ellipsis;
 									white-space: nowrap;
@@ -417,6 +435,25 @@
 						}
 					}
 				}
+			}
+
+			.user-name{
+				width: 20%;
+			}
+			.user-employeenum{
+				width: 15%;
+			}
+			.user-deptname{
+				width: 25%;
+			}
+			.user-title{
+				width: 25%;
+			}
+			.user-mobile{
+				width: 15%;
+			}
+			.user-check, .user-operate{
+				display:none;
 			}
 		}
 

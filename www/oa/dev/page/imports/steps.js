@@ -25,8 +25,8 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
             $reUploadBtn = $importsInner.find('.imports-upload button.btn-upload'),
             $scntBtn = $importsInner.find('.imports-nav a.nav-enable'),
             $fcntBtn = $importsInner.find('.imports-nav a.nav-unable'),
-            $scntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-enable table.table tbody.tbody'),
-            $fcntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-unable table.table tbody.tbody');
+            $scntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-enable .table-data-wrap table.table-data tbody.tbody'),
+            $fcntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-unable .table-data-wrap table.table-data tbody.tbody');
 
         $importsNav.on('click', function(e){
             e.stopPropagation();
@@ -177,13 +177,13 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 var targetHtml = '';
                 $.each(data, function(i, n){
                     targetHtml += '<tr>\
-                        <td>'+ (i + 1) +'</td>\
-                        <td>'+ data[i].name +'</td>\
-                        <td>'+ data[i].employee_num +'</td>\
-                        <td>'+ data[i].dept_name +'</td>\
-                        <td>'+ data[i].title +'</td>\
-                        <td>'+ data[i].mobile +'</td>\
-                        '+ ((type && type == 'unable') ? '<td><span class="red">通讯录中已存在该手机号码的员工</span></td>' : '') +'\
+                        <td class="user-index">'+ (i + 1) +'</td>\
+                        <td class="user-name">'+ data[i].name +'</td>\
+                        <td class="user-employeenum">'+ data[i].employee_num +'</td>\
+                        <td class="user-deptname" title="'+ data[i].dept_name +'">'+ data[i].dept_name +'</td>\
+                        <td class="user-title" title="'+ data[i].title +'">'+ data[i].title +'</td>\
+                        <td class="user-mobile">'+ data[i].mobile +'</td>\
+                        '+ ((type && type == 'unable') ? '<td class="user-error"><span class="red">通讯录中已存在该手机号码的员工</span></td>' : '') +'\
                     </tr>';
                 });
                 o.append(targetHtml);

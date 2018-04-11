@@ -111,7 +111,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     
     // webSocket
     function webSocketInit(session){
-        if (!!window.WebSocket && window.WebSocket.prototype.send){
+        if (!(!!window.WebSocket && window.WebSocket.prototype.send)){
             // 打开一个 web socket
             var ws = new WebSocket(session.ws_url);
             ws.onopen = function(){
@@ -148,7 +148,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         else{
             // 浏览器不支持 WebSocket
             console.log("use polling")
-            pollInit(session.http_url);
+            pollInit('/ws/dl60463dc09800000');//session.http_url
         }
     }
 

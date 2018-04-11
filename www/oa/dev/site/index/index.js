@@ -194,7 +194,11 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 util.setCookie('orgindex', evt.data.orgindex);
                                 // update 20180313 更新相应数据
                                 util.setUserData(evt);
-                                pagechange(evt);
+                                if(kernel.parseHash(location.hash).id == 'imports'){
+                                    kernel.replaceLocation({'args':{},'id':'imports'});
+                                }else{
+                                    pagechange(evt);
+                                }
                             }
                             $('.nav-item-team .son-nav-wrap').hide();
                         });

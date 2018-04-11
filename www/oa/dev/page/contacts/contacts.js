@@ -99,17 +99,16 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                             }else{
                                 deptsText = json[i].department;
                             }
-
                             var departmentText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? '' : deptsText;
                             var titleText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? json[i].title : ((deptTitles && deptTitles.length > 1) ? deptTitles.join('/') : json[i].title);
                             var $itemTpl = $('<tr class="table-item">\
-                                <td style="display:none;"><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
-                                <td>' + json[i].nickname + '</td>\
-                                <td>' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
-                                <td class="dept-text"><p title="' + departmentText + '">' + departmentText + '</p></td>\
-                                <td><p title="' + titleText + '">' + titleText + '</p></td>\
-                                <td>' + json[i].mobile + '</td>\
-                                <td style="display:none;">\
+                                <td class="user-check" style="display:none;"><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
+                                <td class="user-name">' + json[i].nickname + '</td>\
+                                <td class="user-employeenum">' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
+                                <td class="user-deptname dept-text" title="' + departmentText + '">' + departmentText + '</td>\
+                                <td class="user-title"><p title="' + titleText + '">' + titleText + '</p></td>\
+                                <td class="user-mobile">' + json[i].mobile + '</td>\
+                                <td class="user-operate" style="display:none;">\
                                     <button data-index="' + i + '" type="button" class="btn btn-info btn-sm btn-user-edit">编辑</button>\
                                 </td>\
                             </tr>');
@@ -163,9 +162,14 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         }
                         selectUserAll($contactsTable.find('.thead .select-all'));
                     }else{
-                        kernel.hint('当前组织状态异常,请重新登录', 'error');
-                        util.setUserData(undefined);
-                        kernel.replaceLocation({'args': {},'id': 'loginhome'});
+                        if(isQuery && isQuery == true && os){
+                            $contactsWrapData.hide();
+                            $contactsWrapEmpty.show();
+                        }else{
+                            o.find('>').remove();
+                            var itemTpl = '<tr class="empty empty-user"><td colspan="8" class="empty-item"><div class="empty-img empty-img-user"></div><p class="empty-text">暂无人员信息</p></td></tr>';
+                            o.append($(itemTpl));
+                        }
                     }
                 } else {
                     if(isQuery && isQuery == true && os){
@@ -175,6 +179,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         o.find('>').remove();
                         var itemTpl = '<tr class="empty empty-user"><td colspan="8" class="empty-item"><div class="empty-img empty-img-user"></div><p class="empty-text">暂无人员信息</p></td></tr>';
                         o.append($(itemTpl));
+                    }
+                    if(!isQuery && data.type == 'parent'){
+                        kernel.hint('当前组织状态异常,请重新登录', 'error');
+                        util.setUserData(undefined);
+                        kernel.replaceLocation({'args': {},'id': 'loginhome'});
                     }
                 }
                 setDeptTitle($contactsTitle, data.title);

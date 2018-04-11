@@ -49,17 +49,23 @@
 					<button type="button" class="btn btn-info btn-sm btn-user-add fr">添加成员</button>
 				</div>
 			</div>
-			<div class="contacts-inner">
+			<div class="contacts-inner-title">
 				<table class="table">
 					<thead class="thead">
-						<th style="display:none;"><a class="select-all" href="javascript:;"><i class="iconfont">&#xe76a;</i></a></th>
-						<th>姓名</th>
-						<th>员工工号</th>
-						<th>所在部门</th>
-						<th>职务</th>
-						<th>手机号码</th>
-						<th class="delact" style="display: none;">操作</th>
+						<th class="user-check" style="display:none;"><a class="select-all" href="javascript:;"><i class="iconfont">&#xe76a;</i></a></th>
+						<th class="user-name">姓名</th>
+						<th class="user-employeenum">员工工号</th>
+						<th class="user-deptname">所在部门</th>
+						<th class="user-title">职务</th>
+						<th class="user-mobile">手机号码</th>
+						<th class="delact user-operate" style="display: none;">操作</th>
 					</thead>
+					<tbody class="tbody"></tbody>
+				</table>
+			</div>
+			<div class="contacts-inner">
+				<table class="table">
+					<thead class="thead"></thead>
 					<tbody class="tbody"></tbody>
 				</table>
 				<div class="paging hide">

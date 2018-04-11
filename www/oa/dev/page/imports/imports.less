@@ -148,12 +148,59 @@
 					.imports-table{
 						height:600px;
 						margin-top:30px;
-						overflow-x: hidden;
-						overflow-y: scroll;
+						overflow: hidden;
 						.imports-table-enable,.imports-table-unable{
+							height: 600px;
 							display:none;
 							&.active{
 								display:block;
+							}
+							.table-data-wrap{
+								height: 600px;
+								overflow-y: auto;
+							}
+						}
+						.imports-table-enable{
+							.user-index{
+								width: 5%;
+							}
+							.user-name{
+								width: 15%;
+							}
+							.user-employeenum{
+								width: 10%;
+							}
+							.user-deptname{
+								width: 25%;
+							}
+							.user-title{
+								width: 25%;
+							}
+							.user-mobile{
+								width: 20%;
+							}
+						}
+						.imports-table-unable{
+							.user-index{
+								width: 5%;
+							}
+							.user-name{
+								width: 12%;
+							}
+							.user-employeenum{
+								width: 8%;
+							}
+							.user-deptname{
+								width: 20%;
+							}
+							.user-title{
+								width: 16%;
+							}
+							.user-mobile{
+								width: 15%;
+							}
+							.user-error{
+								width: 24%
 							}
 						}
 						table.table{
@@ -189,11 +236,25 @@
 									border-right: none;
 									height: 40px;
 									line-height: 40px;
+									white-space: nowrap;
+									text-overflow: ellipsis;
+									overflow: hidden;
+									display: inline-block;
 									a.item{
 										font-weight: normal;
 										font-size: 24px;
 										color: #b5b5b5;
 										margin: 0 10px;
+									}
+								}
+							}
+
+							&.table-data{
+								tbody{
+									tr:first-child{
+										td{
+											border-top:0;
+										}
 									}
 								}
 							}

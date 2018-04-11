@@ -63,7 +63,7 @@ define(['common/kernel/kernel'], function(kernel) {
                     }
                 }
             };
-            if (param.data instanceof FormData) {
+            if ((window.FormData) ? (param.data instanceof FormData) : false) {
                 //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
                 if(param.dauth){
                     xhr.setRequestHeader('Dauth', param.dauth);
@@ -513,6 +513,10 @@ define(['common/kernel/kernel'], function(kernel) {
                                             // change 2017-12-01
                                             util.setUserData(dataInfo);
                                         }
+                                    },
+                                    error: function(){
+                                        //util.setUserData(undefined);
+                                        //kernel.replaceLocation({'args': {},'id': 'loginhome'});
                                     }
                                 });
                             }
