@@ -83,6 +83,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         util.delCookie('employee_count', undefined),
         util.setUserData(undefined, true);
         kernel.replaceLocation({'args': {},'id': 'loginhome'});
+        $('.loginQr').trigger('click');
     });
 
     //statechange({});

@@ -13,13 +13,12 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         $navTeam = $('#header .nav-top .nav-top-list .nav-item-team'),
         $orgNavList = $navTeam.find('.son-nav-list-team');;
     var stomp = null, userInfo = {}, tempInfo = {'data':{}, 'organization':{}};
-
     // init qrcode
     var initQrcode = function(o){
         o.addClass('login-loading');
         util.ajaxSubmit({
-            url: '/v1.0/barcode_login/public',
-            silent: true,
+            url: '/v1.0/barcode_login/public?v=' + (new Date().getTime()),
+            silent: false,
             type:'get',
             success: function(json) {
                 o.removeClass('login-loading');
@@ -62,36 +61,10 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             if (that && that.childNodes.length > 0) {
                 this.innerHTML = that.innerHTML;
             } else {
-                util.ajaxSubmit({
-                    url: '/v1.0/barcode_login/public',
-                    silent: true,
-                    type:'get',
-                    success: function(json) {
-                        if(json.code == 0){
-                            var res = json.data['result'],
-                                cid = res.cid,
-                                url = res.data;
-                            if (url) {
-                                loginQr.html('');
-                                new QRCode(document.getElementById('qrcode'), {
-                                    text: url,
-                                    width: 234,
-                                    height: 234,
-                                    correctLevel: QRCode.CorrectLevel.L
-                                });
-                                //connect(cid);
-                                webSocketInit(session);
-                            } else {
-                                loginQr.html('');
-                                //更新user
-                                //util.updateUserData();
-                            }
-                        }else{
-                            kernel.hint(json.msg);
-                        }
-                    }
-                });
+                initQrcode($loginBox.find('.loginQr'));
             }
+        }else{
+            initQrcode($loginBox.find('.loginQr'));
         }
     });
 
@@ -115,11 +88,13 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             // 打开一个 web socket
             var ws = new WebSocket(session.ws_url);
             ws.onopen = function(){
+                console.log("已连接上");
                 // Web Socket 已连接上，使用 send() 方法发送数据
                 ws.send('{"cmd": "register","data": "'+ session.session_id +'"}');
             };
             ws.onmessage = function(evt){
                 var json = JSON.parse(evt.data);
+                console.log("json", json);
                 if(json){
                     if(json.id){
                         tempInfo.data = json;
@@ -144,6 +119,9 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 // 关闭 websocket
                 console.log("连接已关闭...")
             };
+            ws.onerror = function (e) {
+                console.log('发生异常:', e);
+            };
         }else{
             // 浏览器不支持 WebSocket
             var timer = setInterval(function(){pollInit('/ws/'+ session.session_id +'', timer)}, 5000);
@@ -151,66 +129,64 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     }
     // polling
     function pollInit(url, timer) {
-        //setTimeout(function() {
-            util.ajaxSubmit({
-                url: url,
-                silent: true,
-                type:'get',
-                force: true,
-                complete: function(res){
-                    if(res.status == 200){
-                        var response = JSON.parse(res.responseText);
-                        if(response.length > 1){
-                            var jsonUser = response[0], jsonInfo = response[1];
-                            if(jsonUser && jsonInfo){
-                                if(jsonUser.id){
-                                    tempInfo.data = jsonUser;
-                                    $loginDoing.hide();
-                                    $loginFail.hide();
-                                    $loginSuccess.find('div.success-img').css({'background-image':'url('+ jsonUser.avatar_url +')'}).attr('title', jsonUser.name);
-                                    $loginSuccess.show();
-                                }
-                                if(jsonInfo.user_id){
-                                    userInfo = jsonInfo;
-                                    if(userInfo.type == 'web'){
-                                        //util.setUserData(userInfo);
-                                        util.setCookie('token', userInfo.token);
-                                        util.setCookie('userid', userInfo.user_id);
-                                        util.setCookie('expire', userInfo.expire);
-                                    }
-                                    orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
-                                        clearInterval(timer);
-                                    });
-                                }
+        util.ajaxSubmit({
+            url: url,
+            silent: true,
+            type:'get',
+            force: true,
+            complete: function(res){
+                if(res.status == 200){
+                    var response = JSON.parse(res.responseText);
+                    if(response.length > 1){
+                        var jsonUser = response[0], jsonInfo = response[1];
+                        if(jsonUser && jsonInfo){
+                            if(jsonUser.id){
+                                tempInfo.data = jsonUser;
+                                $loginDoing.hide();
+                                $loginFail.hide();
+                                $loginSuccess.find('div.success-img').css({'background-image':'url('+ jsonUser.avatar_url +')'}).attr('title', jsonUser.name);
+                                $loginSuccess.show();
                             }
-                        }else if(response.length == 1){
-                            var json = response[0];
-                            if(json){
-                                if(json.id){
-                                    tempInfo.data = json;
-                                    $loginDoing.hide();
-                                    $loginFail.hide();
-                                    $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
-                                    $loginSuccess.show();
+                            if(jsonInfo.user_id){
+                                userInfo = jsonInfo;
+                                if(userInfo.type == 'web'){
+                                    //util.setUserData(userInfo);
+                                    util.setCookie('token', userInfo.token);
+                                    util.setCookie('userid', userInfo.user_id);
+                                    util.setCookie('expire', userInfo.expire);
                                 }
-                                if(json.user_id){
-                                    userInfo = json;
-                                    if(userInfo.type == 'web'){
-                                        //util.setUserData(userInfo);
-                                        util.setCookie('token', userInfo.token);
-                                        util.setCookie('userid', userInfo.user_id);
-                                        util.setCookie('expire', userInfo.expire);
-                                    }
-                                    orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
-                                        clearInterval(timer);
-                                    });
+                                orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
+                                    clearInterval(timer);
+                                });
+                            }
+                        }
+                    }else if(response.length == 1){
+                        var json = response[0];
+                        if(json){
+                            if(json.id){
+                                tempInfo.data = json;
+                                $loginDoing.hide();
+                                $loginFail.hide();
+                                $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                                $loginSuccess.show();
+                            }
+                            if(json.user_id){
+                                userInfo = json;
+                                if(userInfo.type == 'web'){
+                                    //util.setUserData(userInfo);
+                                    util.setCookie('token', userInfo.token);
+                                    util.setCookie('userid', userInfo.user_id);
+                                    util.setCookie('expire', userInfo.expire);
                                 }
+                                orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
+                                    clearInterval(timer);
+                                });
                             }
                         }
                     }
                 }
-            });
-        //}, 5000);
+            }
+        });
     }
 
     // select orgs
@@ -328,6 +304,9 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 } else {
                     kernel.hint(json.msg);
                 }
+            },
+            error: function(res){
+                console.log("res", res);
             }
         });
     }

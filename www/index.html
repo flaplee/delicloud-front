@@ -13,15 +13,12 @@
 	<link href="http://www.delicloud.com/favicon.ico" rel="shortcut icon"/>
 	<link rel="apple-touch-icon-precomposed" href="http://t.static.delicloud.com/images/favicons/128x128.png?v=20180317">
 	<link rel="icon" href="http://t.static.delicloud.com/images/favicons/128x128.png?v=20180317">
-	<link rel="stylesheet" type="text/css" href="http://t.static.delicloud.com/www/home/css/style.css">
-	<!--[if IE 8]> <script src="./oauth/js/html5.min.js"></script> <![endif]-->
-	<!--[if IE 8]> <script src="./oauth/js/respond.src.js"></script> <![endif]-->
-	<!--[if IE 8]> <script src="./oauth/js/rem.min.js"></script> <![endif]-->
+	<link rel="stylesheet" type="text/css" href="http://t.static.delicloud.com/www/home/css/style.css?v=20180317">
 </head>
 <body class="home">
-	<header class="main-nav background-shadow">
+	<div class="main-nav background-shadow">
 	  <div class="wrapper">
-	    <nav role="navigation">
+	    <div class="top-nav clear" role="navigation">
 			<h1 class="logo-box">
 				<a href="/" class="logo" title="得力e+"></a>
 			</h1>
@@ -34,11 +31,11 @@
 				<li><a href="/download.html">应用下载</a></li>
 				<li class="nav-item-admin"><a href="/oa" class="admin-login">管理后台</a></li>
 			</ul>
-	    </nav>
+	    </div>
 	  </div>
-	</header>
+	</div>
 
-	<section class="home-index">
+	<div class="home-index section-container">
 		<div class="home-box">
 			<div class="home-banner">
 				<div class="banner-inner container">
@@ -109,15 +106,18 @@
 			<div class="home-download">
 				<div class="download-text"></div>
 				<div class="download-btn">
-					<a href="https://itunes.apple.com/cn/app/deli/id1340208086?mt=8" target="_blank" class="btn-ios" title="下载iOS"><span>iOS版</span></a>
-					<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.delicloud.app.smartoffice" target="_blank" class="btn-android" title="下载Android"><span>Android版</span></a>
+					<a href="https://itunes.apple.com/cn/app/deli/id1340208086?mt=8" target="_blank" class="btn-ios" title="下载iOS">
+						<span><b class="download-ios-icon"></b>iOS版</span>
+					</a>
+					<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.delicloud.app.smartoffice" target="_blank" class="btn-android" title="下载Android">
+						<span><b class="download-android-icon"></b>Android版</span></a>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 
 	<div class="home-block home-description">
-		<div class="wrapper description-header">
+		<div class="wrapper description-header wrapper-display-pc">
 			<div class="row center-h">
 				<div class="col span-10">
 					<h1 class="heading-block-title center"><strong>得力e+</strong></h1>
@@ -153,7 +153,7 @@
 		</div>
 	</div>
 
-	<section class="home-block home-production">
+	<div class="home-block home-production section-container">
 		<div class="wrapper production-header">
 			<div class="row center-h">
 				<img src="http://t.static.delicloud.com/www/home/images/index/app-m-img-1.png?v=20180317" alt="企业通讯录" title="企业通讯录">
@@ -166,9 +166,9 @@
 		<div class="production-hero-wrapper">
 			<img class="production-hero" src="http://t.static.delicloud.com/www/home/images/index/m-address-simg.png?v=20180317" />
 		</div>
-	</section>
+	</div>
 
-	<section class="home-block home-production">
+	<div class="home-block home-production section-container">
 		<div class="wrapper production-header">
 			<div class="row center-h">
 				<img src="http://t.static.delicloud.com/www/home/images/index/app-m-img-8.png?v=20180317" alt="IM通讯">
@@ -181,9 +181,9 @@
 		<div class="production-hero-wrapper">
 			<img class="production-hero" src="http://t.static.delicloud.com/www/home/images/index/m-im-simg.png?v=20180317" />
 		</div>
-	</section>
+	</div>
 
-	<section class="home-block home-production">
+	<div class="home-block home-production section-container">
 		<div class="wrapper production-header">
 			<div class="row center-h">
 				<img src="http://t.static.delicloud.com/www/home/images/index/app-m-img-2.png?v=20180317" alt="考勤与假期管理">
@@ -196,9 +196,9 @@
 		<div class="production-hero-wrapper">
 			<img class="production-hero" src="http://t.static.delicloud.com/www/home/images/index/m-roll-simg.png?v=20180317" />
 		</div>
-	</section>
+	</div>
 
-	<section class="home-block home-production">
+	<div class="home-block home-production section-container">
 		<div class="wrapper production-header">
 			<div class="row center-h">
 				<img src="http://t.static.delicloud.com/www/home/images/index/app-m-img-3.png?v=20180317" alt="审批">
@@ -211,9 +211,9 @@
 		<div class="production-hero-wrapper">
 			<img class="production-hero" src="http://t.static.delicloud.com/www/home/images/index/m-examine-simg.png?v=20180317" />
 		</div>
-	</section>
+	</div>
 
-	<section class="home-block home-production">
+	<div class="home-block home-production section-container">
 		<div class="wrapper production-header production-header-sub">
 			<div class="row center-h">
 				<div class="col span-10">
@@ -222,9 +222,9 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 
-	<footer class="main-footer">
+	<div class="main-footer main-footer-pc">
 		<div class="wrapper extra">
 			<ul class="small clear">
 			  <li class="width-24-percent">
@@ -258,14 +258,66 @@
 			</ul>
 			<div class="section-footer-news"><span>鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</span></div>
 		</div>
-	</footer>
+	</div>
+	<div class="main-footer main-footer-mobile">
+		<div class="wrapper extra">
+			<ul class="small clear">
+			  <li>
+			    <h1 class="heading-caption section-footer mobile-collapsible">使用帮助</h1>
+			    <ul class="section-footer" role="navigation">
+			      <li><a href="http://b2b.nbdeli.com" target="_blank">去购买智能设备</a></li>
+			      <li><a href="http://download.delicloud.com/app/delispecification.pdf" target="_blank">使用帮助</a></li>
+			    </ul>
+			  </li>
+			  <li>
+			    <h1 class="heading-caption section-support mobile-collapsible">应用开发商</h1>
+			    <ul class="section-support" role="navigation">
+					<li><a href="http://doc.delicloud.com/site/" target="_blank">应用接入指南</a></li>
+			    </ul>
+			  </li>
+			  <li>
+			    <h1 class="heading-caption section-company mobile-collapsible">关于我们</h1>
+			    <ul class="section-company" role="navigation">
+			      <li><a href="http://www.nbdeli.com/" target="_blank">关于得力</a></li>
+			      <li><a href="http://hr.nbdeli.cn/scripts/mgrqispi.dll?Appname=HRsoft2000&Prgname=REC2_RESUME_STAFF_P&ARGUMENTS=-AC" target="_blank">加入我们</a></li>
+			    </ul>
+			  </li>
+			  <li>
+			    <h1 class="heading-caption section-community mobile-collapsible">联系我们</h1>
+			    <ul class="section-community" role="navigation">
+					<li><span class="telephone-contact-icon"></span><a class="telephone-contact-text" href="javascript:;">400-185-0555</a><!-- <a href="javascript:;">QQ</a> <a href="javascript:;">Wechat</a> --> </li>
+					<li><span class="qq-contact-icon"></span><a class="qq-contact-text" href="javascript:;">327264079</a><!-- <a href="javascript:;">QQ</a> <a href="javascript:;">Wechat</a> --> </li>
+					<li><span class="wechat-contact-icon"></span><a class="wechat-contact-text" href="javascript:;">得力e+公众号</a><!-- <a href="javascript:;">QQ</a> <a href="javascript:;">Wechat</a> --> </li>
+			    </ul>
+			  </li>
+			</ul>
+			<div class="section-footer-news"><span>鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</span></div>
+		</div>
+	</div>
 	<script type="text/javascript">
+		function getElementsByClassName(node, className) {
+		    if (node.getElementsByClassName) {
+		        // 使用现有方法
+		        return node.getElementsByClassName(className);
+		    } else {
+		        // 循环遍历所有标签，返回带有相应类名的元素
+		        var results = [],
+		            elems = node.getElementsByTagName("*");
+		        for (var i = 0, len = elems.length; i < len; i++) {
+		            if (elems[i].className.indexOf(className) != -1) {
+		                results[results.length] = elems[i];
+		            }
+		        }
+		        return results;
+		    }
+		}
+
 		var ua = navigator.userAgent.toLowerCase(), targetToggle = document.getElementById("nav-toggle"), targetDom = getElementsByClassName(document,'mobile-collapsible');
 		if (/iphone|ipad|ipod/.test(ua)) {
 			targetToggle.href = 'https://itunes.apple.com/cn/app/deli/id1340208086?mt=8';
 			targetToggle.setAttribute("target","_blank");
 		} else if (/android/.test(ua)) {
-			targetToggle.href = 'http://sj.qq.com/myapp/detail.htm?apkName=com.delicloud.app.smartoffice';
+			targetToggle.href = 'https://www.pgyer.com/smartoffice_production_android';
 			targetToggle.setAttribute("target","_blank");
 		}
 
@@ -324,26 +376,6 @@
 				});
 			}
 		});
-
-		/* 
-		**IE8兼容document.getElementsByClassName方法  update by yqm
-		*/
-		function getElementsByClassName(node, className) {
-		    if (node.getElementsByClassName) {
-		        // 使用现有方法
-		        return node.getElementsByClassName(className);
-		    } else {
-		        // 循环遍历所有标签，返回带有相应类名的元素
-		        var results = [],
-		            elems = node.getElementsByTagName("*");
-		        for (var i = 0, len = elems.length; i < len; i++) {
-		            if (elems[i].className.indexOf(className) != -1) {
-		                results[results.length] = elems[i];
-		            }
-		        }
-		        return results;
-		    }
-		}
 	</script>
 </body>
 </html>

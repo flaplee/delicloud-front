@@ -180,11 +180,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         var itemTpl = '<tr class="empty empty-user"><td colspan="8" class="empty-item"><div class="empty-img empty-img-user"></div><p class="empty-text">暂无人员信息</p></td></tr>';
                         o.append($(itemTpl));
                     }
-                    if(!isQuery && data.type == 'parent'){
+                   /* if(!isQuery && data.type == 'parent'){
                         kernel.hint('当前组织状态异常,请重新登录', 'error');
                         util.setUserData(undefined);
                         kernel.replaceLocation({'args': {},'id': 'loginhome'});
-                    }
+                    }*/
                 }
                 setDeptTitle($contactsTitle, data.title);
             }

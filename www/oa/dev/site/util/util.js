@@ -71,7 +71,8 @@ define(['common/kernel/kernel'], function(kernel) {
                 }
                 xhr.send(param.data);
             } else {
-                xhr.setRequestHeader('content-type', 'application/json');
+                //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.setRequestHeader('Content-Type', 'application/json');
                 if(param.dauth){
                     xhr.setRequestHeader('Dauth', param.dauth);
                     xhr.setRequestHeader('Duagent', '_web');
