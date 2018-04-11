@@ -111,7 +111,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     
     // webSocket
     function webSocketInit(session){
-        if (!(!!window.WebSocket && window.WebSocket.prototype.send)){
+        if (!!window.WebSocket && window.WebSocket.prototype.send){
             // 打开一个 web socket
             var ws = new WebSocket(session.ws_url);
             ws.onopen = function(){
@@ -136,7 +136,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             util.setCookie('userid', userInfo.user_id);
                             util.setCookie('expire', userInfo.expire);
                         }
-                        orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token}, ws);
+                        orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token,type: 'websocket'}, ws);
                     }
                 }
             };
@@ -144,31 +144,73 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 // 关闭 websocket
                 console.log("连接已关闭...")
             };
-        }
-        else{
+        }else{
             // 浏览器不支持 WebSocket
-            console.log("use polling")
-            pollInit('/ws/dl60463dc09800000');//session.http_url
+            var timer = setInterval(function(){pollInit('/ws/'+ session.session_id +'', timer)}, 5000);
         }
     }
-
     // polling
-    function pollInit(url) {
-        setTimeout(function() {
+    function pollInit(url, timer) {
+        //setTimeout(function() {
             util.ajaxSubmit({
                 url: url,
                 silent: true,
                 type:'get',
                 force: true,
-                success: function(json) {
-                    console.log("json", json);
-                    //pollInit(url);
-                },
-                error: function(json){
-                    kernel.hint('网络或服务器错误~', 'error');
+                complete: function(res){
+                    if(res.status == 200){
+                        var response = JSON.parse(res.responseText);
+                        if(response.length > 1){
+                            var jsonUser = response[0], jsonInfo = response[1];
+                            if(jsonUser && jsonInfo){
+                                if(jsonUser.id){
+                                    tempInfo.data = jsonUser;
+                                    $loginDoing.hide();
+                                    $loginFail.hide();
+                                    $loginSuccess.find('div.success-img').css({'background-image':'url('+ jsonUser.avatar_url +')'}).attr('title', jsonUser.name);
+                                    $loginSuccess.show();
+                                }
+                                if(jsonInfo.user_id){
+                                    userInfo = jsonInfo;
+                                    if(userInfo.type == 'web'){
+                                        //util.setUserData(userInfo);
+                                        util.setCookie('token', userInfo.token);
+                                        util.setCookie('userid', userInfo.user_id);
+                                        util.setCookie('expire', userInfo.expire);
+                                    }
+                                    orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
+                                        clearInterval(timer);
+                                    });
+                                }
+                            }
+                        }else if(response.length == 1){
+                            var json = response[0];
+                            if(json){
+                                if(json.id){
+                                    tempInfo.data = json;
+                                    $loginDoing.hide();
+                                    $loginFail.hide();
+                                    $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                                    $loginSuccess.show();
+                                }
+                                if(json.user_id){
+                                    userInfo = json;
+                                    if(userInfo.type == 'web'){
+                                        //util.setUserData(userInfo);
+                                        util.setCookie('token', userInfo.token);
+                                        util.setCookie('userid', userInfo.user_id);
+                                        util.setCookie('expire', userInfo.expire);
+                                    }
+                                    orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
+                                        clearInterval(timer);
+                                    });
+                                }
+                            }
+                        }
+                    }
                 }
             });
-        }, 5000);
+        //}, 5000);
     }
 
     // select orgs
@@ -240,7 +282,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 $loginDoing.show();
                                 $loginSuccess.hide();
                                 $loginFail.hide();
-                                initQrcode($loginBox.find('.loginQr'))
+                                //initQrcode($loginBox.find('.loginQr'))
                                 util.setCookie('orgid', orgInfo[targetCurrent].org_id),
                                 util.setCookie('parentid', orgInfo[targetCurrent].top_department_id),
                                 util.setCookie('orgname', orgInfo[targetCurrent].org_name),
@@ -258,7 +300,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 $loginDoing.show();
                                 $loginSuccess.hide();
                                 $loginFail.hide();
-                                initQrcode($loginBox.find('.loginQr'))
+                                //initQrcode($loginBox.find('.loginQr'))
                                  if(targetLength<=4){
                                     o.addClass('org-list-seldom');
                                 }else{
@@ -275,8 +317,14 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                         $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
                         $loginFail.show();
                     }
-                    //完成关闭websocket
-                    ws.close();
+                    if(data.type == 'websocket'){
+                        //完成关闭websocket
+                        ws.close();
+                    }else if(data.type == 'polling'){
+                        if(typeof ws === 'function'){
+                            ws();
+                        }
+                    }
                 } else {
                     kernel.hint(json.msg);
                 }
