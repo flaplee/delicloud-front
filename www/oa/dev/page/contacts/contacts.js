@@ -18,11 +18,14 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         $removeUser = $contactsInfo.find('.btn-user-remove'),
         $deleteUser = $contactsInfo.find('.btn-user-delete-end'),
         $addUser = $contactsInfo.find('.btn-user-add'),
+        $contactsInner = $contactsInfo.find('.contacts-inner'),
         $contactsTable = $contactsInfo.find('.contacts-inner .table'),
         $tmp = $contactsTable.find('.tbody'),
         $listTmp = $contactsTeam.find('.dept-select-list'),
         $wrapTmp = $listTmp.find('div.dept-select-wrap'),
-        $listTmpInner = $listTmp.find('ul.dept-select-inner');
+        $listTmpInner = $listTmp.find('ul.dept-select-inner'),
+        $departmentInner = $contacts.find('.department-inner');
+        
     // 屏蔽回车键自动提交
     $(document).keydown(function(e){
         switch(e.keyCode){
@@ -30,6 +33,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
              return false;
         }
     });
+    
     
     //初始化组织
     var initTopDeparentment = function(o, data){
@@ -105,7 +109,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                                 <td class="user-check" style="display:none;"><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
                                 <td class="user-name">' + json[i].nickname + '</td>\
                                 <td class="user-employeenum">' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
-                                <td class="user-deptname dept-text" title="' + departmentText + '">' + departmentText + '</td>\
+                                <td class="user-deptname dept-text" title="' + departmentText + '"><p>' + departmentText + '</p></td>\
                                 <td class="user-title"><p title="' + titleText + '">' + titleText + '</p></td>\
                                 <td class="user-mobile">' + json[i].mobile + '</td>\
                                 <td class="user-operate" style="display:none;">\
@@ -180,11 +184,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         var itemTpl = '<tr class="empty empty-user"><td colspan="8" class="empty-item"><div class="empty-img empty-img-user"></div><p class="empty-text">暂无人员信息</p></td></tr>';
                         o.append($(itemTpl));
                     }
-                   /* if(!isQuery && data.type == 'parent'){
+                    if(!isQuery && data.type == 'parent'){
                         kernel.hint('当前组织状态异常,请重新登录', 'error');
                         util.setUserData(undefined);
                         kernel.replaceLocation({'args': {},'id': 'loginhome'});
-                    }*/
+                    }
                 }
                 setDeptTitle($contactsTitle, data.title);
             }
@@ -822,6 +826,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                     orgid: orgid
                 }, true);
                 
+                
+                // 获取屏幕的可见区域高度减去其他部分的高度
+                $listTmpInner.height(document.body.clientHeight - 245);
+                $contactsInner.height(document.body.clientHeight - 250);
+
                 $contactsMenu.find('ul.menu-list li.item').removeClass('current');
                 $contactsMenu.find('ul.menu-list li.item').filter('.item-'+ ((type) ? type : 'user') +'').addClass('current');
                 $contactsBox.find(boxClass).show().siblings().hide();
@@ -838,8 +847,12 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         $contactsForm.hide();
                         break;
                     case 'department':
+                        // 获取屏幕的可见区域高度减去其他部分的高度
+                        $listTmpInner.height(document.body.clientHeight - 245 + 72);
+                        $departmentInner.height(document.body.clientHeight - 250 + 40);
                         departments();
                         $contactsForm.hide();
+                        
                         if($listTmpInner.hasClass('dept-select-inner-user')){
                             $listTmpInner.removeClass('dept-select-inner-user').addClass('dept-select-inner-department');
                         }else{

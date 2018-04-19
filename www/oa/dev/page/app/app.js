@@ -38,7 +38,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                         org_id: orgid
                     },
                     success: function(res) {
-                        console.log("res", res);
                         var data = res.data.result;
                         for (var i = 0; i < data.length; i++) {
                             var innerHtml = '', installHtml = '';
@@ -93,7 +92,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             app_id: data.appid
                         },
                         success: function(res) {
-                            console.log("res", res);
                             if(res.code == 0){
                                 kernel.hint('应用安装成功~', 'success');
                                 util.setCookie('app_ids', (parseInt(util.getCookie('app_ids')) + 1));

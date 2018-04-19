@@ -2,8 +2,17 @@
 define(['common/kernel/kernel'], function(kernel) {
     var util = {
         ajaxSubmit: function(param) {
-            var xhr = new XMLHttpRequest(),
-                type = param.type || 'post',
+            var xhr;
+            if(window.XMLHttpRequest){
+                xhr = new XMLHttpRequest();
+            }else if(window.ActiveXObject){
+                try{
+                    xhr = new ActiveXObject("MSXML2.XMLHTTP");
+                }catch(e) {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            var type = param.type || 'post',
                 url = (param.force ? param.url : ('/web' + param.url))
             if (type === 'get' && param.data) {
                 var strArr = []
@@ -66,13 +75,16 @@ define(['common/kernel/kernel'], function(kernel) {
             if ((window.FormData) ? (param.data instanceof FormData) : false) {
                 //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
                 if(param.dauth){
-                    xhr.setRequestHeader('Dauth', param.dauth);
                     xhr.setRequestHeader('Duagent', '_web');
+                    xhr.setRequestHeader('Dauth', param.dauth);
                 }
                 xhr.send(param.data);
             } else {
                 //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.setRequestHeader('Content-Type', 'application/json');
+                //xhr.setRequestHeader('Content-Type', 'text/html;charset=UTF-8');
+                xhr.setRequestHeader("If-Modified-Since","0");
+                xhr.setRequestHeader("Cache-Control","no-cache");
                 if(param.dauth){
                     xhr.setRequestHeader('Dauth', param.dauth);
                     xhr.setRequestHeader('Duagent', '_web');
@@ -426,7 +438,7 @@ define(['common/kernel/kernel'], function(kernel) {
         //传入undefined表示账号已退出登录
         util.setUserData = function(data, initiative) {
             if (data !== userData) {
-                if (data && userData && data.data.id == userData.data.id) {
+                if(((data && userData)?((userData.data)?(userData.data.id ? true : false) : false) : false)){
                     if (!util.isEqual(userData, data)) {
                         if(data.orgindex == userData.orgindex){
                             userData = data;
@@ -448,7 +460,7 @@ define(['common/kernel/kernel'], function(kernel) {
                             }
                         }
                     }
-                } else {
+                }else{
                     userData = data;
                     if (util.userEvents.onstatechange instanceof Function) {
                         util.userEvents.onstatechange({

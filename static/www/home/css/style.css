@@ -93,10 +93,10 @@ a img {
   background-size: cover;
   overflow: hidden;
   padding: 240px 0 290px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/index1.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/index1.png?v=20180317');
   background: none\9;
   /*下一行为关键设置*/
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/index/index1.png?v=20180317', sizingMethod='scale');
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/index/index1.png?v=20180317', sizingMethod='scale');
 }
 
 .home-box .home-banner .banner-inner{}
@@ -104,14 +104,14 @@ a img {
 .home-box .home-banner .banner-inner .banner-text{
   width: 794px;
   height: 54px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/index1-text.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/index1-text.png?v=20180317');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   margin: 0 auto;
   background: none\9;
   /*下一行为关键设置*/
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/index/index1-text.png?v=20180317', sizingMethod='scale'); 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/index/index1-text.png?v=20180317', sizingMethod='scale'); 
 }
 
 .home-box .home-app{
@@ -131,7 +131,7 @@ a img {
 .home-box .home-app .app-inner .app-info .info-title{
   width: 138px;
   height: 34px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/title1.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/title1.png?v=20180317');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -191,49 +191,49 @@ a img {
 .app-info .app-list .list-item .item-img.item-img-1{
   width: 50px;
   height: 54px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-1.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/app-img-1.png?v=20180317');
 }
 
 .app-info .app-list .list-item .item-img.item-img-2{
   width: 50px;
   height: 50px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-2.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/app-img-2.png?v=20180317');
 }
 
 .app-info .app-list .list-item .item-img.item-img-3{
   width: 54px;
   height: 54px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-3.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/app-img-3.png?v=20180317');
 }
 
 .app-info .app-list .list-item .item-img.item-img-4{
   width: 52px;
   height: 51px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-4.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/app-img-4.png?v=20180317');
 }
 
 .app-info .app-list .list-item .item-img.item-img-5{
   width: 54px;
   height: 50px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-5.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/app-img-5.png?v=20180317');
 }
 
 .app-info .app-list .list-item .item-img.item-img-6{
   width: 50px;
   height: 50px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-6.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/app-img-6.png?v=20180317');
 }
 
 .app-info .app-list .list-item .item-img.item-img-7{
   width: 48px;
   height: 54px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-7.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/app-img-7.png?v=20180317');
 }
 
 .home-box .home-app .app-inner .app-img{
   width: 408px;
   height: 699px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/app.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/app.png?v=20180317');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -261,7 +261,7 @@ a img {
   margin: 0 auto;
   width: 252px;
   height: 35px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/title2.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/title2.png?v=20180317');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -312,34 +312,34 @@ a img {
 }
 
 .device-info .item-img-1{
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/device-img-1.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/device-img-1.png?v=20180317');
 }
 
 .device-info .item-img-2{
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/device-img-2.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/device-img-2.png?v=20180317');
 }
 
 .device-info .item-img-3{
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/device-img-3.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/device-img-3.png?v=20180317');
 }
 
 .device-info .item-img-4{
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/device-img-4.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/device-img-4.png?v=20180317');
 }
 
 .device-info .item-img-5{
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/device-img-5.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/device-img-5.png?v=20180317');
 }
 
 .device-info .item-img-6{
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/device-img-6.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/device-img-6.png?v=20180317');
 }
 
 .home-box .home-device .device-inner .device-img{
   margin: 0 auto;
   width: 1080px;
   height: 576px;
-  background-image: url(' http://t.static.delicloud.com/www/home/images/index/device.png?v=20180317');
+  background-image: url(' https://static.delicloud.com/www/home/images/index/device.png?v=20180317');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -352,7 +352,7 @@ a img {
   background-size: cover;
   overflow: hidden;
   padding: 240px 0 290px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/index2.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/index2.png?v=20180317');
 }
 
 .home-box .home-map .map-inner{
@@ -362,7 +362,7 @@ a img {
 .home-box .home-map .map-inner .map-text{
   width: 543px;
   height: 106px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/index2-text.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/index2-text.png?v=20180317');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
@@ -403,7 +403,7 @@ a img {
 .home-box .home-comment .comment-text{
   width: 856px;
   height: 36px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/index/comment.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/index/comment.png?v=20180317');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
@@ -422,7 +422,7 @@ a img {
 .home-box .home-download .download-text {
     width: 626px;
     height: 39px;
-    background-image: url('http://t.static.delicloud.com/www/home/images/index/download-text.png?v=20180317');
+    background-image: url('https://static.delicloud.com/www/home/images/index/download-text.png?v=20180317');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -463,7 +463,7 @@ a img {
     display: inline-block;
     width: 21px;
     height: 24px;
-    background: url('http://t.static.delicloud.com/www/home/images/ios-icon-black.png') 0 0 no-repeat;
+    background: url('https://static.delicloud.com/www/home/images/ios-icon-black.png') 0 0 no-repeat;
     vertical-align: top;
     margin-top: -1px;
     margin-right: 10px;
@@ -473,7 +473,7 @@ a img {
     display: inline-block;
     width: 21px;
     height: 24px;
-    background: url('http://t.static.delicloud.com/www/home/images/android-icon-black.png') 0 0 no-repeat;
+    background: url('https://static.delicloud.com/www/home/images/android-icon-black.png') 0 0 no-repeat;
     vertical-align: top;
     margin-top: -1px;
     margin-right: 10px;
@@ -482,22 +482,22 @@ a img {
 .home-box .home-download .download-btn a.btn-ios {
     width: 184px;
     height: 184px;
-    background-image: url(http://t.static.delicloud.com/www/home/images/index/ios.png?v=20180317);
+    background-image: url(https://static.delicloud.com/www/home/images/index/ios.png?v=20180317);
     /*针对IE8的hack，目的是除掉之前background*/
     background: none\9;
     /*下一行为关键设置*/
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/index/ios.png?v=20180317', sizingMethod='scale');
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/index/ios.png?v=20180317', sizingMethod='scale');
 }
 
 .home-box .home-download .download-btn a.btn-android {
     width: 184px;
     height: 184px;
     float: right;
-    background-image: url(http://t.static.delicloud.com/www/home/images/index/android.png?v=20180317);
+    background-image: url(https://static.delicloud.com/www/home/images/index/android.png?v=20180317);
     /*针对IE8的hack，目的是除掉之前background*/
     background: none\9;
     /*下一行为关键设置*/
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/index/android.png?v=20180317', sizingMethod='scale');
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/index/android.png?v=20180317', sizingMethod='scale');
 }
 
 
@@ -514,23 +514,23 @@ a img {
 .product-item.item-padding .product-inner .product-info{margin-right: 200px;margin-left: 0;}
 .product-inner .product-info .info-title{}
 .product-inner .product-info .info-title .title-icon{width: 60px; height: 60px;background-repeat: no-repeat; background-position: center; background-size: 100%; margin: 0 auto;}
-.product-inner .product-info .info-title .title-icon-1{width: 50px; height: 54px;background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-1.png?v=20180317');margin-right: 20px;margin-top: 3px;}
-.product-inner .product-info .info-title .title-icon-2{width: 43px; height: 44px;background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-8.png?v=20180317');margin-left: 20px;margin-top: 8px;}
-.product-inner .product-info .info-title .title-icon-3{width: 50px; height: 50px;background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-3.png?v=20180317');margin-right: 20px;margin-top: 5px;}
-.product-inner .product-info .info-title .title-icon-4{width: 52px; height: 51px;background-image: url('http://t.static.delicloud.com/www/home/images/index/app-img-4.png?v=20180317');margin-left: 20px;margin-top: 3px;}
+.product-inner .product-info .info-title .title-icon-1{width: 50px; height: 54px;background-image: url('https://static.delicloud.com/www/home/images/index/app-img-1.png?v=20180317');margin-right: 20px;margin-top: 3px;}
+.product-inner .product-info .info-title .title-icon-2{width: 43px; height: 44px;background-image: url('https://static.delicloud.com/www/home/images/index/app-img-8.png?v=20180317');margin-left: 20px;margin-top: 8px;}
+.product-inner .product-info .info-title .title-icon-3{width: 50px; height: 50px;background-image: url('https://static.delicloud.com/www/home/images/index/app-img-3.png?v=20180317');margin-right: 20px;margin-top: 5px;}
+.product-inner .product-info .info-title .title-icon-4{width: 52px; height: 51px;background-image: url('https://static.delicloud.com/www/home/images/index/app-img-4.png?v=20180317');margin-left: 20px;margin-top: 3px;}
 .product-inner .product-info .info-title .title-text{background-repeat: no-repeat;background-position: center;background-size: 100%;}
-.product-inner .product-info .info-title .title-text-1{width: 139px;height: 24px;background-image: url('http://t.static.delicloud.com/www/home/images/product/pro-text-1.png?v=20180317');margin: 18px 0;}
-.product-inner .product-info .info-title .title-text-2{width: 95px;height: 24px;background-image: url('http://t.static.delicloud.com/www/home/images/product/pro-text-2.png?v=20180317');margin: 18px 0;}
-.product-inner .product-info .info-title .title-text-3{width: 196px;height: 24px;background-image: url('http://t.static.delicloud.com/www/home/images/product/pro-text-3.png?v=20180317');margin: 18px 0;}
-.product-inner .product-info .info-title .title-text-4{width: 52px;height: 24px;background-image: url('http://t.static.delicloud.com/www/home/images/product/pro-text-4.png?v=20180317');margin: 18px 0;}
+.product-inner .product-info .info-title .title-text-1{width: 139px;height: 24px;background-image: url('https://static.delicloud.com/www/home/images/product/pro-text-1.png?v=20180317');margin: 18px 0;}
+.product-inner .product-info .info-title .title-text-2{width: 95px;height: 24px;background-image: url('https://static.delicloud.com/www/home/images/product/pro-text-2.png?v=20180317');margin: 18px 0;}
+.product-inner .product-info .info-title .title-text-3{width: 196px;height: 24px;background-image: url('https://static.delicloud.com/www/home/images/product/pro-text-3.png?v=20180317');margin: 18px 0;}
+.product-inner .product-info .info-title .title-text-4{width: 52px;height: 24px;background-image: url('https://static.delicloud.com/www/home/images/product/pro-text-4.png?v=20180317');margin: 18px 0;}
 .product-inner .product-info .info-desc{font-size: 16px; color: #666; line-height: 24px; margin-top: 40px; margin-bottom: 120px; letter-spacing: 1px;}
 .product-inner  .product-info-1 .info-desc,.product-inner  .product-info-3 .info-desc{text-align: left;}
 .product-inner  .product-info-2 .info-desc,.product-inner  .product-info-4 .info-desc{text-align: right;margin-right: -15px;}
 .product-inner .product-img{background-repeat: no-repeat; background-position: center; background-size: 100%;}
-.product-inner .product-img-1{width: 315px;height: 533px;background-image: url('http://t.static.delicloud.com/www/home/images/product/pro-img-1.png?v=20180317');margin:50px 0 30px 0;margin-right: 155px;}
-.product-inner .product-img-2{width: 317px;height: 528px;background-image: url('http://t.static.delicloud.com/www/home/images/product/pro-img-2.png?v=20180317');margin:65px 0 30px 0;margin-left: 155px;}
-.product-inner .product-img-3{width: 317px;height: 529px;background-image: url('http://t.static.delicloud.com/www/home/images/product/pro-img-3.png?v=20180317');margin:65px 0 30px 0;margin-right: 155px;}
-.product-inner .product-img-4{width: 317px;height: 528px;background-image: url('http://t.static.delicloud.com/www/home/images/product/pro-img-4.png?v=20180317');margin:85px 0 10px 0;margin-left: 155px;}
+.product-inner .product-img-1{width: 315px;height: 533px;background-image: url('https://static.delicloud.com/www/home/images/product/pro-img-1.png?v=20180317');margin:50px 0 30px 0;margin-right: 155px;}
+.product-inner .product-img-2{width: 317px;height: 528px;background-image: url('https://static.delicloud.com/www/home/images/product/pro-img-2.png?v=20180317');margin:65px 0 30px 0;margin-left: 155px;}
+.product-inner .product-img-3{width: 317px;height: 529px;background-image: url('https://static.delicloud.com/www/home/images/product/pro-img-3.png?v=20180317');margin:65px 0 30px 0;margin-right: 155px;}
+.product-inner .product-img-4{width: 317px;height: 528px;background-image: url('https://static.delicloud.com/www/home/images/product/pro-img-4.png?v=20180317');margin:85px 0 10px 0;margin-left: 155px;}
 .product-btn{padding: 120px 0;text-align: center;}
 .product-btn .btn-experience{font-size:26px;width: 240px;height: 60px;line-height: 60px;text-align: center;color: #fff;letter-spacing: 4px;background-color: #5d85e0;border-radius: 5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;display:inline-block;margin: 0 auto;}
 
@@ -545,10 +545,10 @@ a img {
   background-size: cover;
   overflow: hidden;
   padding: 240px 0 290px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/about/about.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/about/about.png?v=20180317');
   background: none\9;
   /*下一行为关键设置*/
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/about/about.png?v=20180317', sizingMethod='scale');
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/about/about.png?v=20180317', sizingMethod='scale');
 }
 
 .about-box .about-banner .banner-inner{
@@ -557,7 +557,7 @@ a img {
 .about-box .about-banner .banner-inner .banner-text{
   width: 709px;
   height: 119px;
-  background-image: url('http://t.static.delicloud.com/www/home/images/about/about-text.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/about/about-text.png?v=20180317');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
@@ -637,10 +637,10 @@ a img {
   overflow: hidden;
   padding: 77px 0 107px;
   margin-bottom: 0;
-  background-image: url('http://t.static.delicloud.com/www/home/images/download.png?v=20180317');
+  background-image: url('https://static.delicloud.com/www/home/images/download.png?v=20180317');
   background: none\9;
   /*下一行为关键设置*/
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/download.png?v=20180317', sizingMethod='scale');
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/download.png?v=20180317', sizingMethod='scale');
 }
 
 .download-box {
@@ -655,14 +655,14 @@ a img {
 .download-inner .download-text {
   width: 588px;
   height: 144px;
-  background-image: url(http://t.static.delicloud.com/www/home/images/download-text.png?v=20180317);
+  background-image: url(https://static.delicloud.com/www/home/images/download-text.png?v=20180317);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   margin-bottom: 100px;
   background: none\9;
   /*下一行为关键设置*/
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/download-text.png?v=20180317', sizingMethod='scale');
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/download-text.png?v=20180317', sizingMethod='scale');
 }
 
 .download-inner .download-device .download-android,.download-inner .download-device .download-ios {
@@ -679,17 +679,17 @@ a img {
 
 .download-inner .download-device .download-ios {
   margin-right: 120px;
-  background-image: url(http://t.static.delicloud.com/www/home/images/index/ios.png?v=20180317);
+  background-image: url(https://static.delicloud.com/www/home/images/index/ios.png?v=20180317);
   background: none\9;
   /*下一行为关键设置*/
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/index/ios.png?v=20180317', sizingMethod='scale');
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/index/ios.png?v=20180317', sizingMethod='scale');
 }
 
 .download-inner .download-device .download-android {  
-  background-image: url(http://t.static.delicloud.com/www/home/images/index/android.png?v=20180317);
+  background-image: url(https://static.delicloud.com/www/home/images/index/android.png?v=20180317);
   background: none\9;
   /*下一行为关键设置*/
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://t.static.delicloud.com/www/home/images/index/android.png?v=20180317', sizingMethod='scale');
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://static.delicloud.com/www/home/images/index/android.png?v=20180317', sizingMethod='scale');
 }
 
 .download-inner .download-device a span {
@@ -710,7 +710,7 @@ a img {
     display: inline-block;
     width: 21px;
     height: 24px;
-    background: url('http://t.static.delicloud.com/www/home/images/ios-icon-white.png') 0 0 no-repeat;
+    background: url('https://static.delicloud.com/www/home/images/ios-icon-white.png') 0 0 no-repeat;
     vertical-align: top;
     margin-top: -1px;
     margin-right: 10px;
@@ -720,7 +720,7 @@ a img {
     display: inline-block;
     width: 21px;
     height: 24px;
-    background: url('http://t.static.delicloud.com/www/home/images/android-icon-white.png') 0 0 no-repeat;
+    background: url('https://static.delicloud.com/www/home/images/android-icon-white.png') 0 0 no-repeat;
     vertical-align: top;
     margin-top: -1px;
     margin-right: 10px;
@@ -953,66 +953,6 @@ html {
     display: none;
 }
 
-
-/* updata by yqm */
-/* .main-footer ul.section-community li .telephone-contact-icon {
-  display: inline-block;
-  width: 18px;
-  height: 22px;
-  background: url('../images/telephone_icon.png') no-repeat;
-  vertical-align: top;
-  margin-left: -20px;
-  margin-right: 10px;
-  margin-top: 3px;
-}
-
-.main-footer ul.section-community li .telephone-contact-text {
-  font-size: 16px;
-  color: #333;
-  vertical-align: top;
-}
-
-.main-footer ul.section-community li .qq-contact-icon {
-  display: inline-block;
-  width: 18px;
-  height: 22px;
-  background: url('../images/qq_icon.png') no-repeat;
-  vertical-align: top;
-  margin-left: -20px;
-  margin-right: 10px;
-  margin-top: 3px;
-}
-
-.main-footer ul.section-community li .qq-contact-text {
-  font-size: 16px;
-  color: #333;
-  vertical-align: top;
-}
-
-.main-footer ul.section-community li .wechat-contact-icon {
-  display: inline-block;
-  width: 22px;
-  height: 18px;
-  background: url('../images/wechat_icon.png') no-repeat;
-  vertical-align: top;
-  margin-left: -20px;
-  margin-right: 6px;
-  margin-top: 3px;
-}
-
-.main-footer ul.section-community li .wechat-contact-text {
-  font-size: 16px;
-  color: #333;
-  vertical-align: top;
-}
- */
-@media screen and (min-width:768px) {
-  .top-nav li {
-    display: inline-block;
-    vertical-align: middle
-  }
-}
-
 .home-block{
   display: none;
 }
@@ -1112,7 +1052,6 @@ html {
   height: 50px\0;
   height: 52px\9;
   margin: 30px 0 0;
-  margin-top: 35px\0;  
   float: right;
 }
 
@@ -1152,9 +1091,10 @@ html {
   width: 178px;
   height: 50px;
   line-height: 50px;
-  background-image: url(http://t.static.delicloud.com/www/home/images/logo.png?v=20180317);
+  background-image: url(https://static.delicloud.com/www/home/images/logo.png?v=20180317);
   background-repeat: no-repeat;
   background-size: cover;
+  margin-top: 3px;
 }
 
 .main-nav .top-nav ul li.nav-item-admin a,.main-nav .top-nav ul li.nav-item-admin a.admin-login:active,.main-nav .top-nav ul li.nav-item-admin a.admin-login:focus,.main-nav .top-nav ul li.nav-item-admin a.admin-login:hover{
@@ -1162,14 +1102,15 @@ html {
   width: 120px;
   height: 40px;
   line-height: 40px;
+  margin-top: -10px;
+  background-color: #5d85e0;
+  -webkit-border-radius: 4px; 
+  -moz-border-radius: 4px; 
+  border-radius: 4px; 
   text-align: center;
   cursor: pointer;
   display: inline-block;
   font-size: 18px;
-  background: url('http://t.static.delicloud.com/www/home/images/bg-blue-admin.png') 0 0 no-repeat;
-  margin-top: 0px;
-  margin-top: 0px\9;
-  margin-top: -6px\9;
 }
 
 .main-nav .top-nav ul li.nav-item-admin a:hover {
@@ -1183,14 +1124,6 @@ html {
 
 .wrapper-display-pc {
   display: none;
-}
-
-.main-footer-pc {
-   display: block;
-}
-
-.main-footer-mobile {
-   display: none;
 }
 
 body .main-footer {
@@ -1212,11 +1145,11 @@ body .main-footer {
   margin-left: 3%;
 }
 
-.width-24-percent {
+.main-footer-pc .width-24-percent {
   width: 24%;
 }
 
-.width-28-percent {
+.main-footer-pc .width-28-percent {
   width: 28%;
 }
 
@@ -1257,6 +1190,9 @@ body .main-footer {
   color: #666666;
   height: 20px;
   line-height: 20px;
+  margin-top: 50px;
+  margin-top: 50px\0;
+  margin-top: 22px\9;
   letter-spacing: 2px;
   text-align: center;
 }
@@ -1266,7 +1202,7 @@ body .main-footer {
   display: inline-block;
   width: 16px;
   height: 18px;
-  background: url('http://t.static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
+  background: url('https://static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
   vertical-align: top;
   margin-right: 10px;
   margin-top: 4px;
@@ -1281,7 +1217,7 @@ body .main-footer {
   display: inline-block;
   width: 16px;
   height: 18px;
-  background: url('http://t.static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
+  background: url('https://static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
   vertical-align: top;
   margin-right: 10px;
   margin-top: 4px;
@@ -1296,7 +1232,7 @@ body .main-footer {
   display: inline-block;
   width: 22px;
   height: 18px;
-  background: url('http://t.static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
+  background: url('https://static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
   margin-right: 6px;
   margin-top: 4px;
 }
@@ -1311,165 +1247,151 @@ body .main-footer {
   text-decoration: none;
 }
 
-
-@media screen and (min-width:768px) and (max-width:1023px) {
-  .wrapper-display-pc {
-    display: none;
-  }
-
-  .main-footer-pc {
-     display: none;
-  }
-
-  .main-footer-mobile {
-     display: block;
-  }
-
-  .main-nav {
-    width: 100%;
-    position: relative;
-  }
-
-  .main-nav .top-nav {
-    flex-wrap: nowrap;
-    /* height: 80px; */
-    z-index: 1;
-    position: relative;
-    z-index: 100;
-    clear: both;
-    background: #fff;
-    font-size: 12px;
-  }
-
-  .main-nav .top-nav ul{
-    height: 50px;
-    margin: 30px 0 0;
-    margin-top: 35px\0;  
-    float: right;
-  }
-
-  .main-nav .top-nav ul li{
-    display: inline-block;
-    width: 80px;
-    height: 50px;
-    margin-left: 80px;
-    float: left;
-    vertical-align: middle;
-  }
-
-  .main-nav .top-nav ul li a{
-    display: inline-block;
-    width: 80px;
-    height: 50px;
-    text-align: center;
-    font-size: 18px;
-    color: #666666;
-    text-decoration: none;
-  }
-
-  .main-nav h1 {
-    flex: 1
-  }
-
-  .main-nav h1.logo-box{
-    margin: 15px 0;
-    width: 178px;
-    height: 50px;
-    display: inline-block;
-    float: left;
-  }
-
-  .main-nav h1.logo-box .logo{
-    display: inline-block;
-    width: 178px;
-    height: 50px;
-    line-height: 50px;
-    background-image: url(http://t.static.delicloud.com/www/home/images/logo.png?v=20180317);
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  .main-nav ul {
-    -flex: 4.3;
-    -display: flex;
-    -flex-wrap: nowrap;
-    -justify-content: space-between;
-    -align-items: center
-  }
-
-  .main-nav li.nav-item-admin {
-    color: #fff;
-    width: 120px;
-    height: 40px;
-    line-height: 40px;
-    margin-top: -10px;
-    text-align: center;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  /* .main-nav .top-nav ul li.nav-item-admin a,.main-nav .top-nav ul li.nav-item-admin a.admin-login:active,.main-nav .top-nav ul li.nav-item-admin a.admin-login:focus,.main-nav .top-nav ul li.nav-item-admin a.admin-login:hover{
-    background-color: #5d85e0;
-    border: 1px solid #5d85e0;
-    border-radius: 4px;
-    color: #fff;
-    width: 120px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 18px;
-  } */
-  .main-nav li.nav-item-admin a.admin-login:hover{
-    font-weight: normal;
-  }
-
-  body .main-footer {
-    background-color: #cfd2d7;
-    border-top: 1px solid rgba(239,234,255,.65);
-  }
-
-  .main-footer-mobile ul.small li {
-    float: none;
-    margin-bottom: 0;
-    font-size: 1rem;
-  }
-  .main-footer-mobile ul.small li h1.heading-caption {
-    font-size: 1rem;
-  }
+/* common */
+body>.section-container {
+    overflow: hidden
 }
 
-@media screen and (max-width:767px) {
+.wrapper {
+    -max-width: 62.5rem;
+    max-width: 1200px;
+    margin: 0 auto
+}
+
+
+body>.section-container {
+    width: 100%;
+    background-color: #fff;
+}
+
+*,*:before,*:after {
+    box-sizing: border-box
+}
+
+*:last-child {
+    margin-bottom: 0 !important
+}
+
+body.home>.section-container {
+  padding: 0;
+}
+
+/* footer */
+.main-footer {
+  background-color: #f6f6f6;
+  border-top: 1px solid rgba(239,234,255,.65)
+}
+
+.main-footer ul {
+  padding-left: 0
+}
+
+.main-footer li {
+  display: block
+}
+
+.main-footer [class^=.section-container-] a {
+  line-height: 1.5rem;
+  color: rgba(0,0,0,.4)
+}
+
+.main-footer .heading-caption {
+  font-size: 18px;
+}
+
+.main-footer ul+.heading-caption {
+  margin-top: 1.5rem
+}
+
+.main-footer .heading-caption.section-footer,.main-footer .section-footer a:focus,.main-footer .section-footer a:hover {
+  color: #666666
+}
+
+.main-footer .heading-caption.section-support,.main-footer .section-support a:focus,.main-footer .section-support a:hover {
+  color: #666666
+}
+
+.main-footer .heading-caption.section-legal,.main-footer .section-legal a:focus,.main-footer .section-legal a:hover {
+  color: #666666
+}
+
+.main-footer .heading-caption.section-company,.main-footer .section-company a:focus,.main-footer .section-company a:hover {
+  color: #666666
+}
+
+.main-footer .heading-caption.section-community,.main-footer .section-community a:focus,.main-footer .section-community a:hover {
+  color: #666666
+}
+
+.main-footer .heading-caption.section-footer-news,.main-footer .heading-caption.section-footer-news a {
+  color: #666666
+}
+
+.main-footer .heading-caption.section-footer-news a:focus,.main-footer .heading-caption.section-footer-news a:hover,.main-footer .section-footer-news a:focus,.main-footer .section-footer-news a:hover {
+  color: #666666
+}
+
+.main-footer .input-group {
+  margin-top: 1.25rem;
+  margin-bottom: 2rem!important
+}
+
+.main-footer .section-footer-news {
+  /* display: flex;
+  align-items: baseline */
+}
+
+.main-footer .section-footer-news a+a::before {
+  content: "· ";
+  margin-left: .25rem;
+  color: rgba(0,0,0,.2)
+}
+
+.main-footer .section-footer-news>:last-child {
+  /* flex: 1 1 auto;
+  text-align: right */
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  body {
+    height: 100%;
+    padding-top: 3.5rem;
+  }
+  
+  body>* {
+    padding: 0 1rem;
+  }
+
   .wrapper-display-pc {
     display: block;
   }
 
-  .main-footer-pc {
-     display: none;
+
+  body.home .home-index {
+    display: none;
+  }
+  
+  .top-nav li {
+    display: inline-block;
+    vertical-align: middle;
   }
 
-  .main-footer-mobile {
-     display: block;
+  body.home>.section-container {
+    padding: 0 1.5625rem;
   }
 
-  body {
-    padding-top: 3.5rem
+  .home-block{
+    display: block;
   }
-  body.home .home-index{
+
+  .top-nav ul {
     display: none;
   }
 
-  [  id]:target::before {
-    content: "";
+  .main-nav .nav-toggle {
     display: block;
-    padding-top: 3.5rem;
-    margin-top: -3.5rem
   }
-
+    
   .main-nav {
     position: fixed;
     will-change: transform;
@@ -1496,21 +1418,21 @@ body .main-footer {
 
   .main-nav h1.logo-box{
     margin: 0;
-    width: 5.3125rem;
-    height: 1.125rem;
-    line-height: 1.125rem;
+    width: 10.625rem;
+    height: 3.25rem;
+    line-height: 3.25rem;
     display: inline-block;
   }
 
   .main-nav h1.logo-box .logo{
     display: inline-block;
-    width: 5.3125rem;
-    height: 1.125rem;
-    line-height: 1.125rem;
-    background-image: url('http://t.static.delicloud.com/www/home/images/logo-m.png?v=20180317');
+    width: 10.625rem;
+    height: 2.25rem;
+    line-height: 2.25rem;
+    background-image: url('https://static.delicloud.com/www/home/images/logo-m.png?v=20180317');
     background-repeat: no-repeat;
-    background-size: contain;
-    margin: .25rem 0;
+    background-size: cover;
+    margin: .55rem 0;
   }
 
   .main-nav ul {
@@ -1617,20 +1539,19 @@ body .main-footer {
   }
 
   .main-nav .nav-toggle {
-    font-size:14px;
+    font-size:1rem;
     color: #fff;
     background-color: #5d85e0;
     display: inline-block;
     cursor: pointer;
     width: 6.625rem;
-    height: 1.875rem;
-    line-height: 1.875rem;
+    height: 2.125rem;
+    line-height: 2.125rem;
     border-radius: .5rem;
     text-align: center;
     text-decoration: none;
     position: absolute;
     right: 0;
-    top 0;
   }
 
   .nav-toggle {
@@ -1644,142 +1565,6 @@ body .main-footer {
     transform: rotate(180deg)
   }
 
-  .home-block{
-      display: block;
-  }
-
-  .main-footer-mobile ul.small li {
-    float: none;
-    margin-bottom: 0;
-    font-size: 1rem;
-  }
-  .main-footer-mobile ul.small li h1.heading-caption {
-    font-size: 1rem;
-  }
-}
-
-@media screen and (max-width:639px) {
-  .top-nav ul {
-    display: none;
-  }
-  .wrapper-display-pc {
-    display: block;
-  }
-  .main-footer-pc {
-     display: none;
-  }
-
-  .main-footer-mobile {
-     display: block;
-  }
-  .main-nav.page-has-badge {
-    border-bottom: 0
-  }
-
-  .main-footer-mobile ul.small li ul.section-community li {
-    margin-top: 0.3rem;  
-  }
-  .main-footer-mobile ul.small li ul.section-community li:first-child {
-    margin-top: 0rem;  
-  }
-
-  .main-footer ul.section-community li .telephone-contact-icon {
-    display: inline-block;
-    width: 1rem;
-    height: 1.22rem;
-    width: 1rem\0;
-    height: 1.12rem\0;
-    background: url('http://t.static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
-    vertical-align: top;
-    margin-right: 0.56rem;
-    margin-top: 0.28rem;
-    margin-top: 0.35rem\0;
-  }
-
-  .main-footer ul.section-community li .telephone-contact-text {
-    display: inline-block;
-    font-size: 0.89rem;
-    vertical-align: top;
-  }
-
-  .main-footer ul.section-community li .qq-contact-icon {
-    display: inline-block;
-    width: 1rem;
-    height: 1.22rem;
-    background: url('http://t.static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
-    vertical-align: top;
-    margin-right: 0.56rem;
-    margin-top: 0.28rem;
-  }
-
-  .main-footer ul.section-community li .qq-contact-text {
-    display: inline-block;
-    font-size: 0.89rem;
-    vertical-align: top;
-  }
-
-  .main-footer ul.section-community li .wechat-contact-icon {
-    display: inline-block;
-    width: 1.22rem;
-    height: 1rem;
-    background: url('http://t.static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
-    margin-right: 0.33rem;
-    margin-top: 0.28rem;
-  }
-
-  .main-footer ul.section-community li .wechat-contact-text {
-    display: inline-block;
-    font-size: 0.89rem;
-  }
-
-  .section-community li a:hover {
-    text-decoration: none;
-  }
-
-  .home-block{
-      display: block;
-  }
-
-  .main-footer-mobile ul.small li {
-    float: none;
-    margin-bottom: 0;
-    font-size: 1rem;
-  }
-  .main-footer-mobile ul.small li h1.heading-caption {
-    font-size: 1rem;
-  }
-
-}
-
-
-/* common */
-body>.section-container {
-    overflow: hidden
-}
-
-.wrapper {
-    -max-width: 62.5rem;
-    max-width: 1200px;
-    margin: 0 auto
-}
-
-.section-container .wrapper {
-    padding: 3.5rem 0
-}
-
-.section-container .wrapper.extra {
-    padding: 6rem 0
-}
-
-@media screen and (max-width: 767px) {
-  body,html {
-      height: 100%
-  }
-  body>* {
-      padding:0 1rem;
-      padding:0 0rem\9;
-  }
-
   body>.section-container:nth-of-type(even) {
     background-color: #fff
   }
@@ -1789,11 +1574,11 @@ body>.section-container {
   }
 
   .section-container .wrapper {
-      padding: 2rem 0
+      padding: 4rem 0
   }
 
   .section-container .wrapper.extra {
-      padding: 4rem 0
+      padding: 6rem 0
   }
 
   [class*="span-"]+[class*="span-"] {
@@ -1803,538 +1588,14 @@ body>.section-container {
   .main-footer{
     background-color: #f6f6f6;
   }
-}
 
-body>.section-container {
-    width: 100%;
-    background-color: #fff;
-}
-
-*,*:before,*:after {
-    box-sizing: border-box
-}
-
-*:last-child {
-    margin-bottom: 0 !important
-}
-
-@media screen and (min-width:768px) {
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -5.6%;
-    margin-bottom: -3.5rem!important
-  }
-
-  .sidebar-main-content .row {
-    margin-left: 7.61%
-  }
-
-  .sidebar-main-content .col {
-    margin-left: 7.0707071%
-  }
-
-  .col.center-h,.row.center-h {
-    justify-content: center
-  }
-
-  .row.justify {
-    justify-content: space-between;
-    justify-content: justify
-  }
-
-  .row.distribute {
-    justify-content: space-around
-  }
-
-  .row.col-reverse {
-    flex-direction: column-reverse
-  }
-
-  .row.reverse {
-    flex-direction: row-reverse
-  }
-
-  .row.center-v {
-    align-items: center;
-    margin-bottom: 0!important
-  }
-
-  .col {
-    margin-bottom: 3.5rem!important;
-    margin-left: 5.3030303%
-  }
-
-  .row.center-v>.col {
-    margin-bottom: 0!important
-  }
-
-  .row.distribute .col+.col,.row.justify .col+.col {
-    margin-left: 0
-  }
-
-  .span-1:not(.col) {
-    width: 3.2%
-  }
-
-  .span-2:not(.col) {
-    width: 12%
-  }
-
-  .span-3:not(.col) {
-    width: 20.8%
-  }
-
-  .span-4:not(.col) {
-    width: 29.6%
-  }
-
-  .span-5:not(.col) {
-    width: 38.4%
-  }
-
-  .span-6:not(.col) {
-    width: 47.2%
-  }
-
-  .span-7:not(.col) {
-    width: 56%
-  }
-
-  .span-8:not(.col) {
-    width: 64.8%
-  }
-
-  .span-9:not(.col) {
-    width: 73.6%
-  }
-
-  .span-10:not(.col) {
-    width: 82.4%
-  }
-
-  .span-11:not(.col) {
-    width: 91.2%
-  }
-
-  .span-12:not(.col) {
-    width: 100%
-  }
-
-  .col.span-1 {
-    width: 3.030303%
-  }
-
-  .col.span-2 {
-    width: 11.3636364%
-  }
-
-  .col.span-3 {
-    width: 19.6969697%
-  }
-
-  .col.span-4 {
-    width: 28.030304%
-  }
-
-  .col.span-5 {
-    width: 36.3636364%
-  }
-
-  .col.span-6 {
-    width: 44.6969697%
-  }
-
-  .col.span-7 {
-    width: 53.030303%
-  }
-
-  .col.span-8 {
-    width: 61.3636364%
-  }
-
-  .col.span-9 {
-    width: 69.6969697%
-  }
-
-  .col.span-10 {
-    width: 78.030303%
-  }
-
-  .col.span-11 {
-    width: 86.3636364%
-  }
-
-  .col.span-12 {
-    width: 94.6969697%
-  }
-
-  .sidebar-main-content .col.span-3 {
-    width: 26.2626263%
-  }
-}
-
-body.home>.section-container {
-  padding: 0 1.5625rem;
-  padding: 0rem 0rem\9;
-}
-
-/* footer */
-.main-footer {
-  background-color: #f6f6f6;
-  border-top: 1px solid rgba(239,234,255,.65)
-}
-
-.main-footer ul {
-  padding-left: 0
-}
-
-.main-footer li {
-  display: block
-}
-
-.main-footer [class^=.section-container-] a {
-  line-height: 1.5rem;
-  color: rgba(0,0,0,.4)
-}
-
-.main-footer .heading-caption {
-  font-size: 18px;
-  margin-bottom: .25rem
-}
-
-.main-footer ul+.heading-caption {
-  margin-top: 1.5rem
-}
-
-.main-footer .heading-caption.section-footer,.main-footer .section-footer a:focus,.main-footer .section-footer a:hover {
-  color: #666666
-}
-
-.main-footer .heading-caption.section-support,.main-footer .section-support a:focus,.main-footer .section-support a:hover {
-  color: #666666
-}
-
-.main-footer .heading-caption.section-legal,.main-footer .section-legal a:focus,.main-footer .section-legal a:hover {
-  color: #666666
-}
-
-.main-footer .heading-caption.section-company,.main-footer .section-company a:focus,.main-footer .section-company a:hover {
-  color: #666666
-}
-
-.main-footer .heading-caption.section-community,.main-footer .section-community a:focus,.main-footer .section-community a:hover {
-  color: #666666
-}
-
-.main-footer .heading-caption.section-footer-news,.main-footer .heading-caption.section-footer-news a {
-  color: #666666
-}
-
-.main-footer .heading-caption.section-footer-news a:focus,.main-footer .heading-caption.section-footer-news a:hover,.main-footer .section-footer-news a:focus,.main-footer .section-footer-news a:hover {
-  color: #666666
-}
-
-.main-footer .input-group {
-  margin-top: 1.25rem;
-  margin-bottom: 2rem!important
-}
-
-.main-footer .section-footer-news {
-  /* display: flex;
-  align-items: baseline */
-}
-
-.main-footer .section-footer-news a+a::before {
-  content: "· ";
-  margin-left: .25rem;
-  color: rgba(0,0,0,.2)
-}
-
-.main-footer .section-footer-news>:last-child {
-  /* flex: 1 1 auto;
-  text-align: right */
-}
-
-@media screen and (min-width:768px) {
-  body.home>.section-container{
-    padding: 0;
-  }
-
-  .home-block{
-    display: none;
-  }
-
-  .home-production {
-    border-top: 1px solid rgba(200,195,213,.35);
-    text-align: center;
-    position: relative
-  }
-
-  .main-footer>.wrapper {
-    padding: 3.125rem 0 1rem
-  }
-
-  .main-footer .heading-caption {
-    margin-bottom: 1.25rem;
-  }
-
-  .main-footer>.wrapper>ul {
-    /* display: flex;
-    justify-content: space-between; */
-    width: 100%;
-  }
-
-  .width-24-percent {
-    width: 24%;
-  }
-
-  .width-28-percent {
-    width: 28%;
-  }
-
-  .main-footer>.wrapper>ul li ul li {
-    /* display: flex;
-    justify-content: space-between; */
-    width: 100%;
-  }
-
-  .main-footer li{
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: #959799;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-    float: left;
-  }
-
-  .main-footer ul.section-community li{
-    color: #333;
-  }
-
-  .main-footer [class^=section-] a {
-    font-size: 1rem;
-    color: #333;
-  }
-
-  .main-footer .section-footer-news{
-    font-size: 14px;
-    color: #666666;
-    height: 1.25rem;
-    line-height: 1.25rem;
-    margin-top: 2rem;
-    letter-spacing: 2px;
-    text-align: center;
-  }
-  
-  /* updata by yqm */
-  .main-footer-mobile ul.small li ul.section-community li {
-    margin-top: 0.5rem;  
-  }
-  .main-footer-mobile ul.small li ul.section-community li:first-child {
-    margin-top: 0rem;  
-  }
-
-  .main-footer ul.section-community li .telephone-contact-icon {
-    display: inline-block;
-    width: 1rem;
-    height: 1.125rem;
-    width: 1rem\0;
-    height: 1.125rem\0;
-    background: url('http://t.static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
-    vertical-align: top;
-    margin-right: 0.71rem;
-    margin-top: 0.2rem;
-  }
-
-  .main-footer ul.section-community li .telephone-contact-text {
-    display: inline-block;
-    font-size: 1rem;
-  }
-
-  .main-footer ul.section-community li .qq-contact-icon {
-    display: inline-block;
-    width: 1rem;
-    height: 1.125rem;
-    background: url('http://t.static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
-    vertical-align: top;
-    margin-right: 0.71rem;
-    margin-top: 0.2rem;
-  }
-
-  .main-footer ul.section-community li .qq-contact-text {
-    display: inline-block;
-    font-size: 1rem;
-  }
-
-  .main-footer ul.section-community li .wechat-contact-icon {
-    display: inline-block;
-    width: 1.375rem;
-    height: 1.125rem;
-    background: url('http://t.static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
-    margin-right: 0.43rem;
-    margin-top: 0.21rem;
-  }
-
-  .main-footer ul.section-community li .wechat-contact-text {
-    display: inline-block;
-    font-size: 1rem;
-    vertical-align: top;
-  }
-
-  .section-community li a:hover {
-    text-decoration: none;
-  }
-
-}
-
-@media screen and (max-width:767px) {
-  .main-footer>.wrapper {
-    padding-bottom: 2rem
-  }
-
-  .main-footer .heading-caption {
-    width: calc(100% + 2rem);
-    margin: 0 0 0 -1rem!important;
-    padding: 1rem 0 1rem 1rem;
-    border-top: 1px solid rgba(0,0,0,.03);
-  }
-
-  .main-footer [class^=.section-container-] {
-    margin-bottom: 0!important
-  }
-
-  .main-footer [class^=.section-container-] a {
-    font-size: 1rem;
-    display: block;
-    text-decoration: none;
-    padding: .25rem 0
-  }
-
-  .main-footer .mobile-collapsible {
-    position: relative
-  }
-
-  .main-footer .mobile-collapsible::after {
-    content: "";
-    display: block;
-    width: 1rem;
-    height: 1rem;
-    position: absolute;
-    top: 50%;
-    margin-top: -.5rem;
-    right: 1rem;
-    background-image: url('http://t.static.delicloud.com/www/home/images/arrow-down.svg');
-    background-size: cover;
-    transition: transform .12s ease-out
-  }
-
-  .main-footer .mobile-collapsible.active::after {
-    transform: rotate(180deg)
-  }
-
-  .main-footer .mobile-collapsible+ul {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: opacity .1s ease-out,max-height .1s cubic-bezier(.165,.84,.44,1)
-  }
-
-  .main-footer .mobile-collapsible.active+ul {
-    max-height: 999px;
-    margin-bottom: .75rem!important;
-    opacity: 1;
-    transition: opacity 50ms ease-in,max-height 1.2s cubic-bezier(.075,.82,.165,1)
-  }
-  
-  /* updata by yqm */
-  .main-footer-mobile ul.small li ul.section-community li {
-    margin-top: 0.4rem;  
-  }
-  .main-footer-mobile ul.small li ul.section-community li:first-child {
-    margin-top: 0rem;  
-  }
-
-  .main-footer ul.section-community li .telephone-contact-icon {
-    display: inline-block;
-    width: 1.125rem;
-    height: 1.375rem;
-    width: 1.125rem\0;
-    height: 1.375rem\0;
-    background: url('http://t.static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
-    vertical-align: top;
-    margin-right: 0.625rem;
-    margin-top: 0.2rem;
-    margin-top: 0.6rem\0;
-  }
-
-  .main-footer ul.section-community li .telephone-contact-text {
-    display: inline-block;
-    font-size: 1rem;
-    vertical-align: top;
-  }
-
-  .main-footer ul.section-community li .qq-contact-icon {
-    display: inline-block;
-    width: 1.125rem;
-    height: 1.375rem;
-    width: 1.125rem\0;
-    height: 1.375rem\0;
-    background: url('http://t.static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
-    vertical-align: top;
-    margin-right: 0.625rem;
-    margin-top: 0.15rem;
-  }
-
-  .main-footer ul.section-community li .qq-contact-text {
-    display: inline-block;
-    font-size: 1rem;
-    vertical-align: top;
-  }
-
-  .main-footer ul.section-community li .wechat-contact-icon {
-    display: inline-block;
-    width: 1.375rem;
-    height: 1.125rem;
-    background: url('http://t.static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
-    margin-right: 0.375rem;
-    margin-top: 0.28rem;
-  }
-
-  .main-footer ul.section-community li .wechat-contact-text {
-    display: inline-block;
-    font-size: 1rem;
-    vertical-align: top;
-  } 
-  .section-community li a:hover {
-    text-decoration: none;
-  }
-}
-
-/* home-production */
-@media screen and (min-width:767px){
   .col.center-h, .row.center-h{
     justify-content: center;
   }
-  .sketchis-features {
-    margin-top: 5rem;
-    text-align: center;
-  }
 
-  .extras-grid .wrapper>.extra-row>.extra {
-    padding: 4.5rem 5.3030303% 4.5rem 0;
-    margin-bottom: 0!important;
-    display: flex;
-  }
-
-  .extra-icon {
-    width: 3.125rem;
-  }
-}
-
-@media screen and (max-width:767px){
-  .col.center-h, .row.center-h{
-    justify-content: center;
+  .col.center-h, .row.center-h img{
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .h3, h3 {
@@ -2345,6 +1606,10 @@ body.home>.section-container {
 
   .heading-block-title{
     color: #333;
+  }
+
+  .heading-block-title strong{
+    font-size: 1.25rem;
   }
 
   .heading-block-text{
@@ -2372,10 +1637,7 @@ body.home>.section-container {
 
   .home-description{
     padding: 0 .5rem;
-  }
-
-  .description-header{
-
+    margin-top: 3.2rem;
   }
 
   .description-header .item-description{
@@ -2386,6 +1648,11 @@ body.home>.section-container {
 
   .description-header .item-description .item-img{
     margin-bottom: 15px;
+  }
+
+  .description-header .item-description .item-img img{
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .home-production {
@@ -2520,4 +1787,956 @@ body.home>.section-container {
     margin-left: 0;
     width: calc(44.6969697% + 5.3030303%)
   }
+
+  .sidebar-main-content .row {
+    margin-left: 7.61%
+  }
+
+  .sidebar-main-content .col {
+    margin-left: 7.0707071%
+  }
+
+  .col.center-h,.row.center-h {
+    justify-content: center
+  }
+
+  .row.justify {
+    justify-content: space-between;
+    justify-content: justify
+  }
+
+  .row.distribute {
+    justify-content: space-around
+  }
+
+  .row.col-reverse {
+    flex-direction: column-reverse
+  }
+
+  .row.reverse {
+    flex-direction: row-reverse
+  }
+
+  .row.center-v {
+    align-items: center;
+    margin-bottom: 0!important
+  }
+  
+  body .main-footer {
+    background-color: #cfd2d7;
+    border-top: 1px solid rgba(239,234,255,.65);
+  }
+
+  .main-footer .wrapper ul li ul li {
+    margin-top: 0.5rem;
+  }
+
+  .main-footer .wrapper ul li ul li:first-child {
+    margin-top: 0rem;
+  }
+
+  .main-footer-mobile ul.small li {
+    float: none;
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+  
+  .main-footer-mobile .width-24-percent {
+    width: 100%;
+  }
+
+ .main-footer-mobile .width-28-percent {
+    width: 100%;
+  }
+
+  .main-footer-mobile ul.small li h1.heading-caption {
+    font-size: 1rem;
+  }
+
+  .main-footer>.wrapper {
+    padding: 0 0 1rem;
+  }
+
+  .main-footer>.wrapper>ul {
+    /* display: flex;
+    justify-content: space-between; */
+    width: 100%;
+  }
+
+  .main-footer>.wrapper {
+    padding: 0;
+    padding-bottom: 2rem;
+  }
+
+  .main-footer .heading-caption {
+    width: calc(100% + 2rem);
+    margin: 0 0 0 -1rem!important;
+    padding: 1rem 0 1rem 1rem;
+    border-top: 1px solid rgba(0,0,0,.03);
+  }
+
+  .main-footer [class^=.section-container-] {
+    margin-bottom: 0!important
+  }
+
+  .main-footer [class^=.section-container-] a {
+    font-size: 1rem;
+    display: block;
+    text-decoration: none;
+    padding: .25rem 0
+  }
+
+  .main-footer .mobile-collapsible {
+    position: relative
+  }
+
+  .main-footer .mobile-collapsible::after {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
+    right: 1rem;
+    background-image: url('https://static.delicloud.com/www/home/images/arrow-down.svg');
+    background-size: cover;
+    transition: transform .12s ease-out
+  }
+
+  .main-footer .mobile-collapsible.active::after {
+    transform: rotate(180deg)
+  }
+
+  .main-footer .mobile-collapsible+ul {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity .1s ease-out,max-height .1s cubic-bezier(.165,.84,.44,1)
+  }
+
+  .main-footer .mobile-collapsible.active+ul {
+    max-height: 999px;
+    margin-bottom: .75rem!important;
+    opacity: 1;
+    transition: opacity 50ms ease-in,max-height 1.2s cubic-bezier(.075,.82,.165,1)
+  }
+
+  .main-footer ul.section-community li .telephone-contact-icon {
+    display: inline-block;
+    width: 1.125rem;
+    height: 1.375rem;
+    width: 1.125rem\0;
+    height: 1.375rem\0;
+    background: url('https://static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
+    vertical-align: top;
+    margin-right: 0.625rem;
+    margin-top: 0.2rem;
+    margin-top: 0.6rem\0;
+  }
+
+  .main-footer ul.section-community li .telephone-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top;
+  }
+
+  .main-footer ul.section-community li .qq-contact-icon {
+    display: inline-block;
+    width: 1.125rem;
+    height: 1.375rem;
+    width: 1.125rem\0;
+    height: 1.375rem\0;
+    background: url('https://static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
+    vertical-align: top;
+    margin-right: 0.625rem;
+    margin-top: 0.15rem;
+  }
+
+  .main-footer ul.section-community li .qq-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top;
+  }
+
+  .main-footer ul.section-community li .wechat-contact-icon {
+    display: inline-block;
+    width: 1.375rem;
+    height: 1.125rem;
+    background: url('https://static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
+    margin-right: 0.375rem;
+    margin-top: 0.28rem;
+  }
+
+  .main-footer ul.section-community li .wechat-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top;
+  } 
+  .section-community li a:hover {
+    text-decoration: none;
+  }
+
+  .main-footer .section-footer-news{
+    font-size: 14px;
+    color: #666666;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    margin-top: 2rem;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+  
+  /* updata by yqm */
+  .main-footer-mobile ul.small li ul.section-community li {
+    margin-top: 0.5rem;  
+  }
+  .main-footer-mobile ul.small li ul.section-community li:first-child {
+    margin-top: 0rem;  
+  }
+
+  .main-footer ul.section-community li .telephone-contact-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1.125rem;
+    width: 1rem\0;
+    height: 1.125rem\0;
+    background: url('https://static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
+    vertical-align: top;
+    margin-right: 0.71rem;
+    margin-top: 0.2rem;
+  }
+
+  .main-footer ul.section-community li .telephone-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+  }
+
+  .main-footer ul.section-community li .qq-contact-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1.125rem;
+    background: url('https://static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
+    vertical-align: top;
+    margin-right: 0.71rem;
+    margin-top: 0.2rem;
+  }
+
+  .main-footer ul.section-community li .qq-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+  }
+
+  .main-footer ul.section-community li .wechat-contact-icon {
+    display: inline-block;
+    width: 1.375rem;
+    height: 1.125rem;
+    background: url('https://static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
+    margin-right: 0.43rem;
+    margin-top: 0.21rem;
+  }
+
+  .main-footer ul.section-community li .wechat-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top;
+  }
+
+  .section-community li a:hover {
+    text-decoration: none;
+  }
+
 }
+
+@media screen and (max-width:767px) {
+  .wrapper-display-pc {
+    display: block;
+  }
+
+  body {
+    padding-top: 3.5rem
+  }
+  
+  body.home>.section-container {
+    padding: 0 1.5625rem;
+  }
+
+  body.home .home-index{
+    display: none;
+  }
+
+  [  id]:target::before {
+    content: "";
+    display: block;
+    padding-top: 3.5rem;
+    margin-top: -3.5rem
+  }
+
+  .main-nav {
+    position: fixed;
+    will-change: transform;
+    width: 100%;
+    z-index: 99;
+    margin-top: -3.5rem;
+    padding-top: .1875rem;
+    padding-bottom: .1875rem;
+    background-color: #fff;
+    -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-nav .top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  .top-nav ul {
+    display: none;
+  }
+
+  .main-nav h1.logo-box{
+    margin: 0;
+    width: 10.625rem;
+    height: 3.25rem;
+    line-height: 3.25rem;
+    display: inline-block;
+  }
+
+  .main-nav h1.logo-box .logo{
+    display: inline-block;
+    width: 6.375rem;
+    height: 1.35rem;
+    line-height: 1.35rem;
+    background-image: url('https://static.delicloud.com/www/home/images/logo-m.png?v=20180317');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 1rem 0 0 0;
+  }
+
+  .main-nav ul {
+    flex: 0 1 100%;
+    max-height: 0;
+    opacity: 0;
+    position: relative;
+    border-top: 1px solid rgba(255,255,255,.1);
+    top: .1875rem;
+    overflow: hidden
+  }
+
+  .main-nav ul>li {
+    opacity: 0;
+    transform: translate(0,-10px) scale(1.07);
+    will-change: transform,opacity;
+    transition: opacity .25s,transform .2s cubic-bezier(.165,.84,.44,1),scale .2s cubic-bezier(.165,.84,.44,1);
+    margin-bottom: -1px;
+    position: relative
+  }
+
+  .main-nav ul.active {
+    overflow: visible;
+    opacity: 1;
+    transition: opacity .05
+  }
+
+  .main-nav ul.active>li {
+    opacity: 1;
+    transform: translate(0,0) scale(1)
+  }
+
+  .main-nav ul.active>li:nth-child(1) {
+    transition-delay: .04s;
+    z-index: 8
+  }
+
+  .main-nav ul.active>li:nth-child(2) {
+    transition-delay: .08s;
+    z-index: 7
+  }
+
+  .main-nav ul.active>li:nth-child(3) {
+    transition-delay: .12s;
+    z-index: 6
+  }
+
+  .main-nav ul.active>li:nth-child(4) {
+    transition-delay: .16s;
+    z-index: 5
+  }
+
+  .main-nav ul.active>li:nth-child(5) {
+    transition-delay: .2s;
+    z-index: 4
+  }
+
+  .main-nav ul.active>li:nth-child(6) {
+    transition-delay: .24s;
+    z-index: 3
+  }
+
+  .main-nav ul.active>li:nth-child(7) {
+    transition-delay: .28s;
+    z-index: 2
+  }
+
+  .main-nav ul.active>li:nth-child(8) {
+    transition-delay: .32s;
+    z-index: 1
+  }
+
+  .main-nav li:not(:last-child) {
+    padding: 0;
+    border-bottom: 1px solid rgba(255,255,255,.1)
+  }
+
+  .main-nav ul a {
+    display: block;
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    padding: 1rem;
+    position: relative;
+    background-color: #130a33
+  }
+
+  .main-nav ul a:not(.active)::before {
+    content: "";
+    display: inline-block;
+    width: .375rem;
+    height: .625rem;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background-image: url(data:image/svg+xml;
+    utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%2213%22%20viewBox%3D%220%200%208%2013%22%3E%3Cpath%20fill%3D%22%23207cdf%22%20fill-rule%3D%22evenodd%22%20d%3D%22M0%201.5L1.5%200l5.792%205.792c.39.39.394%201.022%200%201.416L1.5%2013%200%2011.5l4.294-4.294c.39-.39.393-1.02%200-1.412L0%201.5z%22%2F%3E%3C%2Fsvg%3E);background-size: cover;
+    opacity: .6
+  }
+
+  .main-nav ul a:not(.active)::before {
+    -webkit-filter: hue-rotate(276deg) saturate(0) saturate(0) brightness(100%);
+    filter: hue-rotate(276deg) saturate(0) saturate(0) brightness(100%)
+  }
+
+  .main-nav .nav-toggle {
+    font-size:0.89rem;
+    color: #fff;
+    background-color: #5d85e0;
+    display: inline-block;
+    cursor: pointer;
+    width: 5.125rem;
+    height: 1.75rem;
+    line-height: 1.75rem;
+    border-radius: .5rem;
+    text-align: center;
+    text-decoration: none;
+    position: absolute;
+    right: 0;
+  }
+
+  .nav-toggle {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(253,172,50,.08)
+  }
+
+  .nav-toggle.active::after {
+    transform: rotate(180deg)
+  }
+
+  .home-block{
+      display: block;
+  }
+
+  .main-footer-mobile ul.small li {
+    float: none;
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+  .main-footer-mobile ul.small li h1.heading-caption {
+    font-size: 1rem;
+  }
+
+  .main-footer .section-footer-news{
+    font-size: 0.89rem;
+    color: #666666;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    margin-top: 1rem;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width:767px) {
+  body,html {
+      height: 100%
+  }
+  body>* {
+      padding:0 1rem;
+      padding:0 0rem\9;
+  }
+
+  body>.section-container:nth-of-type(even) {
+    background-color: #fff
+  }
+
+  body>.section-container:nth-of-type(odd) {
+      background-color: #f6f6f6
+  }
+
+  .section-container .wrapper {
+      padding: 4rem 0
+  }
+
+  .section-container .wrapper.extra {
+      padding: 4rem 0
+  }
+
+  [class*="span-"]+[class*="span-"] {
+      margin-top: 2rem;
+      margin-left: 0 !important
+  }
+  .main-footer{
+    background-color: #f6f6f6;
+  }
+
+  .col.center-h, .row.center-h{
+    justify-content: center;
+  }
+
+  .col.center-h, .row.center-h img{
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .h3, h3 {
+    font-size: 1.3125rem;
+    line-height: 1.71875rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .heading-block-title{
+    color: #333;
+  }
+
+  .heading-block-title strong{
+    font-size: 1.25rem;
+  }
+
+  .heading-block-text{
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .section-container .heading-block-title {
+    color: #333;
+    margin-bottom: 1.5rem!important;
+  }
+
+  .section-container .heading-block-text {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 1rem!important;
+  }
+
+  .section-container .heading-block-text.heading-block-text-sub{
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .home-description{
+    padding: 0 .5rem;
+    margin-top: 3.2rem;
+  }
+
+  .description-header .item-description{
+    float: left;
+    width: 25%;
+    text-align: center;
+  }
+
+  .description-header .item-description .item-img{
+    margin-bottom: 15px;
+  }
+
+  .description-header .item-description .item-img img{
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .home-production {
+    text-align: center;
+    position: relative
+  }
+
+  .production-header {
+    padding-bottom: 0!important
+  }
+
+  .production-header.production-header-sub {
+    padding: 0;
+    margin-bottom: 1rem!important;
+  }
+
+  .production-header h1 {
+    margin-bottom: 1rem!important
+  }
+
+  .production-hero {
+    max-width: 100%;
+    margin: 0 auto -.625rem!important;
+    position: relative;
+    width: 210px;
+    height: 278px;
+  }
+
+  .production-hero-wrapper {
+    position: relative
+  }
+
+  .production-hero-wrapper::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -6.25rem;
+    height: 5.625rem;
+    width: 100%;
+    box-shadow: -30px 0 100px rgba(39,21,102,.35);
+    border-radius: 100%; 
+  }
+
+  .home-production::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    background-color: rgba(39,21,102,.1);
+  }
+
+  .home-production-details.extras-grid {
+    text-align: left;
+    position: relative;
+    z-index: 10;
+    background-color: #fff;
+    border-top: 0!important
+  }
+
+  .sketchis-features{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5.6%;
+    margin-top: 5rem;
+    text-align: center;
+  }
+
+  .sketchis-features:last-child {
+    margin-top: 3.5rem;
+  }
+
+  .sketchis-features:last-child {
+    margin-bottom: 7rem
+  }
+
+  .sketchis-features>.col:nth-child(2){
+    margin-top: 0!important;
+  }
+
+  .sketchis-features>.col{
+    margin-left: 5.3030303%!important;
+    width: calc(50% - 5.3030303%)!important;
+  }
+
+  .sketchis-features>.col>.h5, .sketchis-features>.col>h5 {
+    margin-top: .625rem;
+  }
+
+  .extras-grid {
+      padding: 0!important;
+      border-bottom: 0!important
+  }
+
+  .extras-grid .wrapper {
+      padding: 0!important
+  }
+
+  .extras-grid .wrapper>.extra-row {
+      margin-bottom: 0!important
+  }
+
+  .extras-grid .wrapper>.extra-row>.extra {
+      padding: 4.5rem 1.875rem 4.5rem 1.875rem!important;
+      margin-bottom: 0!important;
+      width: 100%!important;
+      border: none!important;
+      margin-top: 0!important;
+      border-bottom: 1px solid rgba(239,234,255,.65)!important;
+      text-align: center
+  }
+
+  .extra>.extra-icon {
+      margin-left: auto;
+      margin-right: auto
+  }
+
+  .extra-icon {
+    margin-bottom: 1.25rem
+  }
+
+  .extra-details {
+    flex-grow: 1
+  }
+
+  .extras-grid .wrapper>.row>.extra+.extra {
+    border-left: 1px solid rgba(239,234,255,.65);
+    padding-left: 5.3030303%;
+    padding-right: 0;
+    margin-left: 0;
+    width: calc(44.6969697% + 5.3030303%)
+  }
+
+
+  .main-footer>.wrapper {
+    padding: 0;
+    padding-bottom: 2rem;
+  }
+
+  .main-footer-mobile .width-24-percent {
+    width: 100%;
+  }
+
+ .main-footer-mobile .width-28-percent {
+    width: 100%;
+  }
+
+  .main-footer .heading-caption {
+    width: calc(100% + 2rem);
+    margin: 0 0 0 -1rem!important;
+    padding: 1rem 0 1rem 1rem;
+    border-top: 1px solid rgba(0,0,0,.03);
+  }
+
+  .main-footer [class^=.section-container-] {
+    margin-bottom: 0!important
+  }
+
+  .main-footer [class^=.section-container-] a {
+    font-size: 1rem;
+    display: block;
+    text-decoration: none;
+    padding: .25rem 0
+  }
+
+  .main-footer .mobile-collapsible {
+    position: relative
+  }
+
+  .main-footer .mobile-collapsible::after {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
+    right: 1rem;
+    background-image: url('https://static.delicloud.com/www/home/images/arrow-down.svg');
+    background-size: cover;
+    transition: transform .12s ease-out
+  }
+
+  .main-footer .mobile-collapsible.active::after {
+    transform: rotate(180deg)
+  }
+
+  .main-footer .mobile-collapsible+ul {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity .1s ease-out,max-height .1s cubic-bezier(.165,.84,.44,1)
+  }
+
+  .main-footer .mobile-collapsible.active+ul {
+    max-height: 999px;
+    margin-bottom: .75rem!important;
+    opacity: 1;
+    transition: opacity 50ms ease-in,max-height 1.2s cubic-bezier(.075,.82,.165,1)
+  }
+  
+  /* updata by yqm */
+  .main-footer-mobile ul.small li ul.section-community li {
+    margin-top: 0.4rem;  
+  }
+  .main-footer-mobile ul.small li ul.section-community li:first-child {
+    margin-top: 0rem;  
+  }
+
+  .main-footer ul.section-community li .telephone-contact-icon {
+    display: inline-block;
+    width: 1.125rem;
+    height: 1.375rem;
+    width: 1.125rem\0;
+    height: 1.375rem\0;
+    background: url('https://static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
+    vertical-align: top;
+    margin-right: 0.625rem;
+    margin-top: 0.2rem;
+    margin-top: 0.6rem\0;
+  }
+
+  .main-footer ul.section-community li .telephone-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top;
+  }
+
+  .main-footer ul.section-community li .qq-contact-icon {
+    display: inline-block;
+    width: 1.125rem;
+    height: 1.375rem;
+    width: 1.125rem\0;
+    height: 1.375rem\0;
+    background: url('https://static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
+    vertical-align: top;
+    margin-right: 0.625rem;
+    margin-top: 0.15rem;
+  }
+
+  .main-footer ul.section-community li .qq-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top;
+  }
+
+  .main-footer ul.section-community li .wechat-contact-icon {
+    display: inline-block;
+    width: 1.375rem;
+    height: 1.125rem;
+    background: url('https://static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
+    margin-right: 0.375rem;
+    margin-top: 0.28rem;
+  }
+
+  .main-footer ul.section-community li .wechat-contact-text {
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top;
+  } 
+  .section-community li a:hover {
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width:639px) {
+  .top-nav ul {
+    display: none;
+  }
+  .wrapper-display-pc {
+    display: block;
+  }
+
+  body.home>.section-container {
+    padding: 0 1.5625rem;
+  }
+
+  .main-nav.page-has-badge {
+    border-bottom: 0
+  }
+
+  .main-footer-mobile ul.small li ul.section-community li {
+    margin-top: 0.3rem;  
+  }
+  .main-footer-mobile ul.small li ul.section-community li:first-child {
+    margin-top: 0rem;  
+  }
+
+  .main-footer-mobile .width-24-percent {
+    width: 100%;
+  }
+
+ .main-footer-mobile .width-28-percent {
+    width: 100%;
+  }
+
+  .main-footer ul.section-community li .telephone-contact-icon {
+    display: inline-block;
+    width: 1.22rem;
+    height: 1.57rem;
+    background: url('https://static.delicloud.com/www/home/images/telephone_icon.png') no-repeat;
+    vertical-align: top;
+    margin-right: 0.56rem;
+    margin-top: 0.28rem;
+    margin-top: 0.35rem\0;
+  }
+
+  .main-footer ul.section-community li .telephone-contact-text {
+    display: inline-block;
+    font-size: 0.89rem;
+    vertical-align: top;
+  }
+
+  .main-footer ul.section-community li .qq-contact-icon {
+    display: inline-block;
+    width: 1.22rem;
+    height: 1.57rem;
+    background: url('https://static.delicloud.com/www/home/images/qq_icon.png') no-repeat;
+    vertical-align: top;
+    margin-right: 0.56rem;
+    margin-top: 0.21rem;
+  }
+
+  .main-footer ul.section-community li .qq-contact-text {
+    display: inline-block;
+    font-size: 0.89rem;
+    vertical-align: top;
+  }
+
+  .main-footer ul.section-community li .wechat-contact-icon {
+    display: inline-block;
+    width: 1.57rem;
+    height: 1.22rem;
+    background: url('https://static.delicloud.com/www/home/images/wechat_icon.png') no-repeat;
+    margin-right: 0.33rem;
+    margin-top: 0.28rem;
+  }
+
+  .main-footer ul.section-community li .wechat-contact-text {
+    display: inline-block;
+    font-size: 0.89rem;
+  }
+
+  .section-community li a:hover {
+    text-decoration: none;
+  }
+
+  .home-block{
+      display: block;
+  }
+
+  .main-footer-mobile ul.small li {
+    float: none;
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+  .main-footer-mobile ul.small li h1.heading-caption {
+    font-size: 1rem;
+  }
+
+  .main-footer .section-footer-news{
+    font-size: 0.89rem;
+    color: #666666;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    margin-top: 1rem;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+}
+

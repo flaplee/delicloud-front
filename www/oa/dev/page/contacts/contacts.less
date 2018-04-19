@@ -110,9 +110,15 @@
 			.contacts-team{
 				width:100%;
 				height: 100%;
-				overflow-y: auto;
+				/* update by yqm */
+				/* overflow-y: auto; */
 				float:left;
-				margin-top: 30px;
+				/* update by yqm */
+				/* margin-top: 30px; */
+				padding-top: 30px;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
 				#treeMenu{
 					width:168px;
 					li{
@@ -134,6 +140,11 @@
 					-webkit-border-radius:6px;
 					-o-border-radius:6px;
 					background-color:#fff;
+					/* update by yqm */
+					padding-bottom: 30px;
+					-moz-box-sizing: border-box;
+					-webkit-box-sizing: border-box;
+					box-sizing: border-box;
 					.dept-select-wrap{
 						.item-info{
 							width: 100%;
@@ -186,14 +197,16 @@
 					}
 					.dept-select-inner{
 						margin-left: 20px;
-						padding-bottom: 40px;
 						-height: 790px;
 						height: 720px;
 						overflow-x: hidden;
 						overflow-y: auto;
 						&.dept-select-inner-user{
 							-height: 790px;
-							height: 720px;
+							/* height: 720px; */
+							/* update by yqm */
+							/* height: calc(100% - 220px); */
+							padding-bottom: 0;
 						}
 						&.dept-select-inner-department{
 							-height: 860px;
@@ -243,7 +256,7 @@
 							}
 							&:last-child{
 								margin-bottom:0;
-								padding-bottom: 10px;
+								padding-bottom: 0;
 							}
 							ul.select-son-list{
 								padding-left: 20px;
@@ -289,6 +302,11 @@
 					width:100%;
 					height:100%;
 					display: block;
+					/* update by yqm */
+					padding-bottom: 40px;
+					-moz-box-sizing: border-box;
+					-webkit-box-sizing: border-box;
+				    box-sizing: border-box;
 				}
 				&.contacts-wrap-empty{
 					display: none;
@@ -332,7 +350,7 @@
 			.contacts-inner{
 				width: 752px;
 				-height: 806px;
-				height: 720px;
+				/* height: 720px; */
 				.table{
 					.tbody{
 						width: 752px;
@@ -353,6 +371,7 @@
 				overflow-x: hidden;
 				overflow-y: auto;
 				table.table{
+					table-layout: fixed;
 					thead.thead{
 						background: #fff;
 						tr{
@@ -403,8 +422,10 @@
 							overflow: hidden;
 							text-overflow: ellipsis;
 							white-space: nowrap;
+							float:left;
 							&.empty-item{
 								display: table-cell;
+								float: none;
 							}
 							a.item{
 								font-weight: normal;
@@ -447,10 +468,10 @@
 				width: 25%;
 			}
 			.user-title{
-				width: 25%;
+				width: 21%;
 			}
 			.user-mobile{
-				width: 15%;
+				width: 19%;
 			}
 			.user-check, .user-operate{
 				display:none;
@@ -471,7 +492,8 @@
 					min-height: 736px;
 					-height: 736px;
 					background-color:#ffffff;
-					padding: 5px 0 40px 20px;
+					-padding: 5px 0px 40px 20px;
+					padding: 5px 0px 0px 20px;
 					.select-item{
 						-position:relative;
 						width: 100%;

@@ -182,7 +182,7 @@ var util = {
     buildDauth: function(userid, token, timestamp) {
         //userid timestamp token
         var hashLoc = (userid ? userid : '' ) + (token ? token : '') + timestamp;
-        var sha256 = kernel.SHA256(hashLoc);
+        var sha256 = util.SHA256(hashLoc);
         var hash = sha256.substr(0, 32);
         return hash;
     },

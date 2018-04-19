@@ -62,9 +62,10 @@ seajs.use(['jquery', 'util', 'fastclick', 'swiper'], function(jquery, util, fast
                     "jsonp": "callback",
                     success: function(res) {
                         if(res.code == 0&& res.data['result'] != false){
+                            deli.common.notification.hidePreloader();
                             deli.common.notification.toast({
                                 "text": "应用添加成功~",
-                                "duration": 3
+                                "duration": 1.5
                             },function(data){},function(resp){});
                             setTimeout(function(){
                             	var data = res.data;
@@ -75,11 +76,11 @@ seajs.use(['jquery', 'util', 'fastclick', 'swiper'], function(jquery, util, fast
                                 	"org_name":orgname || '',
                                     "app_url":appurl || ''
                             	}, function(data) {}, function(resp) {});
-                            },1500); 
+                            }, 300); 
                         }else{
 			                deli.common.notification.toast({
                                 "text": res.msg,
-                                "duration": 3
+                                "duration": 1.5
                             },function(data){},function(resp){});
                         }
                     },
@@ -87,7 +88,7 @@ seajs.use(['jquery', 'util', 'fastclick', 'swiper'], function(jquery, util, fast
                         if(res.readyState == 4 && res.status == 200){
                             deli.common.notification.toast({
                                 "text": "网络错误，请重试~",
-                                "duration": 2
+                                "duration": 1.5
                             },function(data){},function(resp){});
                         }
                     }
@@ -95,6 +96,7 @@ seajs.use(['jquery', 'util', 'fastclick', 'swiper'], function(jquery, util, fast
             };
 
             $btnAdd.on('click', function() {
+                deli.common.notification.showPreloader();
                 deli.app.organization.select({
                     'type':belong_type
                 }, function(data) {

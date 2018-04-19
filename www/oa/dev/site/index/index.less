@@ -687,6 +687,8 @@ button{
 				padding: 0 24px 0 6px;
 				color: #3b63f9;
 				border: 1px solid #3b63f9;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
 				border-radius: 4px;
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -726,32 +728,40 @@ button{
 
 	        .nav-item-team .son-nav-wrap{
 				width: 160px;
-				height: 170px;
+				/* update by yan*/
+				/* height: 170px; */
 				position: absolute;
 				z-index: 1;
-				top: 49px;
+				top: 40px;
+				/* update by yan*/
+				min-height: 40px;
 				left: -32px;
 				display: none;
-				background-color: #fff;
-				border: 1px solid #eaeaea;
+				-background-color: #fff;
+				/* update by yan*/
+				/* border: 1px solid #eaeaea; */
 				border-radius: 6px;
 				.son-nav-wrap-before{
 					width: 60px;
 					height: 10px;
 					position: absolute;
 					top: -10px;
+					/* update by yan*/
+					top: 2px;
 					right: 6px;
+					z-index: 110;
 					&:before{
 						content: '';
 						width: 14px;
 						height: 10px;
-						position: absolute;
-						top: 0;
+						position: absolute;						
+						top: 9px;
 						right: 18px;
 						background-image: url("images/triangle.png");
 						background-repeat: no-repeat;
 						background-size: 100% 100%;
 						background-color: #fff;
+						filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/triangle.png', sizingMethod='scale');
 					}
 				}
 	        }
@@ -763,8 +773,15 @@ button{
 				width: 158px;
 				margin: 0 auto;
 				position: absolute;
-				top: 5px;
-				left: 2px;
+				-top: 5px;
+				-left: 2px;
+				/* update by yan*/
+				top: 20px;
+				left: 0;	
+				z-index: 109;
+				background-color: #fff;
+				border: 1px solid #eaeaea;	
+				padding-top: 3px;
 	        }
 
 	        .nav-item .son-nav-list a.sub-nav-item, .nav-item-team .son-nav-list a.sub-nav-item {

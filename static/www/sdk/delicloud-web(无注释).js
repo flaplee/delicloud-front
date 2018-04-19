@@ -1,31 +1,19 @@
-/**
-    create delicloud-web-sdk.js for js_sdk api
-    @author tianlun
-    @param deli is a object, deli.method to use in the page
-*/
 (function (window) {
     'use strict';
-    //方法列表
+    
     var regMethods = [
         'getLoginStatus',
         'app.onlogout'
     ];
     var JSSDK_VERSION = '1.0.1';
     var version = '1.0.1';
-    var already = false; //是否已初始化
-    var config = null; //缓存config参数
-    var errorHandle = null; //缓存error 回调
-    var readyHandle = null; //缓存ready 回调
+    var already = false; 
+    var config = null; 
+    var errorHandle = null; 
+    var readyHandle = null; 
     var domReady = false;
-    var environment = 'test';
+    var environment = 'www';
     var httpApi = (environment == 'www') ? 'https://www.delicloud.com' : ((environment == 'test') ? 'http://t.delicloud.com' : ((environment == '202') ? 'http://192.168.0.202' : 'http://192.168.0.201'));
-    /**
-     *    deli.config 配置签名对象
-     *    deli.ready 初始化完成
-     *    deli.error 权限校验失败时
-     */
-
-    ;
     (function () {
         var deliApi = function (params) {
             this.config = {
@@ -111,7 +99,7 @@
                     }
                 }
 
-                if (this.config.dataType == "json" || this.config.dataType == "JSON") { //非跨域
+                if (this.config.dataType == "json" || this.config.dataType == "JSON") { 
                     if ((this.config.type == "GET") || (this.config.type == "get")) {
                         for (var item in this.config.data) {
                             this.config.url = addURLParam(this.config.url, item, this.config.data[item]);
@@ -129,28 +117,28 @@
                         xhr.setRequestHeader("Content-Type", this.config.contentType);
                         xhr.send(serialize(this.config.data));
                     }
-                } else if ((this.config.dataType == "jsonp") || (this.config.dataType == "JSONP")) { //跨域
-                    if ((this.config.type == "GET") || (this.config.type == "get")) { //jsonp只能进行get请求跨域
+                } else if ((this.config.dataType == "jsonp") || (this.config.dataType == "JSONP")) { 
+                    if ((this.config.type == "GET") || (this.config.type == "get")) { 
                         if (!params.url || !params.callback) {
                             throw new Error("params is illegal!");
                         } else {
                             this.config.callback = params.callback;
                         }
-                        //创建script标签
+                        
                         var cbName = 'callback';
                         var head = document.getElementsByTagName('head')[0];
                         this.config[this.config.callback] = cbName;
                         var scriptTag = document.createElement('script');
                         head.appendChild(scriptTag);
 
-                        //创建jsonp的回调函数
+                        
                         window[cbName] = function (json) {
                             head.removeChild(scriptTag);
                             clearTimeout(scriptTag.timer);
                             window[cbName] = null;
                             params.success && params.success(json);
                         };
-                        //超时处理
+                        
                         if (params.time) {
                             scriptTag.timer = setTimeout(function () {
                                 head.removeChild(scriptTag);
@@ -176,7 +164,7 @@
             url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
             return url;
         }
-        //序列化函数
+        
         function serialize(data) {
             var val = "";
             var str = "";
@@ -192,10 +180,10 @@
         version: version,
         init: function (obj) {
             var self = this;
-            //第一次初始化后要做的事情
+            
             if (already === false) {
                 already = true;
-                //to do: 判断config，处理PC端权限验证
+                
                 if (config === null || !config.sign) {
                     console.log("配置错误，请重新填写配置", config);
                 } else {
@@ -205,11 +193,11 @@
                         dataType: "jsonp",
                         data: config,
                         callback: "callback",
-                        //time:"1000",
+                        
                         success: function (res) {
                             if (res.code == 0) {
                                 if (self.util.getQuery('user_id') === undefined && self.util.getCookie('user_id') == 'undefined' && self.util.getQuery('token') === undefined && self.util.getCookie('token') == 'undefined') {
-                                    // 未登录
+                                    
                                     alert('用户未登录或者登录信息已经过期，请重新登录');
                                     window.location.replace(httpApi + '/oa/');
                                 } else {
@@ -218,7 +206,7 @@
                             } else {
                                 var msg = (res.msg) ? res.msg : '网络或服务器错误',
                                     code = (res.msg) ? '-1' : '-3';
-                                //alert('配置错误，请重新填写配置:' + msg);
+                                
                                 setTimeout(function () {
                                     errorHandle && errorHandle({
                                         message: '权限校验失败 ' + msg,
@@ -230,7 +218,7 @@
                         fail: function (res) {
                             var msg = (res.msg) ? res.msg : '网络或服务器错误',
                                 code = (res.msg) ? '-1' : '-3';
-                            //alert('配置错误，请重新填写配置:' + msg);
+                            
                             setTimeout(function () {
                                 errorHandle && errorHandle({
                                     message: '权限校验失败 ' + msg,
@@ -244,11 +232,11 @@
         },
         config: function (obj) {
             var self = this;
-            //这里对用户传进来的参数进行过滤
+            
             if (!obj) {
                 return;
             }
-            //to do: 参数名待统一
+            
             config = {
                 appId: obj.appId || -1,
                 timestamp: obj.timestamp,
@@ -296,7 +284,7 @@
                                     alert(s.msg);
                                 }
                                 if (s.code == 9102112) {
-                                    // 未登录
+                                    
                                     alert(s.msg);
                                     window.location.replace(httpApi + '/oa/');
                                 }
@@ -321,7 +309,7 @@
                 }
             };
             if (param.data instanceof FormData) {
-                //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+                
                 if (param.dauth) {
                     xhr.setRequestHeader('Dauth', param.dauth),
                     xhr.setRequestHeader('Duagent', '_web');
@@ -342,7 +330,7 @@
                 throw new Error("参数不合法");
             }
 
-            //创建 script 标签并加入到页面中
+            
             var callbackName = ('jsonp_' + Math.random()).replace(".", "");
             var oHead = document.getElementsByTagName('head')[0];
             options.data[options.callback] = callbackName;
@@ -350,7 +338,7 @@
             var oS = document.createElement('script');
             oHead.appendChild(oS);
 
-            //创建jsonp回调函数
+            
             window[callbackName] = function (json) {
                 oHead.removeChild(oS);
                 clearTimeout(oS.timer);
@@ -358,10 +346,10 @@
                 options.success && options.success(json);
             };
 
-            //发送请求
+            
             oS.src = options.url + '?' + params;
 
-            //超时处理
+            
             if (options.time) {
                 oS.timer = setTimeout(function () {
                     window[callbackName] = null;
@@ -371,7 +359,7 @@
                     });
                 }, time);
             }
-            //格式化参数
+            
             function formatParams(data) {
                 var arr = [];
                 for (var name in data) {
@@ -389,7 +377,6 @@
         prefixLoadTpl: function (userid, token) {
             var self = this;
             var _WrapPrivate = {
-                //初始化
                 init: function () {
                     //插入 header、footer 
                     document.head.innerHTML = document.head.innerHTML + '\
@@ -541,19 +528,19 @@
                     dataType: "jsonp",
                     data: {},
                     callback: "callback",
-                    //time:"1000",
+                    
                     success: function (res) {
                         if (res.code == 0) {
                             var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
                             if (connect == 'connect') {
-                                //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
+                                
                                 self.util.setCookie('userid', res.data.result.user_id);
                                 self.util.setCookie('token', res.data.result.token);
                             } else {
                                 self.logout(userid, token);
                             }
 
-                            //初始化
+                            
                             _WrapPrivate.init();
                         }
                     },
@@ -561,11 +548,11 @@
                         if (res.code == 0) {
                             var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
                             if (connect == 'connect') {
-                                //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
+                                
                             } else {
                                 self.logout(userid, token);
                             }
-                            //初始化
+                            
                             _WrapPrivate.init();
                         } else if (res.code == 9102112) {
                             setTimeout(function () {
@@ -581,7 +568,7 @@
                     }
                 });
             } else {
-                // 未登录
+                
                 alert('用户未登录或者登录信息已经过期，请重新登录');
                 window.location.replace(httpApi + '/oa/');
             }
@@ -631,12 +618,12 @@
                     Duagent: '_web'
                 },
                 callback: "callback",
-                //time:"1000",
+                
                 success: function (res) {
                     if (res.code == 0) {
                         self.util.setCookie('userid', undefined);
                         self.util.setCookie('token', undefined);
-                        // onlogout
+                        
                         readyHandle && readyHandle({
                             data: res.data
                         });
@@ -854,7 +841,7 @@
         }
     };
 
-    //注册命名空间,"app.getLoginStatus"生成deli.app.getLoginStatus
+    
     var regNameSpace = function (method, fn) {
         var arr = method.split('.');
         var namespace = deli;
@@ -868,7 +855,7 @@
             namespace = namespace[arr[i]];
         }
     };
-    //设置默认属性
+    
     function setDefaultValue(obj, defaults, flag) {
         for (var i in defaults) {
             if (flag) {
@@ -878,10 +865,10 @@
             }
         }
     }
-    //生成器，处理传参、回调以及对特定方法特殊处理
+    
     function generator(method, param, callbackSuccess, callbackFail) {
-        //to do
-        //console.log('调用方法：', method, '传参：', param);
+        
+        
         var p = param || {};
         var successCallback = function (res) {
             console.log('默认成功回调', method, res);
@@ -895,15 +882,15 @@
         if (callbackFail) {
             failCallback = callbackFail;
         }
-        //统一回调处理
+        
         var callback = function (response) {
-            //console.log('统一响应：', response);
+            
             var data = response || {};
             var code = data.code;
             var result = data.result;
-            //code 0 表示成功, 其它表示失败
+            
             if (code === '0') {
-                //数据处理
+                
                 switch (method) {
                 case 'app.onlogout':
                     result = data.result;
@@ -914,7 +901,7 @@
                 failCallback && failCallback.call(null, result, code);
             }
         };
-        //前端内容处理, 消息接入
+        
         switch (method) {
         case 'app.onlogout':
             callback({
@@ -927,7 +914,7 @@
             break;
         }
     }
-    //注册方法生成api
+    
     regMethods.forEach(function (method) {
         regNameSpace(method, function (param, callbackSuccess, callbackFail) {
             generator(method, param, callbackSuccess, callbackFail);
@@ -953,7 +940,7 @@
         }
     }
 
-    //支持amd && cmd
+    
     if (typeof module === 'object' && module && typeof module.exports === 'object') {
         module.exports = deli;
     } else if (typeof define === 'function' && (define.amd || define.cmd)) {

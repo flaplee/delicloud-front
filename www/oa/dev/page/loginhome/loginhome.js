@@ -88,13 +88,12 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             // 打开一个 web socket
             var ws = new WebSocket(session.ws_url);
             ws.onopen = function(){
-                console.log("已连接上");
+                //console.log("已连接上");
                 // Web Socket 已连接上，使用 send() 方法发送数据
                 ws.send('{"cmd": "register","data": "'+ session.session_id +'"}');
             };
             ws.onmessage = function(evt){
                 var json = JSON.parse(evt.data);
-                console.log("json", json);
                 if(json){
                     if(json.id){
                         tempInfo.data = json;
@@ -117,14 +116,14 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             };
             ws.onclose = function() {
                 // 关闭 websocket
-                console.log("连接已关闭...")
+                //console.log("连接已关闭...")
             };
             ws.onerror = function (e) {
-                console.log('发生异常:', e);
+                //console.log('发生异常:', e);
             };
         }else{
             // 浏览器不支持 WebSocket
-            var timer = setInterval(function(){pollInit('/ws/'+ session.session_id +'', timer)}, 5000);
+            var timer = setInterval(function(){pollInit('/ws/'+ session.session_id +'', timer)}, 3000);
         }
     }
     // polling
@@ -277,7 +276,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 $loginSuccess.hide();
                                 $loginFail.hide();
                                 //initQrcode($loginBox.find('.loginQr'))
-                                 if(targetLength<=4){
+                                 if(targetLength <= 4){
                                     o.addClass('org-list-seldom');
                                 }else{
                                     o.addClass('org-list-plenty');
@@ -306,7 +305,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 }
             },
             error: function(res){
-                console.log("res", res);
+                kernel.hint(res.msg);
             }
         });
     }

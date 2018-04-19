@@ -224,7 +224,7 @@
 		</div>
 	</div>
 
-	<div class="main-footer main-footer-pc">
+	<div class="main-footer main-footer-pc main-footer-mobile">
 		<div class="wrapper extra">
 			<ul class="small clear">
 			  <li class="width-24-percent">
@@ -259,41 +259,6 @@
 			<div class="section-footer-news"><span>鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</span></div>
 		</div>
 	</div>
-	<div class="main-footer main-footer-mobile">
-		<div class="wrapper extra">
-			<ul class="small clear">
-			  <li>
-			    <h1 class="heading-caption section-footer mobile-collapsible">使用帮助</h1>
-			    <ul class="section-footer" role="navigation">
-			      <li><a href="http://b2b.nbdeli.com" target="_blank">去购买智能设备</a></li>
-			      <li><a href="http://download.delicloud.com/app/delispecification.pdf" target="_blank">使用帮助</a></li>
-			    </ul>
-			  </li>
-			  <li>
-			    <h1 class="heading-caption section-support mobile-collapsible">应用开发商</h1>
-			    <ul class="section-support" role="navigation">
-					<li><a href="http://doc.delicloud.com/site/" target="_blank">应用接入指南</a></li>
-			    </ul>
-			  </li>
-			  <li>
-			    <h1 class="heading-caption section-company mobile-collapsible">关于我们</h1>
-			    <ul class="section-company" role="navigation">
-			      <li><a href="http://www.nbdeli.com/" target="_blank">关于得力</a></li>
-			      <li><a href="http://hr.nbdeli.cn/scripts/mgrqispi.dll?Appname=HRsoft2000&Prgname=REC2_RESUME_STAFF_P&ARGUMENTS=-AC" target="_blank">加入我们</a></li>
-			    </ul>
-			  </li>
-			  <li>
-			    <h1 class="heading-caption section-community mobile-collapsible">联系我们</h1>
-			    <ul class="section-community" role="navigation">
-					<li><span class="telephone-contact-icon"></span><a class="telephone-contact-text" href="javascript:;">400-185-0555</a><!-- <a href="javascript:;">QQ</a> <a href="javascript:;">Wechat</a> --> </li>
-					<li><span class="qq-contact-icon"></span><a class="qq-contact-text" href="javascript:;">327264079</a><!-- <a href="javascript:;">QQ</a> <a href="javascript:;">Wechat</a> --> </li>
-					<li><span class="wechat-contact-icon"></span><a class="wechat-contact-text" href="javascript:;">得力e+公众号</a><!-- <a href="javascript:;">QQ</a> <a href="javascript:;">Wechat</a> --> </li>
-			    </ul>
-			  </li>
-			</ul>
-			<div class="section-footer-news"><span>鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</span></div>
-		</div>
-	</div>
 	<script type="text/javascript">
 		function getElementsByClassName(node, className) {
 		    if (node.getElementsByClassName) {
@@ -317,7 +282,7 @@
 			targetToggle.href = 'https://itunes.apple.com/cn/app/deli/id1340208086?mt=8';
 			targetToggle.setAttribute("target","_blank");
 		} else if (/android/.test(ua)) {
-			targetToggle.href = 'https://www.pgyer.com/smartoffice_production_android';
+			targetToggle.href = 'http://sj.qq.com/myapp/detail.htm?apkName=com.delicloud.app.smartoffice';
 			targetToggle.setAttribute("target","_blank");
 		}
 
@@ -370,7 +335,7 @@
 		
 		// footer navLink
 		forEach(targetDom, function(index, el){
-			if (window.innerWidth < 767) {
+			if (window.innerWidth < 1024) {
 				el.addEventListener("click",function(e){
 					el.toggleClass('active')
 				});

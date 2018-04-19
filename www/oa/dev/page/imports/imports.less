@@ -158,6 +158,10 @@
 							.table-data-wrap{
 								height: 600px;
 								overflow-y: auto;
+								padding-bottom: 41px;
+								-moz-box-sizing: border-box;
+								-webkit-box-sizing: border-box;
+								box-sizing: border-box;
 							}
 						}
 						.imports-table-enable{
@@ -204,6 +208,7 @@
 							}
 						}
 						table.table{
+							table-layout: fixed;
 							thead.thead{
 								background: #fff;
 								tr{
@@ -232,6 +237,7 @@
 									padding: 0;
 									font-size:14px;
 									color:#999999;
+									border-top: 0;
 									border-left: none;
 									border-right: none;
 									height: 40px;
@@ -240,6 +246,7 @@
 									text-overflow: ellipsis;
 									overflow: hidden;
 									display: inline-block;
+									float: left;
 									a.item{
 										font-weight: normal;
 										font-size: 24px;
@@ -357,7 +364,7 @@
 							}
 						}
 
-						&::before{
+						&:before{
 							content:'';
 							position:absolute;
 							width:75px;
@@ -368,7 +375,7 @@
 					&.steps-one{
 						margin-bottom:120px;
 						.icon{
-							&::before{
+							&:before{
 								left:-150px;
 								background:url('./images/step1.png') no-repeat center;
 							}
@@ -385,7 +392,7 @@
 					}
 					&.steps-two{
 						.icon{
-							&::before{
+							&:before{
 								width:121px;
 								height:143px;
 								left:-165px;
@@ -425,7 +432,12 @@
 							overflow: hidden;
 							right: 0;
 							top: 0;
-							opacity: 0;
+							-khtml-opacity:0;
+							-moz-opacity:0;
+							filter:alpha(opacity=0);
+							filter:"alpha(opacity=0)";
+							opacity:0; 
+							filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);/*ºÊ»›ie8º∞“‘œ¬*/
 							width:100px;
 							height:40px;
 							line-height:40px;
@@ -460,6 +472,7 @@
 
 			.imports-steps{
 				padding: 105px 0;
+				overflow-y: auto;
 			}
 
 	    }

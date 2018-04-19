@@ -30,7 +30,6 @@ define(['common/kernel/kernel', 'site/util/util', 'common/text/text!page/contact
             
             //初始化组织
             function initTopDept(o, data){
-                console.log("initTopDept");
                 var status = data.status,
                     relation = data.relation,
                     parentid = data.parentid,

@@ -1,13 +1,13 @@
 'use strict';
 define(['module'], function(module) {
 	//请确保modules第一个被赋值
-	var modules = {"common/kernel":3,"common/slider":1,"common/text":1,"page/app":2,"page/appcap":1,"page/appdetail":1,"page/apphome":3,"page/base":1,"page/contacts":5,"page/department":1,"page/device":3,"page/home":2,"page/imports":3,"page/loginhome":5,"panel/adduser":1,"panel/editdept":1,"popup/adddept":1,"popup/deldept":1,"popup/deldevice":1,"popup/deluser":1,"popup/editdept":1,"popup/editdevice":1,"popup/finduser":1,"popup/loginInfo":1,"popup/loginPopup":1,"popup/renamedept":1,"popup/seluser":1,"site/import":1,"site/index":3,"site/pages":1,"site/panels":1,"site/popups":1,"site/util":2},
+	var modules = {"common/kernel":3,"common/slider":1,"common/text":1,"page/app":5,"page/appcap":2,"page/appdetail":2,"page/apphome":4,"page/base":2,"page/contacts":11,"page/department":1,"page/device":4,"page/home":3,"page/imports":10,"page/loginhome":10,"panel/adduser":1,"panel/editdept":1,"popup/adddept":1,"popup/deldept":1,"popup/deldevice":1,"popup/deluser":1,"popup/editdept":1,"popup/editdevice":1,"popup/finduser":1,"popup/loginInfo":1,"popup/loginPopup":1,"popup/renamedept":1,"popup/seluser":1,"site/import":1,"site/index":5,"site/pages":1,"site/panels":1,"site/popups":1,"site/util":7},
 		//请确保srcRoot第二个被赋值
 		srcRoot = 'dev/',
 		//请确保productRoot第三个被赋值
 		productRoot = 'dist/',
 		//请确保siteVersion第四个被赋值
-		siteVersion = "1.0.8",
+		siteVersion = "1.0.18",
 		//请确保debug第五个被赋值
 		debug = true,
 		prefix = module.id.replace(/framework\/[^\/]+$/, ''),
