@@ -24,7 +24,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         $listTmp = $contactsTeam.find('.dept-select-list'),
         $wrapTmp = $listTmp.find('div.dept-select-wrap'),
         $listTmpInner = $listTmp.find('ul.dept-select-inner'),
-        $departmentInner = $contacts.find('.department-inner');
+        $departmentInner = $contacts.find('ul.department-list-inner');
         
     // 屏蔽回车键自动提交
     $(document).keydown(function(e){

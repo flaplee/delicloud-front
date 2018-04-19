@@ -350,6 +350,8 @@
 			.contacts-inner{
 				width: 752px;
 				-height: 806px;
+				overflow-y: auto;
+				overflow-x: hidden;
 				/* height: 720px; */
 				.table{
 					.tbody{
@@ -363,13 +365,14 @@
 			.department-inner{
 				width: 752px;
 				-height: 806px;
-				height: 760px;
+				-height: 760px;
+				height: 100%;
 			}
 			.contacts-inner-title,.contacts-inner,.department-inner{
 				width:100%;
 				-padding-bottom: 100px;
-				overflow-x: hidden;
-				overflow-y: auto;
+				-overflow-x: hidden;
+				-overflow-y: auto;
 				table.table{
 					table-layout: fixed;
 					thead.thead{
@@ -489,11 +492,14 @@
 				-o-border-radius:6px;
 				background-color:#fff;
 				.department-list-inner{
-					min-height: 736px;
+					-min-height: 736px;
+					min-height: 200px;
 					-height: 736px;
 					background-color:#ffffff;
 					-padding: 5px 0px 40px 20px;
 					padding: 5px 0px 0px 20px;
+					overflow-y: auto;
+					overflow-x: hidden;
 					.select-item{
 						-position:relative;
 						width: 100%;
