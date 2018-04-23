@@ -6,6 +6,22 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         $userpanel = $userlist.find('.nav-item-login'),
         $userlogout = $userpanel.find('.nologin'),
         $userlogin = $userpanel.find('.userBtn');
+    // ie8 圆角
+    if(window.PIE && (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE8.0")){
+        $(".nav-item-current").each(function(){
+        PIE.attach(this)
+        });
+        $(".user-wrap").each(function(){
+        PIE.attach(this)
+        });
+        $(".user-info-avatar").each(function(){
+        PIE.attach(this)
+        });
+
+        $(".userinfo-avatar").each(function(){
+        PIE.attach(this)
+        });
+    }
     // 顶部导航
     $usermenu.find('a.navlink').on('click',function(e){
         e.stopPropagation();

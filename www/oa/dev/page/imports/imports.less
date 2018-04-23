@@ -90,6 +90,9 @@
 			border-radius:5px;
 			border:1px solid #eaeaea;
 			margin: 30px;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
 			.imports-crumbs{
 				padding: 20px 30px;
 				a{
@@ -331,7 +334,7 @@
 
 		.imports-steps{
 			display:block;
-			padding:180px 0 210px;
+			-padding:180px 0 210px;
 			.steps-inner{
 				padding-left:400px;
 				.steps-item{
@@ -448,7 +451,7 @@
 		}
 	}
 
-	@media (max-width: 1440px){
+	@media screen and (max-width: 1440px) {
 	   .imports-menu{
 	   		width: 100px;
 			ul.menu-list{
@@ -471,7 +474,7 @@
 			}
 
 			.imports-steps{
-				padding: 105px 0;
+				-padding: 105px 0;
 				overflow-y: auto;
 			}
 

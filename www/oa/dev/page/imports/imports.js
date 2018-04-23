@@ -13,7 +13,8 @@ define(['common/kernel/kernel', 'site/util/util','page/imports/steps'], function
         $importsInnerNav = $importsInnerData.find('.imports-nav'),
         $importsInnerTable = $importsInnerData.find('.imports-table'),
         $importsInnerError = $importsInner.find('.imports-inner-error'),
-        $importsInnerSuccess = $importsInner.find('.imports-inner-success');
+        $importsInnerSuccess = $importsInner.find('.imports-inner-success'),
+        $stepsInner = $importsSteps.find('.steps-inner');
         steps(function(){});
     return {
         onload: function(force) {
@@ -88,6 +89,12 @@ define(['common/kernel/kernel', 'site/util/util','page/imports/steps'], function
                 $importsInfo.hide();
                 $importsSteps.show();
             }
+
+            // 获取屏幕的可见区域高度减去其他部分的高度
+            $importsSteps.css({
+                'padding-top': (document.body.clientHeight - 80 - 60 - $stepsInner.height())*0.5,
+                'padding-bottom': (document.body.clientHeight - 80 - 60 - $stepsInner.height())*0.5
+            });
         }
     };
 });
