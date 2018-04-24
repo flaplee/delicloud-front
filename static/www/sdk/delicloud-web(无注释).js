@@ -389,10 +389,10 @@
                     .deli-wrap-header a:hover{text-decoration:none}\
                     .deli-wrap-header a img{border:none}\
                     .deli-wrap-header .pointer{cursor:pointer}\
-                    .deli-wrap-header{width:100%;height:80px;background-color:#FDFDFD;box-shadow:0 2px 4px 0 rgba(0,0,0,.04)}\
+                    .deli-wrap-header{width:100%;height:80px;background-color:#FDFDFD;box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);}\
                     .deli-wrap-deli-footer{background-color:#cfd2d7;margin:0 auto}\
                     .deli-wrap-header.deli-wrap-top{background:#fff}\
-                    .deli-wrap-header.deli-wrap-top.deli-wrap-top-shadow{-webkit-box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2)}\
+                    .deli-wrap-header.deli-wrap-top.deli-wrap-top-shadow{box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);}\
                     .deli-wrap-header .deli-user-head{width:1200px;height:80px;margin:0 auto;background-color:#fff}\
                     .deli-clear:after{visibility:hidden;display:block;font-size:0;content:"";clear:both;height:0}\
                     .deli-clear{zoom:1}\
@@ -427,22 +427,25 @@
                     .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-asset .deli-user-asset-link{display:inline-block;width:80px;height:40px;line-height:40px;text-align:center;font-size:14px;color:#666;background-color:#fff}\
                     .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-asset .deli-user-asset-link:hover{color:#5d85e0}\
                     .deli-wrap-footer{background-color:#cfd2d7}\
-                    .deli-footer{padding-top:25px;width:1200px;margin:0 auto}\
-                    .deli-footer-link{-height:100px}\
-                    .deli-footer-link dl{width:155px;float:left;-height:100px;margin-right:100px;margin-bottom:0}\
-                    .deli-footer-link dl.deli-attus{position:relative;width:170px;margin-right:0}\
-                    .deli-footer-link dl.deli-attus .deli-icon-weixin-img{display:none;position:absolute;top:-80px;left:-25px;background-image:url(https://static.delicloud.com/www/home/images/weixin.png);width:80px;height:80px}\
-                    .deli-footer-link dl.deli-attus .deli-icon-qq{margin-right:50px}\
+                    .deli-footer{-padding-top:25px;padding-top:50px; width:1200px;margin:0 auto}\
+                    .deli-footer-link{-height:100px;width: 95%; padding-left: 5%;}\
+                    .deli-footer-link dl{-width:155px; width:275px; float:left;-height:100px;-margin-right:100px;margin-bottom:0}\
+                    .deli-footer-link dl.deli-attus{position:relative;-width:170px;width:220px;margin-right:0}\
+                    .deli-footer-link dl.deli-attus .deli-icon-phone{display:inline-block; background:url(https://static.delicloud.com/www/home/images/telephone_icon.png) 0 0 no-repeat;width:16px;height:18px; vertical-align: top; margin-top: 3px; margin-right: 10px;}\
+                    .deli-footer-link dl.deli-attus .deli-icon-weixin-img{-display:none; display:inline-block; -position:absolute;-top:-80px;-left:-25px;-background-image:url(https://static.delicloud.com/www/home/images/weixin.png); background-image:url(https://static.delicloud.com/www/home/images/wechat_icon.png);-width:80px;width:22px;-height:80px; height:18px; vertical-align: top; margin-top: 3px; margin-right: 6px;}\
+                    .deli-footer-link dl.deli-attus .deli-icon-qq{-margin-right:50px;display: inline-block; background-image:url(https://static.delicloud.com/www/home/images/qq_icon.png); width: 16px;height: 18px; vertical-align: top; margin-top: 3px; margin-right: 10px;}\
                     .deli-footer-link dl.deli-attus .deli-icon-weixin{position:relative}\
                     .deli-footer-link dl.deli-attus .deli-icon-qq,.deli-footer-link dl.deli-attus .deli-icon-weixin{font-size:30px;color:#333;cursor:pointer;text-decoration:none}\
                     .deli-footer-link dl.deli-attus .deli-icon-qq:hover,.deli-footer-link dl.deli-attus .deli-icon-weixin:hover{color:#55bfbe}\
                     .deli-footer-link dl.deli-attus .deli-icon-weixin:hover .deli-icon-weixin-img{display:block}\
                     .deli-footer-link dl .deli-kefu-phone{font-size:16px}\
-                    .deli-footer-link dl dt{font-size:16px;font-weight:700;line-height:26px;color:#666;letter-spacing:5px;margin-bottom:20px;opacity:.6;-moz-opacity:.6;-webkit-opacity:.6;-o-opacity:.6}\
-                    .deli-footer-link dl dd{line-height:24px;font-size:14px;color:#959799;margin-bottom:15px;letter-spacing:5px}\
-                    .deli-footer-link dl dd a{font-size:16px;color:#333;letter-spacing:5px;display:inline-block;text-decoration:none}\
-                    .deli-footer-link dl dd:hover a{color:#fff;text-decoration:none}\
-                    .deli-footer-copyright{font-size:14px;color:#666;height:50px;padding-top:20px;text-align:center}</style>';
+                    .deli-footer-link dl dt{font-size:18px; font-weight:700; -line-height:26px; color:#666; letter-spacing:5px;margin-bottom:20px;}\
+                    .deli-footer-link dl dd{line-height:24px;font-size:14px;color:#959799;margin-bottom:18px;letter-spacing:5px}\
+                    .deli-footer-link dl dd a{font-size:16px;color:#333;letter-spacing:2px;display:inline-block;text-decoration:none}\
+                    .deli-footer-link dl dd:hover a{color:#666;text-decoration:none}\
+                    .deli-footer-copyright{font-size:14px;color:#666;height:50px;padding-top:20px;text-align:center;letter-spacing:2px;}\
+                    .deli-footer-link dl.deli-attus dd b {font-size: 16px; color: #333; font-weight: normal;letter-spacing:2px; cursor: pointer;}\
+                    .deli-footer-link dl.deli-attus dd:hover b {color: #666;}</style>';
                     var elementHeader = '<div class="deli-user-head">\
                         <div id="deli-head" class="deli-clear">\
                             <div class="deli-logo-box">\
@@ -482,25 +485,25 @@
                     var elementFooter = '<div class="deli-footer">\
                         <div class="deli-footer-link deli-clear">\
                             <dl><dt>使用帮助</dt>\
-                                <dd><a href="javascript:;">去购买智能设备</a>\
+                                <dd><a href="http://b2b.nbdeli.com" target="_blank">去购买智能设备</a>\
                                 </dd>\
-                                <dd><a href="javascript:;">App使用帮助</a>\
-                                </dd>\
-                                <dd><a href="javascript:;">网页使用帮助</a>\
+                                <dd><a href="http://download.delicloud.com/app/delispecification.pdf" target="_blank">App使用帮助</a>\
                                 </dd>\
                             </dl>\
                             <dl><dt>应用开发商</dt>\
-                                <dd><a href="javascript:;">应用接入指南</a>\
+                                <dd><a href="http://doc.delicloud.com/site/" target="_blank">应用接入指南</a>\
                                 </dd>\
                             </dl>\
                             <dl><dt>关于我们</dt>\
-                                <dd><a href="javascript:;">加入我们</a>\
+                                <dd><a href="http://www.nbdeli.com/" target="_blank">关于得力</a>\
                                 </dd>\
-                                <dd><a href="javascript:;">联系我们</a>\
+                                <dd><a href="http://hr.nbdeli.cn/scripts/mgrqispi.dll?Appname=HRsoft2000&Prgname=REC2_RESUME_STAFF_P&ARGUMENTS=-AC" target="_blank">加入我们</a>\
                                 </dd>\
                             </dl>\
                             <dl class="deli-attus"><dt>联系我们</dt>\
-                                <dd class="deli-kefu-phone">400-185-0555</dd>\
+                                <dd class="deli-kefu-phone"><span class="deli-icon-phone"></span><b>400-185-0555</b></dd>\
+                                <dd class="deli-kefu-qq"><span class="deli-icon-qq"></span><b>327264079</b></dd>\
+                                <dd class="deli-kefu-wechat"><span class="deli-icon-weixin-img"></span><b>得力e+公众号</b></dd>\
                             </dl>\
                         </div>\
                         <div class="deli-footer-copyright">鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</div>\
