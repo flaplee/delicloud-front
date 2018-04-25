@@ -4,30 +4,36 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
 	var userid = util.getCookie('userid'),
         token = util.getCookie('token'),
         orgid = util.getCookie('orgid'),
-        scnt = 0, fcnt = 0, importStatus = 0, isImport = false;
-
+        scnt = 0, fcnt = 0, importStatus = 0, isImport = false, ws;
+    var $menuImport = $('#imports .imports-menu .menu-list .menu-manage-import'),
+        $imports = $('#imports .imports-box'),
+        $importsInfo = $imports.find('.imports-info'),
+        $importsSteps = $imports.find('.imports-steps'),
+        $importsCrumbs = $importsInfo.find('.imports-crumbs'),
+        $importsCrumbsUser = $importsCrumbs.find('.imports-crumbs-user'),
+        $importsCrumbsInfo = $importsCrumbs.find('.imports-crumbs-info'),
+        $importsInner = $importsInfo.find('.imports-inner'),
+        $importsNav = $importsInner.find('.imports-inner-data .imports-nav a'),
+        $importsTable = $importsInner.find('.imports-inner-data .imports-table'),
+        $reUploadBtn = $importsInner.find('.imports-upload button.btn-upload'),
+        $scntBtn = $importsInner.find('.imports-nav a.nav-enable'),
+        $fcntBtn = $importsInner.find('.imports-nav a.nav-unable'),
+        $tableWrap = $importsInner.find('.imports-inner-data .imports-table .table-data-wrap'),
+        $scntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-enable .table-data-wrap table.table-data tbody.tbody'),
+        $fcntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-unable .table-data-wrap table.table-data tbody.tbody');
     member(function(){
         var $dom = $(html),
-            $imports = $('#imports .imports-box'),
-            $importsInfo = $imports.find('.imports-info'),
-            $importsCrumbs = $importsInfo.find('.imports-crumbs'),
-            $importsCrumbsUser = $importsCrumbs.find('.imports-crumbs-user'),
-            $importsCrumbsInfo = $importsCrumbs.find('.imports-crumbs-info'),
-            $importsInner = $importsInfo.find('.imports-inner'),
             $downloadBtn = $dom.find('.btn-step-download'),
             $uploadBtn = $dom.find('.btn-step-upload'),
             $uploadForm = $dom.find('#upload-form'),
             $uploadHideBtn = $dom.find('#upload-file');
             $imports.append($dom);
-        var $importsSteps = $imports.find('.imports-steps');
-        var $importsNav = $importsInner.find('.imports-inner-data .imports-nav a'),
-            $importsTable = $importsInner.find('.imports-inner-data .imports-table'),
-            $reUploadBtn = $importsInner.find('.imports-upload button.btn-upload'),
-            $scntBtn = $importsInner.find('.imports-nav a.nav-enable'),
-            $fcntBtn = $importsInner.find('.imports-nav a.nav-unable'),
-            $scntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-enable .table-data-wrap table.table-data tbody.tbody'),
-            $fcntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-unable .table-data-wrap table.table-data tbody.tbody');
-
+        $menuImport.on('click', function(e){
+            e.preventDefault();
+            resetUploadFile();
+            if(ws) ws.close();
+            kernel.replaceLocation({'id':'imports','args':{'type':'info'}});
+        });
         $importsNav.on('click', function(e){
             e.stopPropagation();
             var c = $(this),index = c.index();
@@ -43,26 +49,33 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
 
         $uploadForm.on('change','#upload-file', function(){
             ajaxFileUpload();
+            $tableWrap.height(document.body.clientHeight - 376);
         });
 
         $importsCrumbsUser.on('click', function(){
             loc.args.type = 'info';
             loc.args.status = 'data';
+            resetUploadFile();
+            if(ws) ws.close();
             kernel.replaceLocation(loc);
         });
 
         $importsCrumbsInfo.on('click', function(){
             loc.args.type = 'steps';
             loc.args.status = 'data';
+            resetUploadFile();
+            if(ws) ws.close();
             kernel.replaceLocation(loc);
         });
 
         $reUploadBtn.on('click', function(e){
             e.stopPropagation();
-            $('#upload-file').val('');
-            scnt = 0, fcnt = 0, importStatus = 0;
+            resetUploadFile();
+            if(ws) ws.close();
             kernel.replaceLocation({'id':'imports','args':{}});
         });
+
+       
 
         function ajaxFileUpload() {
             kernel.showLoading();
@@ -198,15 +211,15 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
         function webSocketInit(session, callback){
             if (!!window.WebSocket && window.WebSocket.prototype.send){
                 // 打开一个 web socket
-                var ws = new WebSocket(session.ws_url);
+                ws = new WebSocket(session.ws_url);
                 ws.onopen = function(){
-                    console.log("已连接上");
+                    //console.log("已连接上");
                     // Web Socket 已连接上，使用 send() 方法发送数据
                     ws.send('{"cmd": "register","data": "'+ session.session_id +'"}');
                 };
                 ws.onmessage = function(evt){
                     var json = JSON.parse(evt.data);
-                    console.log("json", json);
+                    //console.log("json", json);
                     if(json){
                         if(json.fail_list){
                             setTargetHtml($fcntTarget, 'unable', importStatus, json.fail_list, fcnt, function(){
@@ -226,7 +239,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 };
                 ws.onclose = function() {
                     // 关闭 websocket
-                    console.log("连接已关闭...")
+                    //console.log("连接已关闭...")
                     if(typeof callback === 'function'){
                         callback();
                     }
@@ -254,7 +267,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 complete: function(res){
                     if(res.status == 200){
                         var response = JSON.parse(res.responseText);
-                        console.log("response", response);
+                        //console.log("response", response);
                         if(response){
                             $.each(response, function(i, n){
                                 if(n.fail_list && n.fail_list.length > 0){
@@ -280,6 +293,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
     });
 
     return function(callback){
+        resetUploadFile();
         if(isImport && isImport == true){
             $importsInfo.show();
             $importsSteps.hide();
@@ -288,5 +302,13 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 callback();
             }*/
         }
+    };
+    function resetUploadFile(){
+        $('#upload-file').val('');
+        scnt = 0, fcnt = 0, importStatus = 0;
+        $scntTarget.find('>').remove();
+        $fcntTarget.find('>').remove();
+        $scntBtn.find('span.nav-enable-num').text(0);
+        $fcntBtn.find('span.nav-unable-num').text(0);
     }
 });

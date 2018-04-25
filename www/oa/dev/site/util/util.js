@@ -77,6 +77,7 @@ define(['common/kernel/kernel'], function(kernel) {
                 if(param.dauth){
                     xhr.setRequestHeader('Duagent', '_web');
                     xhr.setRequestHeader('Dauth', param.dauth);
+                    xhr.setRequestHeader('Duagent', '_web');
                 }
                 xhr.send(param.data);
             } else {

@@ -15,6 +15,11 @@ define(['common/kernel/kernel', 'site/util/util','page/imports/steps'], function
         $importsInnerError = $importsInner.find('.imports-inner-error'),
         $importsInnerSuccess = $importsInner.find('.imports-inner-success'),
         $stepsInner = $importsSteps.find('.steps-inner');
+    var $scntBtn = $importsInner.find('.imports-nav a.nav-enable'),
+        $fcntBtn = $importsInner.find('.imports-nav a.nav-unable'),
+        $tableWrap = $importsInner.find('.imports-inner-data .imports-table .table-data-wrap'),
+        $scntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-enable .table-data-wrap table.table-data tbody.tbody'),
+        $fcntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-unable .table-data-wrap table.table-data tbody.tbody');
         steps(function(){});
     return {
         onload: function(force) {
@@ -32,6 +37,9 @@ define(['common/kernel/kernel', 'site/util/util','page/imports/steps'], function
                 var $usermenu = $('#header .user-head .nav-top .nav-item');
                 $usermenu.find('a.navlink').removeClass('navlink-current');
                 $usermenu.find('a.navlink.orgBtn').addClass('navlink-current');
+                if(!type && !status && !imports){
+                    steps(function(){});
+                }
             };
             if(type){
                 switch(type){
@@ -89,7 +97,6 @@ define(['common/kernel/kernel', 'site/util/util','page/imports/steps'], function
                 $importsInfo.hide();
                 $importsSteps.show();
             }
-
             // 获取屏幕的可见区域高度减去其他部分的高度
             $importsSteps.css({
                 'padding-top': (document.body.clientHeight - 80 - 60 - $stepsInner.height())*0.5,

@@ -9,17 +9,23 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     // ie8 圆角
     if(window.PIE && (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE8.0")){
         $(".nav-item-current").each(function(){
-        PIE.attach(this)
+            PIE.attach(this)
         });
         $(".user-wrap").each(function(){
-        PIE.attach(this)
+            PIE.attach(this)
         });
+        $(".son-nav-list").each(function(){
+            PIE.attach(this)
+        });
+        $(".user-panel").each(function(){
+            PIE.attach(this)
+        });       
         $(".user-info-avatar").each(function(){
-        PIE.attach(this)
+            PIE.attach(this)
         });
 
         $(".userinfo-avatar").each(function(){
-        PIE.attach(this)
+            PIE.attach(this)
         });
     }
     // 顶部导航
@@ -210,7 +216,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 evt.data.orgindex = c.index();
                                 util.setCookie('orgindex', evt.data.orgindex);
                                 // update 20180313 更新相应数据
-                                util.setUserData(evt);
+                                util.setUserData(evt.data);
                                 if(kernel.parseHash(location.hash).id == 'imports') kernel.replaceLocation({'args':{},'id':'imports'});
                                 pagechange(evt);
                             }
