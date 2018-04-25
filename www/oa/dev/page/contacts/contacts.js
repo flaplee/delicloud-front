@@ -25,7 +25,6 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         $wrapTmp = $listTmp.find('div.dept-select-wrap'),
         $listTmpInner = $listTmp.find('ul.dept-select-inner'),
         $departmentInner = $contacts.find('ul.department-list-inner');
-        
     // 屏蔽回车键自动提交
     $(document).keydown(function(e){
         switch(e.keyCode){
@@ -33,7 +32,6 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
              return false;
         }
     });
-    
     
     //初始化组织
     var initTopDeparentment = function(o, data){
@@ -825,12 +823,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                     parentid: parentid,
                     orgid: orgid
                 }, true);
-                
-                
+
                 // 获取屏幕的可见区域高度减去其他部分的高度
                 $listTmpInner.height(document.body.clientHeight - 245);
                 $contactsInner.height(document.body.clientHeight - 250);
-
+                
                 $contactsMenu.find('ul.menu-list li.item').removeClass('current');
                 $contactsMenu.find('ul.menu-list li.item').filter('.item-'+ ((type) ? type : 'user') +'').addClass('current');
                 $contactsBox.find(boxClass).show().siblings().hide();
@@ -852,7 +849,6 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         $departmentInner.height(document.body.clientHeight - 250 + 40);
                         departments();
                         $contactsForm.hide();
-                        
                         if($listTmpInner.hasClass('dept-select-inner-user')){
                             $listTmpInner.removeClass('dept-select-inner-user').addClass('dept-select-inner-department');
                         }else{
