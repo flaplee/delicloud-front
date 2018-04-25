@@ -4,7 +4,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
 	var userid = util.getCookie('userid'),
         token = util.getCookie('token'),
         orgid = util.getCookie('orgid'),
-        scnt = 0, fcnt = 0, importStatus = 0, isImport = false, ws;
+        scnt = 0, fcnt = 0, importStatus = 0, isImport = false, ws, timer, supWebsocket = (!!window.WebSocket && window.WebSocket.prototype.send);
     var $menuImport = $('#imports .imports-menu .menu-list .menu-manage-import'),
         $imports = $('#imports .imports-box'),
         $importsInfo = $imports.find('.imports-info'),
@@ -31,7 +31,11 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
         $menuImport.on('click', function(e){
             e.preventDefault();
             resetUploadFile();
-            if(ws) ws.close();
+            if(supWebsocket){
+                if(ws){ws.close()};
+            }else{
+                if(timer){clearInterval(timer)};
+            }
             kernel.replaceLocation({'id':'imports','args':{'type':'info'}});
         });
         $importsNav.on('click', function(e){
@@ -56,7 +60,11 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
             loc.args.type = 'info';
             loc.args.status = 'data';
             resetUploadFile();
-            if(ws) ws.close();
+            if(supWebsocket){
+                if(ws){ws.close()};
+            }else{
+                if(timer){clearInterval(timer)};
+            }
             kernel.replaceLocation(loc);
         });
 
@@ -64,18 +72,24 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
             loc.args.type = 'steps';
             loc.args.status = 'data';
             resetUploadFile();
-            if(ws) ws.close();
+            if(supWebsocket){
+                if(ws){ws.close()};
+            }else{
+                if(timer){clearInterval(timer)};
+            }
             kernel.replaceLocation(loc);
         });
 
         $reUploadBtn.on('click', function(e){
             e.stopPropagation();
             resetUploadFile();
-            if(ws) ws.close();
+            if(supWebsocket){
+                if(ws){ws.close()};
+            }else{
+                if(timer){clearInterval(timer)};
+            }
             kernel.replaceLocation({'id':'imports','args':{}});
         });
-
-       
 
         function ajaxFileUpload() {
             kernel.showLoading();
@@ -252,7 +266,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 };
             }else{
                 // 浏览器不支持 WebSocket
-                var timer = setInterval(function(){pollInit('/ws/'+ session.session_id +'', timer, function(){
+                timer = setInterval(function(){pollInit('/ws/'+ session.session_id +'', timer, function(){
                     callback();
                 })}, 3000);
             }
