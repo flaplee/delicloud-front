@@ -93,10 +93,10 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         o.find('>').remove();
                         for (var i = 0; i < res.data.result.length; i++) {
                             //((json[i].department_path.split(';')).length > 1) ? json[i].department_path.replace(new RegExp(""+ orgname +"/","gm"),"").replace(new RegExp("/","gm"),"-").replace(new RegExp(";","gm"),"/") : json[i].department;
-                            var deptPaths = json[i].department_paths,deptsText = '', deptTitles = json[i].titles;
+                            var deptPaths = json[i].department_paths, deptsText = '', deptTitles = json[i].titles;
                             if(deptPaths && deptPaths.length > 1){
                                 for(var j = 0;j < deptPaths.length; j++){
-                                    deptsText += (deptPaths[j]).replace(new RegExp("/","gm"),"-") + ((j == deptPaths.length - 1) ?'':'/');//<span style="color:#494949;margin:0 1px;"></span>
+                                    deptsText += (deptPaths[j] ? deptPaths[j] : '').replace(new RegExp("/","gm"),"-").replace(new RegExp(""+ json[i].organization +"-","gm"),"") + ((j == deptPaths.length - 1) ? '' : '/');//<span style="color:#494949;margin:0 1px;"></span>
                                 }
                             }else{
                                 deptsText = json[i].department;
@@ -610,7 +610,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
             },
             success: function(res) {
                 if(res.code == 0){
-                    kernel.hint('移动成员成功~', 'success');
+                    kernel.hint('移动成员成功', 'success');
                     initContacts($tmp, {
                         id: tempId,
                         orgid: tempOrgid,
@@ -618,7 +618,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                     });
                     //kernel.closePopup('adddept');
                 }else{
-                    kernel.hint('请选择要移动的人员~', 'error');
+                    kernel.hint('请选择要移动的人员', 'error');
                 }
             }
         });
@@ -644,7 +644,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                 }
             });
         } else {
-            kernel.hint('请选择要移动的人员~', 'info');
+            kernel.hint('请选择要移动的人员', 'info');
         }
     });
 
@@ -667,19 +667,19 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                 },
                 success: function(res) {
                     if(res.code == 0){
-                        kernel.hint('删除成员成功~', 'success');
+                        kernel.hint('删除成员成功', 'success');
                         initContacts($tmp, {
                             id: tempId,
                             orgid: tempOrgid,
                             title: orgname
                         });
                     }else{
-                        kernel.hint('请选择要删除的成员~', 'error');
+                        kernel.hint('请选择要删除的成员', 'error');
                     }
                 }
             });
         } else {
-            kernel.hint('请选择要删除的成员~', 'info');
+            kernel.hint('请选择要删除的成员', 'info');
         }
     });
 
@@ -709,7 +709,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                 }
             });
         } else {
-            kernel.hint('请选择要彻底删除的人员~', 'info');
+            kernel.hint('请选择要彻底删除的人员', 'info');
         }
     });
 

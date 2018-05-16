@@ -61,7 +61,7 @@ define(['common/kernel/kernel'], function(kernel) {
                         if (typeof param.error === 'function') {
                             param.error(xhr, 'network_error');
                         } else if (!param.silent) {
-                            kernel.hint('网络或服务器错误: ' + xhr.status, 'error');
+                            kernel.hint('网络异常，请稍后再试', 'error');
                         }
                     }
                     if (typeof param.complete === 'function') {
@@ -491,10 +491,11 @@ define(['common/kernel/kernel'], function(kernel) {
         //从服务器获取最新的账号数据 api 需要跟setToken 保持同步
         util.updateUserData = function(uid, token, callback) {
             if(uid != 'undefined'){
+                var userTimestamp = (new Date().valueOf()).toString();
                 util.ajaxSubmit({
                     type: 'get',
                     url: '/v1.0/user/me',
-                    dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(uid, token, (new Date().valueOf())),
+                    dauth: uid + ' ' + userTimestamp + ' ' + kernel.buildDauth(uid, token, userTimestamp),
                     silent: true,
                     complete: function(xhr, msg) {
                         var json, i;
@@ -507,10 +508,11 @@ define(['common/kernel/kernel'], function(kernel) {
                                     'data': json.data.result,
                                     'organization': targetData
                                 };
+                                var adminTimestamp = (new Date().valueOf()).toString();
                                 util.ajaxSubmit({
                                     type: 'get',
                                     url: '/v1.0/admin/auth/my',
-                                    dauth: uid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(uid, token, (new Date().valueOf())),
+                                    dauth: uid + ' ' + adminTimestamp + ' ' + kernel.buildDauth(uid, token, adminTimestamp),
                                     data: {
                                         type: 'group'
                                     },

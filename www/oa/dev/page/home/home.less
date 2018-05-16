@@ -49,13 +49,16 @@ body.home{
     		width:300px;
     		.record-top{
                 text-align: center;
-                margin: 40px 20px;
+                -margin: 40px 20px;
+                margin: 50px 20px 40px 20px;
                 padding-bottom: 40px;
                 border-bottom: 1px solid #f6f6f6;
                 .logo{
                     margin: 0 auto;
-                    width:100px;
-                    height:100px;
+                    -width:100px;
+                    width: 38px;
+                    -height:100px;
+                    height: 41px;
                     background:url('./images/archi.png')no-repeat center;
                 }
     			.text{
@@ -64,6 +67,10 @@ body.home{
                     font-size:24px;
                     max-height: 144px;
                     overflow: hidden;
+                    /**update by yan**/
+                    height: 24px;
+                    line-height: 24px;
+                    margin-top: 38px;
     			}
     		}
     		.record-main{
@@ -92,38 +99,54 @@ body.home{
     			width:800px;
     			height:360px;
                 margin-top:50px;
-                margin-bottom:30px;
+                -margin-bottom:30px;
+                margin-bottom: 60px;
                 background: url('./images/banner.png') no-repeat center;
     		}
     		.index-entry{
     			h3.entry-title{
-                    font-size:24px;
+                    -font-size:24px;
+                    font-size: 20px;
                     color:#333;
     				text-align:left;
-    				margin-bottom:20px;
+    				-margin-bottom:20px;
+                    margin-bottom: 30px;
+                    /**update by yan**/
+                    height: 20px;
+                    line-height: 20px;
     			}
     			.entry-list{
     				.item{
     					float:left;
     					display:inline-block;
     					width:350px;
-    					height:120px;
+    					-height:120px;
+                        height: 100px;
     					border:1px solid #eaeaea;
-                        border-radius:5px;
-                        -moz-border-radius:5px;
-                        -webkit-border-radius:5px;
-                        -o-border-radius:5px;
+                        -border-radius:5px;
+                        --moz-border-radius:5px;
+                        --webkit-border-radius:5px;
+                        --o-border-radius:5px;
+                        -moz-border-radius:10px;
+                        -webkit-border-radius:10px;
+                        -o-border-radius:10px;
+                        border-radius:10px;
                         margin-right:100px;
-                        padding: 20px 0 20px 45px;
+                        -padding: 20px 0 20px 45px;
+                        padding: 20px 0 20px 50px;
     					.item-wrap{
                             float:left;
-    						width:80px;
-							height:80px;
+    						-width:80px;
+                            width: 60px;
+							-height:80px;
+                            height: 60px;
 							display:inline-block;
                             margin-right: 20px;
     						img.item-icon{
-    							width:80px;
-    							height:80px;
+    							-width:80px;
+                                width: 60px;
+                                -height:80px;
+                                height: 60px;
     							display:inline-block;
                                 border-radius:50%;
                                 -moz-border-radius:50%;
@@ -133,10 +156,13 @@ body.home{
     					}
     					.item-title{
                             float: left;
-                            font-size:20px;
+                            -font-size:20px;
+                            font-size: 18px;
                             color:#333333;
-                            height: 70px;
-                            line-height: 70px;
+                            -height: 70px;
+                            height: 60px;
+                            -line-height: 70px;
+                            line-height: 60px;
     					}
     					&:last-child{
     						margin-right:0;

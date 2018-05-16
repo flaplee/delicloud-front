@@ -84,7 +84,7 @@
 	    	-display: -ms-flexbox;
 		}
 
-		.imports-info,.imports-steps{
+		.imports-info{
 			width: 100%;
 			width: auto\9;
 			background-color:#fff;
@@ -161,8 +161,8 @@
 							}
 							.table-data-wrap{
 								height: 600px;
-								overflow-y: auto;
 								padding-bottom: 41px;
+								overflow-y: auto;
 								-moz-box-sizing: border-box;
 								-webkit-box-sizing: border-box;
 								box-sizing: border-box;
@@ -214,13 +214,13 @@
 						table.table{
 							table-layout: fixed;
 							thead.thead{
-								background: #fff;
+								background: #f2f2f2;
 								tr{
 									height: 40px;
 									line-height: 40px;
 									th{
 										padding: 0;
-										font-size:14px;
+										font-size:16px;
 										color:#333333;
 										height: 40px;
 										line-height: 40px;
@@ -258,6 +258,12 @@
 										margin: 0 10px;
 									}
 								}
+								tr.empty{
+									td{
+										display: block;
+										float: none;
+									}
+								}
 							}
 
 							&.table-data{
@@ -272,7 +278,7 @@
 						}
 					}
 					.imports-upload{
-					    margin: 30px 60px;
+						margin: 20px 60px;
 					}
 				}
 				.imports-inner-error,.imports-inner-success{
@@ -335,117 +341,192 @@
 
 		.imports-steps{
 			display:block;
-			-padding:180px 0 210px;
+			width: 100%;
+			width: auto\9;
+			background-color:#fff;
+			border-radius:5px;
+			border:1px solid #eaeaea;
+			margin: 30px;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
 			.steps-inner{
-				padding-left:400px;
-				.steps-item{
-					width:750px;
-					height:150px;
-					.icon{
-						position:relative;
-						font-size:24px;
-						line-height:24px;
-						color:#333333;
-						p{
-							height:32px;
-							line-height:32px;
-							margin-right:50px;
-						}
-						p,.operate{
-						    float: left;
-						    margin-top:55px;
-						}
-
-						.operate{
-							.btn-step-download{
-								font-size: 18px;
-								width: 100px;
+				width: 100%;
+				-height: 456px;
+				display: table;
+				padding: 190px 0 190px;
+				.steps-inner-btns{
+					display: table-cell;
+					vertical-align: middle;
+					text-align: center;
+					#upload-form{
+						width: 180px;
+						height: 40px;
+						line-height: 40px;
+						margin: 0 auto;
+						cursor: pointer;
+						.upload-file{
+							width:180px;
+							height:40px;
+							line-height:40px;
+							text-align:center;
+							display: inline-block;
+							*zoom:1;
+							*display:block;
+							color: #fff;
+	    					background-color: #5d85e0;
+							font-size: 16px;
+							font-weight: 400;
+							border: none;
+							border-radius: 4px;
+							-webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+							transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+							-webkit-font-smoothing: subpixel-antialiased;
+							position: relative;
+							text-decoration: none;
+							#upload-file{
+								position: absolute;
+								overflow: hidden;
+								right: 0;
+								top: 0;
+								-khtml-opacity:0;
+								-moz-opacity:0;
+								filter:alpha(opacity=0);
+								filter:"alpha(opacity=0)";
+								opacity:0; 
+								filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);/*¬º√¶√à√ùie8¬º¬∞√í√î√è√Ç*/
+								width: 180px;
 								height: 40px;
 								line-height: 40px;
-								display: block;
-								padding: 0;
-								text-align: center;
-							}
-						}
-
-						&:before{
-							content:'';
-							position:absolute;
-							width:75px;
-							height:143px;
-							background:url('./images/step1.png') no-repeat center;
-						}
-					}
-					&.steps-one{
-						margin-bottom:120px;
-						.icon{
-							&:before{
-								left:-150px;
-								background:url('./images/step1.png') no-repeat center;
-							}
-						}
-						.table-tips{
-							margin-top: 20px;
-							p{
-								font-size: 14px;
-								color: #666;
-								height: 24px;
-								line-height: 24px;
+								cursor: pointer;
 							}
 						}
 					}
-					&.steps-two{
-						.icon{
-							&:before{
-								width:121px;
-								height:143px;
-								left:-165px;
-								background:url('./images/step2.png') no-repeat center;
-							}
+					.operate{
+						margin-top: 10px;
+						height: 24px;
+						line-height: 24px;
+						a.btn-step-download{
+							margin: 0 auto;
+							color: #5d85e0;
+							font-size: 12px;
+							height: 16px;
+							line-height: 16px;
+							display: inline-block;
 						}
 					}
 				}
-				#upload-form{
-					width: 100px;
-					height: 40px;
-					line-height: 40px;
-					float: left;
-					margin-top: 45px;
-					cursor: pointer;
-					.upload-file{
-						width:100px;
-						height:40px;
-						line-height:40px;
-						text-align:center;
-						display: inline-block;
-						*zoom:1;
-						*display:block;
-						color: #fff;
-    					background-color: #5d85e0;
-						font-size: 18px;
-						font-weight: 400;
-						border: none;
-						border-radius: 4px;
-						-webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-						transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-						-webkit-font-smoothing: subpixel-antialiased;
-						position: relative;
-						text-decoration: none;
-						#upload-file{
-							position: absolute;
-							overflow: hidden;
-							right: 0;
-							top: 0;
-							-khtml-opacity:0;
-							-moz-opacity:0;
-							filter:alpha(opacity=0);
-							filter:"alpha(opacity=0)";
-							opacity:0; 
-							filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);/*ºÊ»›ie8º∞“‘œ¬*/
-							width:100px;
-							height:40px;
-							line-height:40px;
+			}
+			.steps-record{
+				h2.record-title{
+					font-weight: bold;
+					font-size: 24px;
+					color: #333333;
+					margin: 0;
+					height: 32px;
+					line-height: 32px;
+					margin-left: 30px;
+					margin-bottom: 14px;
+				}
+				.record-list{
+					height: 304px;
+					.record-list-title{
+						table{
+							.thead{
+								background: #f2f2f2;
+								th{
+									padding: 0;
+									font-size: 16px;
+									color: #333333;
+									height: 40px;
+									line-height: 40px;
+									border-top: none;
+									-border-bottom: none;
+									border-left: none;
+									border-right: none;
+									text-align: center;
+								}
+							}
 						}
+					}
+					.record-list-table{
+						height: 200px;
+						overflow-x: hidden;
+						overflow-y: auto;
+						table{
+							tr{
+								&.empty{
+
+								}
+								td{
+									border-left: none;
+									border-right: none;
+									border-top: none;
+								}
+							}
+							tr.record-item{
+								td{
+									font-size: 14px;
+									color: #999999;
+									height: 40px;
+									line-height: 40px;
+									padding: 0;
+									display: inline-block;
+									overflow: hidden;
+									text-overflow: ellipsis;
+									white-space: nowrap;
+									float: left;
+									&.record-operate{
+										.operate-view{
+											color: #5d85e0;
+										}
+									}
+								}
+								&.record-importing{
+									td{
+										color: #eb1d16;
+										&.record-date{
+											position: relative;
+											&:before{
+												content: 'ÂØºÂÖ•‰∏≠';
+												position: absolute;
+												left: 0;
+												top: 9px;
+												width: 61px;
+												height: 22px;
+												line-height: 22px;
+												background-image: url(images//import.png);
+												background-size: 100% 100%;
+												background-repeat: no-repeat;
+												background-position: center;
+												color: #fff;
+												font-size: 12px;
+												text-align: left;
+												text-indent: 5px;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					.record-date{
+						width: 18%;
+					}
+					.record-imported{
+						width: 15%;
+					}
+					.record-unimported{
+						width: 15%;
+					}
+					.record-operater{
+						width: 25%;
+					}
+					.record-status{
+						width: 14%;
+					}
+					.record-operate{
+						width: 13%;
 					}
 				}
 			}
@@ -473,12 +554,37 @@
 					}
 				}
 			}
-
 			.imports-steps{
-				-padding: 105px 0;
 				overflow-y: auto;
 			}
-
 	    }
+	}
+
+	@media screen and (max-width: 1366px) {
+		.imports-box{
+			.imports-info{
+				.imports-inner{
+					.imports-inner-data{
+						min-height:440px;
+						height:auto !important;
+						height:440px;
+						.imports-table{
+							height:300px;
+							.imports-table-enable,.imports-table-unable{
+								height: 300px;
+								.table-data-wrap{
+									height: 300px;
+								}
+							}
+						}
+					}
+				}
+			}
+			.imports-steps{
+				.steps-inner{
+					padding: 40px 0 40px;
+				}
+			}
+		}
 	}
 }

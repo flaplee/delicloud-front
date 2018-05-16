@@ -93,7 +93,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                         },
                         success: function(res) {
                             if(res.code == 0){
-                                kernel.hint('应用安装成功~', 'success');
+                                kernel.hint('应用安装成功', 'success');
                                 util.setCookie('app_ids', (parseInt(util.getCookie('app_ids')) + 1));
                                 getAppList(os);
                                 //kernel.replaceLocation({'args': {},'id': 'apphome'});

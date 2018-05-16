@@ -75,7 +75,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 						success: function(res) {
 							console.log("res", res);
 							if(res.code == 0){
-								kernel.hint('应用安装成功~', 'success');
+								kernel.hint('应用安装成功', 'success');
 							}
 						}
 			        });
