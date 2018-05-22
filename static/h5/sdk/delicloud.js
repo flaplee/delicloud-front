@@ -21,6 +21,8 @@
         'common.connection.getNetworkType',
         'common.phone.getUUID',
         'common.phone.getInterface',
+        'common.screen.keepAwake',
+        'common.screen.breakAwake',
         
         'app.device.bind', 
         'app.user.telephoneCall', 
@@ -44,9 +46,22 @@
         'common.navigation.hide',
         'common.navigation.show',
         'common.navigation.goBack',
-        'common.webview.close'
+        'common.webview.close',
+
+        'app.bluetooth.startSearch',
+        'app.bluetooth.stopSearch',
+        'app.bluetooth.getBluetoothAdapterState',
+        'app.bluetooth.getBluetoothDevices',
+        'app.ibeacon.startSearch',
+        'app.ibeacon.stopSearch',
+        'app.ibeacon.getSearch',
+        'app.storage.get',
+        'app.storage.getInfo',
+        'app.storage.set',
+        'app.storage.remove',
+        'app.storage.clear'
     ];
-    var JSSDK_VERSION = '1.0.0';
+    var JSSDK_VERSION = '1.0.4';
     var ua = win.navigator.userAgent;
     var matches = ua.match(/DeliAppv+[a-zA-Z0-9.-]+/);
     

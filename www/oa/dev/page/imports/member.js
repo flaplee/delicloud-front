@@ -75,12 +75,12 @@ define(['common/kernel/kernel', 'site/util/util', 'common/text/text!page/imports
                 size: 1000
             },
             success: function(res) {
-                data.$target.find('.record-list-table table.table tbody.tbody >').remove();
+                (data.status == 1) ? data.$target.find('.imports-table-enable table.table tbody.tbody >').remove() : data.$target.find('.imports-table-unable table.table tbody.tbody >').remove();
                 console.log("getRecordInfo", res);
                 if(res.code == 0){
                     var json = res.data['result'], targetHtml = '';
+                    (data.status == 1)? data.$target.find('span.nav-enable-num').text(json.total) : data.$target.find('span.nav-unable-num').text(json.total);
                     if(json.total >= 0 && (json.rows && json.rows.length > 0)){
-                        (data.status == 1) ? data.$target.find('span.nav-enable-num').text(json.total) : data.$target.find('span.nav-unable-num').text(json.total);
                         $.each(json.rows, function(i, n){
                             targetHtml += '<tr>\
                                 <td class="user-index">'+ (i + 1) +'</td>\
@@ -103,7 +103,6 @@ define(['common/kernel/kernel', 'site/util/util', 'common/text/text!page/imports
                                 data.$target.find('.imports-table-unable .table-data-wrap .table-data tbody.tbody').append('<tr class="empty"><td rowspan="3" colspan="6">暂无不可导入数据</td></tr>')
                             }
                         }
-                        //(data.status == 1) ? data.$target.find('.imports-table-enable .table-data-wrap .table-data tbody.tbody').append('<tr class="empty"><td rowspan="3" colspan="5">暂无已导入数据</td></tr>') : data.$target.find('.imports-table-unable .table-data-wrap .table-data tbody.tbody').append('<tr class="empty"><td rowspan="3" colspan="6">暂无不可导入数据</td></tr>');
                     }
                     (data.status == 1) ? util.paging(data.$target.find('.imports-enable-paging'), parseInt((kernel.parseHash(location.hash).args.p ? kernel.parseHash(location.hash).args.p : 1)), parseInt(json.total), 5) : util.paging(data.$target.find('.imports-unable-paging'), parseInt((kernel.parseHash(location.hash).args.p ? kernel.parseHash(location.hash).args.p : 1)), parseInt(json.total), 5);
                 }else{

@@ -94,7 +94,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         for (var i = 0; i < res.data.result.length; i++) {
                             //((json[i].department_path.split(';')).length > 1) ? json[i].department_path.replace(new RegExp(""+ orgname +"/","gm"),"").replace(new RegExp("/","gm"),"-").replace(new RegExp(";","gm"),"/") : json[i].department;
                             var deptPaths = json[i].department_paths, deptsText = '', deptTitles = json[i].titles;
-                            if(deptPaths && deptPaths.length > 1){
+                            if((deptPaths && deptPaths.length > 1) || (data.orgid == json[i].org_id && deptPaths.length == 1)) {
                                 for(var j = 0;j < deptPaths.length; j++){
                                     deptsText += (deptPaths[j] ? deptPaths[j] : '').replace(new RegExp("/","gm"),"-").replace(new RegExp(""+ json[i].organization +"-","gm"),"") + ((j == deptPaths.length - 1) ? '' : '/');//<span style="color:#494949;margin:0 1px;"></span>
                                 }

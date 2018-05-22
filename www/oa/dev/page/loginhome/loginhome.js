@@ -46,7 +46,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             },
             error: function(json){
                 o.removeClass('login-loading');
-                kernel.hint('网络或服务器错误', 'error');
+                kernel.hint('网络异常，请稍后再试', 'error');
             }
         });
     };

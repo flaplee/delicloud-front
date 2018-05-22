@@ -199,6 +199,9 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             if(evt.data.organization[index]){
                 $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
                 $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();
+                //update 20180522
+                evt.data.orgindex = index;
+                pagechange(evt);
                 $.each(evt.data.organization, function(i, item) {
                     var $targetHtml = $('<a class="sub-nav-item '+ ((evt.data.organization[index].org_id == item.org_id) ? 'current' : '') +'"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
                     $('.nav-item-team .son-nav-wrap .son-nav-list-team').append($targetHtml);

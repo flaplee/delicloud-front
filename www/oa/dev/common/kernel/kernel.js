@@ -1110,9 +1110,10 @@ define(['common/slider/slider', 'site/pages/pages', 'site/popups/popups', 'site/
 	}
 
 	function errorOccurs(res, msg, isPage) {
-		kernel.alert('加载' + res + '时发生了一个错误: ' + msg, isPage ? function() {
+		/*kernel.alert('加载' + res + '时发生了一个错误: ' + msg, isPage ? function() {
 			history.back();
-		} : undefined);
+		} : undefined);*/
+		kernel.hint('网络异常，请稍后再试', 'error');
 	}
 
 	function updated(isPage) {

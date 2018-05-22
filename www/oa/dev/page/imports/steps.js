@@ -123,8 +123,8 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                             $importsInner.find('p.user-error-title').show();
                             $importsInner.find('p.authority-error-title').hide();
                         }
+                        kernel.replaceLocation(loc);
                     }
-                    kernel.replaceLocation(loc);
                 }else{
                     kernel.hint('网络异常，请稍后再试', 'error');
                 }
@@ -157,8 +157,8 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                             $importsInner.find('p.user-error-title').show();
                             $importsInner.find('p.authority-error-title').hide();
                         }
+                        kernel.replaceLocation(loc);
                     }
-                    kernel.replaceLocation(loc);
                 }else{
                     kernel.hint('网络异常，请稍后再试', 'error');
                 }
@@ -212,10 +212,8 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
     function webSocketInit(id, session, $target, callback){
         var wsid = session.ws_session.session_id, index = $.inArray(wsid, id), len = sid.length;
         if(index < 0){
-            console.log("ws1", ws.length);
             ws.push("");
             index = ws.length;
-            console.log("ws2", ws.length);
         };
         if (!!window.WebSocket && window.WebSocket.prototype.send){
             // 打开一个 web socket
@@ -330,7 +328,6 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
 
     //查看历史导入任务
     function getTaskList(data){
-        data.$target.find('.record-list-table table.table tbody.tbody >').remove();
         var timestamp = (new Date().valueOf()).toString();
         util.ajaxSubmit({
             type: 'get',
@@ -342,6 +339,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 size: data.size
             },
             success: function(res) {
+                data.$target.find('.record-list-table table.table tbody.tbody >').remove();
                 console.log("getTaskList", res);
                 if(res.code == 0){
                     var json = res.data['result'];
@@ -448,7 +446,6 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
 
     //导入成员信息
     function getRecordInfo(data){
-        data.$target.find('.record-list-table table.table tbody.tbody >').remove();
         var timestamp = (new Date().valueOf()).toString();
         util.ajaxSubmit({
             type: 'get',
@@ -460,11 +457,12 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                 size: 1000
             },
             success: function(res) {
+                (data.status == 1) ? data.$target.find('.imports-table-enable table.table tbody.tbody >').remove() : data.$target.find('.imports-table-unable table.table tbody.tbody >').remove();
                 console.log("getRecordInfo", res);
                 if(res.code == 0){
                     var json = res.data['result'], targetHtml = '';
+                    (data.status == 1) ? data.$target.find('span.nav-enable-num').text(json.total) : data.$target.find('span.nav-unable-num').text(json.total);
                     if(json.total >= 0 && (json.rows && json.rows.length > 0)){
-                        (data.status == 1) ? data.$target.find('span.nav-enable-num').text(json.total) : data.$target.find('span.nav-unable-num').text(json.total);
                         $.each(json.rows, function(i, n){
                             targetHtml += '<tr>\
                                 <td class="user-index">'+ (i + 1) +'</td>\

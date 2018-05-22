@@ -9,7 +9,7 @@ module.exports = [{
     },
     port: 4000
 },{
-    remote: 'http://pretest.deli/',//http://t.delicloud.com/
+    remote: 'http://t.delicloud.com/',//
     local: {
         prefix: '/',
         root: './',

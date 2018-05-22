@@ -1,1 +1,0 @@
-'use strict';define(['common/kernel/kernel','site/util/util','common/text/text!page/contacts/import.html!strip'],function(a,b,c){var d=b.getCookie('userid'),e=b.getCookie('token'),f=b.getCookie('orgid'),g=$(c),h=$('#contacts .contacts-box');h.append(g)});
