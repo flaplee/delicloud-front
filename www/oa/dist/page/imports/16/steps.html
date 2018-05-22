@@ -1,0 +1,28 @@
+<div class="imports-steps">
+	<div class="steps-inner">
+		<div class="steps-item steps-one">
+			<div class="icon clear">
+				<p>下载成员信息表模板，批量填写信息</p>
+				<div class="operate">
+					<a class="btn btn-info btn-sm btn-step-download" href="docs/model.xls" download="通讯录批量导入模板.xls" title="下载">下载</a>
+				</div>
+			</div>
+			<div class="table-tips">
+				<p>#表格要求：</p>
+				<p>1.单次导入的人员数量不能超过200</p>
+				<p>2.仅支持Microsoft Office编辑表格，请不要使用其他表格工具</p>
+				<p>3.请不要修改表格格式，包括但不限于合并单元格、修改表格颜色等</p>
+			</div>
+		</div>
+		<div class="steps-item steps-two">
+			<div class="icon">
+				<p>上传填写好的成员信息表</p>
+				<form id="upload-form" action="/web/v1.0/import/employee" method="POST" enctype="multipart/form-data">
+					<a href="javascript:;" class="upload-file">上传
+						<input id="upload-file" name="file" type="file" multiple="multiple"/>
+					</a>
+			    </form>
+			</div>
+		</div>
+	</div>
+</div>

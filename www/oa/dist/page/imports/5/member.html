@@ -1,0 +1,81 @@
+<div class="imports-inner-data data">
+	<div class="imports-nav">
+		<a href="javascript:;" class="nav-enable active">已导入数据（<span class="nav-enable-num">0</span>条）</a>
+		<a href="javascript:;" class="nav-unable">不可导入数据（<span class="nav-unable-num">0</span>条）</a>
+	</div>
+	<div class="imports-table">
+		<div class="imports-table-enable active">
+			<table class="table table-title">
+				<thead class="thead">
+					<th class="user-index"></th>
+					<th class="user-name">姓名</th>
+					<th class="user-employeenum">员工工号</th>
+					<th class="user-deptname">所在部门</th>
+					<th class="user-title">职务</th>
+					<th class="user-mobile">手机号码</th>
+				</thead>
+				<tbody class="tbody">
+				</tbody>
+			</table>
+			<div class="table-data-wrap">
+				<table class="table table-data">
+					<thead class="thead"></thead>
+					<tbody class="tbody"></tbody>
+				</table>
+			</div>
+		</div>
+		<div class="imports-table-unable">
+			<table class="table table-title">
+				<thead class="thead">
+					<th class="user-index"></th>
+					<th class="user-name">姓名</th>
+					<th class="user-employeenum">员工工号</th>
+					<th class="user-deptname">所在部门</th>
+					<th class="user-title">职务</th>
+					<th class="user-mobile">手机号码</th>
+					<th class="user-error">导入失败原因</th>
+				</thead>
+				<tbody class="tbody"></tbody>
+			</table>
+			<div class="table-data-wrap">
+				<table class="table table-data">
+					<thead class="thead"></thead>
+					<tbody class="tbody"></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="imports-paging paging hide">
+		<a href="javascript:;" class="first disabled">首页</a>
+		<a href="javascript:;" class="previous disabled">上一页</a>
+		<a href="javascript:;" class="item active">1</a><a href="javascript:;" class="item">2</a><a href="javascript:;" class="item">3</a><a href="javascript:;" class="item">4</a><a href="javascript:;" class="item">5</a><a href="javascript:;" class="item">6</a><a href="javascript:;" class="item">7</a><a href="javascript:;" class="item">8</a><a href="javascript:;" class="item">9</a><a href="javascript:;" class="item">10</a><a href="javascript:;" class="next">下一页</a>
+		<a href="javascript:;" class="last">尾页</a> 共
+		<span class="listnum"></span>条记录, 每页
+		<select class="select_pagelist">
+			<option value="10">10</option>
+			<option value="30">30</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		</select> 条
+	</div>
+	<div class="imports-upload fr">
+		<button type="button" class="btn btn-info btn-middle btn-upload">重新上传</button>
+	</div>
+</div>
+<div class="imports-inner-error error">
+	<div class="icon"><i class="iconfont">&#xe66b;</i></div>
+	<div class="user-error-title title">
+		<p class="user-error-text">没有识别到人员信息，请检查上传文件</p>
+		<div class="user-error-tips">
+			<p>#表格要求：</p>
+			<p>1.单次导入的人员数量不能超过200</p>
+			<p>2.仅支持Microsoft Office编辑表格，请不要使用其他表格工具</p>
+			<p>3.请不要修改表格格式，包括但不限于合并单元格、修改表格颜色等</p>
+		</div>
+	</div>
+	<p class="authority-error-title title">当前用户不具备管理员权限，请检查用户及组织</p>
+</div>
+<div class="imports-inner-success success">
+	<div class="icon"><i class="iconfont">&#xe649;</i></div>
+	<p class="title">上传成功，将进入组织通讯录</p>
+</div>

@@ -20,7 +20,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/imports/member', 'page/i
         $tableWrap = $importsInner.find('.imports-inner-data .imports-table .table-data-wrap'),
         $scntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-enable .table-data-wrap table.table-data tbody.tbody'),
         $fcntTarget = $importsInner.find('.imports-inner-data .imports-table .imports-table-unable .table-data-wrap table.table-data tbody.tbody');
+<<<<<<< HEAD
         //steps(function(){});
+=======
+        steps(function(){});
+>>>>>>> ef4bf7aad474c2eadfeab6690fd5f9544ec9009a
     return {
         onload: function(force) {
             userid = util.getCookie('userid'),
@@ -43,7 +47,11 @@ define(['common/kernel/kernel', 'site/util/util', 'page/imports/member', 'page/i
                 var $usermenu = $('#header .user-head .nav-top .nav-item');
                 $usermenu.find('a.navlink').removeClass('navlink-current');
                 $usermenu.find('a.navlink.orgBtn').addClass('navlink-current');
+<<<<<<< HEAD
                 if(!status && !imports){
+=======
+                if(!type && !status && !imports){
+>>>>>>> ef4bf7aad474c2eadfeab6690fd5f9544ec9009a
                     steps(function(){});
                 }
             };
@@ -95,6 +103,14 @@ define(['common/kernel/kernel', 'site/util/util', 'page/imports/member', 'page/i
                 $importsInfo.hide();
                 $importsSteps.show();
             }
+<<<<<<< HEAD
+=======
+            // 获取屏幕的可见区域高度减去其他部分的高度
+            $importsSteps.css({
+                'padding-top': (document.body.clientHeight - 80 - 60 - $stepsInner.height())*0.5,
+                'padding-bottom': (document.body.clientHeight - 80 - 60 - $stepsInner.height())*0.5
+            });
+>>>>>>> ef4bf7aad474c2eadfeab6690fd5f9544ec9009a
         }
     };
 });
