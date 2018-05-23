@@ -231,7 +231,9 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                         util.setCookie('employee_count', data.employee_count),
                                         // update 20180306
                                         tempInfo.orgindex = $(this).parent('li.list-item').index();
+                                        tempInfo.orgindexid = tempInfo.organization[tempInfo.orgindex].org_id;
                                         util.setCookie('orgindex', tempInfo.orgindex);
+                                        util.setCookie('orgindexid', tempInfo.orgindexid);
                                         util.setUserData(tempInfo);
                                         kernel.replaceLocation({'args': {},'id': 'home'});
                                     });
@@ -262,10 +264,11 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 util.setCookie('parentid', orgInfo[targetCurrent].top_department_id),
                                 util.setCookie('orgname', orgInfo[targetCurrent].org_name),
                                 util.setCookie('device_ids', (orgInfo[targetCurrent].device_ids ? orgInfo[targetCurrent].device_ids.length : 0)),
-                                util.setCookie('app_ids', (orgInfo[targetCurrent].app_ids? orgInfo[targetCurrent].app_ids.length : 0)),
+                                util.setCookie('app_ids', (orgInfo[targetCurrent].app_ids ? orgInfo[targetCurrent].app_ids.length : 0)),
                                 util.setCookie('employee_count', orgInfo[targetCurrent].employee_count),
                                 // update 20180306
                                 tempInfo.orgindex = targetCurrent;
+                                tempInfo.orgindexid = tempInfo.organization[targetCurrent].org_id;
                                 util.setUserData(tempInfo);
                                 kernel.replaceLocation({'args': {},'id': 'home'});
                             }else{

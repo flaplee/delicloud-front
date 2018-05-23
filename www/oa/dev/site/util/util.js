@@ -526,6 +526,7 @@ define(['common/kernel/kernel'], function(kernel) {
                                             });
                                             dataInfo.organization = targetData;
                                             dataInfo.orgindex = 0;
+                                            dataInfo.orgindexid = targetData[dataInfo.orgindex].org_id;
                                             // change 2017-12-01
                                             util.setUserData(dataInfo);
                                         }

@@ -793,6 +793,8 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
             type = loc.args.type,
             //keyword = loc.args.key_search;
             boxClass = type ? '.' + type + '-info' : '.user-info';
+            var $contactsSearch = $('#contacts .search-form .search-box input.search');
+            $contactsSearch.val('');
             if(userid === undefined || token === undefined || orgid === undefined){
                 util.setUserData(undefined);
                 kernel.replaceLocation({'args': {},'id': 'loginhome'});

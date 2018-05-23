@@ -98,6 +98,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         util.delCookie('token', undefined),
         util.delCookie('orgid', undefined),
         util.delCookie('orgindex', undefined),
+        util.delCookie('orgindexid', undefined),
         util.delCookie('parentid', undefined),
         util.delCookie('orgname', undefined),
         util.delCookie('device_ids', undefined),
@@ -194,46 +195,52 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     }
 
     function orgdatachange(evt){
-        var index = parseInt(util.getCookie('orgindex')? util.getCookie('orgindex') : 0);
-        if(index >= 0 && evt.data.organization && evt.data.organization.length > 0){
-            if(evt.data.organization[index]){
-                $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
-                $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();
-                //update 20180522
-                evt.data.orgindex = index;
-                pagechange(evt);
-                $.each(evt.data.organization, function(i, item) {
-                    var $targetHtml = $('<a class="sub-nav-item '+ ((evt.data.organization[index].org_id == item.org_id) ? 'current' : '') +'"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
-                    $('.nav-item-team .son-nav-wrap .son-nav-list-team').append($targetHtml);
-                    return function(){
-                        // 切换组织
-                        $targetHtml.on('click', function(e) {
-                            var e = e || window.e;
-                            e.stopPropagation();
-                            var c = $(this), oname = c.text();
-                            if(!c.hasClass('current')){
-                                $targetHtml.parents('.nav-item-team').find('a.nav-item-current .navlink-name').text(oname);
-                                c.siblings().removeClass('current');
-                                c.addClass('current');
-                                // update 20180308 更新相应数据
-                                evt.data.orgindex = c.index();
-                                util.setCookie('orgindex', evt.data.orgindex);
-                                // update 20180313 更新相应数据
-                                util.setUserData(evt.data);
-<<<<<<< HEAD
-                                if(kernel.parseHash(location.hash).id == 'imports' && kernel.parseHash(location.hash).args.id) kernel.replaceLocation({'args':{},'id':'imports'});
-=======
-                                if(kernel.parseHash(location.hash).id == 'imports') kernel.replaceLocation({'args':{},'id':'imports'});
->>>>>>> ef4bf7aad474c2eadfeab6690fd5f9544ec9009a
-                                pagechange(evt);
-                            }
-                            $('.nav-item-team .son-nav-wrap').hide();
-                        });
-                    }();
-                });
-            }else{
-                $userlogin.find('a.logout').trigger('click');
+        var index = parseInt(util.getCookie('orgindex') ? util.getCookie('orgindex') : 0), indexnum = 0, indexid = util.getCookie('orgindexid'), indexdata = evt.data.organization;
+        for(var i = 0;i < indexdata.length;i++){
+            if(indexdata[i].org_id == indexid){
+                index = i;
+                util.setCookie('orgindex', i);
+                indexnum ++;
             }
+        }
+        if(indexnum <= 0)index = -1;
+        if(index >= 0 && evt.data.organization && evt.data.organization.length > 0 && evt.data.organization[index]){
+            $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
+            $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();
+            //update 20180522
+            evt.data.orgindex = index;
+            if(evt.data.organization[evt.data.orgindex].org_id != evt.data.orgindexid){
+                evt.data.orgindexid = evt.data.organization[evt.data.orgindex].org_id;
+            }
+            pagechange(evt);
+            $.each(evt.data.organization, function(i, item) {
+                var $targetHtml = $('<a class="sub-nav-item '+ ((evt.data.organization[index].org_id == item.org_id) ? 'current' : '') +'"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
+                $('.nav-item-team .son-nav-wrap .son-nav-list-team').append($targetHtml);
+                return function(){
+                    // 切换组织
+                    $targetHtml.on('click', function(e) {
+                        var e = e || window.e;
+                        e.stopPropagation();
+                        var c = $(this), oname = c.text();
+                        if(!c.hasClass('current')){
+                            $targetHtml.parents('.nav-item-team').find('a.nav-item-current .navlink-name').text(oname);
+                            c.siblings().removeClass('current');
+                            c.addClass('current');
+                            // update 20180308 更新相应数据
+                            evt.data.orgindex = c.index();
+                            util.setCookie('orgindex', evt.data.orgindex);
+                            util.setCookie('orgindexid', evt.data.organization[evt.data.orgindex].org_id);
+                            // update 20180313 更新相应数据
+                            util.setUserData(evt.data);
+                            if(kernel.parseHash(location.hash).id == 'imports' && kernel.parseHash(location.hash).args.id) kernel.replaceLocation({'args':{},'id':'imports'});
+                            pagechange(evt);
+                        }
+                        $('.nav-item-team .son-nav-wrap').hide();
+                    });
+                }();
+            });
+        }else{
+            $userlogin.find('a.logout').trigger('click');
         }
     }
 
