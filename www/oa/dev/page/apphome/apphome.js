@@ -52,12 +52,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 							</div>');
 		                    o.append($itemTpl);
 		                    setTargetApp($itemTpl, dataInner[j].app.web_url);
-		                    function setTargetApp(o, url){
-					        	o.on('click',function(e){
-					        		e.stopPropagation();
-					        		window.location.href = ''+ url +'?user_id='+ userid +'&org_id='+ orgid +'&token='+ token +'&uuid=';
-					        	});
-					        }
 	                	}
 	                }
                 }
@@ -71,6 +65,13 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 //setTargetUrl(o.find('.app-item'));
             }
         });
+    }
+
+    function setTargetApp(o, url){
+    	o.on('click',function(e){
+    		e.stopPropagation();
+    		window.location.href = ''+ url +'?user_id='+ userid +'&org_id='+ orgid +'&token='+ token +'&uuid=';
+    	});
     }
 
 	// 添加应用

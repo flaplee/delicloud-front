@@ -48,6 +48,16 @@
         'common.navigation.goBack',
         'common.webview.close',
 
+        "app.bluetooth.open",
+        "app.bluetooth.close",
+        "app.bluetooth.startScan",
+        "app.bluetooth.stopScan",
+        "app.bluetooth.getScanList",
+        "app.bluetooth.getPairedList",
+        "app.bluetooth.status",
+        "app.bluetooth.connect",
+        "app.bluetooth.send",
+
         'app.bluetooth.startSearch',
         'app.bluetooth.stopSearch',
         'app.bluetooth.getBluetoothAdapterState',

@@ -203,7 +203,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 indexnum ++;
             }
         }
-        if(indexnum <= 0)index = -1;
+        if(indexid && indexdata && indexnum <= 0)index = -1;
         if(index >= 0 && evt.data.organization && evt.data.organization.length > 0 && evt.data.organization[index]){
             $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
             $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();

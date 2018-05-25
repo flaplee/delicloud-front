@@ -99,7 +99,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                         tempInfo.data = json;
                         $loginDoing.hide();
                         $loginFail.hide();
-                        $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                        $loginSuccess.find('div.success-img >').remove();
+                        $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
                         $loginSuccess.show();
                     }
                     if(json.user_id){
@@ -143,7 +144,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 tempInfo.data = jsonUser;
                                 $loginDoing.hide();
                                 $loginFail.hide();
-                                $loginSuccess.find('div.success-img').css({'background-image':'url('+ jsonUser.avatar_url +')'}).attr('title', jsonUser.name);
+                                $loginSuccess.find('div.success-img >').remove();
+                                $loginSuccess.find('div.success-img').append('<img src="'+ jsonUser.avatar_url +'" title="'+ jsonUser.name +'">');
                                 $loginSuccess.show();
                             }
                             if(jsonInfo.user_id){
@@ -166,7 +168,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 tempInfo.data = json;
                                 $loginDoing.hide();
                                 $loginFail.hide();
-                                $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                                $loginSuccess.find('div.success-img >').remove();
+                                $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
                                 $loginSuccess.show();
                             }
                             if(json.user_id){
@@ -249,7 +252,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             //login status
                             $loginDoing.hide();
                             $loginSuccess.hide();
-                            $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                            $loginSuccess.find('div.success-img >').remove();
+                            $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
                             $loginFail.show();
                         }else{
                             if(targetLength == 1){
@@ -267,8 +271,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 util.setCookie('app_ids', (orgInfo[targetCurrent].app_ids ? orgInfo[targetCurrent].app_ids.length : 0)),
                                 util.setCookie('employee_count', orgInfo[targetCurrent].employee_count),
                                 // update 20180306
-                                tempInfo.orgindex = targetCurrent;
-                                tempInfo.orgindexid = tempInfo.organization[targetCurrent].org_id;
+                                tempInfo.orgindex = 0;
+                                tempInfo.orgindexid = tempInfo.organization[0].org_id;
                                 util.setUserData(tempInfo);
                                 kernel.replaceLocation({'args': {},'id': 'home'});
                             }else{
@@ -292,7 +296,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                         //login status
                         $loginDoing.hide();
                         $loginSuccess.hide();
-                        $loginSuccess.find('div.success-img').css({'background-image':'url('+json.avatar_url+')'}).attr('title', json.name);
+                        $loginSuccess.find('div.success-img >').remove();
+                        $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
                         $loginFail.show();
                     }
                     if(data.type == 'websocket'){

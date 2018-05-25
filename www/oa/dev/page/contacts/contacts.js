@@ -567,7 +567,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
             orgid: queryParentid, // tempOrgid tempParentid 
             title: orgname,
             type: 'parent',
-            query: $contactsForm.find('.search-box input.search').val()
+            query: encodeURI($contactsForm.find('.search-box input.search').val())
         }, true, $listTmp);
     });
 

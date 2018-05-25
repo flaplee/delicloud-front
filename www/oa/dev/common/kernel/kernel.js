@@ -3,6 +3,7 @@
 define(['common/slider/slider', 'site/pages/pages', 'site/popups/popups', 'site/panels/panels'], function(slider, pages, popups, panels) {
 	var homePage,
 		kernel = {
+			location: {},
 			appendCss: function(url) { //自动根据当前环境添加css或less
 				var csslnk = document.createElement('link');
 				if (/\.less$/.test(url)) {
