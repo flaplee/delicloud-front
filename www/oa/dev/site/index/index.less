@@ -66,7 +66,11 @@ input:focus:invalid,input:required:invalid {
 	line-height: inherit;
 	padding: 0;
 	margin: 0;
+	color:#cccccc;
 }
+//by xie
+::-moz-placeholder{color:#cccccc}         /* Firefox版本19+ */
+:-ms-input-placeholder{color:#cccccc}      /* IE浏览器 */
 
 ::-webkit-inner-spin-button {
 	display: none;
@@ -358,7 +362,7 @@ code,kbd,pre,samp {
 
 .btn {
     padding: 5px 15px;
-    font-size: 16px;
+    font-size: 12px; //by xie
     font-weight: 400;
     line-height: 1.4;
     border: none;
@@ -567,7 +571,7 @@ button{
 
 #header{
 	&.wrap-top {
-	    height: 80px;
+	    height: 70px;
 		width: 100%;
 		background: #373d41;
 		position: relative;
@@ -581,7 +585,7 @@ button{
 	}
 
 	.user-head {
-	    height: 80px;
+	    height: 70px;
 	    background-color: #fff;
 	}
 
@@ -601,7 +605,7 @@ button{
 	    position: relative;
 	    height: 100%;
 	    z-index: 3;
-		height: 80px;
+		height: 70px;
 		background: #fff;
 		font-size: 12px;
 	    .logo-box {
@@ -617,13 +621,13 @@ button{
 				line-height: 50px;
 				background: url("images/logo.png") no-repeat;
 				background-size: 100% 100%;
-				margin: 15px 0;
+				margin: 10px 0;
 	        }
 	    }
 
 	    .nav-top {
 	    	width: 955px;
-	        height: 40px;
+	        height: 30px;
 	        position: absolute;
 	        bottom: 20px;
 	        left: 245px;
@@ -638,8 +642,8 @@ button{
 	        .nav-item{
 	            display: inline-block;
 	            -width: 85px;
-	            height: 40px;
-	            line-height: 40px;
+	            height: 30px;
+	            line-height: 30px;
 	            float: left;
 	            margin-right: 50px;
 	        }
@@ -664,17 +668,17 @@ button{
 				width: 50px;
 				float: left;
 				position: absolute;
-				top: -5px;
+				top: -10px;
 				right: 0;
 	        }
 
 	        .nav-item a.navlink, .nav-item-team a.navlink {
 	            display: inline-block;
 	            width: 92px;
-	            height: 40px;
-	            line-height: 40px;
+	            height: 30px;
+	            line-height: 30px;
 	            text-align: center;
-	            font-size: 18px;
+	            font-size: 14px;
 	            color: #333;
 	            text-decoration: none;
 	            position: relative;
@@ -683,7 +687,9 @@ button{
 
 	        .nav-item a.navlink.nav-item-current, .nav-item-team a.navlink.nav-item-current{
 				text-align: center;
-				width: 120px;
+				// width: 120px;
+				font-size:12px;
+				width:100px; //by xie
 				padding: 0 24px 0 6px;
 				color: #3b63f9;
 				border: 1px solid #3b63f9;
@@ -731,9 +737,12 @@ button{
 				-height: 170px;
 				position: absolute;
 				z-index: 1;
-				top: 40px;
-				min-height: 40px;
-				left: -36px;
+				// top: 40px;
+				// min-height: 40px;
+				top: 30px;//by xie
+				min-height: 30px;
+				// left: -36px;
+				left: -58px;
 				display: none;
 				-background-color: #fff;
 				border-radius: 6px;
@@ -785,9 +794,12 @@ button{
 	        .nav-item .son-nav-list a.sub-nav-item, .nav-item-team .son-nav-list a.sub-nav-item {
 				display: block;
 				width: 160px;
-				height: 40px;
-				line-height: 40px;
-				font-size: 14px;
+				height: 30px;
+				line-height: 30px;
+				font-size: 12px; //by xie
+				// height: 40px;
+				// line-height: 40px;
+				// font-size: 14px;
 				text-align: center;
 				color: #333333;
 				overflow: hidden;
@@ -881,10 +893,11 @@ button{
 		        .user-panel {
 				    display: none;
 					width: 160px;
-					height: 170px;
+					// height: 170px; by xie
+					height:160px;
 					position: absolute;
 					-top: 58px;
-					top: 64px;
+					top: 60px;
 					right: 0;
 					display: none;
 					background-color: #fff;
@@ -914,7 +927,8 @@ button{
 					}
 				    .user-info{
 						width: 160px;
-						height: 130px;
+						// height: 130px; by xie
+						height:120px;
 						overflow: hidden;
 						border-bottom: 1px solid #eaeaea;
 				    }
@@ -942,7 +956,8 @@ button{
 				        text-align: center;
 				        .user-welcome {
 				            color: #000;
-				            font-size: 16px;
+							// font-size: 16px;
+							font-size:14px;
 				            display: block;
 				            height: 40px;
 				            line-height: 40px;
@@ -952,7 +967,7 @@ button{
 				    .user-asset-link {
 						display: block;
 						width: 160px;
-						height: 38px;
+						height: 38px; 
 						text-decoration: none;
 						&:hover{
 							background-color: #F1F1F1;
@@ -960,14 +975,17 @@ button{
 						}
 						.user-asset {
 							width: 160px;
-							height: 38px;
-							line-height: 38px;
+							// height: 38px;
+							// line-height: 38px; by xie
+							height: 40px;
+							line-height: 40px;
 							padding: 0 10px;
 							overflow: hidden;
 							font-size: 14px;
 							text-align: center;
 					        .asset-name {
-								font-size: 18px;
+								// font-size: 18px;  by xie
+								font-size:14px;
 								color: #fd3a49;
 					        }
 					        &:hover{
@@ -1505,14 +1523,14 @@ textarea{
 		line-height: 32px;
 		border: 1px solid @inputBorder;
 		border-radius: 4px;
-		padding: 0 10px 0 46px;
+		padding: 0 10px 0 36px;
 		margin: 0;
-		font-size: 14px;
+		font-size: 12px;
 		color: @inputText;
 		outline: none;
 		background-color: #fff;
 	}
-
+	
 	.search-ico {
 		display: inline-block;
 		position: absolute;
@@ -1523,7 +1541,7 @@ textarea{
 		-background-image: url("search-ico.png");
 		-background-repeat: no-repeat;
 		-background-position: center;
-		margin-left: 20px;
+		margin-left: 10px;
 		background-color: #eaeaea;
 	}
 }
@@ -1565,7 +1583,8 @@ textarea{
 			padding: 10px 20px;
 			border: 1px solid @inputBorder;
 			text-align: center;
-			white-space: nowrap;
+			//by xie
+			// white-space: nowrap;
 		}
 
 		td.empty-item{

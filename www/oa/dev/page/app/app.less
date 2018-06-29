@@ -26,15 +26,20 @@
             text-align:center;
             >a{
                 position:absolute;
-                font-size: 16px;
-                width: 80px;
-                height: 40px;
-                line-height: 40px;
+                // font-size: 16px;
+                // width: 80px;
+                // height: 40px;
+				// line-height: 40px;
+				font-size: 14px;
+                width: 60px;
+    			height: 30px;
+   				line-height: 30px; //by xie
                 color: #5d85e0;
                 border-color: #5d85e0;
                 background-color:#fff;
                 position: absolute;
-                top: 20px;
+				// top: 20px;
+				top:25px;
                 left: 20px;
             }
             .app-menu{
@@ -61,16 +66,18 @@
         			width:1000px;
         			li.item{
 						width:1000px;
-						height:140px;
+						// height:140px; by xie
+						overflow:hidden;
 						border-bottom: 1px solid #eaeaea;
                         .item-wrap{
                             float:left;
-                            margin-top: 30px;
+							margin-top: 30px;
+							margin-bottom:25px; //by xie
                             .item-img{
                             	float:left;
                             	margin-right:15px;
                             	width: 84px;
-                            	height: 84px;
+                            	height: 54px;  //by xie
                             	border-radius:50%;
                             	-moz-border-radius:50%;
                             	-webkit-border-radius:50%;
@@ -79,7 +86,7 @@
                             	img{
                                     width: 54px;
                                     height: 54px;
-                                    margin: 12px 15px;
+                                    margin: 0px 15px; //by xie
                             	}
                             }
                             .item-info{
@@ -88,10 +95,11 @@
                             		margin-bottom:15px;
                             		.item-text{
                                         float: left;
-                                        font-size: 18px;
+                                        font-size: 14px;// by xie
                                         height: 20px;
                                         line-height: 20px;
-                                        color: #333;
+										color: #333;
+										font-weight:bold;
                             		}
                             		.item-category{
                             			float:left;
@@ -122,17 +130,19 @@
                             		text-overflow: ellipsis;
                             		display: -webkit-box;
                             		-webkit-box-orient: vertical;
-                            		-webkit-line-clamp: 3;
+									-webkit-line-clamp: 3;
+									font-size:12px; //by xie
+									line-height:14px;
                             	}
                             }
                         }
         				.item-btn{
 							float: right;
-                            margin-top: 50px;
+                            margin-top: 40px;//by xie
                             a{
-								width: 100px;
-								height: 40px;
-								line-height: 30px;
+								width: 80px; //by xie
+								height: 30px;
+								line-height: 20px;
 								display: inline-block;
 								text-align: center;
                                 cursor: pointer;
