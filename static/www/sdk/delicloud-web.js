@@ -213,7 +213,12 @@
                                     alert('用户未登录或者登录信息已经过期，请重新登录');
                                     window.location.replace(httpApi + '/oa/');
                                 } else {
-                                    self.prefixLoadTpl(self.util.getQuery('user_id') || self.util.getCookie('user_id'), self.util.getQuery('token') || self.util.getCookie('token'));
+                                    setTimeout(function(){
+                                        self.prefixLoadTpl(self.util.getQuery('user_id') || self.util.getCookie('user_id'), self.util.getQuery('token') || self.util.getCookie('token'));
+                                        if(typeof callback === 'function'){
+                                            callback();
+                                        }
+                                    }, 0);
                                 }
                             } else {
                                 var msg = (res.msg) ? res.msg : '网络或服务器错误',
@@ -258,7 +263,6 @@
             if (obj.appId) {
                 config.appId = obj.appId;
             }
-            self.init(obj);
         },
         api: function (param) {
             var xhr = new XMLHttpRequest(),
@@ -384,7 +388,12 @@
             errorHandle = fn;
         },
         ready: function (callback) {
-            readyHandle = callback;
+            var self = this;
+            //readyHandle = callback;
+            var fn = function(data){
+                self.init(config, callback);
+            }
+            fn();
         },
         prefixLoadTpl: function (userid, token) {
             var self = this;
@@ -392,73 +401,81 @@
                 //初始化
                 init: function () {
                     //插入 header、footer 
-                    document.head.innerHTML = document.head.innerHTML + '\
-                    <style>body,button,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,td,textarea,th,ul{margin:0;padding:0}\
-                    i{font-style:normal}\
-                    ul{list-style:none}\
-                    table{border-collapse:collapse;border-spacing:0}\
-                    body{font-size:12px;font-family:Microsoft YaHei UI,"微软雅黑",Heiti SC,Droid Sans;color:#666;background-color:#fff}\
-                    .deli-wrap-header a{color:#666;text-decoration:none;hide-focus:expression(this.hideFocus=true);outline:0}\
-                    .deli-wrap-header a:hover{text-decoration:none}\
-                    .deli-wrap-header a img{border:none}\
-                    .deli-wrap-header .pointer{cursor:pointer}\
-                    .deli-wrap-header{width:100%;height:80px;background-color:#FDFDFD;box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);}\
-                    .deli-wrap-deli-footer{background-color:#cfd2d7;margin:0 auto}\
-                    .deli-wrap-header.deli-wrap-top{background:#fff}\
-                    .deli-wrap-header.deli-wrap-top.deli-wrap-top-shadow{box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);-o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);}\
-                    .deli-wrap-header .deli-user-head{width:1200px;height:80px;margin:0 auto;background-color:#fff}\
-                    .deli-clear:after{visibility:hidden;display:block;font-size:0;content:"";clear:both;height:0}\
-                    .deli-clear{zoom:1}\
-                    .deli-wrap-header .user-float{background-color:#fff;position:fixed;width:100%;min-width:1200px;margin:auto;top:0;left:0;z-index:3;box-shadow:0 2px 5px rgba(0,0,0,.2)}\
-                    .deli-wrap-header #deli-head{height:100%;z-index:1;position:relative;z-index:100;clear:both;height:80px;background:#fff;font-size:12px}\
-                    .deli-wrap-header #deli-head .deli-logo-box{display: inline-block; position: absolute; bottom: 0; left: 0;}\
-                    .deli-wrap-header #deli-head .deli-logo-box .deli-logo{display: inline-block; float: left; width: 178px; height: 50px; line-height: 50px; margin: 15px 0;background-image: url(https://static.delicloud.com/www/home/images/logo.png?v=20180317); background-repeat: no-repeat; background-size: cover;}\
-                    .deli-wrap-header #deli-head .deli-nav-top{width: 900px; height: 40px; position: absolute; bottom: 20px; right: 20px;}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item{display:inline-block;-width:85px;height:40px;line-height:40px;margin-left:25px;float:left;position:relative}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item.deli-nav-item-team{display:none}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink{display:inline-block;width:85px;height:40px;line-height:40px;text-align:center;font-size:16px;color:#666;text-decoration:none;position:relative;border-radius:5px}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink.deli-nav-item-current{width:120px;padding:0 10px;color:#5d85e0;border:1px solid #5d85e0;border-radius:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink.deli-nav-item-current.larget{width:140px;padding:0 20px}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink.deli-nav-item-current .deli-navlink-icon{font-size:12px;color:#5d85e0;position:absolute;right:10px}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink:hover{-background-color:#55BEBF;color:#5d85e0}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink-current{-background-color:#55BEBF;color:#5d85e0}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item .son-nav-list{width:150px;position:absolute;z-index:1;background-color:#fff;top:60px;display:none;left:-15px;border:1px solid #d9d9d9;border-top:0}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item .son-nav-list a.sub-deli-nav-item{display:block;width:150px;padding:0 10px;height:40px;line-height:40px;font-size:14px;text-align:center;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item .son-nav-list a.sub-deli-nav-item.current,.deli-wrap-header #deli-head .deli-nav-top .deli-nav-item .son-nav-list a.sub-deli-nav-item:hover{color:#5d85e0}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item.deli-nav-item-login{position: absolute; right: 0; text-align: center;}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item.deli-nav-item-device{margin-left: 0;}\
-                    deli-wrap-header #deli-head .deli-nav-top .deli-nologin{display:block;font-size:16px;margin-left:5px;width:100px}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-nologin a{font-size:16px;color:#5d85e0;text-decoration:none}\
-                    .deli-wrap-header #deli-head .deli-nav-top .userBtn.hasLogin:hover{position:relative}\
-                    .deli-wrap-header #deli-head .deli-nav-top .userBtn.hasLogin:hover>.deli-user-panel{display:block}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel{display:none;position:relative;top:-20px;right:0;background-color:#fff;z-index:1;width:80px;height:80px;overflow:visible}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info{position:relative;display:inline-block;width:80px;height:50px;overflow:hidden;margin:15px auto}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info .deli-user-info-avatar{width:50px;height:50px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;display:inline-block}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info i{display:none;position:absolute;top:8px;right:8px}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info.visited i,.deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info:hover i{display:block}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-asset{display:none;border:1px solid #d9d9d9;border-top:0}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-asset .deli-user-asset-link{display:inline-block;width:80px;height:40px;line-height:40px;text-align:center;font-size:14px;color:#666;background-color:#fff}\
-                    .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-asset .deli-user-asset-link:hover{color:#5d85e0}\
-                    .deli-wrap-footer{background-color:#cfd2d7}\
-                    .deli-footer{-padding-top:25px;padding-top:50px; width:1200px;margin:0 auto}\
-                    .deli-footer-link{-height:100px;width: 95%; padding-left: 5%;}\
-                    .deli-footer-link dl{-width:155px; width:275px; float:left;-height:100px;-margin-right:100px;margin-bottom:0}\
-                    .deli-footer-link dl.deli-attus{position:relative;-width:170px;width:220px;margin-right:0}\
-                    .deli-footer-link dl.deli-attus .deli-icon-phone{display:inline-block; background:url(https://static.delicloud.com/www/home/images/telephone_icon.png) 0 0 no-repeat;width:16px;height:18px; vertical-align: top; margin-top: 3px; margin-right: 10px;}\
-                    .deli-footer-link dl.deli-attus .deli-icon-weixin-img{-display:none; display:inline-block; -position:absolute;-top:-80px;-left:-25px;-background-image:url(https://static.delicloud.com/www/home/images/weixin.png); background-image:url(https://static.delicloud.com/www/home/images/wechat_icon.png);-width:80px;width:22px;-height:80px; height:18px; vertical-align: top; margin-top: 3px; margin-right: 6px;}\
-                    .deli-footer-link dl.deli-attus .deli-icon-qq{-margin-right:50px;display: inline-block; background-image:url(https://static.delicloud.com/www/home/images/qq_icon.png); width: 16px;height: 18px; vertical-align: top; margin-top: 3px; margin-right: 10px;}\
-                    .deli-footer-link dl.deli-attus .deli-icon-weixin{position:relative}\
-                    .deli-footer-link dl.deli-attus .deli-icon-qq,.deli-footer-link dl.deli-attus .deli-icon-weixin{font-size:30px;color:#333;cursor:pointer;text-decoration:none}\
-                    .deli-footer-link dl.deli-attus .deli-icon-qq:hover,.deli-footer-link dl.deli-attus .deli-icon-weixin:hover{color:#55bfbe}\
-                    .deli-footer-link dl.deli-attus .deli-icon-weixin:hover .deli-icon-weixin-img{display:block}\
-                    .deli-footer-link dl .deli-kefu-phone{font-size:16px}\
-                    .deli-footer-link dl dt{font-size:18px; font-weight:700; -line-height:26px; color:#666; letter-spacing:5px;margin-bottom:20px;}\
-                    .deli-footer-link dl dd{line-height:24px;font-size:14px;color:#959799;margin-bottom:18px;letter-spacing:5px}\
-                    .deli-footer-link dl dd a{font-size:16px;color:#333;letter-spacing:2px;display:inline-block;text-decoration:none}\
-                    .deli-footer-link dl dd:hover a{color:#666;text-decoration:none}\
-                    .deli-footer-copyright{font-size:14px;color:#666;height:50px;padding-top:20px;text-align:center;letter-spacing:2px;}\
-                    .deli-footer-link dl.deli-attus dd b {font-size: 16px; color: #333; font-weight: normal;letter-spacing:2px; cursor: pointer;}\
-                    .deli-footer-link dl.deli-attus dd:hover b {color: #666;}</style>';
+                    var elementStyle = '<style>body,button,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,td,textarea,th,ul{margin:0;padding:0}\
+                        i{font-style:normal}\
+                        ul{list-style:none}\
+                        table{border-collapse:collapse;border-spacing:0}\
+                        body{font-size:12px;font-family:Microsoft YaHei UI,"微软雅黑",Heiti SC,Droid Sans;color:#666;background-color:#fff}\
+                        .deli-wrap-header a{color:#666;text-decoration:none;hide-focus:expression(this.hideFocus=true);outline:0}\
+                        .deli-wrap-header a:hover{text-decoration:none}\
+                        .deli-wrap-header a img{border:none}\
+                        .deli-wrap-header .pointer{cursor:pointer}\
+                        .deli-wrap-header{width:100%;height:80px;background-color:#FDFDFD;box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);filter: progid:DXImageTransform.Microsoft.Shadow(color=#cccccc, Direction=125, Strength=4);}\
+                        .deli-wrap-deli-footer{background-color:#cfd2d7;margin:0 auto}\
+                        .deli-wrap-header.deli-wrap-top{background:#fff}\
+                        .deli-wrap-header.deli-wrap-top.deli-wrap-top-shadow{box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);filter: progid:DXImageTransform.Microsoft.Shadow(color=#cccccc, Direction=125, Strength=4);}\
+                        .deli-wrap-header .deli-user-head{width:1200px;height:80px;margin:0 auto;background-color:#fff}\
+                        .deli-clear:after{visibility:hidden;display:block;font-size:0;content:"";clear:both;height:0}\
+                        .deli-clear{zoom:1}\
+                        .deli-wrap-header .user-float{background-color:#fff;position:fixed;width:100%;min-width:1200px;margin:auto;top:0;left:0;z-index:3;box-shadow:0 2px 5px rgba(0,0,0,.2);-moz-box-shadow:0 2px 5px rgba(0,0,0,.2);-webkit-box-shadow:0 2px 5px rgba(0,0,0,.2);-o-box-shadow:0 2px 5px rgba(0,0,0,.2);filter: progid:DXImageTransform.Microsoft.Shadow(color=#cccccc, Direction=125, Strength=4);}\
+                        .deli-wrap-header #deli-head{height:100%;z-index:1;position:relative;z-index:100;clear:both;height:80px;background:#fff;font-size:12px}\
+                        .deli-wrap-header #deli-head .deli-logo-box{display: inline-block; position: absolute; bottom: 0; left: 0;}\
+                        .deli-wrap-header #deli-head .deli-logo-box .deli-logo{display: inline-block; float: left; width: 178px; height: 50px; line-height: 50px; margin: 15px 0;background-image: url(https://static.delicloud.com/www/home/images/logo.png?v=20180317); background-repeat: no-repeat; background-size: cover;}\
+                        .deli-wrap-header #deli-head .deli-nav-top{width: 900px; height: 40px; position: absolute; bottom: 20px; right: 20px;}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item{display:inline-block;-width:85px;height:40px;line-height:40px;margin-left:25px;float:left;position:relative}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item.deli-nav-item-team{display:none}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink{display:inline-block;width:85px;height:40px;line-height:40px;text-align:center;font-size:16px;color:#666;text-decoration:none;position:relative;border-radius:5px}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink.deli-nav-item-current{width:120px;padding:0 10px;color:#5d85e0;border:1px solid #5d85e0;border-radius:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink.deli-nav-item-current.larget{width:140px;padding:0 20px}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink.deli-nav-item-current .deli-navlink-icon{font-size:12px;color:#5d85e0;position:absolute;right:10px}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink:hover{-background-color:#55BEBF;color:#5d85e0}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item a.deli-navlink-current{-background-color:#55BEBF;color:#5d85e0}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item .son-nav-list{width:150px;position:absolute;z-index:1;background-color:#fff;top:60px;display:none;left:-15px;border:1px solid #d9d9d9;border-top:0}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item .son-nav-list a.sub-deli-nav-item{display:block;width:150px;padding:0 10px;height:40px;line-height:40px;font-size:14px;text-align:center;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item .son-nav-list a.sub-deli-nav-item.current,.deli-wrap-header #deli-head .deli-nav-top .deli-nav-item .son-nav-list a.sub-deli-nav-item:hover{color:#5d85e0}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item.deli-nav-item-login{position: absolute; right: 0; text-align: center;}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nav-item.deli-nav-item-device{margin-left: 0;}\
+                        deli-wrap-header #deli-head .deli-nav-top .deli-nologin{display:block;font-size:16px;margin-left:5px;width:100px}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-nologin a{font-size:16px;color:#5d85e0;text-decoration:none}\
+                        .deli-wrap-header #deli-head .deli-nav-top .userBtn.hasLogin:hover{position:relative}\
+                        .deli-wrap-header #deli-head .deli-nav-top .userBtn.hasLogin:hover>.deli-user-panel{display:block}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel{display:none;position:relative;top:-20px;right:0;background-color:#fff;z-index:1;width:80px;height:80px;overflow:visible}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info{position:relative;display:inline-block;width:80px;height:50px;overflow:hidden;margin:15px auto}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info .deli-user-info-avatar{width:50px;height:50px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;display:inline-block}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info i{display:none;position:absolute;top:8px;right:8px}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info.visited i,.deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-info:hover i{display:block}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-asset{display:none;border:1px solid #d9d9d9;border-top:0}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-asset .deli-user-asset-link{display:inline-block;width:80px;height:40px;line-height:40px;text-align:center;font-size:14px;color:#666;background-color:#fff}\
+                        .deli-wrap-header #deli-head .deli-nav-top .deli-user-panel .deli-user-asset .deli-user-asset-link:hover{color:#5d85e0}\
+                        .deli-wrap-footer{background-color:#cfd2d7}\
+                        .deli-footer{-padding-top:25px;padding-top:50px; width:1200px;margin:0 auto}\
+                        .deli-footer-link{-height:100px;width: 95%; padding-left: 5%;}\
+                        .deli-footer-link dl{-width:155px; width:275px; float:left;-height:100px;-margin-right:100px;margin-bottom:0}\
+                        .deli-footer-link dl.deli-attus{position:relative;-width:170px;width:220px;margin-right:0}\
+                        .deli-footer-link dl.deli-attus .deli-icon-phone{display:inline-block; background:url(https://static.delicloud.com/www/home/images/telephone_icon.png) 0 0 no-repeat;width:16px;height:18px; vertical-align: top; margin-top: 3px; margin-right: 10px;}\
+                        .deli-footer-link dl.deli-attus .deli-icon-weixin-img{-display:none; display:inline-block; -position:absolute;-top:-80px;-left:-25px;-background-image:url(https://static.delicloud.com/www/home/images/weixin.png); background-image:url(https://static.delicloud.com/www/home/images/wechat_icon.png);-width:80px;width:22px;-height:80px; height:18px; vertical-align: top; margin-top: 3px; margin-right: 6px;}\
+                        .deli-footer-link dl.deli-attus .deli-icon-qq{-margin-right:50px;display: inline-block; background-image:url(https://static.delicloud.com/www/home/images/qq_icon.png); width: 16px;height: 18px; vertical-align: top; margin-top: 3px; margin-right: 10px;}\
+                        .deli-footer-link dl.deli-attus .deli-icon-weixin{position:relative}\
+                        .deli-footer-link dl.deli-attus .deli-icon-qq,.deli-footer-link dl.deli-attus .deli-icon-weixin{font-size:30px;color:#333;cursor:pointer;text-decoration:none}\
+                        .deli-footer-link dl.deli-attus .deli-icon-qq:hover,.deli-footer-link dl.deli-attus .deli-icon-weixin:hover{color:#55bfbe}\
+                        .deli-footer-link dl.deli-attus .deli-icon-weixin:hover .deli-icon-weixin-img{display:block}\
+                        .deli-footer-link dl .deli-kefu-phone{font-size:16px}\
+                        .deli-footer-link dl dt{font-size:18px; font-weight:700; -line-height:26px; color:#666; letter-spacing:5px;margin-bottom:20px;}\
+                        .deli-footer-link dl dd{line-height:24px;font-size:14px;color:#959799;margin-bottom:18px;letter-spacing:5px}\
+                        .deli-footer-link dl dd a{font-size:16px;color:#333;letter-spacing:2px;display:inline-block;text-decoration:none}\
+                        .deli-footer-link dl dd:hover a{color:#666;text-decoration:none}\
+                        .deli-footer-copyright{font-size:14px;color:#666;height:50px;padding-top:20px;text-align:center;letter-spacing:2px;}\
+                        .deli-footer-link dl.deli-attus dd b {font-size: 16px; color: #333; font-weight: normal;letter-spacing:2px; cursor: pointer;}\
+                        .deli-footer-link dl.deli-attus dd:hover b {color: #666;}</style>';
+                    var delihead = document.head || document.getElementsByTagName('head')[0];
+                    var styleTag = document.createElement('style');
+                        styleTag.type = 'text/css';
+                        if (styleTag.styleSheet){
+                            styleTag.styleSheet.cssText = elementStyle;
+                        } else {
+                            styleTag.appendChild(document.createTextNode(elementStyle));
+                        }
+                        delihead.appendChild(styleTag);
                     var elementHeader = '<div class="deli-user-head">\
                         <div id="deli-head" class="deli-clear">\
                             <div class="deli-logo-box">\
@@ -521,20 +538,30 @@
                         </div>\
                         <div class="deli-footer-copyright">鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</div>\
                     </div>';
-
                     var wrapHeader = document.createElement('div'),
                         wrapFooter = document.createElement('div');
                     wrapHeader.className = 'deli-wrap-header', wrapFooter.className = 'deli-wrap-footer';
                     wrapHeader.innerHTML = elementHeader, wrapFooter.innerHTML = elementFooter;
-                    document.body.appendChild(wrapFooter);
-                    document.body.insertBefore(wrapHeader, document.body.firstElementChild);
-                    document.querySelector('.deli-wrap-header .deli-nologin a.deli-nologin-btn').addEventListener('click', function () {
-                        self.util.setCookie('userid', undefined);
-                        self.util.setCookie('token', undefined);
-                        self.logout(userid, token, function(){
-                            window.location.replace(httpApi + '/oa/');
+                    document.querySelector("body").appendChild(wrapFooter);
+                    document.querySelector("body").insertBefore(wrapHeader, document.querySelector("body").firstElementChild);
+                    var wrapNologinBtn = document.querySelector('.deli-wrap-header .deli-nologin a.deli-nologin-btn');
+                    if (wrapNologinBtn.addEventListener) {
+                        wrapNologinBtn.addEventListener("click", function(){
+                            self.util.setCookie('userid', undefined);
+                            self.util.setCookie('token', undefined);
+                            self.logout(userid, token, function(){
+                                window.location.replace(httpApi + '/oa/');
+                            });
+                        }, false);
+                    }else {
+                        wrapNologinBtn.attachEvent("onclick", function(){
+                            self.util.setCookie('userid', undefined);
+                            self.util.setCookie('token', undefined);
+                            self.logout(userid, token, function(){
+                                window.location.replace(httpApi + '/oa/');
+                            });
                         });
-                    }, false);
+                    }
                 }
             };
             if (userid && token) {
@@ -930,6 +957,9 @@
             break;
         }
     }
+    //forEach兼容ie8
+    Array.prototype.forEach||(Array.prototype.forEach=function(c,e){var d,a;if(null==this)throw new TypeError("this is null or not defined");var b=Object(this),f=b.length>>>0;if("function"!==typeof c)throw new TypeError(c+" is not a function");1<arguments.length&&(d=e);for(a=0;a<f;){if(a in b){var g=b[a];c.call(d,g,a,b)}a++}});
+
     //注册方法生成api
     regMethods.forEach(function (method) {
         regNameSpace(method, function (param, callbackSuccess, callbackFail) {

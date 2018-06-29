@@ -69,7 +69,11 @@
         'app.storage.getInfo',
         'app.storage.set',
         'app.storage.remove',
-        'app.storage.clear'
+        'app.storage.clear',
+
+        'device.sdk.init',
+        'device.sdk.api',
+        'device.sdk.destory'
     ];
     var JSSDK_VERSION = '1.0.4';
     var ua = win.navigator.userAgent;

@@ -84,7 +84,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     
     // webSocket
     function webSocketInit(session){
-        if (!!window.WebSocket && window.WebSocket.prototype.send){
+        if (typeof WebSocket != 'undefined'){
             // 打开一个 web socket
             var ws = new WebSocket(session.ws_url);
             ws.onopen = function(){
@@ -124,67 +124,59 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             };
         }else{
             // 浏览器不支持 WebSocket
-            var timer = setInterval(function(){pollInit('/ws/'+ session.session_id +'', timer)}, 3000);
+            var timer = setInterval(function(){pollInit(session.http_url, timer)}, 3000);//'/ws/'+session.session_id
         }
     }
     // polling
     function pollInit(url, timer) {
-        util.ajaxSubmit({
-            url: url,
-            silent: true,
-            type:'get',
-            force: true,
-            complete: function(res){
-                if(res.status == 200){
-                    var response = JSON.parse(res.responseText);
-                    if(response.length > 1){
-                        var jsonUser = response[0], jsonInfo = response[1];
-                        if(jsonUser && jsonInfo){
-                            if(jsonUser.id){
-                                tempInfo.data = jsonUser;
-                                $loginDoing.hide();
-                                $loginFail.hide();
-                                $loginSuccess.find('div.success-img >').remove();
-                                $loginSuccess.find('div.success-img').append('<img src="'+ jsonUser.avatar_url +'" title="'+ jsonUser.name +'">');
-                                $loginSuccess.show();
-                            }
-                            if(jsonInfo.user_id){
-                                userInfo = jsonInfo;
-                                if(userInfo.type == 'web'){
-                                    //util.setUserData(userInfo);
-                                    util.setCookie('token', userInfo.token);
-                                    util.setCookie('userid', userInfo.user_id);
-                                    util.setCookie('expire', userInfo.expire);
-                                }
-                                orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
-                                    clearInterval(timer);
-                                });
-                            }
+        $.getJSON(url).done(function(res) {
+            var response = res;
+            if(response.length > 1){
+                var jsonUser = response[0], jsonInfo = response[1];
+                if(jsonUser && jsonInfo){
+                    if(jsonUser.id){
+                        tempInfo.data = jsonUser;
+                        $loginDoing.hide();
+                        $loginFail.hide();
+                        $loginSuccess.find('div.success-img >').remove();
+                        $loginSuccess.find('div.success-img').append('<img src="'+ jsonUser.avatar_url +'" title="'+ jsonUser.name +'">');
+                        $loginSuccess.show();
+                    }
+                    if(jsonInfo.user_id){
+                        userInfo = jsonInfo;
+                        if(userInfo.type == 'web'){
+                            //util.setUserData(userInfo);
+                            util.setCookie('token', userInfo.token);
+                            util.setCookie('userid', userInfo.user_id);
+                            util.setCookie('expire', userInfo.expire);
                         }
-                    }else if(response.length == 1){
-                        var json = response[0];
-                        if(json){
-                            if(json.id){
-                                tempInfo.data = json;
-                                $loginDoing.hide();
-                                $loginFail.hide();
-                                $loginSuccess.find('div.success-img >').remove();
-                                $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
-                                $loginSuccess.show();
-                            }
-                            if(json.user_id){
-                                userInfo = json;
-                                if(userInfo.type == 'web'){
-                                    //util.setUserData(userInfo);
-                                    util.setCookie('token', userInfo.token);
-                                    util.setCookie('userid', userInfo.user_id);
-                                    util.setCookie('expire', userInfo.expire);
-                                }
-                                orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
-                                    clearInterval(timer);
-                                });
-                            }
+                        orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
+                            clearInterval(timer);
+                        });
+                    }
+                }
+            }else if(response.length == 1){
+                var json = response[0];
+                if(json){
+                    if(json.id){
+                        tempInfo.data = json;
+                        $loginDoing.hide();
+                        $loginFail.hide();
+                        $loginSuccess.find('div.success-img >').remove();
+                        $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
+                        $loginSuccess.show();
+                    }
+                    if(json.user_id){
+                        userInfo = json;
+                        if(userInfo.type == 'web'){
+                            //util.setUserData(userInfo);
+                            util.setCookie('token', userInfo.token);
+                            util.setCookie('userid', userInfo.user_id);
+                            util.setCookie('expire', userInfo.expire);
                         }
+                        orgsCalls($orgList ,{userid: userInfo.user_id,token: userInfo.token, type: 'polling'}, function(){
+                            clearInterval(timer);
+                        });
                     }
                 }
             }

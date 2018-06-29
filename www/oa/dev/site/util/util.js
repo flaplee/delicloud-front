@@ -81,9 +81,7 @@ define(['common/kernel/kernel'], function(kernel) {
                 }
                 xhr.send(param.data);
             } else {
-                //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.setRequestHeader('Content-Type', 'application/json');
-                //xhr.setRequestHeader('Content-Type', 'text/html;charset=UTF-8');
                 xhr.setRequestHeader("If-Modified-Since","0");
                 xhr.setRequestHeader("Cache-Control","no-cache");
                 if(param.dauth){
