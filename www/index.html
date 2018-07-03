@@ -260,8 +260,10 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var ua = navigator.userAgent.toLowerCase(), targetToggle = document.getElementById("nav-toggle"), targetDom = getElementsByClassName(document,'mobile-collapsible');
-
+		var ua = navigator.userAgent.toLowerCase(), targetToggle = document.getElementById("nav-toggle"), targetDom = getElementsByClassName(document,'mobile-collapsible'), bodyDom = document.querySelector("body");
+		if ((/iphone|ipad|ipod/).test(ua) || (/android/).test(ua)) {
+			bodyDom.className = 'home home-h5';
+		};
 		var forEach = function(array, callback, scope) {
 			for (var i = 0; i < array.length; i++) {
 			  callback.call(scope, i, array[i]) // passes back stuff we need

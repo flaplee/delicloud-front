@@ -34,14 +34,14 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             url: '/v1.0/admin/app/my', // '/v1.0/app/bind/'+ orgid
             dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
             data: {
-				'org_id':orgid
+				'org_id': orgid
             },
             success: function(res) {
                 //console.log("res",res);
                 var data = res.data.result;
                 if(data.length > 0){
 	                for (var i = 0;i < data.length; i++) {
-	                	var dataInner = data[i].binds; 
+	                	var dataInner = data[i].binds;
 	                	for(var j = 0;j < dataInner.length; j++){
 	                		var $itemTpl = $('<div class="app-item" data-app_id="' + dataInner[j].id + '" title="' + dataInner[j].app.name + '">\
 								<div class="item-icon-wrap">\
@@ -56,21 +56,19 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	                }
                 }
 
-                o.append('<a class="app-item app-item-add" href="/oa/#!app" title="安装新应用">\
+                o.append('<a class="app-item app-item-add '+ ((dataInner.length >= 8 && ((dataInner.length + 1) % 4 == 0)) ? 'app-item-radius-right' : ((dataInner.length >= 8 && (dataInner.length% 4 == 0)) ? 'app-item-radius-left' : '')) +'" href="/oa/#!app" title="安装新应用">\
 					<div class="item-icon-wrap"></div>\
 					<div class="item-title">安装新应用</div>\
 					<div class="item-info"></div>\
 				</a>');
-                //setAddApp(o.find('.app-item'), o.find('.app-item').attr('data-app_id'));
-                //setTargetUrl(o.find('.app-item'));
             }
         });
     }
 
     function setTargetApp(o, url){
     	o.on('click',function(e){
-    		e.stopPropagation();
-    		window.location.href = ''+ url +'?user_id='+ userid +'&org_id='+ orgid +'&token='+ token +'&uuid=';
+			e.stopPropagation();
+			window.location.href = ''+ url +'?user_id='+ userid +'&org_id='+ orgid +'&token='+ token +'&uuid=';
     	});
     }
 

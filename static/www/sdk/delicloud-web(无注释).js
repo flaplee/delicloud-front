@@ -987,7 +987,7 @@
                             d.style.width = "100%";
                             d.style.height = "40px";
                             d.style.backgroundColor = "#f8f4ce";
-                            d.innerHTML = '<div style="width: 1200px;height: 40px;line-height: 40px;margin: 0 auto;background-color: #f8f4ce;text-align:center;color: #3f3f3f;font-size: 12px;"><div style="position: relative; width: 300px; margin: 0 auto;"><i class="icon-supbrowser" style="width: 14px; height: 14px; margin: 13px 0; background-image: url(http://t.static.delicloud.com/www/home/images/prompt.png?v=20180628); display: inline-block; position: absolute; left: 0; top: 0;"></i><p style="margin-left: 24px;text-align: left;">当前浏览器版本过低，推荐使用最新版<a href="http://www.chromeliulanqi.com/" target="_blank" style="color:#5d85e0;">谷歌浏览器</a></p></div></div>';
+                            d.innerHTML = '<div style="width: 1200px;height: 40px;line-height: 40px;margin: 0 auto;background-color: #f8f4ce;text-align:center;color: #3f3f3f;font-size: 12px;"><div style="position: relative; width: 300px; margin: 0 auto;"><i class="icon-supbrowser" style="width: 14px; height: 14px; margin: 13px 0; background-image: url(http://t.static.delicloud.com/www/home/images/prompt.png?v=20180628); display: inline-block; position: absolute; left: 0; top: 0;"></i><p style="margin-left: 24px;text-align: left;">当前浏览器版本过低，推荐使用最新版<a href="https://ie.sogou.com/" target="_blank" style="color:#5d85e0;">搜狗高速浏览器</a></p></div></div>';
                             f();
                         }
                     }

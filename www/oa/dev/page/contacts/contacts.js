@@ -827,8 +827,8 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                 }, true);
 
                 // 获取屏幕的可见区域高度减去其他部分的高度
-                $listTmpInner.height(document.body.clientHeight - 245);
-                $contactsInner.height(document.body.clientHeight - 250);
+                $listTmpInner.height(document.body.clientHeight - 205);
+                $contactsInner.height(document.body.clientHeight - 210);
                 
                 $contactsMenu.find('ul.menu-list li.item').removeClass('current');
                 $contactsMenu.find('ul.menu-list li.item').filter('.item-'+ ((type) ? type : 'user') +'').addClass('current');
@@ -847,8 +847,8 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                         break;
                     case 'department':
                         // 获取屏幕的可见区域高度减去其他部分的高度
-                        $listTmpInner.height(document.body.clientHeight - 245 + 72);
-                        $departmentInner.height(document.body.clientHeight - 250 + 40);
+                        $listTmpInner.height(document.body.clientHeight - 133);
+                        $departmentInner.height(document.body.clientHeight - 170);
                         departments();
                         $contactsForm.hide();
                         if($listTmpInner.hasClass('dept-select-inner-user')){

@@ -31,19 +31,18 @@
 			position: absolute;
 			left:0;
 			top:0;
-			// width:140px;
-			width:90px; //by xie
+			width:90px;
 			height:100%;
 			float:left;
 			background-color: #e3e6e5;
 			li.item{
 				update:20171122;
-				width:90px; //by xie
+				width:90px;
 				a{
 					display:inline-block;
 					font-weight: normal;
 					cursor: pointer;
-					font-size: 14px; //by xie
+					font-size: 14px;
  					color: #333333;
 					text-decoration: none;
 					display: block;
@@ -90,9 +89,7 @@
 						position: absolute;
 						width: 24px;
 						height: 24px;
-						-top: 2px;
-						// top: 8px; 
-						top:3px; //by xie
+						top:3px;
 						left: 0;
 						background-color: #fff;
 					}
@@ -112,12 +109,8 @@
 			.contacts-team{
 				width:100%;
 				height: 100%;
-				/* update by yqm */
-				/* overflow-y: auto; */
 				float:left;
-				/* update by yqm */
-				/* margin-top: 30px; */
-				padding-top: 20px; //by xie
+				padding-top: 20px;
 				-webkit-box-sizing: border-box;
 				-moz-box-sizing: border-box;
 				box-sizing: border-box;
@@ -154,10 +147,8 @@
 							line-height: 40px;
 							float: left;
 							display: inline-block;
-							// color: #999;
 							color:#333333; 
-							// font-size: 18px;
-							font-family: "SimSun"; //by xie
+							font-family: "SimSun";
 							font-size:14px;
 							overflow: hidden;
 							text-overflow: ellipsis;
@@ -166,8 +157,7 @@
 						
 							.text {
 								color: #333333;
-								// font-size: 18px;
-								font-size:14px; //by xie
+								font-size: 14px;
 								.item-class{
 									color: #999;
 									margin: 0 15px;
@@ -228,8 +218,7 @@
 								float:left;
 								display:inline-block;
 								color: #999;
-								// font-size:18px;
-								font-size:14px; //by xie
+								font-size:14px;
 								overflow: hidden;
 								text-overflow: ellipsis;
 								white-space: nowrap;
@@ -241,12 +230,11 @@
 								}
 								.text{
 									color:#333333;
-									// font-size:18px;
-									font-size:14px; //by xie
+									font-size:14px;
 									font-family: "SimSun";
 									.item-class{
 										margin-right:15px;
-										color:#999; //by xie
+										color:#999;
 									}
 								}
 								&:hover{
@@ -296,7 +284,7 @@
 		overflow: hidden;
 		background: #f6f6f6;
 		width: 100%;
-		height:100%;
+		-height:100%;
 		padding-left: 400px;
 		>div{
 			-display: flex;
@@ -320,7 +308,7 @@
 					height:100%;
 					display: block;
 					/* update by yqm */
-					padding-bottom: 40px;
+					-padding-bottom: 40px;
 					-moz-box-sizing: border-box;
 					-webkit-box-sizing: border-box;
 				    box-sizing: border-box;
@@ -399,10 +387,10 @@
 					thead.thead{
 						background: #fff;
 						tr{
-							height: 40px;
-							line-height: 40px;
+							height: 30px;
+							line-height: 30px;
 							th{
-								font-size:14px; //by xie
+								font-size:14px;
 								color:#333333;
 								-font-weight:bold;
 								height: 40px;
@@ -414,7 +402,6 @@
 								text-align:center;
 								padding: 0;
 								border-bottom: 1px solid #eaeaea;
-								/**update by yan**/
 								background-color: #f2f2f2;
 								.select-all{
 									font-weight: normal;
@@ -423,7 +410,6 @@
 									margin: 0 10px;
 								}
 							}
-							//by xie
 							th.user-name{
 								padding-left: 4%;
 								text-align: left;
@@ -471,14 +457,11 @@
 								-width: 275px;
 								p{
 									-width: 275px;
-									//by xie
-									// overflow: hidden;
-									// text-overflow: ellipsis;
-									// white-space: nowrap; 
 									line-height:20px;
-									margin:10px 0 10px; 
+									margin:10px 0 10px;
 									text-align:left;
 									display: block;
+									padding:0 10px;
 								}
 							}
 							&.empty {
@@ -492,7 +475,6 @@
 							    }
 							}
 						}
-						//by xie 
 						.user-name{
 							padding-left: 4%;
 							text-align: left;	
@@ -528,10 +510,10 @@
 				width: 100%;
 				height:100%;
 				margin-right:20%;
-				border-radius:6px;
-				-moz-border-radius:6px;
-				-webkit-border-radius:6px;
-				-o-border-radius:6px;
+				border-radius:10px;
+				-moz-border-radius:10px;
+				-webkit-border-radius:10px;
+				-o-border-radius:10px;
 				background-color:#fff;
 				.department-list-inner{
 					-min-height: 736px;
@@ -542,6 +524,10 @@
 					padding: 5px 0px 0px 20px;
 					overflow-y: auto;
 					overflow-x: hidden;
+					border-radius: 10px;
+					-moz-border-radius: 10px;
+					-webkit-border-radius: 10px;
+					-o-border-radius: 10px;
 					.select-item{
 						-position:relative;
 						width: 100%;
@@ -565,14 +551,12 @@
 								float:left;
 								display:inline-block;
 								color: #999;
-								// font-size:18px;
-								font-size:14px; //by xie 620
+								font-size:14px;
 								font-family: "SimSun";
 								height:40px;
 								line-height:40px;
 								>.item-class{
-									// color:#999;
-									color:#333333; //by xie 620
+									color:#333333;
 									margin:0 10px;
 								}
 								>.item-count{
@@ -589,8 +573,7 @@
 								}
 								>.text{
 									color:#333333;
-									// font-size:18px;
-									font-size:14px; //by xie 620
+									font-size:14px;
 									margin-right: 5px;
 								}
 								>.null{
