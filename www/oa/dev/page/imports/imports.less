@@ -96,7 +96,7 @@
 			-webkit-box-sizing: border-box;
 			box-sizing: border-box;
 			.imports-crumbs{
-				padding: 20px 30px;
+				padding: 20px 20px;
 				a{
 					&.active,&:hover{
 						color:#5d85e0;
@@ -221,7 +221,7 @@
 									line-height: 40px;
 									th{
 										padding: 0;
-										font-size:16px;
+										font-size:14px;
 										color:#333333;
 										height: 40px;
 										line-height: 40px;
@@ -240,24 +240,32 @@
 								}
 								td{
 									padding: 0;
-									font-size:14px;
+									font-size:12px;
 									color:#999999;
 									border-top: 0;
 									border-left: none;
 									border-right: none;
-									height: 40px;
+									-height: 40px;
 									line-height: 40px;
-									white-space: nowrap;
-									text-overflow: ellipsis;
-									overflow: hidden;
-									display: inline-block;
-									float: left;
+									-white-space: nowrap;
+									-text-overflow: ellipsis;
+									-overflow: hidden;
+									display: table-cell;
 									font-family: "SimSun";
 									a.item{
 										font-weight: normal;
 										font-size: 24px;
 										color: #b5b5b5;
 										margin: 0 10px;
+									}
+									&.user-name,&.user-deptname,&.user-title{
+										p{
+											line-height: 20px;
+											margin: 10px 0 10px;
+											text-align: left;
+											display: block;
+											padding: 0 40px;
+										}
 									}
 								}
 								tr.empty{
@@ -422,12 +430,12 @@
 			.steps-record{
 				h2.record-title{
 					font-weight: bold;
-					font-size: 24px;
+					font-size: 16px;
 					color: #333333;
 					margin: 0;
 					height: 32px;
 					line-height: 32px;
-					margin-left: 30px;
+					margin-left: 20px;
 					margin-bottom: 14px;
 				}
 				.record-list{
@@ -468,7 +476,7 @@
 							}
 							tr.record-item{
 								td{
-									font-size: 14px;
+									font-size: 12px;
 									color: #999999;
 									height: 40px;
 									line-height: 40px;

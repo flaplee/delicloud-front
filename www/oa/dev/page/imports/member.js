@@ -84,10 +84,10 @@ define(['common/kernel/kernel', 'site/util/util', 'common/text/text!page/imports
                         $.each(json.rows, function(i, n){
                             targetHtml += '<tr>\
                                 <td class="user-index">'+ (i + 1) +'</td>\
-                                <td class="user-name">'+ n.name +'</td>\
+                                <td class="user-name"><p>'+ n.name +'</p></td>\
                                 <td class="user-employeenum">'+ n.employee_num +'</td>\
-                                <td class="user-deptname" title="'+ n.dept_name +'">'+ n.dept_name +'</td>\
-                                <td class="user-title" title="'+ n.title +'">'+ n.title +'</td>\
+                                <td class="user-deptname" title="'+ n.dept_name +'"><p>'+ n.dept_name +'</p></td>\
+                                <td class="user-title" title="'+ n.title +'"><p>'+ n.title +'</p></td>\
                                 <td class="user-mobile">'+ n.mobile +'</td>\
                                 '+ ((data.status && data.status != 1) ? '<td class="user-error"><span class="red">'+ ((n.msg && n.msg != '') ? n.msg : '通讯录中已存在该手机号码的员工') +'</span></td>' : '') +'\
                             </tr>';

@@ -60,9 +60,10 @@ input:-webkit-autofill,select:-webkit-autofill,textarea:-webkit-autofill{box-sha
 #page #content header p.group {color: #5d85e0; font-size: 18px; margin-right: 2px; width: 80%; margin: 0 auto;position: relative; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: normal; font-weight: normal;}
 #page #content header p.group.group-border{}
 #page #content header .title{font-size: 14px;font-weight: 700;color: #fff;background-color: #5d85e0;padding: 10px 0 10px 15px;border-top-left-radius: 4px;border-top-right-radius: 4px;}
-#page #content header .title .logo{width: 40px; height: 40px; background-image: url('https://static.delicloud.com/h5/web/invitation/images/logo.png'); background-repeat: no-repeat; background-size: 100% 100%; display: inline-block; float: left; margin-right: 10px;}
+#page #content header .title .logo{position: relative;width: 40px; height: 40px;background-color: #fff;display: inline-block; float: left; margin-right: 10px;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;-o-border-radius: 50%;}
+#page #content header .title .logo:before{content: ''; background-image: url(https://static.delicloud.com/images/logos/logo_32.png); background-repeat: no-repeat; background-size: 100% 100%; width: 24px; height: 24px; position: absolute; left: 8px; top: 8px;}
 #page #content header .title .text{height: 40px; line-height: 40px; display: inline-block; float: left;}
-#page #content header #avatar {width: 70px; height: 70px;line-height: 70px; color: #fff;border-radius: 50%;margin: 12px auto 10px;overflow: hidden;background-color: #fff;}
+#page #content header #avatar {width: 70px; height: 70px;line-height: 70px; color: #fff;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;-o-border-radius: 50%;margin: 12px auto 10px;overflow: hidden;background-color: #fff;}
 #page #content header #avatar img {width: 100%; height: 100%;width: 70px;height: 70px;}
 #page #content section.content{position:relative;-width:100%;-webkit-box-flex:1;-ms-flex:1 1 auto;-webkit-flex:1 1 auto;flex:1 1 auto;margin: 0 9%;}
 #page #content section.content>{position:absolute;width:100%;height:100%;-right:100%;-visibility:hidden;color:#666;-webkit-animation-duration:.4s;animation-duration:.4s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-iteration-count:1;animation-iteration-count:1}
@@ -70,8 +71,8 @@ input:-webkit-autofill,select:-webkit-autofill,textarea:-webkit-autofill{box-sha
 #page #content section.content.content-line{margin:0;}
 #page #content section.content.content-line .line-box{position: relative;width: 100%;height: 55px;}
 #page #content section.content.content-line .line-box .line-across{position: absolute;top: 27px;left:0;border-bottom:1px dashed #cecece;width:100%;height: 1px;z-index: 10;}
-#page #content section.content.content-line .line-box .line-left{position: absolute;left: -12px;top: 15px;width: 25px;height: 25px;background-color: #f2f3f3;border-radius: 50%;z-index: 11;}
-#page #content section.content.content-line .line-box .line-right{position: absolute;right: -12px;top: 15px;width: 25px;height: 25px;background-color: #f2f3f3;border-radius: 50%;z-index: 11;}
+#page #content section.content.content-line .line-box .line-left{position: absolute;left: -12px;top: 15px;width: 25px;height: 25px;background-color: #f2f3f3;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;-o-border-radius: 50%;z-index: 11;}
+#page #content section.content.content-line .line-box .line-right{position: absolute;right: -12px;top: 15px;width: 25px;height: 25px;background-color: #f2f3f3;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;-o-border-radius: 50%;z-index: 11;}
 #page #content section.content.content-input .formInput{height: 38px;margin:0 auto 8px;}
 #page #content section.content.content-input .formInput:nth-child(1){margin-top:0px;}
 #page #content section.content.content-input .formInput:last-child{margin-bottom:0px;}

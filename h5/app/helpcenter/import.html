@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<meta http-equiv="x-ua-compatible" content="IE=edge" />
@@ -164,15 +163,14 @@
 				"title": "批量导入-帮助",
 				"desc": "批量导入功能使用说明",
 				"link": "http://t.h5.delicloud.com/app/helpcenter/import.html",
-				// "link": "http://192.168.0.150:5000/import.html",
 				"imgUrl": "https://static.delicloud.com/images/logos/logo_64.png"
 			};
 			// 注入配置信息
 			deli.config({
 				noncestr: "abcdefg", // 必填，生成签名的随机串
-				appId: "373175764691976192", // 必填，应用ID
-				timestamp: "1508755836143", // 必填，生成签名的时间戳
-				signature: "26fcd1cab8ff455bfea0ee59a67bf122", // 必填，服务端生成的签名
+				appId: "377900597703081984", // 必填，应用ID 373175764691976192
+				timestamp: "1508755836143", // 必填，生成签名的时间戳 1508755836143
+				signature: "0c6f93a1017e6edcdf53682cd9e3ad73", // 必填，服务端生成的签名 26fcd1cab8ff455bfea0ee59a67bf122
 			});
 			// 验证签名成功
 			deli.ready(function () {
@@ -180,7 +178,7 @@
 					"text": "分享"
 				}, function (data) {
 					deli.common.message.share(shareConfig, function (data) { }, function (resp) { });
-				}, function (resp) { });
+				}, function (resp) {});
 			});
 			// 验证签名失败
 			deli.error(function (resp) {

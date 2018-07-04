@@ -92,11 +92,10 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                     if(res.data && res.data.result.length > 0){
                         o.find('>').remove();
                         for (var i = 0; i < res.data.result.length; i++) {
-                            //((json[i].department_path.split(';')).length > 1) ? json[i].department_path.replace(new RegExp(""+ orgname +"/","gm"),"").replace(new RegExp("/","gm"),"-").replace(new RegExp(";","gm"),"/") : json[i].department;
                             var deptPaths = json[i].department_paths, deptsText = '', deptTitles = json[i].titles;
                             if((deptPaths && deptPaths.length > 1) || (data.orgid == json[i].org_id && deptPaths.length == 1)) {
                                 for(var j = 0;j < deptPaths.length; j++){
-                                    deptsText += (deptPaths[j] ? deptPaths[j] : '').replace(new RegExp("/","gm"),"-").replace(new RegExp(""+ json[i].organization +"-","gm"),"") + ((j == deptPaths.length - 1) ? '' : '/');//<span style="color:#494949;margin:0 1px;"></span>
+                                    deptsText += (deptPaths[j] ? deptPaths[j] : '').replace(new RegExp("/","gm"),"-").replace(new RegExp(""+ json[i].organization +"-","gm"),"") + ((j == deptPaths.length - 1) ? '' : '/');
                                 }
                             }else{
                                 deptsText = json[i].department;
@@ -105,10 +104,10 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                             var titleText = (json[i].org_id == json[i].department_id && (data.type && data.type == 'parent')) ? json[i].title : ((deptTitles && deptTitles.length > 1) ? deptTitles.join('/') : json[i].title);
                             var $itemTpl = $('<tr class="table-item">\
                                 <td class="user-check" style="display:none;"><a class="item" href="javascript:;" data-uid="' + json[i].user_id + '" data-did="'+ json[i].department_id +'"  data-isMaster="' + ((adminid == json[i].user_id) ? true : false) + '" data-isAdmin="' + json[i].is_department_director + '"><i class="iconfont">&#xe76a;</i></a></td>\
-                                <td class="user-name">' + json[i].nickname + '</td>\
+                                <td class="user-name"><p>' + json[i].nickname + '</p></td>\
                                 <td class="user-employeenum">' + (json[i].employee_num ? json[i].employee_num : '') + '</td>\
-                                <td class="user-deptname dept-text" title="' + departmentText + '"><p>' + departmentText + '</p></td>\
-                                <td class="user-title"><p title="' + titleText + '">' + titleText + '</p></td>\
+                                <td class="user-deptname dept-text"><p class="'+ ((data.type && data.type == 'parent') ? '' : 'text-center') +'">' + departmentText + '</p></td>\
+                                <td class="user-title"><p class="'+ ((data.type && data.type == 'parent') ? '' : 'text-center') +'">' + titleText + '</p></td>\
                                 <td class="user-mobile">' + json[i].mobile + '</td>\
                                 <td class="user-operate" style="display:none;">\
                                     <button data-index="' + i + '" type="button" class="btn btn-info btn-sm btn-user-edit">编辑</button>\

@@ -299,6 +299,10 @@ code,kbd,pre,samp {
     margin: 0 auto
 }
 
+.talign-center{
+	text-align:center;
+}
+
 .talign-left{
 	text-align:left;
 }
@@ -333,13 +337,13 @@ code,kbd,pre,samp {
 			background-image: url(icons/icon_no_equipment.png);
 			background-repeat: no-repeat;
 			background-position: 50% 50%;
-			margin: 0 auto 20px;
+			margin: 0 auto 10px;
 			&.empty-img-device{background-image: url(icons/icon_no_equipment.png);width:67px;height:80px;}
 			&.empty-img-data{background-image: url(icons/icon_no_data.png);width:66px;height:79px;}
 			&.empty-img-user{background-image: url(icons/icon_no_staff.png);width:68px;height:80px;}
 			&.empty-img-dept{background-image: url(icons/icon_no_department.png);width:68px;height:80px;}
     	}
-    	.empty-text{font-size:24px;text-align:center;color:#333;}
+    	.empty-text{font-size:16px;text-align:center;color:#333;}
     }
 }
 
@@ -712,12 +716,11 @@ button{
 	        }
 
 	        .nav-item a.navlink:hover, .nav-item-team a.navlink:hover {
-	            -background-color: #55BEBF;
+	        	font-weight: bold;
 	            color: #3b63f9
 	        }
 
 	        .nav-item a.navlink-current, .nav-item-team a.navlink-current{
-	            -background-color: #55BEBF;
 	            font-weight: bold;
 	            color: #3b63f9
 	        }
@@ -784,7 +787,7 @@ button{
 				z-index: 109;
 				background-color: #fff;
 				border: 1px solid #eaeaea;	
-				padding-top: 3px;
+				-padding-top: 3px;
 				-webkit-border-radius: 5px;
 				-moz-border-radius: 5px;
 				border-radius: 5px;

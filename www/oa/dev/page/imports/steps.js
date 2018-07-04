@@ -34,11 +34,6 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
         e.preventDefault();
         loc = {'id':'imports','args':{'type':'info'}};
         resetUploadFile();
-/*        if(supWebsocket){
-            if(ws){ws.close()};
-        }else{
-            if(timer){clearInterval(timer)};
-        }*/
         kernel.replaceLocation(loc);
     });
 
@@ -58,20 +53,13 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
 
     $importsCrumbsInfo.on('click', function(e){
         e.stopPropagation();
-        //loc.args.type = 'steps';
         loc.args.status = 'data';
         resetUploadFile();
-        /*if(supWebsocket){
-            if(ws){ws.close()};
-        }else{
-            if(timer){clearInterval(timer)};
-        }*/
         kernel.replaceLocation(loc);
     });
 
     // 上传文件
     function ajaxFileUpload() {
-        //kernel.showLoading();
         var loc = kernel.parseHash(location.hash);
         var userid = util.getCookie('userid'),
             token = util.getCookie('token'),
@@ -106,7 +94,6 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                         var data = json.data['result'];
                         if(data && data.ws_session_id){
                             webSocketInit(sid, data, $('.imports-steps .steps-record .record-list .record-list-table table.table tbody.tbody'), function(){
-                                //kernel.hideLoading();
                                 sid.splice($.inArray(data.ws_session_id, sid), 1);
                             });
                         }
@@ -131,7 +118,6 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
             },
             error: function (res, status, e)//服务器响应失败处理函数
             {
-                //kernel.hideLoading();
                 if(res && res.responseText){
                     var json = $.parseJSON(jQuery(res.responseText).text());
                     if(json.code == 0){
@@ -140,14 +126,11 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                         var data = json.data['result'];
                         if(data && data.ws_session_id){
                             webSocketInit(sid, data, $('.imports-steps .steps-record .record-list .record-list-table table.table tbody.tbody'), function(){
-                                //kernel.hideLoading();
                                 sid.splice($.inArray(data.ws_session_id, sid), 1);
                             });
                         }
                     }else{
-                        //kernel.hideLoading();
                         isImport = false;
-                        //loc.args.type = 'steps';
                         loc.args.status = 'error';
                         kernel.hint(json.msg, 'error');
                         if(json.code == '9103101'){
@@ -172,14 +155,11 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
         if(status == 0){
             o.find('>').remove();
             if(type == 'enable'){
-                //util.setCookie('employee_count', (parseInt(util.getCookie('employee_count')) + scnt.length));
                 kernel.hint('导入完成');
-                //loc.args.type = 'steps';
                 loc.args.status = 'success';
                 kernel.replaceLocation(loc);
             }else{
                 kernel.hint('导入失败', 'error');
-                //loc.args.type = 'steps';
                 loc.args.status = 'error';
                 kernel.replaceLocation(loc);
             }
@@ -196,10 +176,10 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
             $.each(data, function(i, n){
                 targetHtml += '<tr>\
                     <td class="user-index">'+ (i + count + 1) +'</td>\
-                    <td class="user-name">'+ data[i].name +'</td>\
+                    <td class="user-name"><p>'+ data[i].name +'</p></td>\
                     <td class="user-employeenum">'+ data[i].employee_num +'</td>\
-                    <td class="user-deptname" title="'+ data[i].dept_name +'">'+ data[i].dept_name +'</td>\
-                    <td class="user-title" title="'+ data[i].title +'">'+ data[i].title +'</td>\
+                    <td class="user-deptname" title="'+ data[i].dept_name +'"><p>'+ data[i].dept_name +'</p></td>\
+                    <td class="user-title" title="'+ data[i].title +'"><p>'+ data[i].title +'</p></td>\
                     <td class="user-mobile">'+ data[i].mobile +'</td>\
                     '+ ((type && type == 'unable') ? '<td class="user-error"><span class="red">'+ ((data[i].msg && data[i].msg != '') ? data[i].msg : '不可导入') +'</span></td>' : '') +'\
                 </tr>';
@@ -215,7 +195,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
             ws.push("");
             index = ws.length;
         };
-        if (!!window.WebSocket && window.WebSocket.prototype.send){
+        if (typeof WebSocket != 'undefined'){
             // 打开一个 web socket
             ws[index] = new WebSocket(session.ws_session.ws_url);
             ws[index].onopen = function(){
@@ -235,6 +215,7 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                     }else{
                         var timestamp = (new Date().valueOf()).toString();
                         setRecordTask($target, session, 'increased');
+                        if(json.status && json.status == 1){if(ws[index]){ws[index].close();}}
                         sid.push(wsid);
                     }
                     if(!kernel.parseHash(location.hash).args.p && $target.find('.record-item').length >= 5){
@@ -257,44 +238,38 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
             };
         }else{
             // 浏览器不支持 WebSocket
-            timer[index] = setInterval(function(){pollInit('/ws/'+ wsid +'', index, $target, function(){
+            timer[index] = setInterval(function(){pollInit(session.ws_session.http_url, index, $target, function(){
                 callback();
             })}, 3000);
         }
     }
     // polling
     function pollInit(url, index, $target, callback) {
-        util.ajaxSubmit({
-            url: url,
-            silent: true,
-            type:'get',
-            force: true,
-            complete: function(res){
-                if(res.status == 200){
-                    var response = JSON.parse(res.responseText);
-                    //console.log("response", response);
-                    if(response){
-                        $.each(response, function(i, n){
-                            var wsid = n.ws_session_id;
-                            if($.inArray(wsid, sid) >= 0){
-                                var wstype = (n.status) ? (($.inArray(wsid, sid) >= 0) ? 'push' : 'unpush') :'unpush';
-                                if(($.inArray(wsid, sid) >= 0)) sid.push(wsid), timer.push("");
-                                if(timer[index]){clearInterval(timer[index]);sid.splice($.inArray(wsid, sid), 1);timer.splice(index, 1);};
-                                setRecordTask($target, n, wstype, (($.inArray(wsid, sid) >= 0) ? $.inArray(wsid, sid) : 0));
-                            }else{
-                                var timestamp = (new Date().valueOf()).toString();
-                                setRecordTask($target, n, 'increased');
-                                sid.push(wsid), timer.push("");
-                            }
-                        });
+        $.getJSON(url).done(function(res) {
+            var response = res;
+            if(response){
+                $.each(response, function(i, n){
+                    var wsid = n.ws_session_id;
+                    if($.inArray(wsid, sid) >= 0){
+                        var wstype = (n.status) ? (($.inArray(wsid, sid) >= 0) ? 'push' : 'unpush') :'unpush';
+                        if(($.inArray(wsid, sid) >= 0)) sid.push(wsid), timer.push("");
+                        if(timer[index]){clearInterval(timer[index]);sid.splice($.inArray(wsid, sid), 1);timer.splice(index, 1);};
+                        setRecordTask($target, n, wstype, (($.inArray(wsid, sid) >= 0) ? $.inArray(wsid, sid) : 0));
+                    }else{
+                        var timestamp = (new Date().valueOf()).toString();
+                        setRecordTask($target, n, 'increased');
+                        if(n.status && n.status == 1){clearInterval(timer[index]);}
+                        sid.push(wsid), timer.push("");
                     }
-                }
+                    if(!kernel.parseHash(location.hash).args.p && $target.find('.record-item').length >= 5){
+                        util.paging($target.parents('.record-list').find('.record-list-paging'), parseInt((kernel.parseHash(location.hash).args.p ? kernel.parseHash(location.hash).args.p : 1)), $target.find('.record-item').length, 5);
+                    }
+                });
             }
         });
     }
 
     return function(callback){
-        //resetUploadFile();
         var loc = kernel.parseHash(location.hash), task_id = loc.args.id;
 
         if(!task_id){
@@ -313,10 +288,6 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
         if(isImport && isImport == true){
             $importsInfo.show();
             $importsSteps.hide();
-            /*member(function(){});
-            if(typeof callback === 'function'){
-                callback();
-            }*/
         }
     };
 
@@ -343,7 +314,6 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
             },
             success: function(res) {
                 data.$target.find('.record-list-table table.table tbody.tbody >').remove();
-                console.log("getTaskList", res);
                 if(res.code == 0){
                     var json = res.data['result'];
                     if(json.total > 0 && (json.rows && json.rows.length > 0)){
@@ -470,10 +440,10 @@ define(['common/kernel/kernel', 'site/util/util',  'page/imports/member', 'commo
                         $.each(json.rows, function(i, n){
                             targetHtml += '<tr>\
                                 <td class="user-index">'+ (i + 1) +'</td>\
-                                <td class="user-name">'+ n.name +'</td>\
+                                <td class="user-name"><p>'+ n.name +'</p></td>\
                                 <td class="user-employeenum">'+ n.employee_num +'</td>\
-                                <td class="user-deptname" title="'+ n.dept_name +'">'+ n.dept_name +'</td>\
-                                <td class="user-title" title="'+ n.title +'">'+ n.title +'</td>\
+                                <td class="user-deptname" title="'+ n.dept_name +'"><p>'+ n.dept_name +'</p></td>\
+                                <td class="user-title" title="'+ n.title +'"><p>'+ n.title +'</p></td>\
                                 <td class="user-mobile">'+ n.mobile +'</td>\
                                 '+ ((data.status && data.status != 1) ? '<td class="user-error"><span class="red">'+ ((n.msg && n.msg != '') ? n.msg : '不可导入') +'</span></td>' : '') +'\
                             </tr>';
