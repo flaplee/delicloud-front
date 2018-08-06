@@ -22,9 +22,16 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 if(res.code == 0){
                     var json = res.data.result;
                     if(json && json.length == 1){
+                        var getUserData = util.getUserData();
+                        if(getUserData.organization[util.getCookie('orgindex')] != json[0]){
+                            getUserData.organization[util.getCookie('orgindex')] = json[0];
+                            util.setUserData(getUserData);
+                        };
+                        util.setCookie('orgname', json[0].org_name),
                         util.setCookie('device_ids', (json[0].device_ids ? json[0].device_ids.length : 0)),
                         util.setCookie('app_ids', (json[0].app_ids ? json[0].app_ids.length : 0)),
                         util.setCookie('employee_count', json[0].employee_count);
+                        $homeName.text(json[0].org_name);
                         $homeDev.text((json[0].device_ids ? json[0].device_ids.length : 0));
                         $homeApp.text((json[0].app_ids ? json[0].app_ids.length : 0));
                         $homeCount.text(json[0].employee_count);
@@ -55,18 +62,12 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                     token: token
                 }
                 if(orgid) json.orgid = orgid;
-                loadHomeData(json);
                 if(locid == 'home'){
                     var $usermenu = $('#header .user-head .nav-top .nav-item');
                     $usermenu.find('a.navlink').removeClass('navlink-current');
                     $usermenu.find('a.navlink.homeBtn').addClass('navlink-current');
                 };
-                if(orgname && device_ids && app_ids && employee_count){
-                    $homeName.text(orgname);
-                    $homeDev.text(device_ids);
-                    $homeApp.text(app_ids);
-                    $homeCount.text(employee_count);
-                }
+                loadHomeData(json);
             }
         }
     };

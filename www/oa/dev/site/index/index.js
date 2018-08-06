@@ -137,7 +137,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     });*/
 
     //在获取用户数据后启动路由
-    //if(util.getCookie('userid') && util.getCookie('token') && (kernel.parseHash(location.hash).id == 'home')){}
     util.updateUserData(util.getCookie('userid'), util.getCookie('token'),function (data) {
         // init home 
         kernel.init('home');

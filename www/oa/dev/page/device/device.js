@@ -36,7 +36,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 	        url: '/v1.0/admin/device/my', //获取我可管理的设备列表
 	        dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
 	        data: {
-	        	ord_id:orgid
+	        	org_id:orgid
 	        },
 	        success: function(res) {
 	            var json = res.data.result;

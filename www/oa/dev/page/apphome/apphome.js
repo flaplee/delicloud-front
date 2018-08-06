@@ -39,9 +39,10 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             success: function(res) {
                 //console.log("res",res);
                 var data = res.data.result;
+                var dataInner = [];
                 if(data.length > 0){
 	                for (var i = 0;i < data.length; i++) {
-	                	var dataInner = data[i].binds;
+	                	dataInner = data[i].binds;
 	                	for(var j = 0;j < dataInner.length; j++){
 	                		var $itemTpl = $('<div class="app-item" data-app_id="' + dataInner[j].id + '" title="' + dataInner[j].app.name + '">\
 								<div class="item-icon-wrap">\

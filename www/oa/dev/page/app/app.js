@@ -72,7 +72,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             </li>');
                             o.append($itemHtml);
                             setInstall($itemHtml.find('.btn-install'), o, {
-                                appid: data[i].id
+                                appid: data[i].id,
+                                type: data[i].belong_type
                             });
                         }
                     }
@@ -82,24 +83,27 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             function setInstall(o, os, data){
                 o.on('click',function(){
                     var timestamp = (new Date().valueOf()).toString();
-                    // 安装应用
-                    util.ajaxSubmit({
-                        type: 'post',
-                        url: '/v1.0/bind/bind', ///v1.0/cd/bind
-                        dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
-                        data: {
-                            org_id: orgid,
-                            app_id: data.appid
-                        },
-                        success: function(res) {
-                            if(res.code == 0){
-                                kernel.hint('应用安装成功', 'success');
-                                util.setCookie('app_ids', (parseInt(util.getCookie('app_ids')) + 1));
-                                getAppList(os);
-                                //kernel.replaceLocation({'args': {},'id': 'apphome'});
+                    if(data.type == 'group' || data.type == 'both'){
+                        // 安装应用
+                        util.ajaxSubmit({
+                            type: 'post',
+                            url: '/v1.0/bind/bind', ///v1.0/cd/bind
+                            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
+                            data: {
+                                org_id: orgid,
+                                app_id: data.appid
+                            },
+                            success: function(res) {
+                                if(res.code == 0){
+                                    kernel.hint('应用安装成功', 'success');
+                                    util.setCookie('app_ids', (parseInt(util.getCookie('app_ids')) + 1));
+                                    getAppList(os);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }else{
+                        kernel.hint('企业组织无法添加个人应用', 'info');
+                    }
                 });
             }
         }

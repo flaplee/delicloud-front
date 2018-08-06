@@ -68,9 +68,8 @@ input:focus:invalid,input:required:invalid {
 	margin: 0;
 	color:#cccccc;
 }
-//by xie
-::-moz-placeholder{color:#cccccc}         /* Firefox版本19+ */
-:-ms-input-placeholder{color:#cccccc}      /* IE浏览器 */
+::-moz-placeholder{color:#cccccc}
+:-ms-input-placeholder{color:#cccccc}
 
 ::-webkit-inner-spin-button {
 	display: none;
@@ -366,7 +365,7 @@ code,kbd,pre,samp {
 
 .btn {
     padding: 5px 15px;
-    font-size: 12px; //by xie
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.4;
     border: none;
@@ -691,9 +690,8 @@ button{
 
 	        .nav-item a.navlink.nav-item-current, .nav-item-team a.navlink.nav-item-current{
 				text-align: center;
-				// width: 120px;
 				font-size:12px;
-				width:100px; //by xie
+				width:100px;
 				padding: 0 24px 0 6px;
 				color: #3b63f9;
 				border: 1px solid #3b63f9;
@@ -716,8 +714,11 @@ button{
 	        }
 
 	        .nav-item a.navlink:hover, .nav-item-team a.navlink:hover {
-	        	font-weight: bold;
 	            color: #3b63f9
+	        }
+
+	        .nav-item a.navlink:hover{
+				font-weight: bold;
 	        }
 
 	        .nav-item a.navlink-current, .nav-item-team a.navlink-current{
@@ -740,11 +741,8 @@ button{
 				-height: 170px;
 				position: absolute;
 				z-index: 1;
-				// top: 40px;
-				// min-height: 40px;
-				top: 30px;//by xie
+				top: 30px;
 				min-height: 30px;
-				// left: -36px;
 				left: -58px;
 				display: none;
 				-background-color: #fff;
@@ -799,10 +797,7 @@ button{
 				width: 160px;
 				height: 30px;
 				line-height: 30px;
-				font-size: 12px; //by xie
-				// height: 40px;
-				// line-height: 40px;
-				// font-size: 14px;
+				font-size: 12px;
 				text-align: center;
 				color: #333333;
 				overflow: hidden;
@@ -836,19 +831,16 @@ button{
 
 		        .userBtn{
 					display: none;
-					width: 50px;
-					height: 50px;
-					line-height: 50px;
+					width: 52px;
+					height: 52px;
+					line-height: 52px;
 					text-align: center;
 					font-size: 16px;
 					text-decoration: none;
 					position: relative;
-					border-radius: 5px;
 					&:hover{
 						.user-wrap {
-			            	.user-info-avatar{
-			            		border:2px solid #5d85e0;
-			            	}
+							border:2px solid #5d85e0;
 		            	}
 		            }
 		        }
@@ -871,13 +863,14 @@ button{
 					-webkit-border-radius: 50%;
 					overflow: hidden;
 		            .user-info-avatar{
-		            	width:50px;
-		            	height:50px;
+		            	width:52px;
+		            	height:52px;
 		            	border-radius: 50%;
 		            	-moz-border-radius: 50%;
 		            	-webkit-border-radius: 50%;
 		            	-o-border-radius: 50%;
 		            	display:inline-block;
+		            	margin: 0px -2px;
 		            }
 		            i{
 		            	display:none;
@@ -896,7 +889,6 @@ button{
 		        .user-panel {
 				    display: none;
 					width: 160px;
-					// height: 170px; by xie
 					height:160px;
 					position: absolute;
 					-top: 58px;
@@ -930,7 +922,6 @@ button{
 					}
 				    .user-info{
 						width: 160px;
-						// height: 130px; by xie
 						height:120px;
 						overflow: hidden;
 						border-bottom: 1px solid #eaeaea;
@@ -978,8 +969,6 @@ button{
 						}
 						.user-asset {
 							width: 160px;
-							// height: 38px;
-							// line-height: 38px; by xie
 							height: 40px;
 							line-height: 40px;
 							padding: 0 10px;
@@ -987,7 +976,6 @@ button{
 							font-size: 14px;
 							text-align: center;
 					        .asset-name {
-								// font-size: 18px;  by xie
 								font-size:14px;
 								color: #fd3a49;
 					        }
@@ -1586,8 +1574,6 @@ textarea{
 			padding: 10px 20px;
 			border: 1px solid @inputBorder;
 			text-align: center;
-			//by xie
-			// white-space: nowrap;
 		}
 
 		td.empty-item{

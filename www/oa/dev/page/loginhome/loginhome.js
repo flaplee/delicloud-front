@@ -106,7 +106,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                     if(json.user_id){
                         userInfo = json;
                         if(userInfo.type == 'web'){
-                            //util.setUserData(userInfo);
                             util.setCookie('token', userInfo.token);
                             util.setCookie('userid', userInfo.user_id);
                             util.setCookie('expire', userInfo.expire);
@@ -145,7 +144,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                     if(jsonInfo.user_id){
                         userInfo = jsonInfo;
                         if(userInfo.type == 'web'){
-                            //util.setUserData(userInfo);
                             util.setCookie('token', userInfo.token);
                             util.setCookie('userid', userInfo.user_id);
                             util.setCookie('expire', userInfo.expire);
@@ -169,7 +167,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                     if(json.user_id){
                         userInfo = json;
                         if(userInfo.type == 'web'){
-                            //util.setUserData(userInfo);
                             util.setCookie('token', userInfo.token);
                             util.setCookie('userid', userInfo.user_id);
                             util.setCookie('expire', userInfo.expire);
