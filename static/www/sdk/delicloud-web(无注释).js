@@ -535,16 +535,18 @@
                     var wrapNologinBtn = document.querySelector('.deli-wrap-header .deli-nologin a.deli-nologin-btn');
                     if (wrapNologinBtn.addEventListener) {
                         wrapNologinBtn.addEventListener("click", function(){
-                            self.util.setCookie('userid', undefined);
-                            self.util.setCookie('token', undefined);
+                            self.util.setCookie('app_user_id', undefined);
+                            self.util.setCookie('app_org_id', undefined);
+                            self.util.setCookie('app_token', undefined);
                             self.logout(userid, token, function(){
                                 window.location.replace(httpApi + '/oa/');
                             });
                         }, false);
                     }else {
                         wrapNologinBtn.attachEvent("onclick", function(){
-                            self.util.setCookie('userid', undefined);
-                            self.util.setCookie('token', undefined);
+                            self.util.setCookie('app_user_id', undefined);
+                            self.util.setCookie('app_org_id', undefined);
+                            self.util.setCookie('app_token', undefined);
                             self.logout(userid, token, function(){
                                 window.location.replace(httpApi + '/oa/');
                             });
@@ -564,8 +566,9 @@
                         if (res.code == 0) {
                             var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
                             if (connect == 'connect') {
-                                self.util.setCookie('userid', res.data.result.user_id);
-                                self.util.setCookie('token', res.data.result.token);
+                                self.util.setCookie('app_org_id', self.util.getQuery('org_id'));
+                                self.util.setCookie('app_user_id', res.data.result.user_id);
+                                self.util.setCookie('app_token', res.data.result.token);
                             } else {
                                 self.logout(userid, token);
                             }
@@ -646,8 +649,9 @@
                 
                 success: function (res) {
                     if (res.code == 0) {
-                        self.util.setCookie('userid', undefined);
-                        self.util.setCookie('token', undefined);
+                        self.util.setCookie('app_user_id', undefined);
+                        self.util.setCookie('app_org_id', undefined);
+                        self.util.setCookie('app_token', undefined);
                         
                         readyHandle && readyHandle({
                             data: res.data

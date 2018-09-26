@@ -16,8 +16,11 @@ create delicloud.js for js_sdk api
         "common.navigation.setRight",
         "common.navigation.close",
         "common.navigation.setColors", //修改通知栏和导航栏颜色
+        "common.image.choose",
         "common.image.upload",
         "common.image.preview",
+        "common.file.choose",
+        "app.disk.choose",
         "common.file.upload",
         "common.location.open",
         "common.location.get",
@@ -66,7 +69,7 @@ create delicloud.js for js_sdk api
         "device.sdk.api",
         "device.sdk.destory"
     ];
-    var JSSDK_VERSION = '1.0.0';
+    var JSSDK_VERSION = '1.0.6';
     var ua = win.navigator.userAgent;
     var matches = ua.match(/DeliAppv+[a-zA-Z0-9.-]+/);
     //android兼容处理

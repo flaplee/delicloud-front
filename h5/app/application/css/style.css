@@ -567,6 +567,10 @@ body .lazyload-nobg {
 	flex-direction: column
 }
 
+#page.page-loading{
+	display: none;
+}
+
 #page>.header {
 	position: relative;
 	color: #fff;
@@ -952,7 +956,8 @@ body .lazyload-nobg {
 #page>.content>.appdetail .appdetail-base {
 	padding: 0 13px;
 	border-bottom: 1px solid #ccc;
-	margin-bottom: 65px
+	margin-bottom: 65px;
+	display: none;
 }
 
 #page>.content>.appdetail .appdetail-base h2.base-title {

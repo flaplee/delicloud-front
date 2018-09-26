@@ -208,13 +208,13 @@
                         //time:"1000",
                         success: function (res) {
                             if (res.code == 0) {
-                                if (self.util.getQuery('user_id') === undefined && self.util.getCookie('user_id') == 'undefined' && self.util.getQuery('token') === undefined && self.util.getCookie('token') == 'undefined') {
+                                if (self.util.getQuery('user_id') === undefined && self.util.getCookie('app_user_id') == 'undefined' && self.util.getQuery('org_id') === undefined && self.util.getQuery('token') === undefined && self.util.getCookie('app_token') == 'undefined') {
                                     // 未登录
                                     alert('用户未登录或者登录信息已经过期，请重新登录');
                                     window.location.replace(httpApi + '/oa/');
                                 } else {
                                     setTimeout(function(){
-                                        self.prefixLoadTpl(self.util.getQuery('user_id') || self.util.getCookie('user_id'), self.util.getQuery('token') || self.util.getCookie('token'));
+                                        self.prefixLoadTpl(self.util.getQuery('user_id') || self.util.getCookie('app_user_id'), self.util.getQuery('token') || self.util.getCookie('app_token'));
                                         if(typeof callback === 'function'){
                                             callback();
                                         }
@@ -547,16 +547,18 @@
                     var wrapNologinBtn = document.querySelector('.deli-wrap-header .deli-nologin a.deli-nologin-btn');
                     if (wrapNologinBtn.addEventListener) {
                         wrapNologinBtn.addEventListener("click", function(){
-                            self.util.setCookie('userid', undefined);
-                            self.util.setCookie('token', undefined);
+                            self.util.setCookie('app_user_id', undefined);
+                            self.util.setCookie('app_org_id', undefined);
+                            self.util.setCookie('app_token', undefined);
                             self.logout(userid, token, function(){
                                 window.location.replace(httpApi + '/oa/');
                             });
                         }, false);
                     }else {
                         wrapNologinBtn.attachEvent("onclick", function(){
-                            self.util.setCookie('userid', undefined);
-                            self.util.setCookie('token', undefined);
+                            self.util.setCookie('app_user_id', undefined);
+                            self.util.setCookie('app_org_id', undefined);
+                            self.util.setCookie('app_token', undefined);
                             self.logout(userid, token, function(){
                                 window.location.replace(httpApi + '/oa/');
                             });
@@ -577,8 +579,9 @@
                             var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
                             if (connect == 'connect') {
                                 //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
-                                self.util.setCookie('userid', res.data.result.user_id);
-                                self.util.setCookie('token', res.data.result.token);
+                                self.util.setCookie('app_user_id', res.data.result.user_id);
+                                self.util.setCookie('app_org_id', self.util.getQuery('org_id'));
+                                self.util.setCookie('app_token', res.data.result.token);
                             } else {
                                 self.logout(userid, token);
                             }
@@ -664,8 +667,9 @@
                 //time:"1000",
                 success: function (res) {
                     if (res.code == 0) {
-                        self.util.setCookie('userid', undefined);
-                        self.util.setCookie('token', undefined);
+                        self.util.setCookie('app_user_id', undefined);
+                        self.util.setCookie('app_org_id', undefined);
+                        self.util.setCookie('app_token', undefined);
                         // onlogout
                         readyHandle && readyHandle({
                             data: res.data

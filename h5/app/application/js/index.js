@@ -121,14 +121,6 @@ seajs.use(['jquery', 'util', 'fastclick', 'swiper'], function(jquery, util, fast
                             $detailItemInfo.find('.appdetail-title').text(app_name);
                             $detailItemInfo.find('.appdetail-content').text(data.slogan);
                             if(data.description){
-                                /*if(data.description.length >= 50){
-                                    $introduceMore.show();
-                                    $introduceMore.on('click', function() {
-                                        var c = $(this);
-                                        $introduceCont.find('p.content-inner').css({ "overflow": "hidden", "height": "auto","white-space":"pre-wrap"});
-                                        $introduceMore.hide();
-                                    });
-                                }*/
                                 $introduceCont.find('p.content-inner').css({ "overflow": "hidden", "height": "auto","white-space":"pre-wrap"});
                                 $introduceMore.hide();
                                 $introduceCont.find('p.content-inner').html(data.description);
@@ -165,7 +157,7 @@ seajs.use(['jquery', 'util', 'fastclick', 'swiper'], function(jquery, util, fast
                             setScreenShot(urls);
                             if(data.products && data.products.length > 0){
                                 var itemHtml = '';
-                                $detailBase.show();
+                                $detailBase.hide();
                                 for(var j = 0;j < data.products.length; j++){
                                     itemHtml += '<a class="base-device" href="javascript:;"><div class="device-icon"><img src="'+ data.products[j].icon +'" /></div><div class="device-title">'+ data.products[j].name +'</div></a>';
                                 }
@@ -179,17 +171,19 @@ seajs.use(['jquery', 'util', 'fastclick', 'swiper'], function(jquery, util, fast
                         } else {
                             util.hint(res.msg);
                         }
+                        $page.removeClass('page-loading');
                     }
                 });
             };
 
             // 应用截图
             function setScreenShot(urls){
-                var $app_screenshot = $('#app_screenshot');
+                var $app_screenshot = $('#app_screenshot'), screenshotHtml = '';
                 var urlMap = urls.join(',').split(',').map(function(a, e) {
-                    $app_screenshot.append($('<div class="screenshot app_screenshot" data-index="'+ e +'"><img width="131" class="lazyload lazyload-fadein" data-src="'+ a +'" src="'+ a +'"></div>'));
+                    screenshotHtml += '<div class="screenshot app_screenshot" data-index="'+ e +'"><img width="131" class="lazyload lazyload-fadein" data-src="'+ a +'" src="'+ a +'"></div>';
                 });
-                $app_screenshot.on("click", ".app_screenshot", function() {
+                $app_screenshot.append($(screenshotHtml));
+                $app_screenshot.off('click').on("click", ".app_screenshot", function() {
                     var $dom = $(this), current = parseInt($dom.attr('data-index'));
                     deli.common.image.preview({
                         current: current,
@@ -203,12 +197,12 @@ seajs.use(['jquery', 'util', 'fastclick', 'swiper'], function(jquery, util, fast
             $detailBtns.find('a').css('display', 'none') && $detailBtns.find('a.btn-add').css('display', 'block');
         }
     };
-    Page.init();
     // 验证签名成功
     deli.ready(function() {
+        Page.init();
     });
     // 验证签名失败
     deli.error(function(resp) {
-        alert(JSON.stringify(resp));
+        //alert(JSON.stringify(resp));
     });
 });

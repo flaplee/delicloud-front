@@ -572,6 +572,7 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
         e.preventDefault();
         tempGoon = false;
         tempPage = 0;
+        tempType = 'parent'
         tempQuery = encodeURI($contactsForm.find('.search-box input.search').val());
         initContacts($tmp, {
             id: tempId,
