@@ -16,9 +16,12 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 kernel.replaceLocation({'args': {},'id': 'loginhome'});
             }else{
             	if(locid == 'apphome'){
-            		var $usermenu = $('#header .user-head .nav-top .nav-item');
-				    $usermenu.find('a.navlink').removeClass('navlink-current');
-				    $usermenu.find('a.navlink.appBtn').addClass('navlink-current');
+				    var $usermenu = $('#header .user-head .nav-top .nav-item');
+                    $usermenu.find('a.navlink').removeClass('navlink-current');
+                    $usermenu.find('a.navlink-group').show();
+                    $usermenu.find('a.navlink-user').hide();
+                    $usermenu.find('a.navlink-admin').hide();
+                    $usermenu.find('a.navlink.appBtn').addClass('navlink-current');
             	};
             	getAppList($tmpIn);
             }
@@ -31,7 +34,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     	// 已安装应用
     	util.ajaxSubmit({
     		type: 'get',
-            url: '/v1.0/admin/app/my', // '/v1.0/app/bind/'+ orgid
+            url: '/v1.0/app/bind/'+ orgid,
             dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
             data: {
 				'org_id': orgid
@@ -42,17 +45,17 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 var dataInner = [];
                 if(data.length > 0){
 	                for (var i = 0;i < data.length; i++) {
-	                	dataInner = data[i].binds;
-	                	for(var j = 0;j < dataInner.length; j++){
-	                		var $itemTpl = $('<div class="app-item" data-app_id="' + dataInner[j].id + '" title="' + dataInner[j].app.name + '">\
+	                	if(data[i].visibility && data[i].visibility == 1){
+	                		dataInner = data[i].app;
+	                		var $itemTpl = $('<div class="app-item" data-app_id="' + dataInner.id + '" title="' + dataInner.name + '">\
 								<div class="item-icon-wrap">\
-									<img class="item-icon" src="' + (dataInner[j].app.icon ? dataInner[j].app.icon : '') + '">\
+									<img class="item-icon" src="' + (dataInner.icon ? dataInner.icon : '') + '">\
 								</div>\
-								<div class="item-title">' + dataInner[j].app.name + '</div>\
+								<div class="item-title">' + dataInner.name + '</div>\
 								<div class="item-info"></div>\
 							</div>');
 		                    o.append($itemTpl);
-		                    setTargetApp($itemTpl, dataInner[j].app.web_url);
+		                    setTargetApp($itemTpl, dataInner.web_url);
 	                	}
 	                }
                 }
@@ -72,26 +75,6 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 			window.location.href = ''+ url +'?user_id='+ userid +'&org_id='+ orgid +'&token='+ token +'&uuid=';
     	});
     }
-
-	// 添加应用
-	function setAddApp(o, appid){
-		o.find('.app-btn-setting').on('click',function(e){
-			e.stopPropagation();
-			var timestamp = (new Date().valueOf()).toString();
-			util.ajaxSubmit({
-	    		type: 'get',
-	            url: '/v1.0/app/bind',
-	            dauth: userid + ' ' + timestamp + ' ' + kernel.buildDauth(userid, token, timestamp),
-	            data: {
-	            	"org_id":orgid,
-					"app_id":appid
-	            },
-	            success: function(res) {
-	            	//kernel.hint('添加成功');
-	            }
-	        });
-		});
-	}
 
 	// 跳转至应用详情
 	function setTargetUrl(o){

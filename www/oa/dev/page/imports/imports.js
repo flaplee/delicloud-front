@@ -41,6 +41,9 @@ define(['common/kernel/kernel', 'site/util/util', 'page/imports/member', 'page/i
             if(locid == 'imports'){
                 var $usermenu = $('#header .user-head .nav-top .nav-item');
                 $usermenu.find('a.navlink').removeClass('navlink-current');
+                $usermenu.find('a.navlink-group').show();
+                $usermenu.find('a.navlink-user').hide();
+                $usermenu.find('a.navlink-admin').hide();
                 $usermenu.find('a.navlink.orgBtn').addClass('navlink-current');
                 if(!status && !imports){
                     steps(function(){});

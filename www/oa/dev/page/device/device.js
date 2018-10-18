@@ -17,7 +17,10 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             }else{
             	if(locid == 'device'){
             		var $usermenu = $('#header .user-head .nav-top .nav-item');
-				    $usermenu.find('a.navlink').removeClass('navlink-current');
+		            $usermenu.find('a.navlink').removeClass('navlink-current');
+		            $usermenu.find('a.navlink-group').show();
+		            $usermenu.find('a.navlink-user').hide();
+		            $usermenu.find('a.navlink-admin').hide();
 				    $usermenu.find('a.navlink.devBtn').addClass('navlink-current');
             	};
             	getDevice(userid, token, orgid, $tmp);

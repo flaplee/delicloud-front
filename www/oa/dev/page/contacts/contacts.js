@@ -802,6 +802,9 @@ define(['common/kernel/kernel', 'site/util/util', 'page/contacts/department'], f
                 if(locid == 'contacts'){
                     var $usermenu = $('#header .user-head .nav-top .nav-item');
                     $usermenu.find('a.navlink').removeClass('navlink-current');
+                    $usermenu.find('a.navlink-group').show();
+                    $usermenu.find('a.navlink-user').hide();
+                    $usermenu.find('a.navlink-admin').hide();
                     $usermenu.find('a.navlink.orgBtn').addClass('navlink-current');
                 };
                 

@@ -50,6 +50,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     $(document).on("mouseover", "li.nav-item-team", function() {
         $("li.nav-item-team .son-nav-wrap").show();       
     })
+
     $(document).on("mouseout", "li.nav-item-team", function() {
         $("li.nav-item-team .son-nav-wrap").hide();
     })
@@ -99,10 +100,11 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         util.delCookie('orgid', undefined),
         util.delCookie('orgindex', undefined),
         util.delCookie('orgindexid', undefined),
+        util.delCookie('orgindexadmin', undefined),
         util.delCookie('parentid', undefined),
         util.delCookie('orgname', undefined),
-        util.delCookie('device_ids', undefined),
-        util.delCookie('app_ids', undefined),
+        //util.delCookie('device_ids', undefined),
+        //util.delCookie('app_ids', undefined),
         util.delCookie('employee_count', undefined),
         util.setUserData(undefined, true);
         kernel.replaceLocation({'args': {},'id': 'loginhome'});
@@ -139,10 +141,9 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     //在获取用户数据后启动路由
     util.updateUserData(util.getCookie('userid'), util.getCookie('token'),function (data) {
         // init home 
-        kernel.init('home');
+        kernel.init('appentry');
     });
     
-
     // init home 
     //kernel.init('home');
 
@@ -162,41 +163,47 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             }
         }
     });
+
     function showCg(data) {}
 
+    //登录状态变更
     function statechange(evt) {
         //showCg(evt.data);
         if(evt.data){
-            datachange(evt);
             $userlogout.hide();
             $userlogin.addClass('hasLogin');
             $userlogin.show();
+            $userteam.show();
+            datachange(evt);
         }else {
             $userlogout.show();
             $userlogin.removeClass('hasLogin');
             $userlogin.hide();
-        }
-
-        if(evt.data){
-            $userteam.show();
-        }else{
             $userteam.hide();
         }
     }
     
-    function datachange(evt) {
+    //存储数据变更
+    function datachange(evt, type) {
         if(evt.data && evt.data.data){
             $userlogin.find('.user-wrap img.user-info-avatar').prop('src', evt.data.data.avatar_url);
             $userlogin.find('.user-panel >.user-info >.userinfo-name-box b').text(evt.data.data.name);
             $userlogin.find('.user-panel >.user-info img').prop('src', evt.data.data.avatar_url);
         }
-        orgdatachange(evt);
+
+        /*if(!(evt.data.orgindexadmin && evt.data.orgindexadmin == true)){
+            kernel.replaceLocation({'args': {},'id': 'appentry'});
+        }*/
+
+        orgdatachange(evt, type);
     }
 
-    function orgdatachange(evt){
-        var index = parseInt(util.getCookie('orgindex') ? util.getCookie('orgindex') : 0), indexnum = 0, indexid = util.getCookie('orgindexid'), indexdata = evt.data.organization;
+    //组织信息
+    function orgdatachange(evt, type){
+        var index = parseInt(util.getCookie('orgindex') ? util.getCookie('orgindex') : 0), indexnum = 0, indexid = util.getCookie('orgindexid');
+        var evtdata = ((type && type == 'choose') ? evt : evt.data), indexdata = evtdata.organization;
         for(var i = 0;i < indexdata.length;i++){
-            if(indexdata[i].org_id == indexid){
+            if(indexdata[i].id == indexid){
                 index = i;
                 util.setCookie('orgindex', i);
                 indexnum ++;
@@ -205,54 +212,178 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 
         if(indexid && indexdata && indexnum <= 0)index = -1;
         
-        if(index >= 0 && evt.data.organization && evt.data.organization.length > 0 && evt.data.organization[index]){
-            $('a.nav-item-current .navlink-name').text(evt.data.organization[index].org_name);
+        if(index >= 0 && evtdata.organization && evtdata.organization.length > 0 && evtdata.organization[index]){
+            $('a.nav-item-current .navlink-type').html(evtdata.organization[index].type == 'group' ? '<i class="iconfont icon-group">&#xe643;</i>' : '<i class="iconfont icon-user">&#xe642;</i>');
+            $('a.nav-item-current .navlink-name').text(evtdata.organization[index].name);
             $('.nav-item-team .son-nav-wrap .son-nav-list-team').find('>').remove();
             //update 20180522
-            evt.data.orgindex = index;
-            if(evt.data.organization[evt.data.orgindex].org_id != evt.data.orgindexid){
-                evt.data.orgindexid = evt.data.organization[evt.data.orgindex].org_id;
+            evtdata.orgindex = index;
+            if(evtdata.organization[evtdata.orgindex].id != evtdata.orgindexid){
+                evtdata.orgindexid = evtdata.organization[evtdata.orgindex].id;
             }
-            pagechange(evt);
-            $.each(evt.data.organization, function(i, item) {
-                var $targetHtml = $('<a class="sub-nav-item '+ ((evt.data.organization[index].org_id == item.org_id) ? 'current' : '') +'"  href="javascript:;" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a>');
-                $('.nav-item-team .son-nav-wrap .son-nav-list-team').append($targetHtml);
-                return function(){
-                    // 切换组织
-                    $targetHtml.on('click', function(e) {
-                        var e = e || window.e;
-                        e.stopPropagation();
-                        var c = $(this), oname = c.text();
-                        if(!c.hasClass('current')){
-                            $targetHtml.parents('.nav-item-team').find('a.nav-item-current .navlink-name').text(oname);
-                            c.siblings().removeClass('current');
-                            c.addClass('current');
-                            // update 20180308 更新相应数据
-                            evt.data.orgindex = c.index();
-                            util.setCookie('orgindex', evt.data.orgindex);
-                            util.setCookie('orgindexid', evt.data.organization[evt.data.orgindex].org_id);
-                            // update 20180313 更新相应数据
-                            util.setUserData(evt.data);
-                            if(kernel.parseHash(location.hash).id == 'imports' && kernel.parseHash(location.hash).args.id) kernel.replaceLocation({'args':{},'id':'imports'});
-                            pagechange(evt);
-                        }
-                        $('.nav-item-team .son-nav-wrap').hide();
-                    });
-                }();
-            });
+
+            if(evtdata.organization && evtdata.organization.length > 0){
+                $.each(evtdata.organization, function(i, item) {
+                    var targetIcon =  (item.type == 'group' ? '<i class="iconfont icon-group">&#xe643;</i>' : '<i class="iconfont icon-user">&#xe642;</i>');
+                    var $targetHtml = $('<a class="sub-nav-item '+ ((evtdata.organization[index].id == item.id) ? 'current' : '') +'"  href="javascript:;" data-oid="' + item.id + '" data-pid="' + item.top_department_id + '">'+ targetIcon +'' + item.name + '</a>');
+                    $('.nav-item-team .son-nav-wrap .son-nav-list-team').append($targetHtml);
+                    return function(){
+                        // 切换组织
+                        $targetHtml.on('click', function(e) {
+                            var e = e || window.e;
+                            e.stopPropagation();
+                            var c = $(this), oname = item.name;
+                            if(!c.hasClass('current')){
+                                $targetHtml.parents('.nav-item-team').find('a.nav-item-current .navlink-type').html(targetIcon);
+                                $targetHtml.parents('.nav-item-team').find('a.nav-item-current .navlink-name').text(oname);
+                                c.siblings().removeClass('current');
+                                c.addClass('current');
+                                // update 20180308 更新相应数据
+                                compareData({
+                                    userid: evtdata.data.id,
+                                    orgid: evtdata.organization[c.index()].id,
+                                    token: util.getCookie('token')
+                                }, evtdata, c.index());
+
+                                /*evtdata.orgindex = c.index();
+                                util.setCookie('orgindex', evtdata.orgindex);
+                                util.setCookie('orgindexid', evtdata.organization[evtdata.orgindex].id);
+                                util.setCookie('orgindexadmin', evtdata.orgindexadmin);
+                                // update 20180313 更新相应数据
+                                util.setUserData(evtdata);*/
+                                if(kernel.parseHash(location.hash).id == 'imports' && kernel.parseHash(location.hash).args.id) kernel.replaceLocation({'args':{},'id':'imports'});
+                            }
+                            $('.nav-item-team .son-nav-wrap').hide();
+                        });
+                    }();
+                });
+            }else{
+                pagechange(evt, type);
+            }
         }else{
             $userlogin.find('a.logout').trigger('click');
         }
     }
 
-    function pagechange(evt){
-        util.setCookie('userid', evt.data.data.id),
-        util.setCookie('orgid', evt.data.organization[evt.data.orgindex].org_id),
-        util.setCookie('parentid', evt.data.organization[evt.data.orgindex].top_department_id),
-        util.setCookie('orgname', evt.data.organization[evt.data.orgindex].org_name),
-        util.setCookie('device_ids', (evt.data.organization[evt.data.orgindex].device_ids ? evt.data.organization[evt.data.orgindex].device_ids.length : 0)),
-        util.setCookie('app_ids', (evt.data.organization[evt.data.orgindex].app_ids ? evt.data.organization[evt.data.orgindex].app_ids.length : 0)),
-        util.setCookie('employee_count', evt.data.organization[evt.data.orgindex].employee_count),
-        kernel.reloadPage(kernel.parseHash(location.hash).id);
+    //页面数据变更
+    function pagechange(evt, type){
+        var evtdata = (type && type == 'choose') ? evt : evt.data;
+        util.setCookie('userid', evtdata.data.id),
+        util.setCookie('orgid', evtdata.organization[evtdata.orgindex].id),
+        util.setCookie('parentid', evtdata.organization[evtdata.orgindex].top_department_id),
+        util.setCookie('orgname', evtdata.organization[evtdata.orgindex].name),
+        //util.setCookie('device_ids', (evt.data.organization[evt.data.orgindex].device_ids ? evt.data.organization[evt.data.orgindex].device_ids.length : 0)),
+        //util.setCookie('app_ids', (evt.data.organization[evt.data.orgindex].app_ids ? evt.data.organization[evt.data.orgindex].app_ids.length : 0)),
+        util.setCookie('employee_count', evtdata.organization[evtdata.orgindex].employee_cnt);
+        if(evtdata.orgindexadmin && evtdata.orgindexadmin == true){
+            kernel.reloadPage(kernel.parseHash(location.hash).id);
+        }else{
+            kernel.replaceLocation({'args': {},'id': 'appentry'});
+        }
     }
+
+    //组织切换
+    function orgchange(evt, type){
+        if(kernel.parseHash(location.hash).id == 'appentry'){
+            if(evt.orgindexadmin && evt.orgindexadmin == true){
+                $usermenu.find('.navlink-user').show()
+                $usermenu.find('.navlink-admin').show()
+                $usermenu.find('.navlink-group').hide()
+            }else{
+                $usermenu.find('.navlink-user').show()
+                $usermenu.find('.navlink-admin').hide()
+                $usermenu.find('.navlink-group').hide()
+            }
+        }else{
+            $usermenu.find('.navlink-user').hide()
+            $usermenu.find('.navlink-admin').hide()
+            $usermenu.find('.navlink-group').show()
+        }
+    }
+
+    //切换组织时比较数据变化
+    function compareData(params, evt, index){
+        var timestamp = (new Date().valueOf()).toString(), data = {};
+        (params.orgid) ? (data.org_id = params.orgid ) : '';
+        util.ajaxSubmit({
+            type: 'get',
+            url: '/v1.0/user/me',
+            dauth: params.userid + ' ' + timestamp + ' ' + kernel.buildDauth(params.userid, params.token, timestamp),
+            data: data,
+            success: function(res) {
+                if(res.code == 0){
+                    var json = res.data.organization;
+                    if(json){
+                        //切换组织时数据状态发生变化
+                        var getUserData = evt, getOrgIndex = index;
+                        if(!util.isEqual(getUserData.organization[getUserData.orgindex], json[index])){
+                            getUserData.orgindex = index;
+                            getUserData.orgindexid = json[index].id;
+                            if(getUserData.data.id == json[index].admin_id){
+                                console.log("orgindexadmin", true);
+                                getUserData.orgindexadmin = true;
+                                util.setCookie('orgindex', getUserData.orgindex);
+                                util.setCookie('orgindexid', getUserData.orgindexid);
+                                util.setCookie('orgindexadmin', true);
+                                util.setUserData(getUserData);
+                                datachange(getUserData, 'choose');
+                                //orgchange(getUserData);
+                                //pagechange(evt, 'choose');
+                            }else{
+                                getAdminList({
+                                    userid: params.userid,
+                                    token: params.token,
+                                    orgid: params.orgid
+                                }, function(res){
+                                    console.log("orgindexadmin", res);
+                                    getUserData.orgindexadmin = res;
+                                    util.setCookie('orgindex', getUserData.orgindex);
+                                    util.setCookie('orgindexid', getUserData.orgindexid);
+                                    util.setCookie('orgindexadmin', res);
+                                    util.setUserData(getUserData);
+                                    datachange(getUserData, 'choose');
+                                    //orgchange(getUserData);
+                                    //pagechange(evt, 'choose');
+                                });
+                            }
+                        }
+                        util.setCookie('orgname', json[index].name),
+                        util.setCookie('employee_count', json[index].employee_cnt);
+                    }
+                }
+            }
+        });
+    }
+
+    // 获取是否是子管理员
+    function getAdminList(data, callback){
+        var timestamp = (new Date().valueOf()).toString();
+        util.ajaxSubmit({
+            type: 'get',
+            url: '/v1.0/admin/group/'+ data.orgid +'',
+            dauth: data.userid + ' ' + timestamp + ' ' + kernel.buildDauth(data.userid, data.token, timestamp),
+            data: {},
+            success: function(json) {
+                if (json.code == 0) {
+                    var admin_ids = [];
+                    if(json.data['result'].length > 0){
+                        $.each(json.data['result'], function(i, item) {
+                            $.each(item.admin_ids, function(j, inner) {
+                                admin_ids.push(inner)
+                            });
+                        });
+                    }
+                    if(typeof callback === 'function'){
+                        callback(($.inArray(data.userid, admin_ids) >= 0) ? true : false);
+                    }
+                } else {
+                    kernel.hint(json.msg);
+                }
+            },
+            error: function(res){
+                kernel.hint(res.msg);
+            }
+        });
+    }
+
 });

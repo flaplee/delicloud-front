@@ -22,20 +22,10 @@ define({
 		html: 'appdetail.html',
 		css: 'appdetail.less'
 	},
-	appcap:{
-		js: 'appcap',
-		html: 'appcap.html',
-		css: 'appcap.less'
-	},
 	device:{
 		js: 'device',
 		html: 'device.html',
 		css: 'device.less'
-	},
-	base:{
-		js: 'base',
-		html: 'base.html',
-		css: 'base.less'
 	},
 	contacts:{
 		js: 'contacts',
@@ -56,5 +46,10 @@ define({
 		js: 'orghome',
 		html: 'orghome.html',
 		css: 'orghome.less'
+	},
+	appentry:{
+		js: 'appentry',
+		html: 'appentry.html',
+		css: 'appentry.less'
 	}
 });

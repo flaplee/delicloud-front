@@ -312,7 +312,11 @@ code,kbd,pre,samp {
 
 .empty {
 	&.empty-device{
-		height:620px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -53px;
+		margin-top: -52px;
 	}
 
 	&.empty-user{
@@ -320,16 +324,17 @@ code,kbd,pre,samp {
 	}
 
 	&.empty-dept{
-		-height:620px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -34px;
+		margin-top: -57px;
 	}
 
 	&.empty-data{
 		height:620px;
 	}
     .empty-item{
-    	&.empty-item-dept{
-			margin-top:200px;
-    	}
     	.empty-img{
     		width:68px;
 			height:80px;
@@ -347,12 +352,12 @@ code,kbd,pre,samp {
 }
 
 @font-face {
-  font-family: 'iconfont';  /* project id 483384 */
-  src: url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.eot');
-  src: url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_483384_4ad656pwxm3g14i.svg#iconfont') format('svg');
+	font-family: 'iconfont';  /* project id 483384 */
+	src: url('//at.alicdn.com/t/font_483384_2hpx2wvnw65.eot');
+	src: url('//at.alicdn.com/t/font_483384_2hpx2wvnw65.eot?#iefix') format('embedded-opentype'),
+	url('//at.alicdn.com/t/font_483384_2hpx2wvnw65.woff') format('woff'),
+	url('//at.alicdn.com/t/font_483384_2hpx2wvnw65.ttf') format('truetype'),
+	url('//at.alicdn.com/t/font_483384_2hpx2wvnw65.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -657,13 +662,12 @@ button{
 
 	        .nav-item-team{
 				display:none;
-				-width: 92px;
 				height: 40px;
 				line-height: 40px;
 				margin-left: 25px;
 				float: left;
 				position: absolute;
-				right: 110px;
+				right: 85px;
 	        }
 
 	        .nav-item-login{
@@ -685,22 +689,24 @@ button{
 	            color: #333;
 	            text-decoration: none;
 	            position: relative;
-	            border-radius: 5px
+	            border-radius: 5px;
+	            &.centerBtn{
+					display: none;
+	            }
 	        }
 
 	        .nav-item a.navlink.nav-item-current, .nav-item-team a.navlink.nav-item-current{
 				text-align: center;
 				font-size:12px;
-				width:100px;
-				padding: 0 24px 0 6px;
+				width: 116px;
 				color: #3b63f9;
-				border: 1px solid #3b63f9;
 				-webkit-border-radius: 4px;
 				-moz-border-radius: 4px;
 				border-radius: 4px;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
+				padding-right: 15px;
     			&.larget{
 					width:140px;
 					padding: 0 20px;
@@ -709,8 +715,20 @@ button{
 					font-size:12px;
 					color: #3b63f9;
 					position:absolute;
-					right:10px;
+					right: 0;
 				}
+	        }
+
+	        .nav-item-team a.navlink.nav-item-current{
+	        	.navlink-type{
+	        		.icon-user,.icon-group{
+	        			margin-right: 5px;
+	        			font-size: 14px;
+	        		}
+	        	}
+	        	.navlink-name{
+	        		margin: 0 12px 0 6px;
+	        	}
 	        }
 
 	        .nav-item a.navlink:hover, .nav-item-team a.navlink:hover {
@@ -737,13 +755,12 @@ button{
 	        }
 
 	        .nav-item-team .son-nav-wrap{
-				width: 160px;
-				-height: 170px;
+				width: 200px;
 				position: absolute;
 				z-index: 1;
 				top: 30px;
 				min-height: 30px;
-				left: -58px;
+				left: -73px;
 				display: none;
 				-background-color: #fff;
 				border-radius: 6px;
@@ -772,10 +789,10 @@ button{
 	        }
 
 	        .nav-item .son-nav-list,.nav-item-team .son-nav-list {
-				max-height: 160px;
+				max-height: 200px;
 				overflow-y: auto;
 				overflow-x: hidden;
-				width: 158px;
+				width: 198px;
 				margin: 0 auto;
 				position: absolute;
 				-top: 5px;
@@ -786,24 +803,28 @@ button{
 				background-color: #fff;
 				border: 1px solid #eaeaea;	
 				-padding-top: 3px;
-				-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
-				border-radius: 5px;
+				-webkit-border-radius: 0;
+				-moz-border-radius: 0;
+				border-radius: 0;
 				-ms-overflow-style: auto;
 	        }
 
 	        .nav-item .son-nav-list a.sub-nav-item, .nav-item-team .son-nav-list a.sub-nav-item {
 				display: block;
-				width: 160px;
+				width: 100%;
 				height: 30px;
 				line-height: 30px;
 				font-size: 12px;
-				text-align: center;
+				text-align: left;
 				color: #333333;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				margin: 0 auto;
+				padding: 0 20px;
+				.icon-group, .icon-user{
+					margin-right: 5px;
+				}
 	        }
 
 	        .nav-item-team .son-nav-list a.sub-nav-item.current{

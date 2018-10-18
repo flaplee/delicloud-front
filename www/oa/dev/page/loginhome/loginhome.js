@@ -18,7 +18,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
         o.addClass('login-loading');
         util.ajaxSubmit({
             url: '/v1.0/barcode_login/public?v=' + (new Date().getTime()),
-            silent: false,
+            silent: true,
             type:'get',
             success: function(json) {
                 o.removeClass('login-loading');
@@ -183,59 +183,117 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     // select orgs
     function orgsCalls(o, data, ws){
         var timestamp = (new Date().valueOf()).toString();
-        util.ajaxSubmit({
-            type: 'get',
-            url: '/v1.0/admin/auth/my',
-            dauth: data.userid + ' ' + timestamp + ' ' + kernel.buildDauth(data.userid, data.token, timestamp),
-            data: {
-                type: 'group'
-            },
-            success: function(json) {
-                if (json.code == 0) {
-                    o.find('>').remove('');
-                    var orgInfo = json.data.result;
-                    if(orgInfo && orgInfo.length && orgInfo.length > 0){
-                        var targetData = [], targetLength = orgInfo.length, targetCurrent = 0;
-                        $.each(orgInfo, function(i, item) {
-                            if((item.is_admin && item.is_admin == true) || item.department_ids || item.app_ids || item.device_ids){
+        if(typeof data.userid !== 'undefined'){
+            util.ajaxSubmit({
+                type: 'get',
+                url: '/v1.0/user/me',
+                dauth: data.userid + ' ' + timestamp + ' ' + kernel.buildDauth(data.userid, data.token, timestamp),
+                data: {},
+                success: function(json) {
+                    if (json.code == 0) {
+                        o.find('>').remove('');
+                        var orgInfo = json.data.organization;
+                        if(orgInfo && orgInfo.length && orgInfo.length > 0){
+                            var targetData = [], targetLength = orgInfo.length, targetCurrent = 0;
+                            $.each(orgInfo, function(i, item) {
                                 targetCurrent = i;
-                                var $tempOrg = $('<li class="list-item"><a class="list-item-inner noline" href="javascript:;" title="' + item.org_name + '" data-oid="' + item.org_id + '" data-pid="' + item.top_department_id + '">' + item.org_name + '</a></li>');
+                                var tempIcon =  (item.type == 'group' ? '<i class="iconfont icon-group">&#xe643;</i>' : '<i class="iconfont icon-user">&#xe642;</i>');
+                                var $tempOrg = $('<li class="list-item"><a class="list-item-inner noline" href="javascript:;" title="' + item.name + '" data-oid="' + item.id + '" data-pid="' + item.top_department_id + '"><span class="list-item-text">'+ tempIcon +'' + item.name + '</span></a></li>');
                                 targetData.push(item);
                                 o.append($tempOrg);
                                 return function(){
                                     // 选择组织
-                                    var data = {
-                                        name: item.org_name,
-                                        orgid: item.org_id,
+                                    var json = {
+                                        name: item.name,
+                                        orgid: item.id,
                                         parentid: item.top_department_id,
-                                        app_ids: (item.app_ids ? item.app_ids.length : 0),
-                                        device_ids: (item.device_ids ? item.device_ids.length : 0),
-                                        employee_count: item.employee_count
+                                        //app_ids: (item.app_ids ? item.app_ids.length : 0),
+                                        //device_ids: (item.device_ids ? item.device_ids.length : 0),
+                                        employee_count: item.employee_cnt
                                     };
                                     $tempOrg.find('a.list-item-inner').on('click', function(e) {
                                         e.stopPropagation();
                                         // 全局数据
-                                        util.setCookie('orgid', data.orgid),
-                                        util.setCookie('parentid', data.parentid),
-                                        util.setCookie('orgname', data.name),
-                                        util.setCookie('device_ids', data.device_ids),
-                                        util.setCookie('app_ids', data.app_ids),
-                                        util.setCookie('employee_count', data.employee_count),
+                                        util.setCookie('orgid', json.orgid),
+                                        util.setCookie('parentid', json.parentid),
+                                        util.setCookie('orgname', json.name),
+                                        //util.setCookie('device_ids', json.device_ids),
+                                        //util.setCookie('app_ids', json.app_ids),
+                                        util.setCookie('employee_count', json.employee_count),
                                         // update 20180306
                                         tempInfo.orgindex = $(this).parent('li.list-item').index();
-                                        tempInfo.orgindexid = tempInfo.organization[tempInfo.orgindex].org_id;
+                                        tempInfo.orgindexid = tempInfo.organization[tempInfo.orgindex].id;
                                         util.setCookie('orgindex', tempInfo.orgindex);
                                         util.setCookie('orgindexid', tempInfo.orgindexid);
-                                        util.setUserData(tempInfo);
-                                        kernel.replaceLocation({'args': {},'id': 'home'});
+                                        if(tempInfo.organization[tempInfo.orgindex].admin_id && tempInfo.organization[tempInfo.orgindex].admin_id == data.userid){
+                                            util.setCookie('orgindexadmin', true);
+                                            tempInfo.orgindexadmin = true;
+                                            util.setUserData(tempInfo);
+                                        }else{
+                                            getAdminList({
+                                                userid: data.userid,
+                                                token: data.token,
+                                                orgid: json.orgid,
+                                                parentid: json.parentid
+                                            }, function(res){
+                                                console.log("orgindexadmin", res);
+                                                util.setCookie('orgindexadmin', res);
+                                                tempInfo.orgindexadmin = res;
+                                                util.setUserData(tempInfo);
+                                            });
+                                        }
+                                        //kernel.replaceLocation({'args': {},'id': 'home'});
+                                        kernel.replaceLocation({'args': {},'id': 'appentry'});
                                     });
                                 }();
+                            });
+                            tempInfo.organization = targetData;
+                            if(targetLength <= 0){
+                                $loginBox.show();
+                                $orgBox.hide();
+                                //login status
+                                $loginDoing.hide();
+                                $loginSuccess.hide();
+                                $loginSuccess.find('div.success-img >').remove();
+                                $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
+                                $loginFail.show();
                             }else{
-                                targetLength--;
+                                if(targetLength == 1){
+                                    $loginBox.show();
+                                    $orgBox.hide();
+                                    //login status
+                                    $loginDoing.show();
+                                    $loginSuccess.hide();
+                                    $loginFail.hide();
+                                    //initQrcode($loginBox.find('.loginQr'))
+                                    util.setCookie('orgid', orgInfo[targetCurrent].id),
+                                    util.setCookie('parentid', orgInfo[targetCurrent].top_department_id),
+                                    util.setCookie('orgname', orgInfo[targetCurrent].name),
+                                    //util.setCookie('device_ids', (orgInfo[targetCurrent].device_ids ? orgInfo[targetCurrent].device_ids.length : 0)),
+                                    //util.setCookie('app_ids', (orgInfo[targetCurrent].app_ids ? orgInfo[targetCurrent].app_ids.length : 0)),
+                                    util.setCookie('employee_count', orgInfo[targetCurrent].employee_cnt),
+                                    // update 20180306
+                                    tempInfo.orgindex = 0;
+                                    tempInfo.orgindexid = tempInfo.organization[0].id;
+                                    util.setUserData(tempInfo);
+                                    //kernel.replaceLocation({'args': {},'id': 'home'});
+                                    kernel.replaceLocation({'args': {},'id': 'appentry'});
+                                }else{
+                                    $loginBox.hide();
+                                    $orgBox.show();
+                                    //login status
+                                    $loginDoing.show();
+                                    $loginSuccess.hide();
+                                    $loginFail.hide();
+                                    //initQrcode($loginBox.find('.loginQr'))
+                                     if(targetLength <= 4){
+                                        o.addClass('org-list-seldom');
+                                    }else{
+                                        o.addClass('org-list-plenty');
+                                    }
+                                }
                             }
-                        });
-                        tempInfo.organization = targetData;
-                        if(targetLength <= 0){
+                        }else{
                             $loginBox.show();
                             $orgBox.hide();
                             //login status
@@ -244,58 +302,46 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             $loginSuccess.find('div.success-img >').remove();
                             $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
                             $loginFail.show();
-                        }else{
-                            if(targetLength == 1){
-                                $loginBox.show();
-                                $orgBox.hide();
-                                //login status
-                                $loginDoing.show();
-                                $loginSuccess.hide();
-                                $loginFail.hide();
-                                //initQrcode($loginBox.find('.loginQr'))
-                                util.setCookie('orgid', orgInfo[targetCurrent].org_id),
-                                util.setCookie('parentid', orgInfo[targetCurrent].top_department_id),
-                                util.setCookie('orgname', orgInfo[targetCurrent].org_name),
-                                util.setCookie('device_ids', (orgInfo[targetCurrent].device_ids ? orgInfo[targetCurrent].device_ids.length : 0)),
-                                util.setCookie('app_ids', (orgInfo[targetCurrent].app_ids ? orgInfo[targetCurrent].app_ids.length : 0)),
-                                util.setCookie('employee_count', orgInfo[targetCurrent].employee_count),
-                                // update 20180306
-                                tempInfo.orgindex = 0;
-                                tempInfo.orgindexid = tempInfo.organization[0].org_id;
-                                util.setUserData(tempInfo);
-                                kernel.replaceLocation({'args': {},'id': 'home'});
-                            }else{
-                                $loginBox.hide();
-                                $orgBox.show();
-                                //login status
-                                $loginDoing.show();
-                                $loginSuccess.hide();
-                                $loginFail.hide();
-                                //initQrcode($loginBox.find('.loginQr'))
-                                 if(targetLength <= 4){
-                                    o.addClass('org-list-seldom');
-                                }else{
-                                    o.addClass('org-list-plenty');
-                                }
+                        }
+                        if(data.type == 'websocket'){
+                            //完成关闭websocket
+                            ws.close();
+                        }else if(data.type == 'polling'){
+                            if(typeof ws === 'function'){
+                                ws();
                             }
                         }
-                    }else{
-                        $loginBox.show();
-                        $orgBox.hide();
-                        //login status
-                        $loginDoing.hide();
-                        $loginSuccess.hide();
-                        $loginSuccess.find('div.success-img >').remove();
-                        $loginSuccess.find('div.success-img').append('<img src="'+ json.avatar_url +'" title="'+ json.name +'">');
-                        $loginFail.show();
+                    } else {
+                        kernel.hint(json.msg);
                     }
-                    if(data.type == 'websocket'){
-                        //完成关闭websocket
-                        ws.close();
-                    }else if(data.type == 'polling'){
-                        if(typeof ws === 'function'){
-                            ws();
-                        }
+                },
+                error: function(res){
+                    kernel.hint(res.msg);
+                }
+            });
+        }
+    }
+
+    // 获取是否是子管理员
+    function getAdminList(data, callback){
+        var timestamp = (new Date().valueOf()).toString();
+        util.ajaxSubmit({
+            type: 'get',
+            url: '/v1.0/admin/group/'+ data.orgid +'',
+            dauth: data.userid + ' ' + timestamp + ' ' + kernel.buildDauth(data.userid, data.token, timestamp),
+            data: {},
+            success: function(json) {
+                if (json.code == 0) {
+                    var admin_ids = []
+                    if(json.data['result'].length > 0){
+                        $.each(json.data['result'], function(i, item) {
+                            $.each(item.admin_ids, function(j, inner) {
+                                admin_ids.push(inner)
+                            });
+                        });
+                    }
+                    if(typeof callback === 'function'){
+                        callback(($.inArray(data.userid, admin_ids) >= 0) ? true : false);
                     }
                 } else {
                     kernel.hint(json.msg);
@@ -306,6 +352,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             }
         });
     }
+
     return {
         onload: function(force) {
             var h_userid, h_token, h_orgid, h_orgname, h_parentid;

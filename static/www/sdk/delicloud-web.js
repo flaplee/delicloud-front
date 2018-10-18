@@ -1,31 +1,27 @@
-/**
-    create delicloud-web-sdk.js for js_sdk api
-    @author tianlun
-    @param deli is a object, deli.method to use in the page
-*/
 (function (window) {
-    'use strict';
-    //方法列表
+    //'use strict';
     var regMethods = [
-        'getLoginStatus',
-        'app.onlogout'
-    ];
-    var JSSDK_VERSION = '1.0.1';
-    var version = '1.0.1';
-    var already = false; //是否已初始化
-    var config = null; //缓存config参数
-    var errorHandle = null; //缓存error 回调
-    var readyHandle = null; //缓存ready 回调
+        'common.supbrowser',
+        'app.getLoginStatus',
+        'app.onlogout',
+        'web.getLoginStatus',
+        'web.onlogout',
+        'web.onrequest',
+        'web.getNextInfo',
+        'web.getCurrentInfo',
+        'web.getUsersFromOrg'
+    ]
+
+    var JSSDK_VERSION = '1.0.2';
+    var version = '1.0.2';
+    var already = false; 
+    var config = null; 
+    var errorHandle = null; 
+    var readyHandle = null; 
     var domReady = false;
     var environment = 'test';
     var httpApi = (environment == 'www') ? 'https://www.delicloud.com' : ((environment == 'test') ? 'http://t.delicloud.com' : ((environment == '202') ? 'http://192.168.0.202' : 'http://192.168.0.201'));
-    /**
-     *    deli.config 配置签名对象
-     *    deli.ready 初始化完成
-     *    deli.error 权限校验失败时
-     */
-
-    ;
+    var requestApi = (environment == 'www') ? 'https://www.delicloud.com/web' : ((environment == 'test') ? 'http://t.delicloud.com/web' : ((environment == '202') ? 'http://192.168.0.202:9002' : 'http://192.168.0.201:9002'));
     (function () {
         var deliApi = function (params) {
             this.config = {
@@ -111,7 +107,7 @@
                     }
                 }
 
-                if (this.config.dataType == "json" || this.config.dataType == "JSON") { //非跨域
+                if (this.config.dataType == "json" || this.config.dataType == "JSON") { 
                     if ((this.config.type == "GET") || (this.config.type == "get")) {
                         for (var item in this.config.data) {
                             this.config.url = addURLParam(this.config.url, item, this.config.data[item]);
@@ -129,28 +125,28 @@
                         xhr.setRequestHeader("Content-Type", this.config.contentType);
                         xhr.send(serialize(this.config.data));
                     }
-                } else if ((this.config.dataType == "jsonp") || (this.config.dataType == "JSONP")) { //跨域
-                    if ((this.config.type == "GET") || (this.config.type == "get")) { //jsonp只能进行get请求跨域
+                } else if ((this.config.dataType == "jsonp") || (this.config.dataType == "JSONP")) { 
+                    if ((this.config.type == "GET") || (this.config.type == "get")) { 
                         if (!params.url || !params.callback) {
                             throw new Error("params is illegal!");
                         } else {
                             this.config.callback = params.callback;
                         }
-                        //创建script标签
+                        
                         var cbName = 'callback';
                         var head = document.getElementsByTagName('head')[0];
                         this.config[this.config.callback] = cbName;
                         var scriptTag = document.createElement('script');
                         head.appendChild(scriptTag);
 
-                        //创建jsonp的回调函数
+                        
                         window[cbName] = function (json) {
                             head.removeChild(scriptTag);
                             clearTimeout(scriptTag.timer);
                             window[cbName] = null;
                             params.success && params.success(json);
                         };
-                        //超时处理
+                        
                         if (params.time) {
                             scriptTag.timer = setTimeout(function () {
                                 head.removeChild(scriptTag);
@@ -176,7 +172,7 @@
             url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
             return url;
         }
-        //序列化函数
+        
         function serialize(data) {
             var val = "";
             var str = "";
@@ -190,12 +186,12 @@
     })();
     var deli = {
         version: version,
-        init: function (obj) {
+        init: function (obj, callback) {
             var self = this;
-            //第一次初始化后要做的事情
+            
             if (already === false) {
                 already = true;
-                //to do: 判断config，处理PC端权限验证
+                
                 if (config === null || !config.sign) {
                     console.log("配置错误，请重新填写配置", config);
                 } else {
@@ -205,16 +201,15 @@
                         dataType: "jsonp",
                         data: config,
                         callback: "callback",
-                        //time:"1000",
+                        
                         success: function (res) {
                             if (res.code == 0) {
-                                if (self.util.getQuery('user_id') === undefined && self.util.getCookie('app_user_id') == 'undefined' && self.util.getQuery('org_id') === undefined && self.util.getQuery('token') === undefined && self.util.getCookie('app_token') == 'undefined') {
-                                    // 未登录
+                                if (self.util.getQuery('user_id') === undefined && self.util.getCookie('user_id') == 'undefined' && self.util.getQuery('token') === undefined && self.util.getCookie('token') == 'undefined') {
                                     alert('用户未登录或者登录信息已经过期，请重新登录');
                                     window.location.replace(httpApi + '/oa/');
                                 } else {
                                     setTimeout(function(){
-                                        self.prefixLoadTpl(self.util.getQuery('user_id') || self.util.getCookie('app_user_id'), self.util.getQuery('token') || self.util.getCookie('app_token'));
+                                        self.prefixLoadTpl(self.util.getQuery('user_id') || self.util.getCookie('user_id'), self.util.getQuery('token') || self.util.getCookie('token'));
                                         if(typeof callback === 'function'){
                                             callback();
                                         }
@@ -223,7 +218,7 @@
                             } else {
                                 var msg = (res.msg) ? res.msg : '网络或服务器错误',
                                     code = (res.msg) ? '-1' : '-3';
-                                //alert('配置错误，请重新填写配置:' + msg);
+                                
                                 setTimeout(function () {
                                     errorHandle && errorHandle({
                                         message: '权限校验失败 ' + msg,
@@ -235,7 +230,7 @@
                         fail: function (res) {
                             var msg = (res.msg) ? res.msg : '网络或服务器错误',
                                 code = (res.msg) ? '-1' : '-3';
-                            //alert('配置错误，请重新填写配置:' + msg);
+                            
                             setTimeout(function () {
                                 errorHandle && errorHandle({
                                     message: '权限校验失败 ' + msg,
@@ -248,12 +243,10 @@
             }
         },
         config: function (obj) {
-            var self = this;
-            //这里对用户传进来的参数进行过滤
             if (!obj) {
                 return;
             }
-            //to do: 参数名待统一
+            
             config = {
                 appId: obj.appId || -1,
                 timestamp: obj.timestamp,
@@ -300,7 +293,7 @@
                                     alert(s.msg);
                                 }
                                 if (s.code == 9102112) {
-                                    // 未登录
+                                    
                                     alert(s.msg);
                                     window.location.replace(httpApi + '/oa/');
                                 }
@@ -325,7 +318,7 @@
                 }
             };
             if (param.data instanceof FormData) {
-                //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+                
                 if (param.dauth) {
                     xhr.setRequestHeader('Dauth', param.dauth),
                     xhr.setRequestHeader('Duagent', '_web');
@@ -346,7 +339,7 @@
                 throw new Error("参数不合法");
             }
 
-            //创建 script 标签并加入到页面中
+            
             var callbackName = ('jsonp_' + Math.random()).replace(".", "");
             var oHead = document.getElementsByTagName('head')[0];
             options.data[options.callback] = callbackName;
@@ -354,7 +347,7 @@
             var oS = document.createElement('script');
             oHead.appendChild(oS);
 
-            //创建jsonp回调函数
+            
             window[callbackName] = function (json) {
                 oHead.removeChild(oS);
                 clearTimeout(oS.timer);
@@ -362,10 +355,10 @@
                 options.success && options.success(json);
             };
 
-            //发送请求
+            
             oS.src = options.url + '?' + params;
 
-            //超时处理
+            
             if (options.time) {
                 oS.timer = setTimeout(function () {
                     window[callbackName] = null;
@@ -375,7 +368,7 @@
                     });
                 }, time);
             }
-            //格式化参数
+            
             function formatParams(data) {
                 var arr = [];
                 for (var name in data) {
@@ -398,7 +391,6 @@
         prefixLoadTpl: function (userid, token) {
             var self = this;
             var _WrapPrivate = {
-                //初始化
                 init: function () {
                     //插入 header、footer 
                     var elementStyle = '<style>body,button,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,td,textarea,th,ul{margin:0;padding:0}\
@@ -406,19 +398,21 @@
                         ul{list-style:none}\
                         table{border-collapse:collapse;border-spacing:0}\
                         body{font-size:12px;font-family:Microsoft YaHei UI,"微软雅黑",Heiti SC,Droid Sans;color:#666;background-color:#fff}\
+                        .deli-wrap-header{position: fixed; z-index: 100; clear: both; height: 80px; background: #fff; font-size: 12px;box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5);filter: progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, Direction=125, Strength=4);-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, Direction=125, Strength=4)";}\
                         .deli-wrap-header a{color:#666;text-decoration:none;hide-focus:expression(this.hideFocus=true);outline:0}\
                         .deli-wrap-header a:hover{text-decoration:none}\
                         .deli-wrap-header a img{border:none}\
                         .deli-wrap-header .pointer{cursor:pointer}\
-                        .deli-wrap-header{width:100%;height:80px;background-color:#FDFDFD;box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);filter: progid:DXImageTransform.Microsoft.Shadow(color=#cccccc, Direction=125, Strength=4);}\
+                        .deli-wrap-header{width:100%;height:80px;background-color:#FDFDFD;box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5);filter: progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, Direction=125, Strength=4);-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, Direction=125, Strength=4)";}\
                         .deli-wrap-deli-footer{background-color:#cfd2d7;margin:0 auto}\
                         .deli-wrap-header.deli-wrap-top{background:#fff}\
-                        .deli-wrap-header.deli-wrap-top.deli-wrap-top-shadow{box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1); -o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.1);filter: progid:DXImageTransform.Microsoft.Shadow(color=#cccccc, Direction=125, Strength=4);}\
-                        .deli-wrap-header .deli-user-head{width:1200px;height:80px;margin:0 auto;background-color:#fff}\
+                        .deli-wrap-header.deli-wrap-top.deli-wrap-top-shadow{box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -moz-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -webkit-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5); -o-box-shadow: 0 1px 10px 0 rgba(3, 18, 18, 0.5);filter: progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, Direction=125, Strength=4);-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, Direction=125, Strength=4)";}\
+                        .deli-wrap-header .deli-user-head{width:100%;height:80px;margin:0 auto;background-color:#fff}\
                         .deli-clear:after{visibility:hidden;display:block;font-size:0;content:"";clear:both;height:0}\
                         .deli-clear{zoom:1}\
-                        .deli-wrap-header .user-float{background-color:#fff;position:fixed;width:100%;min-width:1200px;margin:auto;top:0;left:0;z-index:3;box-shadow:0 2px 5px rgba(0,0,0,.2);-moz-box-shadow:0 2px 5px rgba(0,0,0,.2);-webkit-box-shadow:0 2px 5px rgba(0,0,0,.2);-o-box-shadow:0 2px 5px rgba(0,0,0,.2);filter: progid:DXImageTransform.Microsoft.Shadow(color=#cccccc, Direction=125, Strength=4);}\
-                        .deli-wrap-header #deli-head{height:100%;z-index:1;position:relative;z-index:100;clear:both;height:80px;background:#fff;font-size:12px}\
+                        .deli-clearfix:after,deli-clearfix:before{content:" ";display:table}.deli-clearfix:after{clear:both}\
+                        .deli-wrap-header .user-float{background-color:#fff;position:fixed;width:100%;min-width:1200px;margin:auto;top:0;left:0;z-index:3;box-shadow:0 2px 5px rgba(0,0,0,.2);-moz-box-shadow:0 2px 5px rgba(0,0,0,.2);-webkit-box-shadow:0 2px 5px rgba(0,0,0,.2);-o-box-shadow:0 2px 5px rgba(0,0,0,.2);filter: progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, Direction=125, Strength=4);-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, Direction=125, Strength=4)";}\
+                        .deli-wrap-header #deli-head{width: 1200px;height:100%;z-index:1;position:relative;z-index:100;clear:both;height:80px;background:#fff;font-size:12px;margin: 0 auto;}\
                         .deli-wrap-header #deli-head .deli-logo-box{display: inline-block; position: absolute; bottom: 0; left: 0;}\
                         .deli-wrap-header #deli-head .deli-logo-box .deli-logo{display: inline-block; float: left; width: 178px; height: 50px; line-height: 50px; margin: 15px 0;background-image: url(https://static.delicloud.com/www/home/images/logo.png?v=20180317); background-repeat: no-repeat; background-size: cover;}\
                         .deli-wrap-header #deli-head .deli-nav-top{width: 900px; height: 40px; position: absolute; bottom: 20px; right: 20px;}\
@@ -479,17 +473,17 @@
                     var elementHeader = '<div class="deli-user-head">\
                         <div id="deli-head" class="deli-clear">\
                             <div class="deli-logo-box">\
-                                <a href="https://www.delicloud.com/" class="deli-logo" title="得力e+"></a>\
+                                <a href="http://t.delicloud.com/" class="deli-logo" title="得力e+"></a>\
                             </div>\
                             <div class="deli-nav-top">\
                                 <ul class="deli-nav-top-list deli-clear">\
-                                    <li class="deli-nav-item"><a href="https://www.delicloud.com/oa/" class="deli-navlink">首页</a>\
+                                    <li class="deli-nav-item"><a href="http://t.delicloud.com/oa/" class="deli-navlink">首页</a>\
                                     </li>\
-                                    <li class="deli-nav-item"><a href="https://www.delicloud.com/oa/#!contacts" class="deli-navlink">组织通讯录</a>\
+                                    <li class="deli-nav-item"><a href="http://t.delicloud.com/oa/#!contacts" class="deli-navlink">组织通讯录</a>\
                                     </li>\
-                                    <li class="deli-nav-item"><a href="https://www.delicloud.com/oa/#!apphome" class="deli-navlink">应用</a>\
+                                    <li class="deli-nav-item"><a href="http://t.delicloud.com/oa/#!apphome" class="deli-navlink">应用</a>\
                                     </li>\
-                                    <li class="deli-nav-item deli-nav-item-device"><a href="https://www.delicloud.com/oa/#!device" class="deli-navlink">设备</a>\
+                                    <li class="deli-nav-item deli-nav-item-device"><a href="http://t.delicloud.com/oa/#!device" class="deli-navlink">设备</a>\
                                     </li>\
                                     <li class="deli-nav-item deli-nav-item-team"><a href="javascript:;" class="deli-navlink deli-nav-item-current"><span class="deli-navlink-name"></span> <span class="deli-navlink-icon"><i class="iconfont">&#xe608;</i></span></a>\
                                         <div class="sun-nav-list sun-nav-list-team">\
@@ -538,12 +532,13 @@
                         </div>\
                         <div class="deli-footer-copyright">鄂ICP备17027057号  Copyright &copy;2018 武汉得力智能办公研究院有限公司 版权所有</div>\
                     </div>';
+
                     var wrapHeader = document.createElement('div'),
                         wrapFooter = document.createElement('div');
                     wrapHeader.className = 'deli-wrap-header', wrapFooter.className = 'deli-wrap-footer';
                     wrapHeader.innerHTML = elementHeader, wrapFooter.innerHTML = elementFooter;
                     document.querySelector("body").appendChild(wrapFooter);
-                    document.querySelector("body").insertBefore(wrapHeader, document.querySelector("body").firstElementChild);
+                    document.querySelector("body").insertBefore(wrapHeader, (document.body.firstElementChild || document.body.children[0]));
                     var wrapNologinBtn = document.querySelector('.deli-wrap-header .deli-nologin a.deli-nologin-btn');
                     if (wrapNologinBtn.addEventListener) {
                         wrapNologinBtn.addEventListener("click", function(){
@@ -573,20 +568,17 @@
                     dataType: "jsonp",
                     data: {},
                     callback: "callback",
-                    //time:"1000",
+                    
                     success: function (res) {
                         if (res.code == 0) {
                             var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
                             if (connect == 'connect') {
-                                //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
-                                self.util.setCookie('app_user_id', res.data.result.user_id);
                                 self.util.setCookie('app_org_id', self.util.getQuery('org_id'));
+                                self.util.setCookie('app_user_id', res.data.result.user_id);
                                 self.util.setCookie('app_token', res.data.result.token);
                             } else {
                                 self.logout(userid, token);
                             }
-
-                            //初始化
                             _WrapPrivate.init();
                         }
                     },
@@ -594,11 +586,9 @@
                         if (res.code == 0) {
                             var connect = (res.data.result.token && res.data.result.token.length > 0) ? 'connect' : 'noconnect';
                             if (connect == 'connect') {
-                                //self.util.buildHash({args:{user_id:"",org_id:"",token:"",uuid:""}});
                             } else {
                                 self.logout(userid, token);
                             }
-                            //初始化
                             _WrapPrivate.init();
                         } else if (res.code == 9102112) {
                             setTimeout(function () {
@@ -614,7 +604,6 @@
                     }
                 });
             } else {
-                // 未登录
                 alert('用户未登录或者登录信息已经过期，请重新登录');
                 window.location.replace(httpApi + '/oa/');
             }
@@ -655,22 +644,23 @@
         },
         logout: function (userid, token, callback){
             var self = this;
+            var timeStamp =  (new Date().valueOf());
             deliApi.init({
                 url: "" + httpApi + "/web/v1.0/cd/logout/web",
                 type: "get",
                 dataType: "jsonp",
                 data: {
-                    Dauth: userid + ' ' + (new Date().valueOf()) + ' ' + self.util.buildDauth(userid, token, (new Date().valueOf())),
+                    Dauth: userid + ' ' + timeStamp + ' ' + self.util.buildDauth(userid, token, timeStamp),
                     Duagent: '_web'
                 },
                 callback: "callback",
-                //time:"1000",
+                
                 success: function (res) {
                     if (res.code == 0) {
                         self.util.setCookie('app_user_id', undefined);
                         self.util.setCookie('app_org_id', undefined);
                         self.util.setCookie('app_token', undefined);
-                        // onlogout
+                        
                         readyHandle && readyHandle({
                             data: res.data
                         });
@@ -744,6 +734,21 @@
                 return nl;
             },
             getQuery: function (param) {
+                Function.prototype.method = function (name, func) {
+                    this.prototype[name] = func;
+                    return this;
+                };
+                if (!String.prototype.trim) {
+                    String.method('trim', function () {
+                        return this.replace(/^\s+|\s+$/g, '');
+                    });
+                    String.method('ltrim', function () {
+                        return this.replace(/^\s+/g, '');
+                    });
+                    String.method('rtrim', function () {
+                        return this.replace(/\s+$/g, '');
+                    });
+                }
                 var url = window.location.href;
                 var searchIndex = url.indexOf('?');
                 var searchParams = url.slice(searchIndex + 1).split('&');
@@ -888,7 +893,7 @@
         }
     };
 
-    //注册命名空间,"app.getLoginStatus"生成deli.app.getLoginStatus
+    
     var regNameSpace = function (method, fn) {
         var arr = method.split('.');
         var namespace = deli;
@@ -902,7 +907,7 @@
             namespace = namespace[arr[i]];
         }
     };
-    //设置默认属性
+    
     function setDefaultValue(obj, defaults, flag) {
         for (var i in defaults) {
             if (flag) {
@@ -912,10 +917,8 @@
             }
         }
     }
-    //生成器，处理传参、回调以及对特定方法特殊处理
+    
     function generator(method, param, callbackSuccess, callbackFail) {
-        //to do
-        //console.log('调用方法：', method, '传参：', param);
         var p = param || {};
         var successCallback = function (res) {
             console.log('默认成功回调', method, res);
@@ -929,42 +932,288 @@
         if (callbackFail) {
             failCallback = callbackFail;
         }
-        //统一回调处理
+        
         var callback = function (response) {
-            //console.log('统一响应：', response);
+            
             var data = response || {};
             var code = data.code;
             var result = data.result;
-            //code 0 表示成功, 其它表示失败
+            
             if (code === '0') {
-                //数据处理
                 switch (method) {
-                case 'app.onlogout':
-                    result = data.result;
-                    break;
+                    case 'common.supbrowser':
+                        result = data.result;
+                        break;
+                    case 'app.onlogout':
+                        result = data.result;
+                        break;
+                    case 'web.onlogout':
+                        result = data.result;
+                        break;
+                    case 'web.onrequest':
+                        result = data.result;
+                        break;
+                    case 'web.getNextInfo':
+                        result = data.result;
+                        break;
+                    case 'web.getCurrentInfo':
+                        result = data.result;
+                        break;
+                    case 'web.getUsersFromOrg':
+                        result = data.result;
+                        break;
                 }
                 successCallback && successCallback.call(null, result);
             } else {
                 failCallback && failCallback.call(null, result, code);
             }
         };
-        //前端内容处理, 消息接入
+        
         switch (method) {
-        case 'app.onlogout':
-            callback({
-                code: '0',
-                msg: '成功',
-                result: {
-                    'app.onlogout': 'app.onlogout'
+            case 'common.supbrowser':
+                function getElementsByClassName(node, className) {
+                    if (node.getElementsByClassName) {
+                        // 使用现有方法
+                        return node.getElementsByClassName(className);
+                    } else {
+                        // 循环遍历所有标签，返回带有相应类名的元素
+                        var results = [],
+                            elems = node.getElementsByTagName("*");
+                        for (var i = 0, len = elems.length; i < len; i++) {
+                            if (elems[i].className.indexOf(className) != -1) {
+                                results[results.length] = elems[i];
+                            }
+                        }
+                        return results;
+                    }
                 }
-            });
+                if(p && p.ie){
+                    if(p.ie <= 8 && (!("WebSocket" in window && 2 === window.WebSocket.CLOSING)) || p.ie >= 9){
+                        var f = function() {
+                            var s = getElementsByClassName(document, 'deli-wrap-header')[0];
+                            if("undefined" == typeof(s)) {
+                                setTimeout(f, 10)
+                            } else {
+                                s.insertBefore(d, s.firstChild)
+                            }
+                        };
+                        var n = getElementsByClassName(document, 'deli-wrap-supbrowser')[0];
+                        if(!(n && n != 'undefined')){
+                            var d = document.createElement("div");
+                            d.className = "deli-wrap-supbrowser";
+                            d.style.width = "100%";
+                            d.style.height = "40px";
+                            d.style.backgroundColor = "#f8f4ce";
+                            d.innerHTML = '<div style="width: 1200px;height: 40px;line-height: 40px;margin: 0 auto;background-color: #f8f4ce;text-align:center;color: #3f3f3f;font-size: 12px;"><div style="position: relative; width: 300px; margin: 0 auto;"><i class="icon-supbrowser" style="width: 14px; height: 14px; margin: 13px 0; background-image: url(http://t.static.delicloud.com/www/home/images/prompt.png?v=20180628); display: inline-block; position: absolute; left: 0; top: 0;"></i><p style="margin-left: 24px;text-align: left;">当前浏览器版本过低，推荐使用最新版<a href="https://ie.sogou.com/" target="_blank" style="color:#5d85e0;">搜狗高速浏览器</a></p></div></div>';
+                            f();
+                        }
+                    }
+                    callback({
+                        code: '0',
+                        msg: '成功',
+                        result: {
+                            code: '0',
+                            msg: '成功'
+                        }
+                    });
+                }else{
+                    setTimeout(function () {
+                        errorHandle && errorHandle({
+                            message: '参数错误',
+                            errorCode: '-1'
+                        });
+                    });
+                }
+                break;
+            case 'app.onlogout':
+                callback({
+                    code: '0',
+                    msg: '成功',
+                    result: {
+                        code: '0',
+                        msg: '成功'
+                    }
+                });
+                break;
+            case 'web.onlogout':
+                callback({
+                    code: '0',
+                    msg: '成功',
+                    result: {
+                        code: '0',
+                        msg: '成功'
+                    }
+                });
+                break;
+            case 'web.onrequest':
+                if(p && p.url && p.user_id && p.token){
+                    var timeStamp =  (new Date().valueOf());
+                    deli.api({
+                        type: p.type,
+                        url: p.url,
+                        dauth: p.user_id + ' ' + timeStamp + ' ' + deli.util.buildDauth(p.user_id, p.token, timeStamp),
+                        data: {},
+                        success: function(res) {
+                            if (res.code == 0) {
+                                callback({
+                                    code: '0',
+                                    msg: '成功',
+                                    result: {
+                                        code: '0',
+                                        data: res.data
+                                    }
+                                });
+                            }
+                        }
+                    })
+                }else{
+                    setTimeout(function () {
+                        errorHandle && errorHandle({
+                            message: '参数错误',
+                            errorCode: '-1'
+                        });
+                    });
+                }
+                break;
+            case 'web.getNextInfo':
+                if(p && p.user_id && p.dept_id && p.token){
+                    var timeStamp =  (new Date().valueOf());
+                    var force = 0;
+                    var dataInfo = {
+                        "user":[],
+                        "organization":[]
+                    };
+                    //获取部门下级部门信息
+                    deli.api({
+                        type: 'get',
+                        url: '' + requestApi + '/v1.0/org/department/'+ p.dept_id +'/departments',
+                        dauth: p.user_id + ' ' + timeStamp + ' ' + deli.util.buildDauth(p.user_id, p.token, timeStamp),
+                        data: {},
+                        success: function(res) {
+                            if (res.code == 0) {
+                                force++;
+                                dataInfo.organization = res.data.result;
+                                if(force == 2){
+                                    callback({
+                                        code: '0',
+                                        msg: '成功',
+                                        result: {
+                                            code: '0',
+                                            data: dataInfo
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    })
+                    //获取部门下级所有成员信息
+                    deli.api({
+                        type: 'get',
+                        url: '' + requestApi + '/v1.0/org/department/'+ p.dept_id +'/users',
+                        dauth: p.user_id + ' ' + timeStamp + ' ' + deli.util.buildDauth(p.user_id, p.token, timeStamp),
+                        data: {},
+                        success: function(res) {
+                            if (res.code == 0) {
+                                force++;
+                                dataInfo.user = res.data.result;
+                                if(force == 2){
+                                    callback({
+                                        code: '0',
+                                        msg: '成功',
+                                        result: {
+                                            code: '0',
+                                            data: dataInfo
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    })
+                }else{
+                    setTimeout(function () {
+                        errorHandle && errorHandle({
+                            message: '参数错误',
+                            errorCode: '-1'
+                        });
+                    });
+                }
+                break;
+            case 'web.getCurrentInfo':
+                //获取一级部门信息
+                if(p && p.user_id && p.org_id && p.token){
+                    var timeStamp =  (new Date().valueOf());
+                    var dataInfo = {
+                        "user":[],
+                        "organization":[]
+                    };
+                    deli.api({
+                        type: 'get',
+                        url: '' + requestApi + '/v1.0/org/'+ p.org_id +'/departments',
+                        dauth: p.user_id + ' ' + timeStamp + ' ' + deli.util.buildDauth(p.user_id, p.token, timeStamp),
+                        data: {},
+                        success: function(res) {
+                            if (res.code == 0) {
+                                dataInfo.organization = res.data.result;
+                                callback({
+                                    code: '0',
+                                    msg: '成功',
+                                    result: {
+                                        code: '0',
+                                        data: dataInfo
+                                    }
+                                });
+                            }
+                        }
+                    })
+                    //获取一级部门信息的成员信息
+                }else{
+                    setTimeout(function () {
+                        errorHandle && errorHandle({
+                            message: '参数错误',
+                            errorCode: '-1'
+                        });
+                    });
+                }
+                break;
+            case 'web.getUsersFromOrg':
+                // 获取部门下级所有成员信息
+                if(p && p.user_id && p.dept_id && p.token){
+                    var timeStamp =  (new Date().valueOf());
+                    deli.api({
+                        type: 'get',
+                        url: '' + requestApi + '/v1.0/org/'+ p.dept_id +'/users',
+                        dauth: p.user_id + ' ' + timeStamp + ' ' + deli.util.buildDauth(p.user_id, p.token, timeStamp),
+                        data: {
+                            query: p.text
+                        },
+                        success: function(res) {
+                            if (res.code == 0) {
+                                console.log("res", res)
+                                callback({
+                                    code: '0',
+                                    msg: '成功',
+                                    result: {
+                                        code: '0',
+                                        data: res.data
+                                    }
+                                });
+                            }
+                        }
+                    })
+                }else{
+                    setTimeout(function () {
+                        errorHandle && errorHandle({
+                            message: '参数错误',
+                            errorCode: '-1'
+                        });
+                    });
+                }
             break;
         }
     }
-    //forEach兼容ie8
+
     Array.prototype.forEach||(Array.prototype.forEach=function(c,e){var d,a;if(null==this)throw new TypeError("this is null or not defined");var b=Object(this),f=b.length>>>0;if("function"!==typeof c)throw new TypeError(c+" is not a function");1<arguments.length&&(d=e);for(a=0;a<f;){if(a in b){var g=b[a];c.call(d,g,a,b)}a++}});
 
-    //注册方法生成api
     regMethods.forEach(function (method) {
         regNameSpace(method, function (param, callbackSuccess, callbackFail) {
             generator(method, param, callbackSuccess, callbackFail);
@@ -989,8 +1238,7 @@
             return o.__wrapper
         }
     }
-
-    //支持amd && cmd
+    
     if (typeof module === 'object' && module && typeof module.exports === 'object') {
         module.exports = deli;
     } else if (typeof define === 'function' && (define.amd || define.cmd)) {

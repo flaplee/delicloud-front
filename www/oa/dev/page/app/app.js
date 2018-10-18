@@ -20,11 +20,14 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 kernel.replaceLocation({'args': {},'id': 'loginhome'});
             }else{
             	if(locid == 'app'){
-            		var $usermenu = $('#header .user-head .nav-top .nav-item');
-				    $usermenu.find('a.navlink').removeClass('navlink-current');
-				    $usermenu.find('a.navlink.appBtn').addClass('navlink-current');
+                    var $usermenu = $('#header .user-head .nav-top .nav-item');
+                    $usermenu.find('a.navlink').removeClass('navlink-current');
+                    $usermenu.find('a.navlink-group').show();
+                    $usermenu.find('a.navlink-user').hide();
+                    $usermenu.find('a.navlink-admin').hide();
+                    $usermenu.find('a.navlink.appBtn').addClass('navlink-current');
             	};
-            	getAppList($tmpApp);
+                getAppList($tmpApp);
             }
 
             function getAppList(o){

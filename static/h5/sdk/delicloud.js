@@ -19,6 +19,7 @@ create delicloud.js for js_sdk api
         "common.image.choose",
         "common.image.upload",
         "common.image.preview",
+        "common.image.save",
         "common.file.choose",
         "app.disk.choose",
         "common.file.upload",
@@ -327,7 +328,7 @@ create delicloud.js for js_sdk api
                 var data = response || {};
                 var code = data.code;
                 var result = JSON.parse(data.result).data;
-                if (code === '0') {
+                if (result.code === '0') {
                     successCallback && successCallback.call(null, result);
                 } else {
                     failCallback && failCallback.call(null, result, code);
@@ -344,7 +345,7 @@ create delicloud.js for js_sdk api
                     result = (data.type && data.type == 'callback') ? JSON.parse(data.result).data : data.data;
                 }
                 //code 0 表示成功, 其它表示失败
-                if (code === '0') {
+                if (result.code === '0') {
                     successCallback && successCallback.call(null, result);
                 } else {
                     failCallback && failCallback.call(null, result, code);

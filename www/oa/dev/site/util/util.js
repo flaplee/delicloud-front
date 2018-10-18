@@ -469,6 +469,15 @@ define(['common/kernel/kernel'], function(kernel) {
                         });
                     }
                 }
+            }else{
+                userData = data;
+                if (util.userEvents.onpagechange instanceof Function) {
+                    util.userEvents.onpagechange({
+                        type: 'pagechange',
+                        initiative: initiative,
+                        data: util.clone(data)
+                    });
+                }
             }
         };
         util.getUserData = function() {
@@ -488,7 +497,7 @@ define(['common/kernel/kernel'], function(kernel) {
         };
         //从服务器获取最新的账号数据 api 需要跟setToken 保持同步
         util.updateUserData = function(uid, token, callback) {
-            if(uid != 'undefined'){
+            if(typeof uid !== 'undefined'){
                 var userTimestamp = (new Date().valueOf()).toString();
                 util.ajaxSubmit({
                     type: 'get',
@@ -500,40 +509,15 @@ define(['common/kernel/kernel'], function(kernel) {
                         try {
                             json = $.parseJSON(xhr.responseText);
                             if (json.data) {
-                                //util.setUserData(json.data); 由于接口 /v1.0/user/me 返回组织数据格式与接口 /v1.0/admin/auth/my 返回数据格式不一致，因此组装此2个接口
-                                //屏蔽掉个人组织 
-                                var targetData = [], dataInfo = {
+                                //更新组织信息
+                                var targetData = json.data.organization, dataInfo = {
                                     'data': json.data.result,
                                     'organization': targetData
                                 };
-                                var adminTimestamp = (new Date().valueOf()).toString();
-                                util.ajaxSubmit({
-                                    type: 'get',
-                                    url: '/v1.0/admin/auth/my',
-                                    dauth: uid + ' ' + adminTimestamp + ' ' + kernel.buildDauth(uid, token, adminTimestamp),
-                                    data: {
-                                        type: 'group'
-                                    },
-                                    silent: true,
-                                    success: function(json) {
-                                        if (json.code == 0) {
-                                            $.each(json.data.result,function(i, item){
-                                                if((item.is_admin && item.is_admin == true) || item.department_ids || item.app_ids || item.device_ids){
-                                                    targetData.push(item);
-                                                }
-                                            });
-                                            dataInfo.organization = targetData;
-                                            dataInfo.orgindex = 0;
-                                            dataInfo.orgindexid = targetData[dataInfo.orgindex].org_id;
-                                            // change 2017-12-01
-                                            util.setUserData(dataInfo);
-                                        }
-                                    },
-                                    error: function(){
-                                        //util.setUserData(undefined);
-                                        //kernel.replaceLocation({'args': {},'id': 'loginhome'});
-                                    }
-                                });
+                                dataInfo.orgindex = util.getCookie('orgindex') || 0;
+                                dataInfo.orgindexid = util.getCookie('orgindexid') || '';
+                                dataInfo.orgindexadmin = util.getCookie('orgindexadmin') || false;
+                                util.setUserData(dataInfo);
                             }
                         } catch (e) {
                             //kernel.hint('网络错误，请稍后重试~');
@@ -543,6 +527,10 @@ define(['common/kernel/kernel'], function(kernel) {
                         }
                     }
                 });
+            }else{
+                if (typeof callback === 'function') {
+                    callback(util.clone(userData));
+                }
             }
         };
         util.token = util.getCookie('token');
