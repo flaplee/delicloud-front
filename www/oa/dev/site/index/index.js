@@ -268,17 +268,22 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
     //页面数据变更
     function pagechange(evt, type){
         var evtdata = (type && type == 'choose') ? evt : evt.data;
-        util.setCookie('userid', evtdata.data.id),
-        util.setCookie('orgid', evtdata.organization[evtdata.orgindex].id),
-        util.setCookie('parentid', evtdata.organization[evtdata.orgindex].top_department_id),
-        util.setCookie('orgname', evtdata.organization[evtdata.orgindex].name),
-        //util.setCookie('device_ids', (evt.data.organization[evt.data.orgindex].device_ids ? evt.data.organization[evt.data.orgindex].device_ids.length : 0)),
-        //util.setCookie('app_ids', (evt.data.organization[evt.data.orgindex].app_ids ? evt.data.organization[evt.data.orgindex].app_ids.length : 0)),
-        util.setCookie('employee_count', evtdata.organization[evtdata.orgindex].employee_cnt);
-        if(evtdata.orgindexadmin && evtdata.orgindexadmin == true){
-            kernel.reloadPage(kernel.parseHash(location.hash).id);
-        }else{
-            kernel.replaceLocation({'args': {},'id': 'appentry'});
+        if(evtdata && evtdata.data && evtdata.data.id){
+            util.setCookie('userid', evtdata.data.id),
+            util.setCookie('orgid', evtdata.organization[evtdata.orgindex].id),
+            util.setCookie('parentid', evtdata.organization[evtdata.orgindex].top_department_id),
+            util.setCookie('orgname', evtdata.organization[evtdata.orgindex].name),
+            //util.setCookie('device_ids', (evt.data.organization[evt.data.orgindex].device_ids ? evt.data.organization[evt.data.orgindex].device_ids.length : 0)),
+            //util.setCookie('app_ids', (evt.data.organization[evt.data.orgindex].app_ids ? evt.data.organization[evt.data.orgindex].app_ids.length : 0)),
+            util.setCookie('employee_count', evtdata.organization[evtdata.orgindex].employee_cnt);
+        }
+
+        if(evtdata){
+            if(evtdata.orgindexadmin && evtdata.orgindexadmin == true){
+                kernel.reloadPage(kernel.parseHash(location.hash).id);
+            }else{
+                kernel.replaceLocation({'args': {},'id': 'appentry'});
+            }
         }
     }
 

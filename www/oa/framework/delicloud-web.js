@@ -14,12 +14,12 @@
 
     var JSSDK_VERSION = '1.0.3';
     var version = '1.0.3';
-    var already = false; 
-    var config = null; 
-    var errorHandle = null; 
-    var readyHandle = null; 
+    var already = false;
+    var config = null;
+    var errorHandle = null;
+    var readyHandle = null;
     var domReady = false;
-    var environment = '202';
+    var environment = 'www';
     var httpApi = (environment == 'www') ? 'https://www.delicloud.com' : ((environment == 'test') ? 'http://t.delicloud.com' : ((environment == '202') ? 'http://192.168.0.202' : 'http://192.168.0.201'));
     var requestApi = (environment == 'www') ? 'https://www.delicloud.com/web' : ((environment == 'test') ? 'http://t.delicloud.com/web' : ((environment == '202') ? 'http://192.168.0.202:9002' : 'http://192.168.0.201:9002'));
     (function () {
@@ -893,7 +893,6 @@
         }
     };
 
-    
     var regNameSpace = function (method, fn) {
         var arr = method.split('.');
         var namespace = deli;
