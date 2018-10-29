@@ -70,7 +70,7 @@ create delicloud.js for js_sdk api
         "device.sdk.api",
         "device.sdk.destory"
     ];
-    var JSSDK_VERSION = '1.0.6';
+    var JSSDK_VERSION = '1.0.7';
     var ua = win.navigator.userAgent;
     var matches = ua.match(/DeliAppv+[a-zA-Z0-9.-]+/);
     //android兼容处理

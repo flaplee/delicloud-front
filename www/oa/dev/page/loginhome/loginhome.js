@@ -229,6 +229,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                             util.setCookie('orgindexadmin', true);
                                             tempInfo.orgindexadmin = true;
                                             util.setUserData(tempInfo);
+                                            kernel.replaceLocation({'args': {},'id': 'appentry'});
                                         }else{
                                             getAdminList({
                                                 userid: data.userid,
@@ -240,10 +241,9 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                                 util.setCookie('orgindexadmin', res);
                                                 tempInfo.orgindexadmin = res;
                                                 util.setUserData(tempInfo);
+                                                kernel.replaceLocation({'args': {},'id': 'appentry'});
                                             });
                                         }
-                                        //kernel.replaceLocation({'args': {},'id': 'home'});
-                                        kernel.replaceLocation({'args': {},'id': 'appentry'});
                                     });
                                 }();
                             });

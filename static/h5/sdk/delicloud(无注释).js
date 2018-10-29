@@ -2,7 +2,7 @@
     "use strict";
     var clientEvents = [ "backbutton" ];
     var regMethods = [ "common.navigation.setTitle", "common.navigation.setRight", "common.navigation.close", "common.navigation.setColors","common.image.choose", "common.image.upload", "common.image.preview", "common.image.save", "common.file.choose","app.disk.choose", "common.file.upload", "common.location.open", "common.location.get", "common.message.share", "common.phone.vibrate", "common.connection.getNetworkType", "common.phone.getUUID", "common.phone.getInterface", "common.screen.keepAwake", "common.screen.breakAwake", "app.device.bind", "app.user.telephoneCall", "app.user.chatOpen", "app.user.select", "app.department.select", "common.notification.showPreloader", "common.notification.hidePreloader", "common.notification.toast", "common.notification.prompt", "app.organization.create", "app.organization.select", "app.config.init", "app.method.transit", "app.method.orgCreate", "app.method.checkJsApis", "app.session.get", "app.user.get", "app.organization.get", "app.code.scan", "common.navigation.hide", "common.navigation.show", "common.navigation.goBack", "common.webview.close", "common.modal.show", "app.storage.get", "app.storage.getInfo", "app.storage.set", "app.storage.remove", "app.storage.clear", "device.sdk.init", "device.sdk.api", "device.sdk.destory" ];
-    var JSSDK_VERSION = "1.0.6";
+    var JSSDK_VERSION = "1.0.7";
     var ua = win.navigator.userAgent;
     var matches = ua.match(/DeliAppv+[a-zA-Z0-9.-]+/);
     if (matches === null) {
