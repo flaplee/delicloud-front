@@ -14,27 +14,31 @@ define(['module', 'common/kernel/kernel', 'site/util/util','page/device/device']
             var data = params.data;
             $editInfo.val(data.name);
             $btnSave.off('click').on('click',function(){
-                util.ajaxSubmit({
-                    type: 'post',
-                    url: '/v1.0/device/'+ data.devid +'/name',
-                    dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
-                    data: {
-                        name: $editInfo.val()
-                    },
-                    success: function(res) {
-                        kernel.closePopup('editdevice');
-                        if(res.code == 0){
-                            kernel.hint('保存成功~', 'success');
-                            device.getDeviceSub(userid, token, orgid, $('#device .dev-box').find('.dev-main .dev-installed .dev-wrap table.table tbody.tbody'));
-                        }else{
+                if(/^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/.test($editInfo.val())){
+                    util.ajaxSubmit({
+                        type: 'post',
+                        url: '/v1.0/device/'+ data.devid +'/name',
+                        dauth: userid + ' ' + (new Date().valueOf()) + ' ' + kernel.buildDauth(userid, token, (new Date().valueOf())),
+                        data: {
+                            name: $editInfo.val()
+                        },
+                        success: function(res) {
+                            kernel.closePopup('editdevice');
+                            if(res.code == 0){
+                                kernel.hint('保存成功', 'success');
+                                device.getDeviceSub(userid, token, orgid, $('#device .dev-box').find('.dev-main .dev-installed .dev-wrap table.table tbody.tbody'));
+                            }else{
+                                kernel.hint(res.msg, 'error');
+                            }
+                        },
+                        error: function(res){
+                            kernel.closePopup('editdevice');
                             kernel.hint(res.msg, 'error');
                         }
-                    },
-                    error: function(res){
-                        kernel.closePopup('editdevice');
-                        kernel.hint(res.msg, 'error');
-                    }
-                });
+                    });
+                }else{
+                    kernel.hint('设备名称只可使用字母、数字', 'error');
+                }
             });
             $btnClose.off('click').on('click',function(){
                 kernel.closePopup('editdevice');

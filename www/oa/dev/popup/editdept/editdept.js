@@ -22,7 +22,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 
             $btnConfirm.off('click').on('click',function(){
                 if(type == 'rename' || type == 'edit'){
-                    var msg = '部门重命名成功~';
+                    var msg = '部门重命名成功';
                     //部门重命名
                     util.ajaxSubmit({
                         type:'post',
@@ -47,7 +47,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
                         }
                     });
                 }else if(type == 'add'){
-                    var msg = '添加部门成功~';
+                    var msg = '添加部门成功';
                     // 添加部门
                     //update 20180304 pid、oid置换
                     util.ajaxSubmit({

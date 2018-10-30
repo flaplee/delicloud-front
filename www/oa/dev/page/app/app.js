@@ -1,6 +1,6 @@
 'use strict';
 define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
-	var userid, token, orgid, orgname, parentid, loc, locid;
+	var userid, token, orgid, orgname, orgtype, parentid, loc, locid;
 	var $appBox = $('#app .app-box'),
     	$tmpApp = $appBox.find('.app-main .app-inner .app-main-list'),
     	$tmpBack = $appBox.find('.btn-app-back');
@@ -13,6 +13,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             token = util.getCookie('token'),
             orgid = util.getCookie('orgid'),
             orgname = util.getCookie('orgname'),
+            orgtype = util.getCookie('orgtype'),
             parentid = util.getCookie('parentid');
         	loc = util.clone(kernel.location), locid = loc.id;
         	if(userid === undefined || token === undefined || orgid === undefined){
@@ -27,10 +28,10 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                     $usermenu.find('a.navlink-admin').hide();
                     $usermenu.find('a.navlink.appBtn').addClass('navlink-current');
             	};
-                getAppList($tmpApp);
+                getAppList($tmpApp, orgtype);
             }
 
-            function getAppList(o){
+            function getAppList(o, type){
                 o.find('>').remove();
                 var timestamp = (new Date().valueOf()).toString();
                 util.ajaxSubmit({
@@ -76,7 +77,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             o.append($itemHtml);
                             setInstall($itemHtml.find('.btn-install'), o, {
                                 appid: data[i].id,
-                                type: data[i].belong_type
+                                type: data[i].belong_type,
+                                orgtype: type
                             });
                         }
                     }
@@ -86,7 +88,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             function setInstall(o, os, data){
                 o.on('click',function(){
                     var timestamp = (new Date().valueOf()).toString();
-                    if(data.type == 'group' || data.type == 'both'){
+                    if((data.orgtype == 'group' && data.type == 'group') || (data.orgtype == 'user' && data.type == 'user') || data.type == 'both'){
                         // 安装应用
                         util.ajaxSubmit({
                             type: 'post',
@@ -105,7 +107,12 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             }
                         });
                     }else{
-                        kernel.hint('企业组织无法添加个人应用', 'info');
+                        if(data.orgtype == 'group'){
+                            kernel.hint('企业组织无法添加个人应用', 'info');
+                        }
+                        if(data.orgtype == 'user'){
+                            kernel.hint('个人组织无法添加企业应用', 'info');
+                        }
                     }
                 });
             }

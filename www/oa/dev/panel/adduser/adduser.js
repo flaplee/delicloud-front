@@ -219,7 +219,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 			                success: function(res) {
 								if(res && res.code == 0){
 									$addUserCancel.trigger('click');
-									kernel.hint(res.msg || ((type && type == 'edit') ? '编辑成员信息成功~' : '添加成员成功~'), 3000);
+									kernel.hint(res.msg || ((type && type == 'edit') ? '编辑成员信息成功' : '添加成员成功'), 3000);
 									contacts.initContacts($('#contacts .contacts-box .contacts-inner tbody.tbody'), {
 										orgid: data.orgid, //data.id
 										type: data.type,
@@ -229,10 +229,10 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 			                }
 			            });
 					}else{
-						kernel.hint('请输入正确的手机号码~', 'error');
+						kernel.hint('请输入正确的手机号码', 'error');
 					}
 				}else{
-					kernel.hint('请输入成员姓名~', 'error');
+					kernel.hint('请输入成员姓名', 'error');
 				}
 			});
 
@@ -261,7 +261,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 			                success: function(res) {
 			                    if(res && res.code == 0){
 			                    	$addUserCancel.trigger('click');
-			                    	kernel.hint(res.msg || ((type && type == 'edit') ? '编辑成员信息成功~' : '添加成员成功~'), 3000);
+			                    	kernel.hint(res.msg || ((type && type == 'edit') ? '编辑成员信息成功' : '添加成员成功'), 3000);
 			                    	contacts.initContacts($('#contacts .contacts-box .contacts-inner tbody.tbody'), {
 				                        orgid: data.orgid, //data.id
 				                        type: data.type,
@@ -271,10 +271,10 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
 			                }
 			            });
 			        }else{
-						kernel.hint('请输入正确的手机号码~', 'error');
+						kernel.hint('请输入正确的手机号码', 'error');
 					}
 				}else{
-					kernel.hint('请输入成员姓名~', 'error');
+					kernel.hint('请输入成员姓名', 'error');
 				}
 			});
 

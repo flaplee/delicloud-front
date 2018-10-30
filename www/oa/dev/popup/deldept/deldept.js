@@ -27,7 +27,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/contacts/conta
                     success: function(resp) {
                         console.log("resp",resp);
                         if(resp.code == 0){
-                            kernel.hint('部门删除成功~', 3000);
+                            kernel.hint('部门删除成功', 3000);
                             kernel.closePopup('deldept');
                             if(func && typeof func === 'function'){
                                 func();

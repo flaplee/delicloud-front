@@ -33,7 +33,6 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 
             $btnUserEnd.off('click').on('click',function(e){
                 e.stopPropagation();
-                console.log("~~~~~~~添加成员");
                 var jsonData = [];
                 $tmp.find('a.item.selected').each(function(i, o) {
                     jsonData.push(dataCache[$(o).parents('tr').index()]);

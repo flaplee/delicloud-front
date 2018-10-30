@@ -273,6 +273,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             util.setCookie('orgid', evtdata.organization[evtdata.orgindex].id),
             util.setCookie('parentid', evtdata.organization[evtdata.orgindex].top_department_id),
             util.setCookie('orgname', evtdata.organization[evtdata.orgindex].name),
+            util.setCookie('orgtype', evtdata.organization[evtdata.orgindex].type)
             //util.setCookie('device_ids', (evt.data.organization[evt.data.orgindex].device_ids ? evt.data.organization[evt.data.orgindex].device_ids.length : 0)),
             //util.setCookie('app_ids', (evt.data.organization[evt.data.orgindex].app_ids ? evt.data.organization[evt.data.orgindex].app_ids.length : 0)),
             util.setCookie('employee_count', evtdata.organization[evtdata.orgindex].employee_cnt);
@@ -353,6 +354,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             }
                         }
                         util.setCookie('orgname', json[index].name),
+                        util.setCookie('orgtype', json[index].type),
                         util.setCookie('employee_count', json[index].employee_cnt);
                     }
                 }

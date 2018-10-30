@@ -40,6 +40,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             }
                         }
                         util.setCookie('orgname', json[getOrgIndex].name),
+                        util.setCookie('orgtype', json[getOrgIndex].type),
                         util.setCookie('employee_count', json[getOrgIndex].employee_cnt);
                     }
                 }

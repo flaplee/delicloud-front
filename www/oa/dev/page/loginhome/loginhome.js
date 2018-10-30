@@ -209,7 +209,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                         parentid: item.top_department_id,
                                         //app_ids: (item.app_ids ? item.app_ids.length : 0),
                                         //device_ids: (item.device_ids ? item.device_ids.length : 0),
-                                        employee_count: item.employee_cnt
+                                        employee_count: item.employee_cnt,
+                                        type: item.type
                                     };
                                     $tempOrg.find('a.list-item-inner').on('click', function(e) {
                                         e.stopPropagation();
@@ -217,6 +218,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                         util.setCookie('orgid', json.orgid),
                                         util.setCookie('parentid', json.parentid),
                                         util.setCookie('orgname', json.name),
+                                        util.setCookie('orgtype', json.type),
                                         //util.setCookie('device_ids', json.device_ids),
                                         //util.setCookie('app_ids', json.app_ids),
                                         util.setCookie('employee_count', json.employee_count),
@@ -269,6 +271,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                     util.setCookie('orgid', orgInfo[targetCurrent].id),
                                     util.setCookie('parentid', orgInfo[targetCurrent].top_department_id),
                                     util.setCookie('orgname', orgInfo[targetCurrent].name),
+                                    util.setCookie('orgtype', orgInfo[targetCurrent].type),
                                     //util.setCookie('device_ids', (orgInfo[targetCurrent].device_ids ? orgInfo[targetCurrent].device_ids.length : 0)),
                                     //util.setCookie('app_ids', (orgInfo[targetCurrent].app_ids ? orgInfo[targetCurrent].app_ids.length : 0)),
                                     util.setCookie('employee_count', orgInfo[targetCurrent].employee_cnt),
@@ -374,13 +377,14 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 
     return {
         onload: function(force) {
-            var h_userid, h_token, h_orgid, h_orgname, h_parentid;
+            var h_userid, h_token, h_orgid, h_orgname, h_orgtype, h_parentid;
             h_userid = util.getCookie('userid'),
             h_token = util.getCookie('token'),
             h_orgid = util.getCookie('orgid'),
             h_orgname = util.getCookie('orgname'),
+            h_orgtype = util.getCookie('orgtype'),
             h_parentid = util.getCookie('parentid');
-            if(h_userid != 'undefined' && h_token != 'undefined' && h_orgid != 'undefined' && h_orgname != 'undefined' && h_parentid != 'undefined'){
+            if(h_userid != 'undefined' && h_token != 'undefined' && h_orgid != 'undefined' && h_orgname != 'undefined' && h_orgtype != 'undefined' && h_parentid != 'undefined'){
                 $loginBox.show();
                 $orgBox.hide();
             }

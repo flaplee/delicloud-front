@@ -52,7 +52,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
                     },
                     success: function(res) {
                         if(res.code == 0){
-                            kernel.hint('设置部门主管成功~', 3000);
+                            kernel.hint('设置部门主管成功', 3000);
                             kernel.closePopup('seluser');
                             //initDept();
                             var adminName = '';

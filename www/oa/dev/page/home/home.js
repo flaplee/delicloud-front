@@ -29,6 +29,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             util.setUserData(getUserData);
                         };
                         util.setCookie('orgname', json[getOrgIndex].name),
+                        util.setCookie('orgtype', json[getOrgIndex].type),
                         //util.setCookie('device_ids', (json[getOrgIndex].device_ids ? json[getOrgIndex].device_ids.length : 0)),
                         //util.setCookie('app_ids', (json[getOrgIndex].app_ids ? json[getOrgIndex].app_ids.length : 0)),
                         util.setCookie('employee_count', json[getOrgIndex].employee_cnt);

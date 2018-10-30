@@ -34,7 +34,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util'], function(module, ke
 		                }
 		            });
 				}else{
-					kernel.hint('请选择要设为主管的员工~','error');
+					kernel.hint('请选择要设为主管的员工','error');
 				}
 			});
 			$editDeptBtns.find('.btn-edit-dept-cancel').off('click').on('click', function() {

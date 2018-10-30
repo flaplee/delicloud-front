@@ -23,9 +23,9 @@ define(['module', 'common/kernel/kernel', 'site/util/util', 'page/device/device'
                     success: function(res) {
                         console.log("res", res);
                         if(res.code == 0){
-                            kernel.hint('删除设备成功~', 'success');
+                            kernel.hint('删除设备成功', 'success');
                         }else{
-                            kernel.hint('删除设备失败~', 'error');
+                            kernel.hint('删除设备失败', 'error');
                         }
                         kernel.closePopup('deldevice');
                         device.getDeviceSub(userid, token, orgid, $('#device .dev-box .dev-main .dev-installed .dev-wrap table.table tbody.tbody'));
