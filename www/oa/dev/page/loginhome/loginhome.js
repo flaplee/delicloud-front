@@ -272,11 +272,30 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                     //util.setCookie('device_ids', (orgInfo[targetCurrent].device_ids ? orgInfo[targetCurrent].device_ids.length : 0)),
                                     //util.setCookie('app_ids', (orgInfo[targetCurrent].app_ids ? orgInfo[targetCurrent].app_ids.length : 0)),
                                     util.setCookie('employee_count', orgInfo[targetCurrent].employee_cnt),
-                                    // update 20180306
+                                    // update 20181030
                                     tempInfo.orgindex = 0;
                                     tempInfo.orgindexid = tempInfo.organization[0].id;
-                                    util.setUserData(tempInfo);
-                                    //kernel.replaceLocation({'args': {},'id': 'home'});
+                                    util.setCookie('orgindex', tempInfo.orgindex);
+                                    util.setCookie('orgindexid', tempInfo.orgindexid);
+                                    if(tempInfo.organization[tempInfo.orgindex].admin_id && tempInfo.organization[tempInfo.orgindex].admin_id == data.userid){
+                                        util.setCookie('orgindexadmin', true);
+                                        tempInfo.orgindexadmin = true;
+                                        util.setUserData(tempInfo);
+                                        kernel.replaceLocation({'args': {},'id': 'appentry'});
+                                    }else{
+                                        getAdminList({
+                                            userid: data.userid,
+                                            token: data.token,
+                                            orgid: json.orgid,
+                                            parentid: json.parentid
+                                        }, function(res){
+                                            console.log("orgindexadmin", res);
+                                            util.setCookie('orgindexadmin', res);
+                                            tempInfo.orgindexadmin = res;
+                                            util.setUserData(tempInfo);
+                                            kernel.replaceLocation({'args': {},'id': 'appentry'});
+                                        });
+                                    }
                                     kernel.replaceLocation({'args': {},'id': 'appentry'});
                                 }else{
                                     $loginBox.hide();

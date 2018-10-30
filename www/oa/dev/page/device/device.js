@@ -61,7 +61,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
 										</div>\
 									</td>\
 									<td class="item-title">'+ device.name +'</td>\
-									<td class="item-status"><span class="'+ ((device.online == true) ? 'status-online' : 'status-offline')  +'">'+ ((device.online == true) ? '在线' : '离线')  +'</span></td>\
+									<td class="item-status">'+ (device.product && device.product.conn_type == 'none' ? '' : '<span class="'+ ((device.online == true) ? 'status-online' : 'status-offline')  +'">'+ ((device.online == true) ? '在线' : '离线')  +'</span>')+ '</td>\
 									<td class="item-app">\
 									'+ appTpl +'\
 									</td>\

@@ -92,22 +92,47 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                 //console.log("res",res);
                 console.log("res.data.result.length", res.data.result.length);
                 var data = res.data.result;
-                var dataInner = [];
+                var dataInner = [], dataUsers = [], dataDepts = [];
                 if(data.length > 0){
                     o.find('>').remove();
                     for (var i = 0;i < data.length; i++) {
-                        if(data[i].visibility && data[i].visibility == 1){
+                        var dataVisible = data[i].visibility;
+                        if(dataVisible){
                             dataInner = data[i].app;
-                            var $itemTpl = $('<div class="app-item" data-app_id="' + dataInner.id + '" title="' + dataInner.name + '">\
-                                <div class="item-icon-wrap">\
-                                    <img class="item-icon" src="' + (dataInner.icon ? dataInner.icon : '') + '">\
-                                </div>\
-                                <div class="item-title">' + dataInner.name + '</div>\
-                                <div class="item-info"></div>\
-                            </div>');
-                            o.append($itemTpl);
-                            setTargetApp($itemTpl, dataInner.web_url);
-                        }
+                            if(dataInner.status == 'y'){
+                                var $itemTpl = $('<div class="app-item" data-app_id="' + dataInner.id + '" title="' + dataInner.name + '">\
+                                    <div class="item-icon-wrap">\
+                                        <img class="item-icon" src="' + (dataInner.icon ? dataInner.icon : '') + '">\
+                                    </div>\
+                                    <div class="item-title">' + dataInner.name + '</div>\
+                                    <div class="item-info"></div>\
+                                </div>');
+                                switch(dataVisible){
+                                    case 1:
+                                        o.append($itemTpl);
+                                        setTargetApp($itemTpl, dataInner.web_url);
+                                        break;
+                                    case 2:
+                                        for (var n = 0;n < data[i].departments.length; n++) {
+                                            dataDepts.push(data[i].departments[n].id)
+                                        }
+                                        //if($.inArray(w.parentid, dataDepts) >= 0){}
+                                        o.append($itemTpl);
+                                        setTargetApp($itemTpl, dataInner.web_url);
+                                        break;
+                                    case 3:
+                                        for (var j = 0;j < data[i].users.length; j++) {
+                                            dataUsers.push(data[i].users[j].id)
+                                        }
+                                        if($.inArray(w.userid, dataUsers) >= 0){
+                                            o.append($itemTpl);
+                                            setTargetApp($itemTpl, dataInner.web_url);
+                                        }
+                                        break;
+                                    default:;
+                                }
+                            }
+                        };
                     }
                 }else{
                     var $emptyTpl = $('<div class="empty empty-app"><div class="empty-item"><div class="empty-img empty-img-app"></div><p class="empty-text">暂无应用</p></div></div>');
@@ -140,7 +165,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             }else{
             	var json = {
                     userid: userid,
-                    token: token
+                    token: token,
+                    parentid: parentid
                 }
                 if(orgid) json.orgid = orgid;
             	if(locid == 'appentry'){
