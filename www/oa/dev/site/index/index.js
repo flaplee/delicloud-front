@@ -326,7 +326,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             getUserData.orgindex = index;
                             getUserData.orgindexid = json[index].id;
                             if(getUserData.data.id == json[index].admin_id){
-                                console.log("orgindexadmin", true);
+                                //console.log("orgindexadmin", true);
                                 getUserData.orgindexadmin = true;
                                 util.setCookie('orgindex', getUserData.orgindex);
                                 util.setCookie('orgindexid', getUserData.orgindexid);
@@ -341,7 +341,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                     token: params.token,
                                     orgid: params.orgid
                                 }, function(res){
-                                    console.log("orgindexadmin", res);
+                                    //console.log("orgindexadmin", res);
                                     getUserData.orgindexadmin = res;
                                     util.setCookie('orgindex', getUserData.orgindex);
                                     util.setCookie('orgindexid', getUserData.orgindexid);

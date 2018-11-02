@@ -37,7 +37,7 @@ define(['module', 'common/kernel/kernel', 'site/util/util','page/device/device']
                         }
                     });
                 }else{
-                    kernel.hint('设备名称只可使用字母、数字', 'error');
+                    kernel.hint('设备名称只可使用中英文、数字', 'error');
                 }
             });
             $btnClose.off('click').on('click',function(){

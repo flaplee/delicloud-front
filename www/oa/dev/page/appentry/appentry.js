@@ -32,7 +32,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                     token: params.token,
                                     orgid: params.orgid
                                 }, function(res){
-                                    console.log("orgindexadmin", res);
+                                    //console.log("orgindexadmin", res);
                                     getUserData.orgindexadmin = res;
                                     util.setCookie('orgindexadmin', res);
                                     util.setUserData(getUserData);
@@ -90,10 +90,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
             dauth: w.userid + ' ' + timestamp + ' ' + kernel.buildDauth(w.userid, w.token, timestamp),
             data: {},
             success: function(res) {
-                //console.log("res",res);
-                console.log("res.data.result.length", res.data.result.length);
                 var data = res.data.result;
-                var dataInner = [], dataUsers = [], dataDepts = [];
+                var dataInner = [], dataUsers = [], dataDepts = '', dataSize = 0;
                 if(data.length > 0){
                     o.find('>').remove();
                     for (var i = 0;i < data.length; i++) {
@@ -110,22 +108,30 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                 </div>');
                                 switch(dataVisible){
                                     case 1:
+                                        dataSize++;
                                         o.append($itemTpl);
                                         setTargetApp($itemTpl, dataInner.web_url);
                                         break;
                                     case 2:
-                                        for (var n = 0;n < data[i].departments.length; n++) {
-                                            dataDepts.push(data[i].departments[n].id)
+                                        var userData = util.getUserData(), getOrgIndex = util.getCookie('orgindex'), dataDeptCodes = userData.organization[getOrgIndex].employees[0].department_code.split('_');
+                                        for(var n = 0;n < data[i].departments.length; n++) {
+                                            dataDepts += data[i].departments[n].code;
                                         }
-                                        //if($.inArray(w.parentid, dataDepts) >= 0){}
-                                        o.append($itemTpl);
-                                        setTargetApp($itemTpl, dataInner.web_url);
+
+                                        for(var m = 0;m < dataDeptCodes.length; m++){
+                                            if(dataDepts.indexOf(dataDeptCodes[m]) > 0 || dataDepts == dataDeptCodes[m]){
+                                                dataSize++;
+                                                o.append($itemTpl);
+                                                setTargetApp($itemTpl, dataInner.web_url);
+                                            }
+                                        }
                                         break;
                                     case 3:
                                         for (var j = 0;j < data[i].users.length; j++) {
                                             dataUsers.push(data[i].users[j].id)
                                         }
                                         if($.inArray(w.userid, dataUsers) >= 0){
+                                            dataSize++;
                                             o.append($itemTpl);
                                             setTargetApp($itemTpl, dataInner.web_url);
                                         }
@@ -135,7 +141,8 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                             }
                         };
                     }
-                }else{
+                }
+                if(data.length <= 0 || dataSize == 0){
                     var $emptyTpl = $('<div class="empty empty-app"><div class="empty-item"><div class="empty-img empty-img-app"></div><p class="empty-text">暂无应用</p></div></div>');
                     o.append($emptyTpl);
                 }

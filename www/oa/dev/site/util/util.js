@@ -439,24 +439,20 @@ define(['common/kernel/kernel'], function(kernel) {
             if (data !== userData) {
                 if(((data && userData)?((userData.data)?(userData.data.id ? true : false) : false) : false)){
                     if (!util.isEqual(userData, data)) {
-                        if(data.orgindex == userData.orgindex){
-                            userData = data;
-                            if (util.userEvents.ondatachange instanceof Function) {
-                                util.userEvents.ondatachange({
-                                    type: 'datachange',
-                                    initiative: initiative,
-                                    data: util.clone(data)
-                                });
-                            }
-                        }else{
-                            userData = data;
-                            if (util.userEvents.onpagechange instanceof Function) {
-                                util.userEvents.onpagechange({
-                                    type: 'pagechange',
-                                    initiative: initiative,
-                                    data: util.clone(data)
-                                });
-                            }
+                        userData = data;
+                        if (util.userEvents.ondatachange instanceof Function) {
+                            util.userEvents.ondatachange({
+                                type: 'datachange',
+                                initiative: initiative,
+                                data: util.clone(data)
+                            });
+                        }
+                        if (util.userEvents.onpagechange instanceof Function) {
+                            util.userEvents.onpagechange({
+                                type: 'pagechange',
+                                initiative: initiative,
+                                data: util.clone(data)
+                            });
                         }
                     }
                 }else{

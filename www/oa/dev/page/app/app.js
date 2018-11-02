@@ -44,42 +44,45 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                     success: function(res) {
                         var data = res.data.result;
                         for (var i = 0; i < data.length; i++) {
-                            var innerHtml = '', installHtml = '';
-                            installHtml =(data[i].installed == true) ? '<a data-appid="'+ data[i].id +'" class="btn btn-default btn-uninstall" title="已安装" href="javascript:;">已安装</a>' : '<a data-appid="'+ data[i].id +'" class="btn btn-info btn-install" title="安装" href="javascript:;">安装</a>';
-                            switch (data[i].belong_type) {
-                                case 'group':
-                                    innerHtml = '<span class="item-category-name">团队可用</span>';
-                                    break;
-                                case 'user':
-                                    innerHtml = '<span class="item-category-name">个人可用</span>';
-                                    break;
-                                case 'both':
-                                    innerHtml = '<span class="item-category-name">团队可用</span><span class="item-category-name">个人可用</span>';
-                                    break;
-                            }
-                            var $itemHtml = $('<li class="item">\
-                                <div class="item-wrap clear">\
-                                    <div class="item-img" title="'+ data[i].name +'">\
-                                        <img  src="'+ data[i].icon +'" width="80" height="80" />\
-                                    </div>\
-                                    <div class="item-info">\
-                                        <div class="item-title clear">\
-                                            <div class="item-text">'+ data[i].name +'</div>\
-                                            <div class="item-category">'+ innerHtml +'</div>\
+                            if (data[i].status == 'y') {
+                                var innerHtml = '', installHtml = '';
+                                installHtml =(data[i].installed == true) ? '<a data-appid="'+ data[i].id +'" class="btn btn-default btn-uninstall" title="已安装" href="javascript:;">已安装</a>' : '<a data-appid="'+ data[i].id +'" class="btn btn-info btn-install" title="安装" href="javascript:;">安装</a>';
+                                switch (data[i].belong_type) {
+                                    case 'group':
+                                        innerHtml = '<span class="item-category-name">团队可用</span>';
+                                        break;
+                                    case 'user':
+                                        innerHtml = '<span class="item-category-name">个人可用</span>';
+                                        break;
+                                    case 'both':
+                                        innerHtml = '<span class="item-category-name">团队可用</span><span class="item-category-name">个人可用</span>';
+                                        break;
+                                }
+                                var $itemHtml = $('<li class="item">\
+                                    <div class="item-wrap clear">\
+                                        <div class="item-img" title="'+ data[i].name +'">\
+                                            <img  src="'+ data[i].icon +'" width="80" height="80" />\
                                         </div>\
-                                        <div class="item-content">'+ data[i].slogan +'</div>\
+                                        <div class="item-info">\
+                                            <div class="item-title clear">\
+                                                <div class="item-text">'+ data[i].name +'</div>\
+                                                <div class="item-category">'+ innerHtml +'</div>\
+                                            </div>\
+                                            <div class="item-content">'+ data[i].slogan +'</div>\
+                                        </div>\
                                     </div>\
-                                </div>\
-                                <div class="item-btn">\
-                                    '+ installHtml +'\
-                                </div>\
-                            </li>');
-                            o.append($itemHtml);
-                            setInstall($itemHtml.find('.btn-install'), o, {
-                                appid: data[i].id,
-                                type: data[i].belong_type,
-                                orgtype: type
-                            });
+                                    <div class="item-btn">\
+                                        '+ installHtml +'\
+                                    </div>\
+                                </li>');
+                                o.append($itemHtml);
+                                setInstall($itemHtml.find('.btn-install'), o, {
+                                    appid: data[i].id,
+                                    type: data[i].belong_type,
+                                    orgtype: type
+                                });
+                            }
+                            
                         }
                     }
                 });

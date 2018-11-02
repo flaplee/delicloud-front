@@ -68,12 +68,17 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                         setTargetApp($itemTpl, dataInner.web_url);
                                         break;
                                     case 2:
-                                        for (var n = 0;n < data[i].departments.length; n++) {
-                                            dataDepts.push(data[i].departments[n].id)
+                                        var userData = util.getUserData(), getOrgIndex = util.getCookie('orgindex'), dataDeptCodes = userData.organization[getOrgIndex].employees[0].department_code.split('_');
+                                        for(var n = 0;n < data[i].departments.length; n++) {
+                                            dataDepts += data[i].departments[n].code;
                                         }
-                                        //if($.inArray(w.parentid, dataDepts) >= 0){}
-                                        o.append($itemTpl);
-                                        setTargetApp($itemTpl, dataInner.web_url);
+
+                                        for(var m = 0;m < dataDeptCodes.length; m++){
+                                            if(dataDepts.indexOf(dataDeptCodes[m]) > 0 || dataDepts == dataDeptCodes[m]){
+                                                o.append($itemTpl);
+                                                setTargetApp($itemTpl, dataInner.web_url);
+                                            }
+                                        }
                                         break;
                                     case 3:
                                         for (var j = 0;j < data[i].users.length; j++) {

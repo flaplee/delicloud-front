@@ -239,7 +239,7 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                                 orgid: json.orgid,
                                                 parentid: json.parentid
                                             }, function(res){
-                                                console.log("orgindexadmin", res);
+                                                //console.log("orgindexadmin", res);
                                                 util.setCookie('orgindexadmin', res);
                                                 tempInfo.orgindexadmin = res;
                                                 util.setUserData(tempInfo);
@@ -289,17 +289,16 @@ define(['common/kernel/kernel', 'site/util/util'], function(kernel, util) {
                                         getAdminList({
                                             userid: data.userid,
                                             token: data.token,
-                                            orgid: json.orgid,
-                                            parentid: json.parentid
+                                            orgid: tempInfo.organization[0].id,
+                                            parentid: tempInfo.organization[0].top_department_id
                                         }, function(res){
-                                            console.log("orgindexadmin", res);
+                                            //console.log("orgindexadmin", res);
                                             util.setCookie('orgindexadmin', res);
                                             tempInfo.orgindexadmin = res;
                                             util.setUserData(tempInfo);
                                             kernel.replaceLocation({'args': {},'id': 'appentry'});
                                         });
                                     }
-                                    kernel.replaceLocation({'args': {},'id': 'appentry'});
                                 }else{
                                     $loginBox.hide();
                                     $orgBox.show();

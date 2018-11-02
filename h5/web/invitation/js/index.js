@@ -268,7 +268,7 @@ seajs.use(['zepto', 'dialog', 'fastclick', 'region'], function($, dialog, fastcl
             }
         },
         isMobile: function(phoneNum) {
-            var reg = /^1[3,4,5,7,8]{1}[0-9]{9}$/;
+            var reg = /^1[1,2,3,4,5,7,8,9]{1}[0-9]{9}$/;
             return reg.test(phoneNum)
         },
         hint: function(text, t) {
