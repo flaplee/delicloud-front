@@ -13,7 +13,7 @@ define(['common/kernel/kernel'], function(kernel) {
                 }
             }
             var type = param.type || 'post',
-                url = (param.force ? param.url : ('/web' + param.url))
+                url = (param.force ? param.url : ('http://t.web.delicloud.com' + param.url))
             if (type === 'get' && param.data) {
                 var strArr = []
                 for (var key in param.data) {
@@ -27,6 +27,14 @@ define(['common/kernel/kernel'], function(kernel) {
             if (!param.data) {
                 param.data = {};
             }
+            xhr.timeout = param.timeout || 60000;
+            xhr.ontimeout = function () {
+                if (typeof param.error === 'function') {
+                    param.error(xhr, 'network_error');
+                } else if (!param.silent) {
+                    kernel.hint('网络异常，请稍后再试', 'error');
+                }
+            };
             xhr.onreadystatechange = function() {
                 var s;
                 if (xhr.readyState === 4) {
@@ -45,7 +53,7 @@ define(['common/kernel/kernel'], function(kernel) {
                                 } else if (!param.silent) {
                                     kernel.hint(s.msg, 'error');
                                 }
-                                if (s.code == 501) {
+                                if (s.code > 500 && s.code <= 509) {
                                     util.setUserData(undefined);
                                     kernel.replaceLocation({'args': {},'id': 'loginhome'});
                                 }
@@ -57,7 +65,10 @@ define(['common/kernel/kernel'], function(kernel) {
                                 kernel.hint('数据解析失败: ' + xhr.responseText, 'error');
                             }
                         }
-                    } else {
+                    } else if(xhr.status === 0){
+                        util.setUserData(undefined);
+                        kernel.replaceLocation({'args': {},'id': 'loginhome'});
+                    }else {
                         if (typeof param.error === 'function') {
                             param.error(xhr, 'network_error');
                         } else if (!param.silent) {
@@ -77,7 +88,6 @@ define(['common/kernel/kernel'], function(kernel) {
                 if(param.dauth){
                     xhr.setRequestHeader('Duagent', '_web');
                     xhr.setRequestHeader('Dauth', param.dauth);
-                    xhr.setRequestHeader('Duagent', '_web');
                 }
                 xhr.send(param.data);
             } else {
