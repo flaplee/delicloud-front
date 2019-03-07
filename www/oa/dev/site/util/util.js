@@ -13,7 +13,7 @@ define(['common/kernel/kernel'], function(kernel) {
                 }
             }
             var type = param.type || 'post',
-                url = (param.force ? param.url : ('http://t.web.delicloud.com' + param.url))
+                url = (param.force ? param.url : ('/web' + param.url))
             if (type === 'get' && param.data) {
                 var strArr = []
                 for (var key in param.data) {
